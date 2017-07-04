@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+<tiles-definitions>
+    
+    <definition name="flowershop" 
+    	template="/WEB-INF/jsp/templates/flowershop.jsp">
+    	<put-attribute name="content" value=""></put-attribute>
+    </definition>
+    
+    <definition name="flowershop.home.index" 
+    	extends="flowershop">
+    	<put-attribute name="content" 
+    		value="/WEB-INF/jsp/home/index.jsp"></put-attribute>
+    </definition>
+    
+    <definition name="category.find" 
+    	extends="flowershop">
+    	<put-attribute name="content" 
+    		value="/WEB-INF/jsp/category/index.jsp"></put-attribute>
+    </definition>
+    
+    <definition name="product.detail" 
+    	extends="flowershop">
+    	<put-attribute name="content" 
+    		value="/WEB-INF/jsp/product/index.jsp"></put-attribute>
+    </definition>
+    
+    
+    
+</tiles-definitions>
