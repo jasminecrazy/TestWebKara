@@ -1,5 +1,5 @@
 package demo.entity;
-// Generated Jul 6, 2017 3:30:10 PM by Hibernate Tools 5.2.3.Final
+// Generated Jul 7, 2017 5:05:55 PM by Hibernate Tools 5.2.3.Final
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -20,30 +20,26 @@ public class Vn implements java.io.Serializable {
 	private int maso;
 	private String loi;
 	private String thongtin;
-	private String ten_1;
-	private String loi_1;
 	private String linkyoutube;
+	private String picture;
 
 	public Vn() {
 	}
 
-	public Vn(String ten, int maso, String loi, String thongtin, String ten_1, String loi_1) {
+	public Vn(String ten, int maso, String loi, String thongtin) {
 		this.ten = ten;
 		this.maso = maso;
 		this.loi = loi;
 		this.thongtin = thongtin;
-		this.ten_1 = ten_1;
-		this.loi_1 = loi_1;
 	}
 
-	public Vn(String ten, int maso, String loi, String thongtin, String ten_1, String loi_1, String linkyoutube) {
+	public Vn(String ten, int maso, String loi, String thongtin, String linkyoutube, String picture) {
 		this.ten = ten;
 		this.maso = maso;
 		this.loi = loi;
 		this.thongtin = thongtin;
-		this.ten_1 = ten_1;
-		this.loi_1 = loi_1;
 		this.linkyoutube = linkyoutube;
+		this.picture = picture;
 	}
 
 	@Id
@@ -94,24 +90,6 @@ public class Vn implements java.io.Serializable {
 		this.thongtin = thongtin;
 	}
 
-	@Column(name = "ten_", nullable = false, length = 100)
-	public String getTen_1() {
-		return this.ten_1;
-	}
-
-	public void setTen_1(String ten_1) {
-		this.ten_1 = ten_1;
-	}
-
-	@Column(name = "loi_", nullable = false, length = 100)
-	public String getLoi_1() {
-		return this.loi_1;
-	}
-
-	public void setLoi_1(String loi_1) {
-		this.loi_1 = loi_1;
-	}
-
 	@Column(name = "linkyoutube", length = 65535)
 	public String getLinkyoutube() {
 		return this.linkyoutube;
@@ -119,6 +97,15 @@ public class Vn implements java.io.Serializable {
 
 	public void setLinkyoutube(String linkyoutube) {
 		this.linkyoutube = linkyoutube;
+	}
+
+	@Column(name = "picture", length = 65535)
+	public String getPicture() {
+		return this.picture;
+	}
+
+	public void setPicture(String picture) {
+		this.picture = picture;
 	}
 
 }

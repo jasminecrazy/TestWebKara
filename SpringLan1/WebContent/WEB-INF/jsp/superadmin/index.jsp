@@ -122,7 +122,7 @@
 									<span class=" fa fa-angle-down"></span>
 							</a>
 								<ul class="dropdown-menu dropdown-usermenu pull-right">
-									<li><a href="javascript:;"> Profile</a></li>
+
 
 
 									<li><a href="<c:url value='/j_spring_security_logout'/>"><i
@@ -317,14 +317,16 @@
 												</div>
 												<p ng-show="duplicateAlert != ''" ng-bind="duplicateAlert"
 													style="color: red"></p>
-
+												<input type="hidden" id="password" name="password"
+													ng-model="edit_password" />
 												<div class="form-group">
 													<label class="control-label">Status</label>
 													<div class="checkbox">
 														<label> <input type="radio" ng-model="edit_status"
-															value="0" name="status" ng-value="0" /> Disable
-														</label> <label> <input type="radio" ng-model="edit_status"
-															value="1" name="status" ng-value="1" /> Enable
+															value="false" name="status" ng-value="false" /> Disable
+														</label> <label> <input type="radio"
+															ng-model="edit_status" value="true" name="status"
+															ng-value="true" /> Enable
 														</label>
 													</div>
 
@@ -347,7 +349,9 @@
 										</form>
 									</div>
 									<div class="modal-footer">
-
+										<button type="button" class="pull-left btn btn-danger"
+											data-toggle="modal" data-target="#myModal_confirmReset"
+											ng-click="ResetPass(x)">Reset password</button>
 										<button id="btnSave" name="btnSave" class="btn btn-primary"
 											ng-click="update()" data-dismiss="modal">Save</button>
 										<button type="button" class="btn btn-default"
@@ -356,35 +360,107 @@
 								</div>
 							</div>
 						</div>
+						<!-- Modal confirmReset -->
+						<div class="modal fade" id="myModal_confirmReset" tabindex="-1"
+							role="dialog" aria-labelledby="myModalLabel">
+							<div class="modal-dialog" role="document">
+								<div class="modal-content">
 
-						
+									<div class="modal-header">
+										<button type="button" class="close" data-dismiss="modal"
+											aria-hidden="true">&times;</button>
+										<h4 class="modal-title" id="myModalLabel">Confirm reset
+											password</h4>
+									</div>
+
+									<div class="modal-body row">
+										<form class="form-horizontal" name="frmReset">
+											<div class="form-group">
+												<label class=" control-label" for="birthday">New
+													password</label>
+												<div class="">
+													<input type="password" id="newPassword" name="newPassword"
+														ng-model="newPassword" class="form-control "
+														required="required" />
+													<div ng-messages="frmReset.newPassword.$error">
+														<div ng-message="required"
+															ng-show="frmReset.newPassword.$touched">
+															<p style="color: red">This field is required</p>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div class="form-group">
+												<label class=" control-label" for="birthday">Retype
+													password</label>
+												<div class="">
+													<input type="password" id="reNewPassword"
+														name="reNewPassword" ng-model="reNewPassword"
+														class="form-control" required="required"
+														match-password="newPassword" />
+													<div ng-messages="frmReset.reNewPassword.$error">
+														<div ng-message="required"
+															ng-show="frmReset.reNewPassword.$touched">
+															<p style="color: red">This field is required</p>
+														</div>
+														<div ng-message="matchPassword">
+															<p style="color: red">Must match the previous field</p>
+														</div>
+													</div>
+
+												</div>
+												
+											</div>
+											<input type="hidden" ng-model="reset_id_role"/>
+											<input type="hidden" ng-model="reset_username"/>
+											<input type="hidden" ng-model ="reset_fullname"/>
+											<input type="hidden" ng-model="reset_status"/>
+									
+										</form>
+									</div>
+
+									<div class="modal-footer">
+										<a class="btn btn-danger btn-ok" data-target="#myModal_reset"
+											data-toggle="modal"
+											ng-click="frmReset.$invalid || ResetPassword()"
+											ng-disabled="frmReset.$invalid">Yes</a>
+
+										<button type="button" class="btn btn-default"
+											data-dismiss="modal">No</button>
+
+									</div>
+								</div>
+							</div>
+						</div>
+
 						<!-- Modal delete -->
-						 <div class="modal fade" id="myModal_delete" tabindex="-1" role="dialog"
-		aria-labelledby="myModalLabel">
-		<div class="modal-dialog">
-			<div class="modal-content">
+						<div class="modal fade" id="myModal_delete" tabindex="-1"
+							role="dialog" aria-labelledby="myModalLabel">
+							<div class="modal-dialog">
+								<div class="modal-content">
 
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal"
-						aria-hidden="true">&times;</button>
-					<h4 class="modal-title" id="myModalLabel">Confirm</h4>
-				</div>
+									<div class="modal-header">
+										<button type="button" class="close" data-dismiss="modal"
+											aria-hidden="true">&times;</button>
+										<h4 class="modal-title" id="myModalLabel">Confirm</h4>
+									</div>
 
-				<div class="modal-body">
+									<div class="modal-body">
 
-					
 
-					<p>Are you sure you want to delete this?</p>
-				</div>
 
-				<div class="modal-footer">
-					<a class="btn btn-danger btn-ok" ng-click="deleteUsers()">Yes</a>
-					<button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+										<p>Are you sure you want to delete this?</p>
+									</div>
 
-				</div>
-			</div>
-		</div>
-	</div> 
+									<div class="modal-footer">
+										<a class="btn btn-danger btn-ok" ng-click="deleteUsers()">Yes</a>
+										<button type="button" class="btn btn-default"
+											data-dismiss="modal">No</button>
+
+									</div>
+								</div>
+							</div>
+						</div>
 
 					</div>
 				</div>

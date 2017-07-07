@@ -28,7 +28,7 @@ public String index()
 		ModelMap modelMap
 	) {
 		if(error != null) {
-			modelMap.put("msg", "Invalid");
+			modelMap.put("msg", "Wrong username or password");
 		}
 		if(logout != null) {
 			modelMap.put("msg", "Logout");

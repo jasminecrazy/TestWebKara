@@ -20,11 +20,10 @@ public class UserRestController {
 	@Autowired
 	private UserService userService;
 
-
 	@RequestMapping(value = "user", method = RequestMethod.GET)
 	public ResponseEntity<List<User>> getAllUser() {
-		
-		return new ResponseEntity<List<User>>(userService.findAllUser(),HttpStatus.OK);
+
+		return new ResponseEntity<List<User>>(userService.findAllUser(), HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "user/{id}", method = RequestMethod.GET)
@@ -70,5 +69,13 @@ public class UserRestController {
 		}
 		return new ResponseEntity<>(HttpStatus.ACCEPTED);
 	}
-
+@RequestMapping(value="user/resetpass",method= RequestMethod.PUT)
+	public ResponseEntity<Void> resetPassword(@RequestBody User user) {
+		try {
+			userService.resetPass(user);
+		} catch (Exception e) {
+			return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
+		}
+		return new ResponseEntity<>(HttpStatus.ACCEPTED);
+	}
 }

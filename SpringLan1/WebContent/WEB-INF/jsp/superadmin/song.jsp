@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -41,7 +41,8 @@
 <link
 	href="${pageContext.request.contextPath }/assets/css/sweetalert.css"
 	rel="stylesheet" />
-<link href="${pageContext.request.contextPath }/assets/css/ui-grid.css" rel="stylesheet" />
+<link href="${pageContext.request.contextPath }/assets/css/ui-grid.css"
+	rel="stylesheet" />
 
 </head>
 
@@ -74,8 +75,12 @@
 								<li><a> <i class="fa fa-info-circle"></i>Information
 										Management<span class="fa fa-chevron-down"></span></a>
 									<ul class="nav child_menu">
-										<li><a href="${pageContext.request.contextPath }/song.html">Song management</a></li>
-										<li><a href="${pageContext.request.contextPath }/superadmin.html">User management</a></li>
+										<li><a
+											href="${pageContext.request.contextPath }/song.html">Song
+												management</a></li>
+										<li><a
+											href="${pageContext.request.contextPath }/superadmin.html">User
+												management</a></li>
 
 									</ul></li>
 
@@ -107,7 +112,9 @@
 									<span class=" fa fa-angle-down"></span>
 							</a>
 								<ul class="dropdown-menu dropdown-usermenu pull-right">
-									<li><a href="javascript:;"> Profile</a></li>
+									<li><a
+										href="${pageContext.request.contextPath }/superadmin/profile.html">
+											Profile</a></li>
 
 
 									<li><a href="<c:url value='/j_spring_security_logout'/>"><i
@@ -132,8 +139,9 @@
 								<li><i class="ace-icon fa fa-home home-icon"></i> <a
 									href="${pageContext.request.contextPath }/admin/welcome">Home</a>
 								</li>
-								<li class="active"><a href="${pageContext.request.contextPath }/superadmin/song.html">Song Management</a>
-								</li>
+								<li class="active"><a
+									href="${pageContext.request.contextPath }/superadmin/song.html">Song
+										Management</a></li>
 
 							</ul>
 						</div>
@@ -141,9 +149,9 @@
 					</div>
 					<div class="title_right">
 						<div class="form-group pull-right top_search">
-							<button data-toggle="modal" data-target="#myModal_them"
+							<button data-toggle="modal" data-target="#myModal_Add"
 								type="button" class="btn btn-primary btn-lg"
-								ng-click="loadthem()">Add</button>
+								ng-click="ResetForm()">Add</button>
 						</div>
 					</div>
 					<div class="clearfix"></div>
@@ -152,534 +160,243 @@
 							<div class="x_panel">
 								<div class="x_title">
 									<div class="clearfix"></div>
+									<h3>List Song Information</h3>
 								</div>
-								<div class="col-md-6 pull-right">
-									<input id="filter" type="text" placeholder="Find"
-										class="form-control" data-ng-model="filterTable"></input>
-								</div>
+
 
 								<div class="x_content">
-									
+
 
 									<div class="table-responsive">
-										<%-- <table class="table table-condensed table-hover">
-											<thead>
-												<tr>
-													<th style="width: 3%">&#35;</th>
-													<th class="sortable" style="width: 10%"
-														ng-click="sortType = 'songId';sortReverse = !sortReverse">SongID<span
-														ng-show="sortType == 'songId' &amp;&amp; !sortReverse"
-														class="fa fa-caret-down"></span> <span
-														ng-show="sortType == 'songId' &amp;&amp; sortReverse"
-														class="fa fa-caret-up"></span>
-													</th>
-													<th class="sortable" style="width: 20%"
-														ng-click="sortType = 'songName';sortReverse = !sortReverse">SongName<span
-														ng-show="sortType == 'songName' &amp;&amp; !sortReverse"
-														class="fa fa-caret-down"></span> <span
-														ng-show="sortType == 'songName' &amp;&amp; sortReverse"
-														class="fa fa-caret-up"></span>
-													</th>
-													<th class="sortable" style="width: 10%"
-														ng-click="sortType = 'lyric';sortReverse = !sortReverse">Lyric<span
-														ng-show="sortType == 'lyric' &amp;&amp; !sortReverse"
-														class="fa fa-caret-down"></span> <span
-														ng-show="sortType == 'lyric' &amp;&amp; sortReverse"
-														class="fa fa-caret-up"></span>
-													</th>
-													<th class="sortable" style="width: 10%"
-														ng-click="sortType = 'author';sortReverse = !sortReverse">Author
-														<span
-														ng-show="sortType == 'author' &amp;&amp; !sortReverse"
-														class="fa fa-caret-down"></span> <span
-														ng-show="sortType == 'author' &amp;&amp; sortReverse"
-														class="fa fa-caret-up"></span>
-													</th>
-
-
-
-
-
-													<th style="width: 10%">Action</th>
-
-												</tr>
-											</thead>
-											<tbody>
-												<c:forEach var="song" items="${song }">
-													<tr>
-														<td>${song.id }</td>
-														<td>${song.maso }</td>
-														<td>${song.ten }</td>
-														<td>${song.loi }</td>
-														<td>${song.thongtin}</td>
-													</tr>
-												</c:forEach>
-												<!-- <tr data-ng-show="showList(x,$index)" data-ng-repeat="x in list |  orderBy:sortType:sortReverse| filter : filterTable"">
-									<td ng-bind="$index+1"><input type="hidden"
-										ng-model="x.id" /></td>
-									<td data-ng-bind="x.maso"></td>
-									<td data-ng-bind="x.ten"></td>
-									<td data-ng-bind="x.loi"></td>
-									<td data-ng-bind="x.thongtin"></td>
-									
-
-									<td>
-										<button data-toggle="modal" class="btn btn-success btn-sm"
-											data-tooltip="tooltip" title="View detail informations"
-											data-target="#myModal_detail" ng-click="chitiet(x)">
-											<span class="glyphicon glyphicon-eye-open"></span>
-										</button>
-										<button class="btn btn-primary btn-sm" ng-click="sua(x)"
-											data-tooltip="tooltip" title="Edit" data-toggle="modal"
-											data-target="#myModal_sua">
-											<span class="glyphicon glyphicon-edit"></span>
-										</button>
-										<button data-toggle="modal" class="btn btn-danger btn-sm"
-											data-tooltip="tooltip" title="Delete"
-											data-target="#myModal_xoa" ng-click="xoa(x)">
-											<i class="ace-icon fa fa-trash-o bigger-130"></i>
-										</button>
-									</td>
-								</tr> -->
-											</tbody>
-										</table>
-
-									</div>
-									<div class='pull-right'>
-										<uib-pagination
-											data-total-items="(list | filter:filterTable).length"
-											data-ng-model="currentPage"
-											data-ng-change="updatePageIndexes()"
-											data-max-size="maxPaginationSize"
-											data-items-per-page="itemsPerPage" data-boundary-links="true"
-											data-previous-text="&lsaquo;" data-next-text="&rsaquo;"
-											data-first-text="&laquo;" data-last-text="&raquo;">
-										</uib-pagination>
-									</div> --%>
-									<div id="grid" ui-grid="gridOptions"
+										<div id="grid" ui-grid="gridOptions"
 											ui-grid-selection="ui-grid-selection"
 											ui-grid-resize-columns="ui-grid-resize-columns"
 											ui-grid-pagination="ui-grid-pagination" class="myGrid"></div>
+									</div>
 								</div>
 							</div>
 						</div>
+						<!-- Modal add new Song -->
+						<div class="modal fade" id="myModal_Add" tabindex="-1"
+							role="dialog">
+							<div class="modal-dialog" role="document">
+								<div class="modal-content">
+									<div class="modal-header">
+										<button type="button" class="close" data-dismiss="modal"
+											aria-label="Close">
+											<span aria-hidden="true">&times;</span>
+										</button>
+										<h4 class="modal-title" id="myModalLabel">Add new song</h4>
+									</div>
+									<div class="modal-body row">
+										<form class="form-horizontal" name="frmFormAdd" enctype="multipart/form-data" id="fileUploadForm">
+											<div class="col-md-6">
+												<div class="form-group">
+													<label class=" control-label" for="">Song ID</label>
+													<div class="">
+														<input id="songId" name="songId"
+															ng-keyup="hideDuplicateAlert()"
+															class="form-control input-md"
+															ng-keydown="autoAdd($event)" type="number"
+															ng-model="add_songId" ng-required="false" />
+													</div>
+												</div>
+												<p ng-show="duplicateAlert != ''" ng-bind="duplicateAlert"
+													style="color: red"></p>
+
+												<div class="form-group">
+													<label class=" control-label" for="">Song Name</label>
+													<div class="">
+														<input id="songName" name="songName"
+															class="form-control input-md" type="text"
+															ng-model="add_songName" ng-required="false" />
+													</div>
+												</div>
+												<div class="form-group">
+													<label class=" control-label">Lyric</label>
+													<div class="">
+														<input id="lyric" name="lyric" placeholder=""
+															ng-model="add_lyric" class="form-control input-md"
+															type="text" />
+
+													</div>
+												</div>
+
+												<div class="form-group">
+													<label class="control-label">Author</label>
+													<div class="">
+														<input id="author" name="author" placeholder=""
+															ng-model="add_author" class="form-control input-md"
+															type="text" />
+
+													</div>
+
+
+												</div>
+
+												<div class="form-group">
+													<label class=" control-label">Youtube Link</label>
+													<div class="">
+														<textarea id="youtube" name="youtube" rows="5"
+															class="form-control input-md" type="text"
+															ng-model="add_youtubelink"></textarea>
+
+													</div>
+												</div>
+												<label class="col-md-2 control-label">Picture</label>
+												<div class="col-md-12 picture">
+													<img ng-src="{{prev_img}}" height="150" width="100"
+														id="prev_img" /> <input type="file" id="image"
+														name="uploadfile" accept="*"
+														onchange="angular.element(this).scope().getImage(this)"
+														ng-model="image" />
+													<!-- Multiple Radios -->
+
+												</div>
+
+											</div>
+
+
+
+
+
+										</form>
+									</div>
+									<div class="modal-footer">
+										<button id="btnSave" name="btnSave" class="btn btn-primary"
+											ng-click="add(false)">Add</button>
+										<button id="btnSave" name="btnSave" class="btn btn-default"
+											ng-click="add(true)">Add and close</button>
+										<button type="button" class="btn btn-default"
+											data-dismiss="modal">Close</button>
+
+									</div>
+
+								</div>
+							</div>
+						</div>
+
+						<!-- Modal edit song information -->
+						<div class="modal fade" id="myModal_Edit" tabindex="-1"
+							role="dialog">
+							<div class="modal-dialog" role="document">
+								<div class="modal-content">
+									<div class="modal-header">
+										<button type="button" class="close" data-dismiss="modal"
+											aria-label="Close">
+											<span aria-hidden="true">&times;</span>
+										</button>
+										<h4 class="modal-title" id="myModalLabel">Edit song
+											information</h4>
+									</div>
+									<div class="modal-body row">
+										<form class="form-horizontal" name="editForm">
+											<div class="col-md-6">
+												<div class="form-group">
+													<label class=" control-label" for="">Song ID</label>
+													<div class="">
+														<input id="songId" name="songId"
+															ng-keyup="hideDuplicateAlert()"
+															class="form-control input-md" type="number"
+															ng-model="edit_songId" ng-required="false" />
+													</div>
+												</div>
+												<p ng-show="duplicateAlert != ''" ng-bind="duplicateAlert"
+													style="color: red"></p>
+
+												<div class="form-group">
+													<label class=" control-label" for="">Song Name</label>
+													<div class="">
+														<input id="songName" name="songName"
+															class="form-control input-md" type="text"
+															ng-model="edit_songName" ng-required="false" />
+													</div>
+												</div>
+												<div class="form-group">
+													<label class=" control-label">Lyric</label>
+													<div class="">
+														<input id="lyric" name="lyric" placeholder=""
+															ng-model="edit_lyric" class="form-control input-md"
+															type="text" />
+
+													</div>
+												</div>
+
+												<div class="form-group">
+													<label class="control-label">Author</label>
+													<div class="">
+														<input id="author" name="author" placeholder=""
+															ng-model="edit_author" class="form-control input-md"
+															type="text" />
+
+													</div>
+
+
+												</div>
+
+												<div class="form-group">
+													<label class=" control-label">Youtube Link</label>
+													<div class="">
+														<textarea id="youtube" name="youtube" rows="5"
+															class="form-control input-md" type="text"
+															ng-model="edit_youtubelink"></textarea>
+
+													</div>
+												</div>
+
+											</div>
+
+										</form>
+									</div>
+									<div class="modal-footer">
+
+										<button id="btnSave" name="btnSave" class="btn btn-primary"
+											ng-click="update()" data-dismiss="modal">Save</button>
+										<button type="button" class="btn btn-default"
+											data-dismiss="modal">Close</button>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- Modal delete -->
+						<div class="modal fade" id="myModal_delete" tabindex="-1"
+							role="dialog" aria-labelledby="myModalLabel">
+							<div class="modal-dialog">
+								<div class="modal-content">
+
+									<div class="modal-header">
+										<button type="button" class="close" data-dismiss="modal"
+											aria-hidden="true">&times;</button>
+										<h4 class="modal-title" id="myModalLabel">Confirm</h4>
+									</div>
+
+									<div class="modal-body">
+
+
+
+										<p>Are you sure you want to delete this?</p>
+									</div>
+
+									<div class="modal-footer">
+										<a class="btn btn-danger btn-ok" ng-click="delete()">Yes</a>
+										<button type="button" class="btn btn-default"
+											data-dismiss="modal">No</button>
+
+									</div>
+								</div>
+							</div>
+						</div>
+
 					</div>
-					<!-- Modal thÃªm -->
-					<!-- <div class="modal fade" id="myModal_them" tabindex="-1" role="dialog">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal"
-						aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-					<h4 class="modal-title" id="myModalLabel">ThÃªm thÃ´ng tin tráº»</h4>
 				</div>
-				<div class="modal-body row">
-					<form class="form-horizontal" name="frmStudentAdd"
-						enctype="multipart/form-data" id="fileUploadForm">
-						<div class="col-md-6">
-							Text input
-							<div class="form-group">
-								<label class=" control-label" for="">MÃ£ tráº»</label>
-								<div class="">
-									<input id="username" name="username"
-										ng-keyup="hideDuplicateAlert()" class="form-control input-md"
-										ng-keydown="autoAdd($event)" type="text"
-										ng-model="add_username" ng-required="false" />
-								</div>
-							</div>
-							<p ng-show="duplicateAlert != ''" ng-bind="duplicateAlert"
-								style="color: red"></p>
-							Text input
-							<div class="form-group">
-								<label class=" control-label" for="">Há»� vÃ  tÃªn tráº»</label>
-								<div class="">
-									<input id="studentName" name="studentName"
-										class="form-control input-md" type="text"
-										ng-model="add_studentName" ng-required="false" />
-								</div>
-							</div>
-							<div class="form-group">
-								<label class=" control-label" for="birthday">NgÃ y Sinh</label>
-								<div class="">
-									<input id="birthday" name="birthday" placeholder=""
-										ng-model="birthday" class="form-control input-md" type="date" />
+				<!-- /page content -->
 
-								</div>
-							</div>
-							Text input
-							<div class="form-group">
-								<label class="control-label">Giá»›i tÃ­nh</label>
-								<div class="checkbox">
-									<label> <input type="radio" ng-model="gender" value="0"
-										name="gender" ng-value="0" /> Nam
-									</label> <label> <input type="radio" ng-model="gender"
-										value="1" name="gender" ng-value="1" /> Ná»¯
-									</label>
-								</div>
-
-
-							</div>
-							Text input
-							<div class="form-group">
-								<label class=" control-label" for="birthday">Ä�á»‹a chá»‰</label>
-								<div class="">
-									<textarea id="address" name="address" rows="5"
-										class="form-control input-md" type="text"
-										ng-model="add_address"></textarea>
-
-								</div>
-							</div>
-							<div class="form-group">
-								<label class=" control-label" for="birthday">NgÃ y vÃ o
-									trÆ°á»�ng</label>
-								<div class="">
-									<input id="ngayvaotruong" name="ngayvaotruong" placeholder=""
-										class="form-control input-md" type="date" ng-required="true"
-										ng-model="add_ngayvaotruong" />
-
-								</div>
-							</div>
-							<div class="form-group">
-								<label class="control-label">TÃ¬nh tráº¡ng sá»©c khá»�e</label> <input
-									id="healthStatus" name="healthStatus" placeholder=""
-									class="form-control input-md" type="text"
-									ng-model="add_healthStatus" />
-
-
-							</div>
-							<div class="form-group">
-								<label class="control-label">Há»� tÃªn phá»¥ huynh</label> <input
-									id="parentName" name="parentName" placeholder=""
-									class="form-control input-md" type="text"
-									ng-model="add_parentName" />
-
-
-							</div>
-							<div class="form-group">
-								<label class="control-label">Sá»‘ Ä‘iá»‡n thoáº¡i</label> <input
-									id="phone" name="phone" placeholder=""
-									class="form-control input-md" type="text"
-									ng-model="add_phone" />
-
-
-							</div>
-							<div class="form-group">
-								<label class="control-label" for="selectbasic">Lá»›p</label>
-								<div class="">
-									<select ng-selected="student.class" ng-model="add_className"
-										class="form-control"
-										ng-options="x.tenlop for x in list_class" name="className"
-										id="className" ng-required="true">
-									</select>
-								</div>
-							</div>
-						</div>
-
-
-
-
-
-					</form>
-				</div>
-				<div class="modal-footer">
-					<button id="btnSave" name="btnSave" class="btn btn-primary"
-						ng-click="them(false)">Add</button>
-					<button id="btnSave" name="btnSave" class="btn btn-default"
-						ng-click="them(true)">Add and close</button>
-					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-
-				</div>
-
+				<!-- footer content -->
+				<footer> </footer>
+				<!-- /footer content -->
 			</div>
-		</div>
-	</div> -->
-					<!-- Modal-->
-					<!-- Modal sá»­a -->
-					<!-- <div class="modal fade" id="myModal_sua" tabindex="-1" role="dialog">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal"
-						aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-					<h4 class="modal-title" id="myModalLabel">Sá»­a thÃ´ng tin tráº»</h4>
-				</div>
-				<div class="modal-body row">
-					<form class="form-horizontal" name="editForm">
-						<div class="col-md-6">
-							- text input
-							<input type="hidden" name="id" ng-model="edit_id" /> <input
-								type="hidden" name="username" ng-model="edit_username" />
-
-							Text input
-							<div class="form-group">
-								<label class="control-label" for="lastName"> Há»� vÃ  tÃªn
-									tráº»</label>
-								<div class="">
-									<input id="studentName" name="studentName" placeholder=""
-										class="form-control input-md" type="text"
-										ng-model="edit_studentName" ng-required="true" />
-
-								</div>
-							</div>
-							<div class="form-group">
-								<label class="control-label" for="birthday">Birthday</label>
-								<div class="">
-									<input id="birthday" name="birthday" placeholder=""
-										ng-model="edit_birthday" class="form-control input-md"
-										type="date" />
-
-								</div>
-							</div>
-							<div class="form-group">
-								<label class=" control-label" for="birthday">Ä�á»‹a chá»‰</label>
-								<div class="">
-									<input id="address" name="address"
-										class="form-control input-md" type="text"
-										ng-model="edit_address" />
-								</div>
-							</div>
-							Text input
-							<div class="form-group">
-								<label class=" control-label">NgÃ y vÃ o trÆ°á»�ng</label>
-								<div class="">
-									<input id="ngayvaotruong" name="ngayvaotruong"
-										class="form-control input-md" type="date"
-										ng-model="edit_ngayvaotruong" />
-
-								</div>
-							</div>
-							<div class="form-group">
-								<label class="control-label">Gender</label>
-								<div class="checkbox">
-									<label> <input type="radio" ng-model="edit_gender"
-										value="0" name="gender" /> Nam
-									</label> <label> <input type="radio" ng-model="edit_gender"
-										value="1" name="gender" /> Ná»¯
-									</label>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-6">
-
-							Text input
-							<div class="form-group">
-								<label class=" control-label" for="birthday">TÃ¬nh tráº¡ng
-									sá»©c khá»�e</label>
-								<div class="">
-									<input id="healthStatus" name="healthStatus" placeholder=""
-										class="form-control input-md" type="text" ng-required="true"
-										ng-model="edit_healthStatus" />
-								</div>
-							</div>
-							<div class="form-group">
-								<label class="control-label" for="selectbasic">Lá»›p</label>
-								<div class="">
-									<select ng-selected="student.class" ng-model="edit_className"
-										class="form-control" ng-options="x.tenlop for x in list_class"
-										name="className" id="className" ng-required="true">
-									</select>
-								</div>
-							</div>
-							<div class="form-group">
-								<label class="control-label">Há»� tÃªn phá»¥ huynh</label> <input
-									id="parentName" name="parentName" placeholder=""
-									class="form-control input-md" type="text"
-									ng-model="edit_parentName" />
-
-
-							</div>
-							<div class="form-group">
-								<label class="control-label">Sá»‘ Ä‘iá»‡n thoáº¡i</label> <input
-									id="phone" name="phone" placeholder=""
-									class="form-control input-md" type="text"
-									ng-model="edit_phone" />
-
-
-							</div>
-							<div class="form-group">
-							<label class="control-label">Tráº¡ng thÃ¡i</label>
-							<div class="" style="padding: 6px">
-								<input type="radio" ng-model="active" ng-value="true" />
-								CÃ²n há»�c <input type="radio" ng-model="active" ng-value="false" />
-								Ä�Ã£ nghá»‰
-							</div>
-						</div>
-						</div>
-					</form>
-				</div>
-				<div class="modal-footer">
-
-					<button id="btnSave" name="btnSave" class="btn btn-primary"
-						ng-click="update()" data-dismiss="modal">Save</button>
-					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-				</div>
-			</div>
-		</div>
-	</div> -->
-					<!-- Modal xem chi tiáº¿t -->
-					<!-- <div class="modal fade" id="myModal_detail" tabindex="-1" role="dialog"
-		aria-labelledby="myModalLabel">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal"
-						aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-					<h4 class="modal-title" id="myModalLabel">ThÃ´ng tin chi tiáº¿t</h4>
-				</div>
-				<div class="modal-body row">
-					<form class="form-horizontal" name="frmStudentView">
-						<div class="col-md-6">
-
-
-
-							Text input
-							<div class="form-group">
-								<label class="control-label" for="lastName">MÃ£ Tráº»</label>
-								<div class="">
-									<input id="username" name="username" placeholder=""
-										class="form-control input-md" type="text"
-										ng-model="chitiet.username" readonly="readonly"
-										ng-required="true" />
-								</div>
-							</div>
-
-							Text input
-							<div class="form-group">
-								<label class="control-label" for="firstName">Há»� vÃ  TÃªn
-									tráº»</label>
-								<div class="">
-									<input id="firstName" name="firstName" placeholder=""
-										class="form-control input-md" type="text" ng-required="true"
-										ng-model="chitiet.firstname" readonly="readonly" />
-								</div>
-							</div>
-							Text input
-							<div class="form-group">
-								<label class="control-label" for="birthday">NgÃ y Sinh</label>
-								<div class="">
-									<input id="birthday" name="birthday"
-										class="form-control input-md" type="text"
-										ng-model="chitiet.birthday" readonly="readonly" />
-									<p>{{chitiet.birthday}}</p>
-								</div>
-							</div>
-							Text input
-							<div class="form-group">
-								<label class="control-label" for="address">Ä�á»‹a chá»‰</label>
-								<div class="">
-									<input type="text" id="adress" name="address" placeholder=""
-										rows="5" class="form-control input-md" type="text"
-										ng-model="chitiet.address" readonly="readonly" />
-
-								</div>
-							</div>
-							Text input
-							<div class="form-group">
-								<label class="control-label" for="address">NgÃ y vÃ o
-									trÆ°á»�ng</label>
-								<div class="">
-									<input type="date" id="ngayvaotruong" name="ngayvaotruong"
-										placeholder="" class="form-control input-md"
-										ng-model="chitiet.ngayvaotruong" readonly="readonly" />
-
-								</div>
-							</div>
-							Text input
-							<div class="form-group">
-								<label class="control-label" for="address">TÃ¬nh tráº¡ng
-									sá»©c khá»�e</label>
-								<div class="">
-									<input type="text" id="healthStatus" name="healthStatus"
-										placeholder="" class="form-control input-md"
-										ng-model="chitiet.healthStatus" readonly="readonly" />
-
-								</div>
-							</div>
-							
-
-						</div>
-						<div class="col-md-6">
-
-							Text input
-							<div class="form-group">
-								<label class=" control-label" for="gender">Giá»›i TÃ­nh</label>
-								<div class="col-md-12">
-									<p>{{chitiet.gender ? 'Ná»¯' : 'Nam'}}</p>
-								</div>
-							</div>
-							<div class="form-group">
-								<label class="control-label">Há»� tÃªn phá»¥ huynh</label> <input
-									id="parentName" name="parentName" placeholder=""
-									class="form-control input-md" type="text"
-									ng-model="chitiet.parentName" />
-
-
-							</div>
-							<div class="form-group">
-								<label class="control-label">Sá»‘ Ä‘iá»‡n thoáº¡i</label> <input
-									id="phone" name="phone" placeholder=""
-									class="form-control input-md" type="text"
-									ng-model="chitiet.phone" />
-
-
-							</div>
-
-						</div>
-
-					</form>
-
-				</div>
-
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-				</div>
-			</div>
-		</div>
-	</div> -->
-					<!-- Modal xÃ³a -->
-					<!-- <div class="modal fade" id="myModal_xoa" tabindex="-1" role="dialog"
-		aria-labelledby="myModalLabel">
-		<div class="modal-dialog">
-			<div class="modal-content">
-
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal"
-						aria-hidden="true">&times;</button>
-					<h4 class="modal-title" id="myModalLabel">XÃ¡c nháº­n</h4>
-				</div>
-
-				<div class="modal-body">
-
-					<input type="hidden" ng-model="student_delete.id" />
-
-					<p>Báº¡n cÃ³ cháº¯c cháº¯n muá»‘n xÃ³a khÃ´ng?</p>
-				</div>
-
-				<div class="modal-footer">
-					<a class="btn btn-danger btn-ok" ng-click="deleteStudent()">CÃ³</a>
-					<button type="button" class="btn btn-default" data-dismiss="modal">KhÃ´ng</button>
-
-				</div>
-			</div>
-		</div>
-	</div> -->
-
-				</div>
-			</div>
-			<!-- /page content -->
-
-			<!-- footer content -->
-			<footer> </footer>
-			<!-- /footer content -->
 		</div>
 	</div>
-
 
 	<!-- jQuery -->
 	<script
@@ -727,10 +444,7 @@
 	<script type="text/javascript"
 		src="${pageContext.request.contextPath }/assets/scripts/songCtrl.js"></script>
 
-<script src="${pageContext.request.contextPath }/assets/js/ui-grid.js"></script>
-
-
-
+	<script src="${pageContext.request.contextPath }/assets/js/ui-grid.js"></script>
 </body>
 
 </html>

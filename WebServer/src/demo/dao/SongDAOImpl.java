@@ -63,7 +63,7 @@ public class SongDAOImpl implements SongDAO {
 		Transaction transaction = null;
 		try {
 			transaction = session.beginTransaction();
-			session.delete(id);
+			session.delete(getSong(id));
 			transaction.commit();
 		} catch (Exception e) {
 			if (transaction != null) {
@@ -80,6 +80,8 @@ public class SongDAOImpl implements SongDAO {
 		Session session = sessionFactory.openSession();
 		Transaction transaction = null;
 		try {
+			/*Vn s = new Vn("HOÀI NIỆM DẤU YÊU", 51615, "Tìm lại chốn cũ năm xưa bên nhau…", "Sinh", "");*/
+			
 			transaction = session.beginTransaction();
 			session.save(song);
 			transaction.commit();

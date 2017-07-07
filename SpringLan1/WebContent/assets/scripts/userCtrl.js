@@ -145,38 +145,66 @@ app
 
 						}
 					}
-					//Load data to edit form
+					// Load data to edit form
 					$scope.GetUser = function(data) {
-						$http
-								.get(
-										"http://localhost:8080/WebServer/api/user/"
-												+ data.id)
-								.then(
-										function(response) {
-											userID = data.id;
-											$scope.edit_username = response.data.username;
-											$scope.edit_fullname = response.data.fullname
-											$scope.edit_status = response.data.enabled == 0 ? '0': '1';
-											$scope.edit_id = data.id;
-											$scope.edit_role = response.data.role.id==1 ?'1':'2';
-										
-										});
+						$http.get(
+								"http://localhost:8080/WebServer/api/user/"
+										+ data.id).then(function(response) {
+							userID = data.id;
+							$scope.edit_username = response.data.username;
+							$scope.edit_fullname = response.data.fullname
+							$scope.edit_status = response.data.enabled;
+							$scope.edit_id = data.id;
+							$scope.edit_role = response.data.role.id;
+							$scope.edit_password = response.data.password;
+
+						});
 
 					}
-					//Edit user information
-					$scope.update = function()
-					{
-						
+					// Edit user information
+					$scope.update = function() {
+
+						var userData = {
+							id : userID,
+							username : $scope.edit_username,
+							fullname : $scope.edit_fullname,
+							enabled : ($scope.edit_status == null ? false
+									: ($scope.edit_status == false ? false
+											: true)),
+							password : $scope.edit_password,
+							role : {
+								'id' : $scope.edit_role
+							}
+						};
+
+						$http(
+								{
+									method : "PUT",
+									url : "http://localhost:8080/WebServer/api/user",
+									data : userData,
+									dataType : "json",
+									headers : {
+										'Content-Type' : 'application/json; charset=UTF-8'
+									}
+								})
+								.then(
+										function(result) {
+											$("#myModal_edit").modal("hide");
+											GetListUser();
+											alertEditSucess();
+										},
+										function(response) {
+											alertFailMessage("Oops! Something went wrong, please check your input again.");
+
+										});
 					}
-					var deleteUser ="";
-					//get data for delete
-					$scope.deleteUser = function(data)
-					{
+					var deleteUser = "";
+					// get data for delete
+					$scope.deleteUser = function(data) {
 						deleteUser = data;
 					}
-					//Delete user
-					$scope.deleteUsers = function()
-					{
+					// Delete user
+					$scope.deleteUsers = function() {
 						$http(
 								{
 									method : "DELETE",
@@ -189,6 +217,47 @@ app
 								alertDeleteSucess();
 
 							}
+						});
+					}
+					// Form Reset
+					$scope.ResetPass = function() {
+						$http
+								.get(
+										"http://localhost:8080/WebServer/api/user/"
+												+ $scope.edit_id)
+								.then(
+										function(response) {
+											userID = $scope.edit_id;
+											$scope.reset_username = response.data.username;
+											$scope.reset_id_role = response.data.role.id;
+											$scope.reset_fullname =response.data.fullname;
+											$scope.reset_status = response.data.enabled
+
+										});
+					}
+					// Reset password for user
+
+					$scope.ResetPassword = function() {
+
+						var dataUser = {
+							id : userID,
+							password : $scope.newPassword,
+							role : {
+								'id' : $scope.reset_id_role
+							},
+							username:$scope.reset_username,
+							fullname:$scope.reset_fullname,
+							enabled :$scope.reset_role
+						};
+						$http(
+								{
+									method : "PUT",
+									url : "http://localhost:8080/WebServer/api/user/resetpass",
+									data : dataUser,
+									dataType : "json"
+								}).then(function(result) {
+							$("#myModal_confirmReset").modal("hide");
+							resetAlert();
 						});
 					}
 					// Alert when adding successfully
@@ -233,6 +302,24 @@ app
 						setTimeout(function() {
 							location.reload();
 						}, alertDuration);
+					}
+					function alertFailMessage(message) {
+						swal({
+							title : "",
+							text : message,
+							type : "error",
+							timer : alertDuration,
+							showConfirmButton : false
+						});
+					}
+					function resetAlert() {
+						swal({
+							title : "",
+							text : "Reset successfully.",
+							type : "success",
+							timer : 2000,
+							showConfirmButton : false
+						});
 					}
 
 				});

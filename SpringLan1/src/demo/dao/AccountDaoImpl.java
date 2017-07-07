@@ -3,22 +3,21 @@ package demo.dao;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Repository;
 
 import demo.entity.User;
-import demo.entity.Vn;
 
 @Repository("accountDao")
 public class AccountDaoImpl implements AccountDao{
 	@Autowired
 	private SessionFactory sessionFactory;
-	@Autowired
-	private BCryptPasswordEncoder passwordEncoder; 
+	 
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<User> findAll() {
@@ -164,5 +163,7 @@ public class AccountDaoImpl implements AccountDao{
 		}
 		return account;
 	}
+
+	
 
 }

@@ -48,4 +48,11 @@ public class UserServiceImpl implements UserService {
 
 	}
 
+	@Override
+	public void resetPass(User user) {
+		user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
+		userDao.resetPass(user);
+		
+	}
+
 }

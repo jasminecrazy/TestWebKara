@@ -16,5 +16,8 @@ public interface AccountService {
 	public void update(int id);
 
 	public List<User> search(String keyword);
+
 	public User getUser(int id);
+
+	
 }
