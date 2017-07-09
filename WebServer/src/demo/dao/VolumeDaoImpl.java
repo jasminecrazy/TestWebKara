@@ -10,85 +10,62 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import demo.entity.Album;
-import demo.entity.Vn;
 import demo.entity.Volume;
 
-@Repository("SongDAO")
-public class SongDAOImpl implements SongDAO {
+@Repository("VolumeDao")
+public class VolumeDaoImpl implements VolumeDao {
 	@Autowired
 	private SessionFactory sessionFactory;
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Vn> findAllSong() {
-		List<Vn> song = new ArrayList<Vn>();
+	public List<Volume> findAllVol() {
+		List<Volume> volume = new ArrayList<Volume>();
 		Session session = sessionFactory.openSession();
 		Transaction transaction = null;
 		try {
 			transaction = session.beginTransaction();
-			song = session.createQuery("from Vn").list();
+			volume = session.createQuery("from Volume").list();
 			transaction.commit();
 		} catch (Exception e) {
-			song = null;
+			volume = null;
 			if (transaction != null) {
 				transaction.rollback();
 			}
 		} finally {
 			session.close();
 		}
-		return song;
+		return volume;
 	}
 
 	@Override
-	public Vn getSong(int id) {
-		Vn song = null;
+	public Volume getVol(int id) {
+		Volume volume = null;
 		Session session = sessionFactory.openSession();
 		Transaction transaction = null;
 		try {
 			transaction = session.beginTransaction();
-			song = (Vn) session.createQuery("select c from Vn c where c.id =:id").setInteger("id", id).uniqueResult();
+			volume = (Volume) session.createQuery("select c from Volume c where c.id =:id").setInteger("id", id)
+					.uniqueResult();
 			transaction.commit();
 		} catch (Exception e) {
-			song = null;
+			volume = null;
 			if (transaction != null) {
 				transaction.rollback();
 			}
 		} finally {
 			session.close();
 		}
-		return song;
+		return volume;
 	}
 
 	@Override
-	public void deleteSong(int id) {
+	public void deleteVol(int id) {
 		Session session = sessionFactory.openSession();
 		Transaction transaction = null;
 		try {
 			transaction = session.beginTransaction();
-			session.delete(getSong(id));
-			transaction.commit();
-		} catch (Exception e) {
-			if (transaction != null) {
-				transaction.rollback();
-			}
-		} finally {
-			session.close();
-		}
-
-	}
-
-	@Override
-	public void addSong(Vn song) {
-		Session session = sessionFactory.openSession();
-		Transaction transaction = null;
-		try {
-			/*
-			 * Vn s = new Vn("HOÀI NIỆM DẤU YÊU", 51615,
-			 * "Tìm lại chốn cũ năm xưa bên nhau…", "Sinh", "");
-			 */
-
-			transaction = session.beginTransaction();
-			session.save(song);
+			session.delete(getVol(id));
 			transaction.commit();
 		} catch (Exception e) {
 			if (transaction != null) {
@@ -101,12 +78,12 @@ public class SongDAOImpl implements SongDAO {
 	}
 
 	@Override
-	public void updateSong(Vn song) {
+	public void addVol(Volume volume) {
 		Session session = sessionFactory.openSession();
 		Transaction transaction = null;
 		try {
 			transaction = session.beginTransaction();
-			session.update(song);
+			session.save(volume);
 			transaction.commit();
 		} catch (Exception e) {
 			if (transaction != null) {
@@ -115,48 +92,24 @@ public class SongDAOImpl implements SongDAO {
 		} finally {
 			session.close();
 		}
+
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
-	public List<Volume> getListVol() {
-
-		List<Volume> vol = new ArrayList<Volume>();
+	public void updateVol(Volume volume) {
 		Session session = sessionFactory.openSession();
 		Transaction transaction = null;
 		try {
 			transaction = session.beginTransaction();
-			vol = session.createQuery("from Volume").list();
+			session.update(volume);
 			transaction.commit();
 		} catch (Exception e) {
-			vol = null;
 			if (transaction != null) {
 				transaction.rollback();
 			}
 		} finally {
 			session.close();
 		}
-		return vol;
-	}
 
-	@SuppressWarnings("unchecked")
-	@Override
-	public List<Album> getListAlbum() {
-		List<Album> album = new ArrayList<Album>();
-		Session session = sessionFactory.openSession();
-		Transaction transaction = null;
-		try {
-			transaction = session.beginTransaction();
-			album = session.createQuery("from Album").list();
-			transaction.commit();
-		} catch (Exception e) {
-			album = null;
-			if (transaction != null) {
-				transaction.rollback();
-			}
-		} finally {
-			session.close();
-		}
-		return album;
 	}
 }

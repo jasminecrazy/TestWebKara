@@ -1,11 +1,14 @@
 package demo.entity;
-// Generated Jul 7, 2017 5:05:55 PM by Hibernate Tools 5.2.3.Final
+// Generated Jul 9, 2017 11:48:25 PM by Hibernate Tools 5.1.0.Alpha1
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -16,30 +19,39 @@ import javax.persistence.Table;
 public class Vn implements java.io.Serializable {
 
 	private Integer id;
+	private Album album;
+	private Volume volume;
 	private String ten;
 	private int maso;
 	private String loi;
 	private String thongtin;
 	private String linkyoutube;
 	private String picture;
+	private Integer masauso;
 
 	public Vn() {
 	}
 
-	public Vn(String ten, int maso, String loi, String thongtin) {
+	public Vn(Album album, Volume volume, String ten, int maso, String loi, String thongtin) {
+		this.album = album;
+		this.volume = volume;
 		this.ten = ten;
 		this.maso = maso;
 		this.loi = loi;
 		this.thongtin = thongtin;
 	}
 
-	public Vn(String ten, int maso, String loi, String thongtin, String linkyoutube, String picture) {
+	public Vn(Album album, Volume volume, String ten, int maso, String loi, String thongtin, String linkyoutube,
+			String picture, Integer masauso) {
+		this.album = album;
+		this.volume = volume;
 		this.ten = ten;
 		this.maso = maso;
 		this.loi = loi;
 		this.thongtin = thongtin;
 		this.linkyoutube = linkyoutube;
 		this.picture = picture;
+		this.masauso = masauso;
 	}
 
 	@Id
@@ -52,6 +64,26 @@ public class Vn implements java.io.Serializable {
 
 	public void setId(Integer id) {
 		this.id = id;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "idalbum", nullable = false)
+	public Album getAlbum() {
+		return this.album;
+	}
+
+	public void setAlbum(Album album) {
+		this.album = album;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "vol_id", nullable = false)
+	public Volume getVolume() {
+		return this.volume;
+	}
+
+	public void setVolume(Volume volume) {
+		this.volume = volume;
 	}
 
 	@Column(name = "ten", nullable = false, length = 100)
@@ -106,6 +138,15 @@ public class Vn implements java.io.Serializable {
 
 	public void setPicture(String picture) {
 		this.picture = picture;
+	}
+
+	@Column(name = "masauso")
+	public Integer getMasauso() {
+		return this.masauso;
+	}
+
+	public void setMasauso(Integer masauso) {
+		this.masauso = masauso;
 	}
 
 }

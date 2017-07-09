@@ -93,8 +93,22 @@
 												management</a></li>
 
 									</ul></li>
+								<li><a> <i class="fa fa-list-ul"></i>Category
+										Management<span class="fa fa-chevron-down"></span></a>
+									<ul class="nav child_menu">
+										
+										<li><a
+											href="${pageContext.request.contextPath }/superadmin.html">Volume Management</a></li>
+											<li><a
+											href="${pageContext.request.contextPath }/superadmin.html">Album Management</a></li>
+
+									</ul></li>
 
 							</ul>
+
+
+
+
 						</div>
 
 
@@ -169,12 +183,10 @@
 						<div class="col-md-12 col-sm-12 col-xs-12">
 							<div class="x_panel">
 								<div class="x_title">
+									<h3>User Management</h3>
 									<div class="clearfix"></div>
 								</div>
-								<div class="col-md-6 pull-right">
-									<input id="filter" type="text" placeholder="Find"
-										class="form-control" data-ng-model="filterTable"></input>
-								</div>
+
 
 								<div class="x_content">
 
@@ -409,13 +421,13 @@
 													</div>
 
 												</div>
-												
+
 											</div>
-											<input type="hidden" ng-model="reset_id_role"/>
-											<input type="hidden" ng-model="reset_username"/>
-											<input type="hidden" ng-model ="reset_fullname"/>
-											<input type="hidden" ng-model="reset_status"/>
-									
+											<input type="hidden" ng-model="reset_id_role" /> <input
+												type="hidden" ng-model="reset_username" /> <input
+												type="hidden" ng-model="reset_fullname" /> <input
+												type="hidden" ng-model="reset_status" />
+
 										</form>
 									</div>
 

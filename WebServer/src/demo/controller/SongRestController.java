@@ -25,7 +25,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import demo.entity.Album;
 import demo.entity.Vn;
+import demo.entity.Volume;
 import demo.service.SongService;
 
 @WebServlet("/uploadFile")
@@ -123,4 +125,13 @@ public class SongRestController {
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 
+	@RequestMapping(value = "song/getVol", method = RequestMethod.GET)
+	public ResponseEntity<List<Volume>> getListVol() {
+		return new ResponseEntity<List<Volume>>(songService.getListVol(), HttpStatus.OK);
+	}
+
+	@RequestMapping(value = "song/getAlbum", method = RequestMethod.GET)
+	public ResponseEntity<List<Album>> getListAlbum() {
+		return new ResponseEntity<List<Album>>(songService.getListAlbum(), HttpStatus.OK);
+	}
 }

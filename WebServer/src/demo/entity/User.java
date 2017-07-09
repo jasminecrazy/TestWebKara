@@ -1,5 +1,5 @@
 package demo.entity;
-// Generated Jul 7, 2017 5:05:55 PM by Hibernate Tools 5.2.3.Final
+// Generated Jul 9, 2017 11:48:25 PM by Hibernate Tools 5.1.0.Alpha1
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -21,9 +21,9 @@ public class User implements java.io.Serializable {
 	private Integer id;
 	private Role role;
 	private String username;
-	private String fullname;
 	private String password;
 	private boolean enabled;
+	private String fullname;
 
 	public User() {
 	}
@@ -35,12 +35,12 @@ public class User implements java.io.Serializable {
 		this.enabled = enabled;
 	}
 
-	public User(Role role, String username, String fullname, String password, boolean enabled) {
+	public User(Role role, String username, String password, boolean enabled, String fullname) {
 		this.role = role;
 		this.username = username;
-		this.fullname = fullname;
 		this.password = password;
 		this.enabled = enabled;
+		this.fullname = fullname;
 	}
 
 	@Id
@@ -74,15 +74,6 @@ public class User implements java.io.Serializable {
 		this.username = username;
 	}
 
-	@Column(name = "fullname", length = 100)
-	public String getFullname() {
-		return this.fullname;
-	}
-
-	public void setFullname(String fullname) {
-		this.fullname = fullname;
-	}
-
 	@Column(name = "password", nullable = false, length = 100)
 	public String getPassword() {
 		return this.password;
@@ -99,6 +90,15 @@ public class User implements java.io.Serializable {
 
 	public void setEnabled(boolean enabled) {
 		this.enabled = enabled;
+	}
+
+	@Column(name = "fullname", length = 100)
+	public String getFullname() {
+		return this.fullname;
+	}
+
+	public void setFullname(String fullname) {
+		this.fullname = fullname;
 	}
 
 }

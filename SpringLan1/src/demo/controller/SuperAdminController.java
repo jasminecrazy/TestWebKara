@@ -20,56 +20,32 @@ public class SuperAdminController {
 	private AccountService accountService;
 	@Autowired
 	private SongService songService;
-	@RequestMapping(method=RequestMethod.GET)
-public String index(ModelMap modelMap)
-{
-		modelMap.put("accounts", 
-				accountService.findAll());
-	return "superadmin/index";
-}
-	@RequestMapping(value="song",method=RequestMethod.GET)
-	public String song(ModelMap modelMap)
-	{
-		modelMap.put("song",songService.findAll());
+
+	@RequestMapping(method = RequestMethod.GET)
+	public String index(ModelMap modelMap) {
+		modelMap.put("accounts", accountService.findAll());
+		return "superadmin/index";
+	}
+
+	@RequestMapping(value = "song", method = RequestMethod.GET)
+	public String song(ModelMap modelMap) {
+		modelMap.put("song", songService.findAll());
 		return "superadmin/song";
 	}
 
+	@RequestMapping(value = "genre", method = RequestMethod.GET)
+	public String genre() {
+		return "superadmin/genre";
+	}
 
-	//Create/Save
-	@RequestMapping(value="add",method= RequestMethod.GET)
-	public String save(ModelMap modelMap )
-	{
-		modelMap.put("user", new User());
-		return "superadmin/add";
-		
+	@RequestMapping(value = "vol", method = RequestMethod.GET)
+	public String vol() {
+		return "superadmin/vol";
 	}
-	@RequestMapping(value="add",method= RequestMethod.POST)
-	public String save(@ModelAttribute("user") User user,ModelMap modelMap )
-	{
-		accountService.create(user);
-		return "redirect:/superadmin.html";
-		
+
+	@RequestMapping(value = "album", method = RequestMethod.GET)
+	public String album() {
+		return "superadmin/album";
 	}
-	@RequestMapping(value="delete/{id}",method= RequestMethod.GET)
-	public String delete(@PathVariable ("id") Integer id)
-	{
-		accountService.delete(id);
-		return "redirect:/superadmin.html";
-		
-	}
-	@RequestMapping(value="edit/{id}",method= RequestMethod.GET)
-	public String edit(@PathVariable ("id") Integer id,ModelMap modalMap)
-	{
-		modalMap.put("user",accountService.getUser(id));
-		return "superadmin/edit";
-		
-	}
-	@RequestMapping(value="edit",method= RequestMethod.POST)
-	public String edit(@ModelAttribute("user") User user )
-	{
-		accountService.create(user);
-		return "redirect:/superadmin.html";
-		
-	}
-	
+
 }

@@ -2,7 +2,9 @@ package demo.service;
 
 import java.util.List;
 
+import demo.entity.Album;
 import demo.entity.Vn;
+import demo.entity.Volume;
 
 public interface SongService {
 	public List<Vn> findAllSong();
@@ -14,4 +16,8 @@ public interface SongService {
 	public void addSong(Vn song);
 
 	public void updateSong(Vn song);
+
+	public List<Volume> getListVol();
+
+	public List<Album> getListAlbum();
 }

@@ -2,18 +2,12 @@ app
 		.controller(
 				'songCtrl',
 				function($scope, $http, $filter, $resource, uiGridConstants) {
-					/*
-					 * $scope.list = []; function getAllSong() { $http({ url :
-					 * 'http://localhost:8080/WebServer/api/song', method :
-					 * "GET" }).then(function(response) { $scope.list =
-					 * response.data; }, function(error) { console.log(error);
-					 * }); } getAllSong();
-					 */
-					// get User List
+					
+					// get List Songs
 					function GetListSong() {
 						$scope.list = [];
-						var User = $resource('http://localhost:8080/WebServer/api/song');
-						User.query().$promise.then(function(listSong) {
+						var Song = $resource('http://localhost:8080/WebServer/api/song');
+						Song.query().$promise.then(function(listSong) {
 
 							$scope.list = listSong;
 							$scope.gridOptions.data = listSong;
@@ -22,6 +16,31 @@ app
 
 					}
 					GetListSong();
+					function GetListVol() {
+						$scope.list_volume = [];
+						var Vol = $resource('http://localhost:8080/WebServer/api/song/getVol');
+						Vol.query().$promise.then(function(listVol) {
+
+							$scope.list_volume = listVol;
+							
+
+						});
+
+					}
+					GetListVol();
+					function GetListAlbum() {
+						$scope.list_album = [];
+						var Album = $resource('http://localhost:8080/WebServer/api/song/getAlbum');
+						Album.query().$promise.then(function(listAlbum) {
+
+							$scope.list_album = listAlbum;
+							
+
+						});
+
+					}
+					GetListAlbum();
+					
 					$scope.gridOptions = {
 						noUnselect : true,
 						multiSelect : false,
@@ -59,6 +78,15 @@ app
 									name : 'linkyoutube',
 									displayName : 'Youtube Link'
 								},
+								{
+									name : 'volume.volName',
+									displayName:'Vol'
+								},
+								{
+									name : 'album.albumName',
+									displayName:'Album'
+								},
+								
 
 								{
 									name : 'Action',
@@ -68,30 +96,11 @@ app
 											+ '<button ng-click="grid.appScope.deleteSong(row.entity)" data-toggle="modal" class="btn btn-danger btn-sm" data-tooltip ="tooltip" title="Delete" data-target="#myModal_delete"><span class="glyphicon glyphicon-remove"></span></button>'
 								} ]
 					};
-
-					$scope.rowdata = {
-						availableOptions : [ {
-							id : '15',
-							name : '15'
-						}, {
-							id : '30',
-							name : '30'
-						}, {
-							id : '50',
-							name : '50'
-						}, {
-							id : '100',
-							name : '100'
-						} ],
-						selectedOption : {
-							id : '15',
-							name : '15 rows'
-						}
-					};
-					$scope.ChangeRow = function(index) {
-						$scope.itemsPerPage = index;
-						$scope.updatePageIndexes();
-					}
+					// Enable text box for Id KaraokeKali
+					$('#check').change(function(){
+						   $("#genre").prop("disabled", !$(this).is(':checked'));
+						});
+					
 					var alertDuration = 1800;
 					// Check SongId
 					function id_duplicate_Add(id) {
@@ -110,7 +119,7 @@ app
 					$scope.hideDuplicateAlert = function() {
 						$scope.duplicateAlert = " ";
 					}
-					//Get Image
+					// Get Image
 					$scope.prev_img='';
 					$scope.getImage = function(element) {
 			    		photofile = element.files[0];
@@ -147,45 +156,94 @@ app
 			    	$scope.image="";
 					// Add new Song
 					$scope.add = function(close) {
-						if (id_duplicate_Add(document.getElementById("songId").value)) {
-							uploadFile();
-							$http(
-									{
-										method : "POST",
-										url : "http://localhost:8080/WebServer/api/song",
-										data : {
-											maso : $scope.add_songId,
-											ten : $scope.add_songName,
-											loi : $scope.add_lyric,
-											thongtin : $scope.add_author,
-											linkyoutube : $scope.add_youtubelink,
-											picture:$scope.image
-										},
-
-										dataType : "json",
-										headers: { 'Content-Type': 'application/json; charset=UTF-8'}
-									})
-									.then(
-											function(result) {
-												if (result.status == 201) {
-
-													GetListSong();
-													alertAddSucess();
-													if (close == true) {
-														$("#myModal_Add")
-																.modal("hide");
-													}
-												}
-
+						if($scope.chk)
+							{
+							if (id_duplicate_Add(document.getElementById("songId").value)) {
+								uploadFile();
+								$http(
+										{
+											method : "POST",
+											url : "http://localhost:8080/WebServer/api/song",
+											data : {
+												maso : $scope.add_songId,
+												ten : $scope.add_songName,
+												loi : $scope.add_lyric,
+												thongtin : $scope.add_author,
+												linkyoutube : $scope.add_youtubelink,
+												picture:$scope.image,
+												volume:$scope.add_volName,
+												album:$scope.add_albumName,
+												masauso:$scope.add_genre
 											},
-											function(response) {
-												alertFailMessage("Oops! Something went wrong, please check your input again.");
-												console.log('Fail');
-											});
-						}
+
+											dataType : "json",
+											headers: { 'Content-Type': 'application/json; charset=UTF-8'}
+										})
+										.then(
+												function(result) {
+													if (result.status == 201) {
+
+														GetListSong();
+														alertAddSucess();
+														if (close == true) {
+															$("#myModal_Add")
+																	.modal("hide");
+														}
+													}
+
+												},
+												function(response) {
+													alertFailMessage("Oops! Something went wrong, please check your input again.");
+													console.log('Fail');
+												});
+							}
+						
+							}
+						else
+							{
+							if (id_duplicate_Add(document.getElementById("songId").value)) {
+								uploadFile();
+								$http(
+										{
+											method : "POST",
+											url : "http://localhost:8080/WebServer/api/song",
+											data : {
+												maso : $scope.add_songId,
+												ten : $scope.add_songName,
+												loi : $scope.add_lyric,
+												thongtin : $scope.add_author,
+												linkyoutube : $scope.add_youtubelink,
+												picture:$scope.image,
+												volume:$scope.add_volName,
+												album:$scope.add_albumName,
+												masauso:null
+											},
+
+											dataType : "json",
+											headers: { 'Content-Type': 'application/json; charset=UTF-8'}
+										})
+										.then(
+												function(result) {
+													if (result.status == 201) {
+
+														GetListSong();
+														alertAddSucess();
+														if (close == true) {
+															$("#myModal_Add")
+																	.modal("hide");
+														}
+													}
+
+												},
+												function(response) {
+													alertFailMessage("Oops! Something went wrong, please check your input again.");
+													console.log('Fail');
+												});
+							}
+							}
 
 					}
-					//Load song data to edit form
+					// Load song data to edit form
 	
 					$scope.GetSong = function(data) {
 						$http
@@ -201,15 +259,28 @@ app
 											$scope.edit_id = data.id;
 											$scope.edit_author = response.data.thongtin;
 											$scope.edit_youtubelink = response.data.linkyoutube;
+											$scope.edit_genre = response.data.masauso;
+											
+											for (var i = 0; i < $scope.list_volume.length; i++) {
+								                if (response.data.volume.volId == $scope.list_volume[i].volId) {
+								                    $scope.edit_volName = $scope.list_volume[i];
+								                    break;
+}}
+											for (var i = 0; i < $scope.list_album.length; i++) {
+								                if (response.data.album.albumId == $scope.list_album[i].albumId) {
+								                    $scope.edit_albumName = $scope.list_album[i];
+								                    break;
+}}
+											
 										
 										});
 
 					}
-					//Update song information
+					// Update song information
 					$scope.update = function () {
 						
 			   	var songData={id:songID,ten:$scope.edit_songName,maso:$scope.edit_songId,loi:$scope.edit_lyric,
-			   			thongtin:$scope.edit_author,linkyoutube:$scope.edit_youtubelink
+			   			thongtin:$scope.edit_author,linkyoutube:$scope.edit_youtubelink,volume:$scope.edit_volName,album:$scope.edit_albumName,masauso:$scope.edit_genre
 			   			};
 			   	
 			       $http({
@@ -228,14 +299,14 @@ app
 
 			        });
 			  }  
-					//get data for delete
+					// get data for delete
 					var deleteSong ="";
-					//get data for delete
+					// get data for delete
 					$scope.deleteSong = function(data)
 					{
 						deleteSong = data;
 					}
-					//Delete Song
+					// Delete Song
 					$scope.delete = function()
 					{
 						$http(
@@ -312,13 +383,12 @@ app
 					// Auto fill in add form
 					$scope.autoAdd = function(keyEvent) {
 						if (keyEvent.keyCode == 81 && keyEvent.altKey) {
-							var random = getRandomInt(1, 10000);
+							var random = getRandomInt(1000, 10000);
 							$scope.add_songId = random;
 							$scope.add_songName = "Just the way you are";
 							$scope.add_lyric = " And I see your name that nothing that I would change";
 							$scope.add_author="Bruno Mars";
 							$scope.add_youtubelink = "https://www.youtube.com/watch?v=KtyB1UTaoaE";
-
 						}
 					}
 				});

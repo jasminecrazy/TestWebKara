@@ -46,7 +46,7 @@
 
 </head>
 
-<body data-ng-app="myApp" class="nav-md" data-ng-controller="songCtrl">
+<body data-ng-app="myApp" class="nav-md" data-ng-controller="albumCtrl">
 	<div class="container body">
 		<div class="main_container">
 			<div class="col-md-3 left_col">
@@ -86,7 +86,7 @@
 								<li><a> <i class="fa fa-list-ul"></i>Category
 										Management<span class="fa fa-chevron-down"></span></a>
 									<ul class="nav child_menu">
-
+										
 										<li><a
 											href="${pageContext.request.contextPath }/superadmin/vol.html">Volume
 												Management</a></li>
@@ -128,9 +128,7 @@
 									<span class=" fa fa-angle-down"></span>
 							</a>
 								<ul class="dropdown-menu dropdown-usermenu pull-right">
-									<li><a
-										href="${pageContext.request.contextPath }/superadmin/profile.html">
-											Profile</a></li>
+
 
 
 									<li><a href="<c:url value='/j_spring_security_logout'/>"><i
@@ -156,7 +154,7 @@
 									href="${pageContext.request.contextPath }/admin/welcome">Home</a>
 								</li>
 								<li class="active"><a
-									href="${pageContext.request.contextPath }/superadmin/song.html">Song
+									href="${pageContext.request.contextPath }/superadmin/vol.html">Volume
 										Management</a></li>
 
 							</ul>
@@ -176,7 +174,7 @@
 							<div class="x_panel">
 								<div class="x_title">
 									<div class="clearfix"></div>
-									<h3>List Song Information</h3>
+									<h3>List Album Information</h3>
 								</div>
 
 
@@ -202,106 +200,34 @@
 											aria-label="Close">
 											<span aria-hidden="true">&times;</span>
 										</button>
-										<h4 class="modal-title" id="myModalLabel">Add new song</h4>
+										<h4 class="modal-title" id="myModalLabel">Add new album</h4>
 									</div>
 									<div class="modal-body row">
 										<form class="form-horizontal" name="frmFormAdd"
 											enctype="multipart/form-data" id="fileUploadForm">
 											<div class="col-md-6">
 												<div class="form-group">
-													<label class=" control-label" for="">Song ID</label>
+													<label class=" control-label" for="">Album ID</label>
 													<div class="">
-														<input id="songId" name="songId"
+														<input id="albumId" name="albumId"
 															ng-keyup="hideDuplicateAlert()"
 															class="form-control input-md"
-															ng-keydown="autoAdd($event)" type="number" min="0"
-															ng-model="add_songId" ng-required="false" />
+															ng-keydown="autoAdd($event)" type="text"
+															ng-model="add_albumId" ng-required="false" />
 													</div>
 												</div>
 												<p ng-show="duplicateAlert != ''" ng-bind="duplicateAlert"
 													style="color: red"></p>
 
 												<div class="form-group">
-													<label class=" control-label" for="">Song Name</label>
+													<label class=" control-label" for="">Album Name</label>
 													<div class="">
-														<input id="songName" name="songName"
+														<input id="albumName" name="albumName"
 															class="form-control input-md" type="text"
-															ng-model="add_songName" ng-required="false" />
+															ng-model="add_albumName" ng-required="false" />
 													</div>
 												</div>
-												<div class="form-group">
-													<label class=" control-label">Lyric</label>
-													<div class="">
-														<input id="lyric" name="lyric" placeholder=""
-															ng-model="add_lyric" class="form-control input-md"
-															type="text" />
-
-													</div>
-												</div>
-
-												<div class="form-group">
-													<label class="control-label">Author</label>
-													<div class="">
-														<input id="author" name="author" placeholder=""
-															ng-model="add_author" class="form-control input-md"
-															type="text" />
-
-													</div>
-
-
-												</div>
-
-												<div class="form-group">
-													<label class=" control-label">Youtube Link</label>
-													<div class="">
-														<textarea id="youtube" name="youtube" rows="5"
-															class="form-control input-md" type="text"
-															ng-model="add_youtubelink"></textarea>
-
-													</div>
-												</div>
-												<label class="col-md-2 control-label">Picture</label>
-												<div class="col-md-12 picture">
-													<img ng-src="{{prev_img}}" height="150" width="100"
-														id="prev_img" /> <input type="file" id="image"
-														name="uploadfile" accept="*"
-														onchange="angular.element(this).scope().getImage(this)"
-														ng-model="image" />
-													<!-- Multiple Radios -->
-
-												</div>
-
-											</div>
-											<div class="col-md-6">
-												<div class="form-group">
-													<label class="control-label" for="selectbasic">Vol</label>
-													<div class="">
-														<select ng-selected="vol.volName" ng-model="add_volName"
-															class="form-control"
-															ng-options="x.volName for x in list_volume"
-															name="volName" id="volName" ng-required="true">
-														</select>
-													</div>
-												</div>
-												<div class="form-group">
-													<label class="control-label" for="selectbasic">ID
-														Karaoke California</label>
-													<div class="">
-														<input type="number" min="0" name="genre" ng-model="add_genre"
-															id="genre" ng-disabled="true" class="col-md-11" /> <input
-															type="checkbox" id="check" class="col-md-1" ng-model="chk"/>
-													</div>
-												</div>
-												<div class="form-group">
-													<label class="control-label" for="selectbasic">Album</label>
-													<div class="">
-														<select ng-selected="album.albumName"
-															ng-model="add_albumName" class="form-control"
-															ng-options="x.albumName for x in list_album"
-															name="albumName" id="albumName" ng-required="true">
-														</select>
-													</div>
-												</div>
+												
 
 											</div>
 
@@ -313,9 +239,8 @@
 									</div>
 									<div class="modal-footer">
 										<button id="btnSave" name="btnSave" class="btn btn-primary"
-											ng-click="add(false)">Add</button>
-										<button id="btnSave" name="btnSave" class="btn btn-default"
-											ng-click="add(true)">Add and close</button>
+											ng-click="add()">Add</button>
+										
 										<button type="button" class="btn btn-default"
 											data-dismiss="modal">Close</button>
 
@@ -335,94 +260,33 @@
 											aria-label="Close">
 											<span aria-hidden="true">&times;</span>
 										</button>
-										<h4 class="modal-title" id="myModalLabel">Edit song
+										<h4 class="modal-title" id="myModalLabel">Edit album
 											information</h4>
 									</div>
 									<div class="modal-body row">
 										<form class="form-horizontal" name="editForm">
 											<div class="col-md-6">
 												<div class="form-group">
-													<label class=" control-label" for="">Song ID</label>
+													<label class=" control-label" for="">Album ID</label>
 													<div class="">
-														<input id="songId" name="songId"
+														<input id="albumId" name="albumId"
 															ng-keyup="hideDuplicateAlert()"
-															class="form-control input-md" type="number"
-															ng-model="edit_songId" ng-required="false" />
+															class="form-control input-md" type="text"
+															ng-model="edit_albumId" ng-required="false" />
 													</div>
 												</div>
 												<p ng-show="duplicateAlert != ''" ng-bind="duplicateAlert"
 													style="color: red"></p>
 
 												<div class="form-group">
-													<label class=" control-label" for="">Song Name</label>
+													<label class=" control-label" for="">Album Name</label>
 													<div class="">
-														<input id="songName" name="songName"
+														<input id="albumName" name="albumName"
 															class="form-control input-md" type="text"
-															ng-model="edit_songName" ng-required="false" />
+															ng-model="edit_albumName" ng-required="false" />
 													</div>
 												</div>
-												<div class="form-group">
-													<label class=" control-label">Lyric</label>
-													<div class="">
-														<input id="lyric" name="lyric" placeholder=""
-															ng-model="edit_lyric" class="form-control input-md"
-															type="text" />
-
-													</div>
-												</div>
-
-												<div class="form-group">
-													<label class="control-label">Author</label>
-													<div class="">
-														<input id="author" name="author" placeholder=""
-															ng-model="edit_author" class="form-control input-md"
-															type="text" />
-
-													</div>
-
-
-												</div>
-
-												<div class="form-group">
-													<label class=" control-label">Youtube Link</label>
-													<div class="">
-														<textarea id="youtube" name="youtube" rows="5"
-															class="form-control input-md" type="text"
-															ng-model="edit_youtubelink"></textarea>
-
-													</div>
-												</div>
-
-											</div>
-											<div class="col-md-6">
-												<div class="form-group">
-													<label class="control-label" for="selectbasic">Vol</label>
-													<div class="">
-														<select ng-selected="vol.volName" ng-model="edit_volName"
-															class="form-control"
-															ng-options="x.volName for x in list_volume"
-															name="volName" id="volName" ng-required="true">
-														</select>
-													</div>
-												</div>
-												<div class="form-group">
-													<label class="control-label" for="selectbasic">ID
-														Karaoke California</label>
-													<div class="">
-														<input type="number" min="0" name="genre" ng-model="edit_genre"
-															id="genre" class="col-md-11" /> 
-													</div>
-												</div>
-												<div class="form-group">
-													<label class="control-label" for="selectbasic">Album</label>
-													<div class="">
-														<select ng-selected="album.albumName"
-															ng-model="edit_albumName" class="form-control"
-															ng-options="x.albumName for x in list_album"
-															name="albumName" id="albumName" ng-required="true">
-														</select>
-													</div>
-												</div>
+												
 
 											</div>
 
@@ -458,7 +322,7 @@
 									</div>
 
 									<div class="modal-footer">
-										<a class="btn btn-danger btn-ok" ng-click="delete()">Yes</a>
+										<a class="btn btn-danger btn-ok" ng-click="deleteAlbums()">Yes</a>
 										<button type="button" class="btn btn-default"
 											data-dismiss="modal">No</button>
 
@@ -522,7 +386,7 @@
 		src="${pageContext.request.contextPath }/assets/scripts/myApp.js"></script>
 
 	<script type="text/javascript"
-		src="${pageContext.request.contextPath }/assets/scripts/songCtrl.js"></script>
+		src="${pageContext.request.contextPath }/assets/scripts/albumCtrl.js"></script>
 
 	<script src="${pageContext.request.contextPath }/assets/js/ui-grid.js"></script>
 </body>
