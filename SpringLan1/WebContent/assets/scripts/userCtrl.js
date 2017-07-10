@@ -130,6 +130,10 @@ app
 						$scope.add_username = "";
 						$scope.add_fullname = "";
 						$scope.add_password = "";
+					
+						$scope.frmUserAdd.fullname.$setUntouched();
+						$scope.frmUserAdd.username.$setUntouched();
+						$scope.frmUserAdd.password.$setUntouched();
 					}
 					function getRandomInt(min, max) {
 						return Math.floor(Math.random() * (max - min + 1))
@@ -157,6 +161,9 @@ app
 							$scope.edit_id = data.id;
 							$scope.edit_role = response.data.role.id;
 							$scope.edit_password = response.data.password;
+							$scope.editForm.fullname.$setUntouched();
+							$scope.editForm.username.$setUntouched();
+							$scope.editForm.password.$setUntouched();
 
 						});
 

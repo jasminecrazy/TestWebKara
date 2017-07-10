@@ -118,6 +118,8 @@ app
 							$scope.edit_albumName = response.data.albumName;
 
 							$scope.edit_id = data.id;
+							$scope.editForm.albumId.$setUntouched();
+							$scope.editForm.albumName.$setUntouched();
 
 						});
 
@@ -222,6 +224,9 @@ app
 					$scope.ResetForm = function() {
 						$scope.add_albumId = "";
 						$scope.add_albumName = "";
+						$scope.frmFormAdd.albumId.$setUntouched();
+						$scope.frmFormAdd.albumName.$setUntouched();
+						
 
 					}
 					function getRandomInt(min, max) {

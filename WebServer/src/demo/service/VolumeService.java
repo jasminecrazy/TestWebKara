@@ -14,4 +14,5 @@ public interface VolumeService {
 	public void addVol(Volume volume);
 
 	public void updateVol(Volume volume);
+	public List<Volume> getNewVol();
 }

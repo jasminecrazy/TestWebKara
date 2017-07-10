@@ -65,11 +65,9 @@ app
 								{
 									name : 'ten',
 									displayName : 'SongName'
-								},
-								{
-									name : 'loi',
-									displayName : 'Lyric'
-								},
+								}
+									  , { name : 'loi', displayName : 'Lyric' },
+									 
 								{
 									name : 'thongtin',
 									displayName : 'Author'
@@ -93,7 +91,9 @@ app
 									enableSorting : false,
 									enableFiltering : false,
 									cellTemplate : '<button class="btn btn-primary btn-sm" ng-click="grid.appScope.GetSong(row.entity)" data-tooltip ="tooltip" title="Edit"	data-toggle="modal" data-target="#myModal_Edit"><span class="glyphicon glyphicon-edit"></span></button>'
+										
 											+ '<button ng-click="grid.appScope.deleteSong(row.entity)" data-toggle="modal" class="btn btn-danger btn-sm" data-tooltip ="tooltip" title="Delete" data-target="#myModal_delete"><span class="glyphicon glyphicon-remove"></span></button>'
+											
 								} ]
 					};
 					// Enable text box for Id KaraokeKali
@@ -260,6 +260,13 @@ app
 											$scope.edit_author = response.data.thongtin;
 											$scope.edit_youtubelink = response.data.linkyoutube;
 											$scope.edit_genre = response.data.masauso;
+											$scope.favoriteSong = response.data.baihatyeuthich;
+											$scope.highLight = response.data.baihatnoibat;
+											$scope.editForm.songId.$setUntouched();
+											$scope.editForm.songName.$setUntouched();
+											$scope.editForm.lyric.$setUntouched();
+											$scope.editForm.author.$setUntouched();
+											$scope.editForm.youtube.$setUntouched();
 											
 											for (var i = 0; i < $scope.list_volume.length; i++) {
 								                if (response.data.volume.volId == $scope.list_volume[i].volId) {
@@ -272,6 +279,7 @@ app
 								                    break;
 }}
 											
+											
 										
 										});
 
@@ -280,8 +288,15 @@ app
 					$scope.update = function () {
 						
 			   	var songData={id:songID,ten:$scope.edit_songName,maso:$scope.edit_songId,loi:$scope.edit_lyric,
-			   			thongtin:$scope.edit_author,linkyoutube:$scope.edit_youtubelink,volume:$scope.edit_volName,album:$scope.edit_albumName,masauso:$scope.edit_genre
-			   			};
+			   			thongtin:$scope.edit_author,linkyoutube:$scope.edit_youtubelink,volume:$scope.edit_volName,album:$scope.edit_albumName,masauso:$scope.edit_genre,
+			   			baihatyeuthich:($scope.favoriteSong == null ? false
+								: ($scope.favoriteSong == false ? false
+										: true)),
+										baihatnoibat:($scope.highLight == null ? false
+												: ($scope.highLight == false ? false
+														: true))
+			   			
+			   	};
 			   	
 			       $http({
 			          method: "PUT",
@@ -299,6 +314,7 @@ app
 
 			        });
 			  }  
+				
 					// get data for delete
 					var deleteSong ="";
 					// get data for delete
@@ -375,6 +391,11 @@ app
 						$scope.add_lyric = "";
 						$scope.add_author="";
 						$scope.add_youtubelink="";
+						$scope.frmFormAdd.songId.$setUntouched();
+						$scope.frmFormAdd.songName.$setUntouched();
+						$scope.frmFormAdd.lyric.$setUntouched();
+						$scope.frmFormAdd.author.$setUntouched();
+						$scope.frmFormAdd.youtube.$setUntouched();
 					}
 					function getRandomInt(min, max) {
 						return Math.floor(Math.random() * (max - min + 1))

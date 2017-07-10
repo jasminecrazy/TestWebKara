@@ -20,4 +20,10 @@ public interface SongService {
 	public List<Volume> getListVol();
 
 	public List<Album> getListAlbum();
+
+	public List<Vn> getHighLightSong();
+
+	public List<Vn> getFavoriteSong();
+
+	public List<Vn> getNewestSong();
 }

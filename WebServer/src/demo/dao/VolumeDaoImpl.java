@@ -112,4 +112,25 @@ public class VolumeDaoImpl implements VolumeDao {
 		}
 
 	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Volume> getNewVol() {
+		List<Volume> volume = new ArrayList<Volume>();
+		Session session = sessionFactory.openSession();
+		Transaction transaction = null;
+		try {
+			transaction = session.beginTransaction();
+			volume = session.createQuery("select c from Volume c order by c.id desc").setMaxResults(3).list();
+			transaction.commit();
+		} catch (Exception e) {
+			volume = null;
+			if (transaction != null) {
+				transaction.rollback();
+			}
+		} finally {
+			session.close();
+		}
+		return volume;
+	}
 }

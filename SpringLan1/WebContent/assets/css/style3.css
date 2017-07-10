@@ -98,5 +98,10 @@ a {
 {
 	color: #37C400
 }
+.Custom h3 a
+{
+	color:#37C400;
+	text-decoration:none;
+}
 
 

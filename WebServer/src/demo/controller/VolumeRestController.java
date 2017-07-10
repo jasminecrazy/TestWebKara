@@ -69,4 +69,10 @@ public class VolumeRestController {
 		}
 		return new ResponseEntity<>(HttpStatus.ACCEPTED);
 	}
+	@RequestMapping(value = "volume/getNewVol", method = RequestMethod.GET)
+	public ResponseEntity<List<Volume>> getNewVolume() {
+
+		return new ResponseEntity<List<Volume>>(volumeService.getNewVol(), HttpStatus.OK);
+
+	}
 }

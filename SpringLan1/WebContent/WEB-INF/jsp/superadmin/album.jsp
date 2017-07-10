@@ -86,7 +86,7 @@
 								<li><a> <i class="fa fa-list-ul"></i>Category
 										Management<span class="fa fa-chevron-down"></span></a>
 									<ul class="nav child_menu">
-										
+
 										<li><a
 											href="${pageContext.request.contextPath }/superadmin/vol.html">Volume
 												Management</a></li>
@@ -124,8 +124,9 @@
 						<ul class="nav navbar-nav navbar-right">
 							<li class=""><a href="javascript:;"
 								class="user-profile dropdown-toggle" data-toggle="dropdown"
-								aria-expanded="false"> <img src="images/img.jpg" alt="" />Admin
-									<span class=" fa fa-angle-down"></span>
+								aria-expanded="false"> <img
+									src="${pageContext.request.contextPath }/assets/images/img.jpg"
+									alt="" />Admin <span class=" fa fa-angle-down"></span>
 							</a>
 								<ul class="dropdown-menu dropdown-usermenu pull-right">
 
@@ -213,7 +214,13 @@
 															ng-keyup="hideDuplicateAlert()"
 															class="form-control input-md"
 															ng-keydown="autoAdd($event)" type="text"
-															ng-model="add_albumId" ng-required="false" />
+															ng-model="add_albumId" ng-required="true" />
+														<div ng-messages="frmFormAdd.albumId.$error">
+															<div ng-message="required"
+																ng-show="frmFormAdd.albumId.$touched">
+																<p style="color: red">This field is required</p>
+															</div>
+														</div>
 													</div>
 												</div>
 												<p ng-show="duplicateAlert != ''" ng-bind="duplicateAlert"
@@ -224,10 +231,16 @@
 													<div class="">
 														<input id="albumName" name="albumName"
 															class="form-control input-md" type="text"
-															ng-model="add_albumName" ng-required="false" />
+															ng-model="add_albumName" ng-required="true" />
+														<div ng-messages="frmFormAdd.albumName.$error">
+															<div ng-message="required"
+																ng-show="frmFormAdd.albumName.$touched">
+																<p style="color: red">This field is required</p>
+															</div>
+														</div>
 													</div>
 												</div>
-												
+
 
 											</div>
 
@@ -239,8 +252,9 @@
 									</div>
 									<div class="modal-footer">
 										<button id="btnSave" name="btnSave" class="btn btn-primary"
+											ng-disabled="frmFormAdd.albumId.$error.required ||frmFormAdd.albumName.$error.required"
 											ng-click="add()">Add</button>
-										
+
 										<button type="button" class="btn btn-default"
 											data-dismiss="modal">Close</button>
 
@@ -272,7 +286,13 @@
 														<input id="albumId" name="albumId"
 															ng-keyup="hideDuplicateAlert()"
 															class="form-control input-md" type="text"
-															ng-model="edit_albumId" ng-required="false" />
+															ng-model="edit_albumId" ng-required="true" />
+														<div ng-messages="editForm.albumId.$error">
+															<div ng-message="required"
+																ng-show="editForm.albumId.$touched">
+																<p style="color: red">This field is required</p>
+															</div>
+														</div>
 													</div>
 												</div>
 												<p ng-show="duplicateAlert != ''" ng-bind="duplicateAlert"
@@ -283,10 +303,16 @@
 													<div class="">
 														<input id="albumName" name="albumName"
 															class="form-control input-md" type="text"
-															ng-model="edit_albumName" ng-required="false" />
+															ng-model="edit_albumName" ng-required="true" />
+														<div ng-messages="editForm.albumName.$error">
+															<div ng-message="required"
+																ng-show="editForm.albumName.$touched">
+																<p style="color: red">This field is required</p>
+															</div>
+														</div>
 													</div>
 												</div>
-												
+
 
 											</div>
 
@@ -295,6 +321,7 @@
 									<div class="modal-footer">
 
 										<button id="btnSave" name="btnSave" class="btn btn-primary"
+										ng-disabled="editForm.albumId.$error.required ||editForm.albumName.$error.required"
 											ng-click="update()" data-dismiss="modal">Save</button>
 										<button type="button" class="btn btn-default"
 											data-dismiss="modal">Close</button>

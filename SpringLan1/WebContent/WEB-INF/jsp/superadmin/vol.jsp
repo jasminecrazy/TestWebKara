@@ -124,7 +124,7 @@
 						<ul class="nav navbar-nav navbar-right">
 							<li class=""><a href="javascript:;"
 								class="user-profile dropdown-toggle" data-toggle="dropdown"
-								aria-expanded="false"> <img src="images/img.jpg" alt="" />Admin
+								aria-expanded="false"> <img src="${pageContext.request.contextPath }/assets/images/img.jpg" alt="" />Admin
 									<span class=" fa fa-angle-down"></span>
 							</a>
 								<ul class="dropdown-menu dropdown-usermenu pull-right">
@@ -213,7 +213,13 @@
 															ng-keyup="hideDuplicateAlert()"
 															class="form-control input-md"
 															ng-keydown="autoAdd($event)" type="text"
-															ng-model="add_volId" ng-required="false" />
+															ng-model="add_volId" ng-required="true" />
+															<div ng-messages="frmFormAdd.volId.$error">
+															<div ng-message="required"
+																ng-show="frmFormAdd.volId.$touched">
+																<p style="color: red">This field is required</p>
+															</div>
+														</div>
 													</div>
 												</div>
 												<p ng-show="duplicateAlert != ''" ng-bind="duplicateAlert"
@@ -224,7 +230,13 @@
 													<div class="">
 														<input id="volName" name="volName"
 															class="form-control input-md" type="text"
-															ng-model="add_volName" ng-required="false" />
+															ng-model="add_volName" ng-required="true" />
+															<div ng-messages="frmFormAdd.volName.$error">
+															<div ng-message="required"
+																ng-show="frmFormAdd.volName.$touched">
+																<p style="color: red">This field is required</p>
+															</div>
+														</div>
 													</div>
 												</div>
 												
@@ -239,6 +251,7 @@
 									</div>
 									<div class="modal-footer">
 										<button id="btnSave" name="btnSave" class="btn btn-primary"
+										ng-disabled="frmFormAdd.volId.$error.required ||frmFormAdd.volName.$error.required"
 											ng-click="add()">Add</button>
 										
 										<button type="button" class="btn btn-default"
@@ -272,7 +285,13 @@
 														<input id="volId" name="volId"
 															ng-keyup="hideDuplicateAlert()"
 															class="form-control input-md" type="text"
-															ng-model="edit_volId" ng-required="false" />
+															ng-model="edit_volId" ng-required="true" />
+															<div ng-messages="editForm.volId.$error">
+															<div ng-message="required"
+																ng-show="editForm.volId.$touched">
+																<p style="color: red">This field is required</p>
+															</div>
+														</div>
 													</div>
 												</div>
 												<p ng-show="duplicateAlert != ''" ng-bind="duplicateAlert"
@@ -283,7 +302,13 @@
 													<div class="">
 														<input id="volName" name="volName"
 															class="form-control input-md" type="text"
-															ng-model="edit_volName" ng-required="false" />
+															ng-model="edit_volName" ng-required="true" />
+															<div ng-messages="editForm.volName.$error">
+															<div ng-message="required"
+																ng-show="editForm.volName.$touched">
+																<p style="color: red">This field is required</p>
+															</div>
+														</div>
 													</div>
 												</div>
 												
@@ -295,6 +320,7 @@
 									<div class="modal-footer">
 
 										<button id="btnSave" name="btnSave" class="btn btn-primary"
+											ng-disabled="editForm.volId.$error.required ||editForm.volName.$error.required"
 											ng-click="update()" data-dismiss="modal">Save</button>
 										<button type="button" class="btn btn-default"
 											data-dismiss="modal">Close</button>

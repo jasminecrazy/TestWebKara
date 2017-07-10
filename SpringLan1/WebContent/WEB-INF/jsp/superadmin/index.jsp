@@ -96,11 +96,13 @@
 								<li><a> <i class="fa fa-list-ul"></i>Category
 										Management<span class="fa fa-chevron-down"></span></a>
 									<ul class="nav child_menu">
-										
+
 										<li><a
-											href="${pageContext.request.contextPath }/superadmin.html">Volume Management</a></li>
-											<li><a
-											href="${pageContext.request.contextPath }/superadmin.html">Album Management</a></li>
+											href="${pageContext.request.contextPath }/superadmin/vol.html">Volume
+												Management</a></li>
+										<li><a
+											href="${pageContext.request.contextPath }/superadmin/album.html">Album
+												Management</a></li>
 
 									</ul></li>
 
@@ -132,8 +134,9 @@
 						<ul class="nav navbar-nav navbar-right">
 							<li class=""><a href="javascript:;"
 								class="user-profile dropdown-toggle" data-toggle="dropdown"
-								aria-expanded="false"> <img src="images/img.jpg" alt="" />Admin
-									<span class=" fa fa-angle-down"></span>
+								aria-expanded="false"> <img
+									src="${pageContext.request.contextPath }/assets/images/img.jpg"
+									alt="" />Admin <span class=" fa fa-angle-down"></span>
 							</a>
 								<ul class="dropdown-menu dropdown-usermenu pull-right">
 
@@ -223,8 +226,16 @@
 													<div class="">
 														<input id="fullname" name="fullname"
 															ng-keydown="autoAdd($event)" ng-model="add_fullname"
-															class="form-control input-md" type="text" />
-
+															class="form-control input-md" type="text"
+															ng-required="true" />
+														<div ng-messages="frmUserAdd.fullname.$error">
+															<div ng-message="required"
+																ng-show="frmUserAdd.fullname.$touched">
+																<p style="color: red">This field is required</p>
+															</div>
+														</div>
+														<p ng-show="duplicateAlert != ''" ng-bind="duplicateAlert"
+															style="color: red"></p>
 													</div>
 												</div>
 												<div class="form-group">
@@ -233,7 +244,15 @@
 														<input id="username" name="username"
 															ng-keyup="hideDuplicateAlert()"
 															class="form-control input-md" type="text"
-															ng-model="add_username" ng-required="false" />
+															ng-model="add_username" ng-required="true" />
+															<div ng-messages="frmUserAdd.username.$error">
+															<div ng-message="required"
+																ng-show="frmUserAdd.username.$touched">
+																<p style="color: red">This field is required</p>
+															</div>
+														</div>
+														<p ng-show="duplicateAlert != ''" ng-bind="duplicateAlert"
+															style="color: red"></p>
 													</div>
 												</div>
 												<p ng-show="duplicateAlert != ''" ng-bind="duplicateAlert"
@@ -246,7 +265,15 @@
 													<div class="">
 														<input id="password" name="password"
 															class="form-control input-md" type="password"
-															ng-model="add_password" ng-required="false" />
+															ng-model="add_password" ng-required="true" />
+															<div ng-messages="frmUserAdd.password.$error">
+															<div ng-message="required"
+																ng-show="frmUserAdd.password.$touched">
+																<p style="color: red">This field is required</p>
+															</div>
+														</div>
+														<p ng-show="duplicateAlert != ''" ng-bind="duplicateAlert"
+															style="color: red"></p>
 													</div>
 												</div>
 
@@ -279,8 +306,10 @@
 									</div>
 									<div class="modal-footer">
 										<button id="btnSave" name="btnSave" class="btn btn-primary"
+										ng-disabled="frmUserAdd.fullname.$error.required || frmUserAdd.username.$error.required ||frmUserAdd.password.$error.required"
 											ng-click="save(false)">Add</button>
 										<button id="btnSave" name="btnSave" class="btn btn-default"
+										ng-disabled="frmUserAdd.fullname.$error.required || frmUserAdd.username.$error.required ||frmUserAdd.password.$error.required"
 											ng-click="save(true)">Add and close</button>
 										<button type="button" class="btn btn-default"
 											data-dismiss="modal">Close</button>
@@ -311,9 +340,15 @@
 												<div class="form-group">
 													<label class=" control-label">Fullname</label>
 													<div class="">
-														<input id="fullname" name="fullname" placeholder=""
+														<input id="fullname" name="fullname" placeholder="" ng-required="true"
 															ng-model="edit_fullname" class="form-control input-md"
 															type="text" />
+															<div ng-messages="editForm.fullname.$error">
+															<div ng-message="required"
+																ng-show="editForm.fullname.$touched">
+																<p style="color: red">This field is required</p>
+															</div>
+														</div>
 
 													</div>
 												</div>
@@ -324,8 +359,14 @@
 															ng-keyup="hideDuplicateAlert()"
 															class="form-control input-md"
 															ng-keydown="autoAdd($event)" type="text"
-															ng-model="edit_username" ng-required="false" />
+															ng-model="edit_username" ng-required="true" />
+															<div ng-messages="editForm.username.$error">
+															<div ng-message="required"
+																ng-show="editForm.username.$touched">
+																<p style="color: red">This field is required</p>
+															</div>
 													</div>
+												</div>
 												</div>
 												<p ng-show="duplicateAlert != ''" ng-bind="duplicateAlert"
 													style="color: red"></p>
@@ -364,7 +405,7 @@
 										<button type="button" class="pull-left btn btn-danger"
 											data-toggle="modal" data-target="#myModal_confirmReset"
 											ng-click="ResetPass(x)">Reset password</button>
-										<button id="btnSave" name="btnSave" class="btn btn-primary"
+										<button id="btnSave" name="btnSave" class="btn btn-primary" ng-disabled="editForm.username.$error.required ||editForm.fullname.$error.required"
 											ng-click="update()" data-dismiss="modal">Save</button>
 										<button type="button" class="btn btn-default"
 											data-dismiss="modal">Close</button>

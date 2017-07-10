@@ -76,15 +76,29 @@
 										Management<span class="fa fa-chevron-down"></span></a>
 									<ul class="nav child_menu">
 										<li><a
-											href="${pageContext.request.contextPath }/song.html">Song
+											href="${pageContext.request.contextPath }/admin/song.html">Song
 												management</a></li>
-										<li><a
-											href="${pageContext.request.contextPath }/superadmin.html">User
-												management</a></li>
+
 
 									</ul></li>
+								<li><a> <i class="fa fa-list-ul"></i>Category
+										Management<span class="fa fa-chevron-down"></span></a>
+									<ul class="nav child_menu">
 
+										<li><a
+											href="${pageContext.request.contextPath }/admin/vol.html">Volume
+												Management</a></li>
+										<li><a
+											href="${pageContext.request.contextPath }/admin/album.html">Album
+												Management</a></li>
+
+									</ul></li>
 							</ul>
+
+
+
+
+
 						</div>
 
 
@@ -108,11 +122,14 @@
 						<ul class="nav navbar-nav navbar-right">
 							<li class=""><a href="javascript:;"
 								class="user-profile dropdown-toggle" data-toggle="dropdown"
-								aria-expanded="false"> <img src="images/img.jpg" alt="" />Admin
-									<span class=" fa fa-angle-down"></span>
+								aria-expanded="false"> <img
+									src="${pageContext.request.contextPath }/assets/images/img.jpg"
+									alt="" />Admin <span class=" fa fa-angle-down"></span>
 							</a>
 								<ul class="dropdown-menu dropdown-usermenu pull-right">
-									<li><a href="${pageContext.request.contextPath }/superadmin/profile.html"> Profile</a></li>
+									<li><a
+										href="${pageContext.request.contextPath }/superadmin/profile.html">
+											Profile</a></li>
 
 
 									<li><a href="<c:url value='/j_spring_security_logout'/>"><i
@@ -187,7 +204,8 @@
 										<h4 class="modal-title" id="myModalLabel">Add new song</h4>
 									</div>
 									<div class="modal-body row">
-										<form class="form-horizontal" name="frmFormAdd">
+										<form class="form-horizontal" name="frmFormAdd"
+											enctype="multipart/form-data" id="fileUploadForm">
 											<div class="col-md-6">
 												<div class="form-group">
 													<label class=" control-label" for="">Song ID</label>
@@ -195,7 +213,7 @@
 														<input id="songId" name="songId"
 															ng-keyup="hideDuplicateAlert()"
 															class="form-control input-md"
-															ng-keydown="autoAdd($event)" type="number"
+															ng-keydown="autoAdd($event)" type="number" min="0"
 															ng-model="add_songId" ng-required="false" />
 													</div>
 												</div>
@@ -239,6 +257,50 @@
 															class="form-control input-md" type="text"
 															ng-model="add_youtubelink"></textarea>
 
+													</div>
+												</div>
+												<label class="col-md-2 control-label">Picture</label>
+												<div class="col-md-12 picture">
+													<img ng-src="{{prev_img}}" height="150" width="100"
+														id="prev_img" /> <input type="file" id="image"
+														name="uploadfile" accept="*"
+														onchange="angular.element(this).scope().getImage(this)"
+														ng-model="image" />
+													<!-- Multiple Radios -->
+
+												</div>
+
+											</div>
+											<div class="col-md-6">
+												<div class="form-group">
+													<label class="control-label" for="selectbasic">Vol</label>
+													<div class="">
+														<select ng-selected="vol.volName" ng-model="add_volName"
+															class="form-control"
+															ng-options="x.volName for x in list_volume"
+															name="volName" id="volName" ng-required="true">
+														</select>
+													</div>
+												</div>
+												<div class="form-group">
+													<label class="control-label" for="selectbasic">ID
+														Karaoke California</label>
+													<div class="">
+														<input type="number" min="0" name="genre"
+															ng-model="add_genre" id="genre" ng-disabled="true"
+															class="col-md-11" />
+															 <input type="checkbox" id="check"
+															class="col-md-1" ng-model="chk" />
+													</div>
+												</div>
+												<div class="form-group">
+													<label class="control-label" for="selectbasic">Album</label>
+													<div class="">
+														<select ng-selected="album.albumName"
+															ng-model="add_albumName" class="form-control"
+															ng-options="x.albumName for x in list_album"
+															name="albumName" id="albumName" ng-required="true">
+														</select>
 													</div>
 												</div>
 
@@ -285,8 +347,7 @@
 													<div class="">
 														<input id="songId" name="songId"
 															ng-keyup="hideDuplicateAlert()"
-															class="form-control input-md"
-															 type="number"
+															class="form-control input-md" type="number"
 															ng-model="edit_songId" ng-required="false" />
 													</div>
 												</div>
@@ -334,6 +395,37 @@
 												</div>
 
 											</div>
+											<div class="col-md-6">
+												<div class="form-group">
+													<label class="control-label" for="selectbasic">Vol</label>
+													<div class="">
+														<select ng-selected="vol.volName" ng-model="edit_volName"
+															class="form-control"
+															ng-options="x.volName for x in list_volume"
+															name="volName" id="volName" ng-required="true">
+														</select>
+													</div>
+												</div>
+												<div class="form-group">
+													<label class="control-label" for="selectbasic">ID
+														Karaoke California</label>
+													<div class="">
+														<input type="number" min="0" name="genre"
+															ng-model="edit_genre" id="genre" class="col-md-12" />
+													</div>
+												</div>
+												<div class="form-group">
+													<label class="control-label" for="selectbasic">Album</label>
+													<div class="">
+														<select ng-selected="album.albumName"
+															ng-model="edit_albumName" class="form-control"
+															ng-options="x.albumName for x in list_album"
+															name="albumName" id="albumName" ng-required="true">
+														</select>
+													</div>
+												</div>
+
+											</div>
 
 										</form>
 									</div>
@@ -347,33 +439,34 @@
 								</div>
 							</div>
 						</div>
-								<!-- Modal delete -->
-						 <div class="modal fade" id="myModal_delete" tabindex="-1" role="dialog"
-		aria-labelledby="myModalLabel">
-		<div class="modal-dialog">
-			<div class="modal-content">
+						<!-- Modal delete -->
+						<div class="modal fade" id="myModal_delete" tabindex="-1"
+							role="dialog" aria-labelledby="myModalLabel">
+							<div class="modal-dialog">
+								<div class="modal-content">
 
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal"
-						aria-hidden="true">&times;</button>
-					<h4 class="modal-title" id="myModalLabel">Confirm</h4>
-				</div>
+									<div class="modal-header">
+										<button type="button" class="close" data-dismiss="modal"
+											aria-hidden="true">&times;</button>
+										<h4 class="modal-title" id="myModalLabel">Confirm</h4>
+									</div>
 
-				<div class="modal-body">
+									<div class="modal-body">
 
-					
 
-					<p>Are you sure you want to delete this?</p>
-				</div>
 
-				<div class="modal-footer">
-					<a class="btn btn-danger btn-ok" ng-click="delete()">Yes</a>
-					<button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+										<p>Are you sure you want to delete this?</p>
+									</div>
 
-				</div>
-			</div>
-		</div>
-	</div> 
+									<div class="modal-footer">
+										<a class="btn btn-danger btn-ok" ng-click="delete()">Yes</a>
+										<button type="button" class="btn btn-default"
+											data-dismiss="modal">No</button>
+
+									</div>
+								</div>
+							</div>
+						</div>
 
 					</div>
 				</div>
@@ -384,55 +477,55 @@
 				<!-- /footer content -->
 			</div>
 		</div>
-</div>
+	</div>
 
-		<!-- jQuery -->
-		<script
-			src="${pageContext.request.contextPath }/assets/js/jquery.min.js"></script>
+	<!-- jQuery -->
+	<script
+		src="${pageContext.request.contextPath }/assets/js/jquery.min.js"></script>
 
-		<!-- Bootstrap -->
-		<script
-			src="${pageContext.request.contextPath }/assets/js/bootstrap.min.js"></script>
+	<!-- Bootstrap -->
+	<script
+		src="${pageContext.request.contextPath }/assets/js/bootstrap.min.js"></script>
 
-		<!-- FastClick -->
-		<script
-			src="${pageContext.request.contextPath }/assets/js/fastclick.js"></script>
+	<!-- FastClick -->
+	<script
+		src="${pageContext.request.contextPath }/assets/js/fastclick.js"></script>
 
-		<!-- NProgress -->
-		<script
-			src="${pageContext.request.contextPath }/assets/js/nprogress.js"></script>
+	<!-- NProgress -->
+	<script
+		src="${pageContext.request.contextPath }/assets/js/nprogress.js"></script>
 
-		<!-- iCheck -->
-		<script
-			src="${pageContext.request.contextPath }/assets/js/icheck.min.js"></script>
+	<!-- iCheck -->
+	<script
+		src="${pageContext.request.contextPath }/assets/js/icheck.min.js"></script>
 
-		<!-- Custom Theme Scripts -->
-		<script src="${pageContext.request.contextPath }/assets/js/custom.js"></script>
+	<!-- Custom Theme Scripts -->
+	<script src="${pageContext.request.contextPath }/assets/js/custom.js"></script>
 
-		<!-- Angular JS -->
-		<script type="text/javascript"
-			src="${pageContext.request.contextPath }/assets/js/angular.min.js"></script>
+	<!-- Angular JS -->
+	<script type="text/javascript"
+		src="${pageContext.request.contextPath }/assets/js/angular.min.js"></script>
 
-		<script type="text/javascript"
-			src="${pageContext.request.contextPath }/assets/js/sweetalert-dev.js"></script>
-		<script type="text/javascript"
-			src="${pageContext.request.contextPath }/assets/js/angular-route.min.js"></script>
-		<script type="text/javascript"
-			src="${pageContext.request.contextPath }/assets/js/angular-ui.min.js"></script>
-		<script type="text/javascript"
-			src="${pageContext.request.contextPath }/assets/js/angular-resource.min.js"></script>
-		<script type="text/javascript"
-			src="${pageContext.request.contextPath }/assets/js/angular-messages.min.js"></script>
-		<script type="text/javascript"
-			src="${pageContext.request.contextPath }/assets/js/ui-bootstrap-tpls.min.js"></script>
-		<!-- App & Controller -->
-		<script type="text/javascript"
-			src="${pageContext.request.contextPath }/assets/scripts/myApp.js"></script>
+	<script type="text/javascript"
+		src="${pageContext.request.contextPath }/assets/js/sweetalert-dev.js"></script>
+	<script type="text/javascript"
+		src="${pageContext.request.contextPath }/assets/js/angular-route.min.js"></script>
+	<script type="text/javascript"
+		src="${pageContext.request.contextPath }/assets/js/angular-ui.min.js"></script>
+	<script type="text/javascript"
+		src="${pageContext.request.contextPath }/assets/js/angular-resource.min.js"></script>
+	<script type="text/javascript"
+		src="${pageContext.request.contextPath }/assets/js/angular-messages.min.js"></script>
+	<script type="text/javascript"
+		src="${pageContext.request.contextPath }/assets/js/ui-bootstrap-tpls.min.js"></script>
+	<!-- App & Controller -->
+	<script type="text/javascript"
+		src="${pageContext.request.contextPath }/assets/scripts/myApp.js"></script>
 
-		<script type="text/javascript"
-			src="${pageContext.request.contextPath }/assets/scripts/songCtrl.js"></script>
+	<script type="text/javascript"
+		src="${pageContext.request.contextPath }/assets/scripts/songCtrl.js"></script>
 
-		<script src="${pageContext.request.contextPath }/assets/js/ui-grid.js"></script>
+	<script src="${pageContext.request.contextPath }/assets/js/ui-grid.js"></script>
 </body>
 
 </html>

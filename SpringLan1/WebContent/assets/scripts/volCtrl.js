@@ -118,6 +118,8 @@ app
 							$scope.edit_volName = response.data.volName;
 
 							$scope.edit_id = data.id;
+							$scope.editForm.volId.$setUntouched();
+							$scope.editForm.volName.$setUntouched();
 
 						});
 
@@ -222,6 +224,8 @@ app
 					$scope.ResetForm = function() {
 						$scope.add_volId = "";
 						$scope.add_volName = "";
+						$scope.frmFormAdd.volId.$setUntouched();
+						$scope.frmFormAdd.volName.$setUntouched();
 
 					}
 					function getRandomInt(min, max) {

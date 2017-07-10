@@ -111,20 +111,14 @@ body, html {
 		</div>
 	</div>
 	<!-- About Section -->
-	<%-- <div class="w3-container Custom" style="padding: 70px 0px" id="about">
-		<h3 class="w3-center h3">Bài hát nổi bật</h3>
-
-		<div class="w3-row-padding w3-center" style="margin-top: 64px">
-			<div class="w3-quarter" data-ng-repeat="x in list_hlSong">
-				<img src="${pageContext.request.contextPath }/assets/images/k.jpg"
-					width="300px" class="img-responsive" />
-				<h4 class="maso">{{x.maso}}</h4>
-				<h3 class="tenbai"><a href="${pageContext.request.contextPath }/demo/detail.html" ng-click="Click()">{{x.ten}}</a></h3>
-			</div>
-			
-
+	<div class="w3-container Custom" style="padding: 70px 0px" id="about">
+		<h3 class="w3-left h3" ng-model="detail_songName"></h3>
+		<div class="row">
+		
 		</div>
-	</div> --%>
+
+		
+	</div>
 	<!-- Team Section -->
 	<div class="col-md-6" id="team">
 		<h3 class="w3-left h3">Karaoke Vol Mới</h3>
@@ -134,25 +128,65 @@ body, html {
 				<div id="songs-container ">
 					<ul>
 
-						<li data-ng-repeat = "x in list_NewestSong">
+						<li>
 							<div class="song">
 								<div class="row">
 
 									<p class="songId">
-										{{x.maso}}<span
-											style="font-size: 14px !important; text-transform: uppercase !important;">{{x.volume.volName}}</span>
+										61471 <span
+											style="font-size: 14px !important; text-transform: uppercase !important;">vol62</span>
 									</p>
-									<h1 class="songName">{{x.ten}}</h1>
+									<h1 class="songName">phía sau một cô gái</h1>
 									<h4 class="SongLyric">
-										{{x.loi}}
+										Nhiều khi anh mong được một lần nói ra hết tất cả thay vì ngồi
+										lặng im nghe..<span style="padding: 0px 4px;" class="lmore"
+											id="61471" style="display:block;">+</span>
 									</h4>
-									<h3 class="author">{{x.thongtin}}</h3>
+									<h3 class="author">Tiên Cookie</h3>
 
 								</div>
 							</div>
 
 						</li>
-						
+						<li>
+							<div class="song">
+								<div class="row">
+
+									<p class="songId">
+										61471 <span
+											style="font-size: 14px !important; text-transform: uppercase !important;">vol62</span>
+									</p>
+									<h1 class="songName">phía sau một cô gái</h1>
+									<h4 class="SongLyric">
+										Nhiều khi anh mong được một lần nói ra hết tất cả thay vì ngồi
+										lặng im nghe..<span style="padding: 0px 4px;" class="lmore"
+											id="61471" style="display:block;">+</span>
+									</h4>
+									<h3 class="author">Tiên Cookie</h3>
+
+								</div>
+							</div>
+
+						</li>
+						<li>
+							<div class="song">
+								<div class="row">
+
+									<p class="songId">
+										61471 <span
+											style="font-size: 14px !important; text-transform: uppercase !important;">vol62</span>
+									</p>
+									<h1 class="songName">phía sau một cô gái</h1>
+									<h4 class="SongLyric">
+										Nhiều khi anh mong được một lần nói ra hết tất cả thay vì ngồi
+										lặng im nghe..
+									</h4>
+									<h3 class="author">Tiên Cookie</h3>
+
+								</div>
+							</div>
+
+						</li>
 					</ul>
 				</div>
 			</div>

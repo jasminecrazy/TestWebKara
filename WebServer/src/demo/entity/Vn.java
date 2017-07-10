@@ -1,5 +1,5 @@
 package demo.entity;
-// Generated Jul 9, 2017 11:48:25 PM by Hibernate Tools 5.1.0.Alpha1
+// Generated Jul 10, 2017 10:46:46 AM by Hibernate Tools 5.2.3.Final
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -28,6 +28,8 @@ public class Vn implements java.io.Serializable {
 	private String linkyoutube;
 	private String picture;
 	private Integer masauso;
+	private Boolean baihatyeuthich;
+	private Boolean baihatnoibat;
 
 	public Vn() {
 	}
@@ -42,7 +44,7 @@ public class Vn implements java.io.Serializable {
 	}
 
 	public Vn(Album album, Volume volume, String ten, int maso, String loi, String thongtin, String linkyoutube,
-			String picture, Integer masauso) {
+			String picture, Integer masauso, Boolean baihatyeuthich, Boolean baihatnoibat) {
 		this.album = album;
 		this.volume = volume;
 		this.ten = ten;
@@ -52,6 +54,8 @@ public class Vn implements java.io.Serializable {
 		this.linkyoutube = linkyoutube;
 		this.picture = picture;
 		this.masauso = masauso;
+		this.baihatyeuthich = baihatyeuthich;
+		this.baihatnoibat = baihatnoibat;
 	}
 
 	@Id
@@ -147,6 +151,24 @@ public class Vn implements java.io.Serializable {
 
 	public void setMasauso(Integer masauso) {
 		this.masauso = masauso;
+	}
+
+	@Column(name = "baihatyeuthich")
+	public Boolean getBaihatyeuthich() {
+		return this.baihatyeuthich;
+	}
+
+	public void setBaihatyeuthich(Boolean baihatyeuthich) {
+		this.baihatyeuthich = baihatyeuthich;
+	}
+
+	@Column(name = "baihatnoibat")
+	public Boolean getBaihatnoibat() {
+		return this.baihatnoibat;
+	}
+
+	public void setBaihatnoibat(Boolean baihatnoibat) {
+		this.baihatnoibat = baihatnoibat;
 	}
 
 }

@@ -60,4 +60,22 @@ public class SongServiceImpl implements SongService {
 		return songDao.getListAlbum();
 	}
 
+	@Override
+	public List<Vn> getHighLightSong() {
+		
+		return songDao.getHighLightSong();
+	}
+
+	@Override
+	public List<Vn> getFavoriteSong() {
+		
+		return songDao.getFavoriteSong();
+	}
+
+	@Override
+	public List<Vn> getNewestSong() {
+		
+		return songDao.getNewestSong();
+	}
+
 }

@@ -46,7 +46,7 @@
 
 </head>
 
-<body data-ng-app="myApp" class="nav-md" data-ng-controller="songCtrl">
+<body data-ng-app="myApp" class="nav-md" data-ng-controller="volCtrl">
 	<div class="container body">
 		<div class="main_container">
 			<div class="col-md-3 left_col">
@@ -76,7 +76,7 @@
 										Management<span class="fa fa-chevron-down"></span></a>
 									<ul class="nav child_menu">
 										<li><a
-											href="${pageContext.request.contextPath }/admin.html">Song
+											href="${pageContext.request.contextPath }/admin/song.html">Song
 												management</a></li>
 										
 
@@ -84,7 +84,7 @@
 								<li><a> <i class="fa fa-list-ul"></i>Category
 										Management<span class="fa fa-chevron-down"></span></a>
 									<ul class="nav child_menu">
-
+										
 										<li><a
 											href="${pageContext.request.contextPath }/admin/vol.html">Volume
 												Management</a></li>
@@ -93,8 +93,12 @@
 												Management</a></li>
 
 									</ul></li>
-
 							</ul>
+
+
+
+
+
 						</div>
 
 
@@ -122,9 +126,7 @@
 									<span class=" fa fa-angle-down"></span>
 							</a>
 								<ul class="dropdown-menu dropdown-usermenu pull-right">
-									<li><a
-										href="${pageContext.request.contextPath }/superadmin/profile.html">
-											Profile</a></li>
+
 
 
 									<li><a href="<c:url value='/j_spring_security_logout'/>"><i
@@ -150,7 +152,7 @@
 									href="${pageContext.request.contextPath }/admin/welcome">Home</a>
 								</li>
 								<li class="active"><a
-									href="${pageContext.request.contextPath }/superadmin/song.html">Song
+									href="${pageContext.request.contextPath }/admin/vol.html">Volume
 										Management</a></li>
 
 							</ul>
@@ -170,7 +172,7 @@
 							<div class="x_panel">
 								<div class="x_title">
 									<div class="clearfix"></div>
-									<h3>List Song Information</h3>
+									<h3>List Vol Information</h3>
 								</div>
 
 
@@ -196,63 +198,46 @@
 											aria-label="Close">
 											<span aria-hidden="true">&times;</span>
 										</button>
-										<h4 class="modal-title" id="myModalLabel">Add new song</h4>
+										<h4 class="modal-title" id="myModalLabel">Add new vol</h4>
 									</div>
 									<div class="modal-body row">
-										<form class="form-horizontal" name="frmFormAdd">
+										<form class="form-horizontal" name="frmFormAdd"
+											enctype="multipart/form-data" id="fileUploadForm">
 											<div class="col-md-6">
 												<div class="form-group">
-													<label class=" control-label" for="">Song ID</label>
+													<label class=" control-label" for="">Vol ID</label>
 													<div class="">
-														<input id="songId" name="songId"
+														<input id="volId" name="volId"
 															ng-keyup="hideDuplicateAlert()"
 															class="form-control input-md"
-															ng-keydown="autoAdd($event)" type="number"
-															ng-model="add_songId" ng-required="false" />
+															ng-keydown="autoAdd($event)" type="text"
+															ng-model="add_volId" ng-required="true" />
+															<div ng-messages="frmFormAdd.volId.$error">
+															<div ng-message="required"
+																ng-show="frmFormAdd.volId.$touched">
+																<p style="color: red">This field is required</p>
+															</div>
+														</div>
 													</div>
 												</div>
 												<p ng-show="duplicateAlert != ''" ng-bind="duplicateAlert"
 													style="color: red"></p>
 
 												<div class="form-group">
-													<label class=" control-label" for="">Song Name</label>
+													<label class=" control-label" for="">Vol Name</label>
 													<div class="">
-														<input id="songName" name="songName"
+														<input id="volName" name="volName"
 															class="form-control input-md" type="text"
-															ng-model="add_songName" ng-required="false" />
+															ng-model="add_volName" ng-required="true" />
+															<div ng-messages="frmFormAdd.volName.$error">
+															<div ng-message="required"
+																ng-show="frmFormAdd.volName.$touched">
+																<p style="color: red">This field is required</p>
+															</div>
+														</div>
 													</div>
 												</div>
-												<div class="form-group">
-													<label class=" control-label">Lyric</label>
-													<div class="">
-														<input id="lyric" name="lyric" placeholder=""
-															ng-model="add_lyric" class="form-control input-md"
-															type="text" />
-
-													</div>
-												</div>
-
-												<div class="form-group">
-													<label class="control-label">Author</label>
-													<div class="">
-														<input id="author" name="author" placeholder=""
-															ng-model="add_author" class="form-control input-md"
-															type="text" />
-
-													</div>
-
-
-												</div>
-
-												<div class="form-group">
-													<label class=" control-label">Youtube Link</label>
-													<div class="">
-														<textarea id="youtube" name="youtube" rows="5"
-															class="form-control input-md" type="text"
-															ng-model="add_youtubelink"></textarea>
-
-													</div>
-												</div>
+												
 
 											</div>
 
@@ -264,9 +249,9 @@
 									</div>
 									<div class="modal-footer">
 										<button id="btnSave" name="btnSave" class="btn btn-primary"
-											ng-click="add(false)">Add</button>
-										<button id="btnSave" name="btnSave" class="btn btn-default"
-											ng-click="add(true)">Add and close</button>
+										ng-disabled="frmFormAdd.volId.$error.required ||frmFormAdd.volName.$error.required"
+											ng-click="add()">Add</button>
+										
 										<button type="button" class="btn btn-default"
 											data-dismiss="modal">Close</button>
 
@@ -286,63 +271,45 @@
 											aria-label="Close">
 											<span aria-hidden="true">&times;</span>
 										</button>
-										<h4 class="modal-title" id="myModalLabel">Edit song
+										<h4 class="modal-title" id="myModalLabel">Edit vol
 											information</h4>
 									</div>
 									<div class="modal-body row">
 										<form class="form-horizontal" name="editForm">
 											<div class="col-md-6">
 												<div class="form-group">
-													<label class=" control-label" for="">Song ID</label>
+													<label class=" control-label" for="">Vol ID</label>
 													<div class="">
-														<input id="songId" name="songId"
+														<input id="volId" name="volId"
 															ng-keyup="hideDuplicateAlert()"
-															class="form-control input-md" type="number"
-															ng-model="edit_songId" ng-required="false" />
+															class="form-control input-md" type="text"
+															ng-model="edit_volId" ng-required="true" />
+															<div ng-messages="editForm.volId.$error">
+															<div ng-message="required"
+																ng-show="editForm.volId.$touched">
+																<p style="color: red">This field is required</p>
+															</div>
+														</div>
 													</div>
 												</div>
 												<p ng-show="duplicateAlert != ''" ng-bind="duplicateAlert"
 													style="color: red"></p>
 
 												<div class="form-group">
-													<label class=" control-label" for="">Song Name</label>
+													<label class=" control-label" for="">Vol Name</label>
 													<div class="">
-														<input id="songName" name="songName"
+														<input id="volName" name="volName"
 															class="form-control input-md" type="text"
-															ng-model="edit_songName" ng-required="false" />
+															ng-model="edit_volName" ng-required="true" />
+															<div ng-messages="editForm.volName.$error">
+															<div ng-message="required"
+																ng-show="editForm.volName.$touched">
+																<p style="color: red">This field is required</p>
+															</div>
+														</div>
 													</div>
 												</div>
-												<div class="form-group">
-													<label class=" control-label">Lyric</label>
-													<div class="">
-														<input id="lyric" name="lyric" placeholder=""
-															ng-model="edit_lyric" class="form-control input-md"
-															type="text" />
-
-													</div>
-												</div>
-
-												<div class="form-group">
-													<label class="control-label">Author</label>
-													<div class="">
-														<input id="author" name="author" placeholder=""
-															ng-model="edit_author" class="form-control input-md"
-															type="text" />
-
-													</div>
-
-
-												</div>
-
-												<div class="form-group">
-													<label class=" control-label">Youtube Link</label>
-													<div class="">
-														<textarea id="youtube" name="youtube" rows="5"
-															class="form-control input-md" type="text"
-															ng-model="edit_youtubelink"></textarea>
-
-													</div>
-												</div>
+												
 
 											</div>
 
@@ -351,6 +318,7 @@
 									<div class="modal-footer">
 
 										<button id="btnSave" name="btnSave" class="btn btn-primary"
+											ng-disabled="editForm.volId.$error.required ||editForm.volName.$error.required"
 											ng-click="update()" data-dismiss="modal">Save</button>
 										<button type="button" class="btn btn-default"
 											data-dismiss="modal">Close</button>
@@ -378,7 +346,7 @@
 									</div>
 
 									<div class="modal-footer">
-										<a class="btn btn-danger btn-ok" ng-click="delete()">Yes</a>
+										<a class="btn btn-danger btn-ok" ng-click="deleteVol()">Yes</a>
 										<button type="button" class="btn btn-default"
 											data-dismiss="modal">No</button>
 
@@ -442,7 +410,7 @@
 		src="${pageContext.request.contextPath }/assets/scripts/myApp.js"></script>
 
 	<script type="text/javascript"
-		src="${pageContext.request.contextPath }/assets/scripts/songCtrl.js"></script>
+		src="${pageContext.request.contextPath }/assets/scripts/volCtrl.js"></script>
 
 	<script src="${pageContext.request.contextPath }/assets/js/ui-grid.js"></script>
 </body>

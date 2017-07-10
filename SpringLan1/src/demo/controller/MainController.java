@@ -36,11 +36,6 @@ public String index()
 		return "main/login";
 	}
 	
-	@RequestMapping(value = "welcome", 
-			method = RequestMethod.GET)
-	public String welcome() {
-		return "main/welcome";
-	}
 	
 	@RequestMapping(value = "403", 
 			method = RequestMethod.GET)

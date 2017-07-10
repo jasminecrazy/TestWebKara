@@ -109,10 +109,12 @@ public class SongRestController {
 			// Get the filename
 			String filename = today + "_" + uploadfile.getOriginalFilename();
 			songObj.setPicture(filename);
+			//Test
+			System.out.println(filename);
 			// Build the local file path
-			String directory = "assets\\images";
+			String directory = "WebContent\\assets\\images";
 			String filepath = Paths.get(directory, filename).toString();
-
+			
 			// Save the file locally
 			BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(new File(filepath)));
 			stream.write(uploadfile.getBytes());
@@ -133,5 +135,20 @@ public class SongRestController {
 	@RequestMapping(value = "song/getAlbum", method = RequestMethod.GET)
 	public ResponseEntity<List<Album>> getListAlbum() {
 		return new ResponseEntity<List<Album>>(songService.getListAlbum(), HttpStatus.OK);
+	}
+
+	@RequestMapping(value = "song/getHightLightSong", method = RequestMethod.GET)
+	public ResponseEntity<List<Vn>> getHightLightSong() {
+		return new ResponseEntity<List<Vn>>(songService.getHighLightSong(), HttpStatus.OK);
+	}
+
+	@RequestMapping(value = "song/getFavoriteSong", method = RequestMethod.GET)
+	public ResponseEntity<List<Vn>> getFavoriteSong() {
+		return new ResponseEntity<List<Vn>>(songService.getFavoriteSong(), HttpStatus.OK);
+	}
+
+	@RequestMapping(value = "song/getNewestSong", method = RequestMethod.GET)
+	public ResponseEntity<List<Vn>> getNewestSong() {
+		return new ResponseEntity<List<Vn>>(songService.getNewestSong(), HttpStatus.OK);
 	}
 }

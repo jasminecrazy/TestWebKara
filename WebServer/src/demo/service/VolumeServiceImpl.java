@@ -42,4 +42,10 @@ private VolumeDao volumeDao;
 		
 	}
 
+	@Override
+	public List<Volume> getNewVol() {
+		
+		return volumeDao.getNewVol();
+	}
+
 }

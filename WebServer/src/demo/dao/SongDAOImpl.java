@@ -82,10 +82,7 @@ public class SongDAOImpl implements SongDAO {
 		Session session = sessionFactory.openSession();
 		Transaction transaction = null;
 		try {
-			/*
-			 * Vn s = new Vn("HOÀI NIỆM DẤU YÊU", 51615,
-			 * "Tìm lại chốn cũ năm xưa bên nhau…", "Sinh", "");
-			 */
+			
 
 			transaction = session.beginTransaction();
 			session.save(song);
@@ -158,5 +155,69 @@ public class SongDAOImpl implements SongDAO {
 			session.close();
 		}
 		return album;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Vn> getHighLightSong() {
+		List<Vn> song = new ArrayList<Vn>();
+		Session session = sessionFactory.openSession();
+		Transaction transaction = null;
+		try {
+			transaction = session.beginTransaction();
+			song = session.createQuery("select c from Vn c where baihatnoibat = true").setMaxResults(4).list();
+			transaction.commit();
+		} catch (Exception e) {
+			song = null;
+			if (transaction != null) {
+				transaction.rollback();
+			}
+		} finally {
+			session.close();
+		}
+		return song;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Vn> getFavoriteSong() {
+		List<Vn> song = new ArrayList<Vn>();
+		Session session = sessionFactory.openSession();
+		Transaction transaction = null;
+		try {
+			transaction = session.beginTransaction();
+			song = session.createQuery("select c from Vn c where baihatyeuthich = true").setMaxResults(15).list();
+			transaction.commit();
+		} catch (Exception e) {
+			song = null;
+			if (transaction != null) {
+				transaction.rollback();
+			}
+		} finally {
+			session.close();
+		}
+		return song;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Vn> getNewestSong() {
+		List<Vn> song = new ArrayList<Vn>();
+		Session session = sessionFactory.openSession();
+		Transaction transaction = null;
+		try {
+			transaction = session.beginTransaction();
+			song = session.createQuery("select c from Vn c where c.volume.id >= All(Select v.id from Volume v)").list();
+			transaction.commit();
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			song = null;
+			if (transaction != null) {
+				transaction.rollback();
+			}
+		} finally {
+			session.close();
+		}
+		return song;
 	}
 }

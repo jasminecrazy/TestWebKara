@@ -33,10 +33,6 @@ public class SuperAdminController {
 		return "superadmin/song";
 	}
 
-	@RequestMapping(value = "genre", method = RequestMethod.GET)
-	public String genre() {
-		return "superadmin/genre";
-	}
 
 	@RequestMapping(value = "vol", method = RequestMethod.GET)
 	public String vol() {
