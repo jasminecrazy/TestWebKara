@@ -207,7 +207,7 @@
 									</div>
 									<div class="modal-body row">
 										<form class="form-horizontal" name="frmFormAdd"
-											enctype="multipart/form-data" id="fileUploadForm">
+											 id="fileUploadForm">
 											<div class="col-md-6">
 												<div class="form-group">
 													<label class=" control-label" for="">Song ID</label>
@@ -291,16 +291,7 @@
 
 													</div>
 												</div>
-												<label class="col-md-2 control-label">Picture</label>
-												<div class="col-md-12 picture">
-													<img ng-src="{{prev_img}}" height="150" width="100"
-														id="prev_img" /> <input type="file" id="image"
-														name="uploadfile" accept="*"
-														onchange="angular.element(this).scope().getImage(this)"
-														ng-model="image" />
-													<!-- Multiple Radios -->
-
-												</div>
+												
 
 											</div>
 											<div class="col-md-6">
@@ -332,6 +323,16 @@
 															ng-options="x.albumName for x in list_album"
 															name="albumName" id="albumName" ng-required="true">
 														</select>
+													</div>
+												</div>
+												<div class="form-group">
+													<label class=" control-label">Full Lyric</label>
+													<div class="">
+														<textarea id="fullLyric" name="fullLyric" rows="9"
+															class="form-control input-md" type="text"
+															ng-model="add_fullLyric" ng-required="false"></textarea>
+														
+
 													</div>
 												</div>
 
@@ -485,6 +486,16 @@
 															ng-options="x.albumName for x in list_album"
 															name="albumName" id="albumName" ng-required="true">
 														</select>
+													</div>
+												</div>
+												<div class="form-group">
+													<label class=" control-label">Full Lyric</label>
+													<div class="">
+														<textarea id="fullLyric" name="fullLyric" rows="9"
+															class="form-control input-md" type="text"
+															ng-model="edit_fullLyric" ng-required="false"></textarea>
+														
+
 													</div>
 												</div>
 

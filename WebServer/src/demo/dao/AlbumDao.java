@@ -3,6 +3,7 @@ package demo.dao;
 import java.util.List;
 
 import demo.entity.Album;
+import demo.entity.Vn;
 
 public interface AlbumDao {
 	public List<Album> findAllAlbum();
@@ -14,4 +15,6 @@ public interface AlbumDao {
 	public void addAlbum(Album album);
 
 	public void updateAlbum(Album album);
+
+	public List<Vn> getSongAlbum(int id);
 }

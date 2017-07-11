@@ -53,5 +53,10 @@ public String index()
 		}
 		return "main/accessDenied";
 	}
+	@RequestMapping(value="welcome",method=RequestMethod.GET)
+	 public String welcome()
+	 {
+		 return "main/welcome";
+	 }
 	
 }

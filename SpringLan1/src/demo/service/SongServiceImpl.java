@@ -8,45 +8,30 @@ import org.springframework.transaction.annotation.Transactional;
 
 import demo.dao.SongDao;
 import demo.entity.Vn;
-@Service("songService")
+@Service("SongService")
 @Transactional
 public class SongServiceImpl implements SongService{
 	@Autowired
 private SongDao songDao;
 	@Override
-	public List<Vn> findAll() {
+	public List<String> search(String songName) {
+		// TODO Auto-generated method stub
+		return songDao.search(songName);
+	}
+	@Override
+	public List<Vn> getSongVol(int id) {
 	
-		return songDao.findAll();
+		return songDao.getSongVol(id);
 	}
-
 	@Override
-	public Vn find(String songname) {
+	public List<Vn> getAlbumSong(int id) {
 		
-		return songDao.find(songname);
+		return songDao.getAlbumSong(id);
 	}
-
 	@Override
-	public void create(Vn song) {
-		songDao.create(song);
+	public Vn getSong(int id) {
 		
-	}
-
-	@Override
-	public void delete(Vn song) {
-		songDao.delete(song);
-		
-	}
-
-	@Override
-	public void update(Vn song) {
-		songDao.update(song);
-		
-	}
-
-	@Override
-	public List<Vn> search(String keyword) {
-	
-		return songDao.search(keyword);
+		return songDao.getSong(id);
 	}
 
 }

@@ -78,4 +78,16 @@ public class SongServiceImpl implements SongService {
 		return songDao.getNewestSong();
 	}
 
+	@Override
+	public List<Vn> getVolSong(int id) {
+		
+		return songDao.getVolSong(id);
+	}
+
+	@Override
+	public List<Vn> getSongSixNumber() {
+	
+		return songDao.getSongSixNumber();
+	}
+
 }

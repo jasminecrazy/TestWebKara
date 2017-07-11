@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -10,11 +11,16 @@
 	href="https://fonts.googleapis.com/css?family=Raleway">
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css"
+	href="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.0/css/jquery.dataTables.css">
+<link rel="stylesheet" type="text/css"
+	href="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.0/css/jquery.dataTables_themeroller.css">
 
 
-
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script type="text/javascript" charset="utf8"
+	src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.1.min.js"></script>
+<script type="text/javascript" charset="utf8"
+	src="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.0/jquery.dataTables.min.js"></script>
 
 <!-- Bootstrap -->
 <link
@@ -40,13 +46,6 @@
 <link
 	href="${pageContext.request.contextPath }/assets/css/sweetalert.css"
 	rel="stylesheet" />
-<script type="text/javascript">
-	$(document).ready(function() {
-		$('#songName').autocomplete({
-			source : '${pageContext.request.contextPath }/demo/search.html'
-		});
-	});
-</script>
 </head>
 <style>
 body, h1, h2, h3, h4, h5, h6 {
@@ -69,13 +68,12 @@ body, html {
 	font-size: 19px;
 }
 </style>
-
-<body ng-controller="indexCtrl" ng-app="myApp">
+<body ng-controller="detailCtrl" ng-app="myApp">
 	<!-- Navbar (sit on top) -->
 	<div class="w3-top">
 		<div class="w3-bar w3-white w3-card-2" id="myNavbar">
-			<a href="#home" class="w3-bar-item w3-button w3-wide">Tìm kiếm mã
-				số karaoke</a>
+			<a href="${pageContext.request.contextPath }/demo.html"
+				class="w3-bar-item w3-button w3-wide">Tìm kiếm mã số karaoke</a>
 			<!-- Right-sided navbar links -->
 			<div class="w3-right w3-hide-small">
 				<a href="${pageContext.request.contextPath }/demo/karaoke.html"
@@ -111,81 +109,43 @@ body, html {
 
 		<h3>Tìm kiếm mã số bài hát...</h3>
 		<div class="wrapper">
-			<input class="search" type="text" id="songName"
+			<input class="search" type="text" id="search"
 				placeholder="Nhập từ khóa cần tìm" /> <input class="submit"
 				type="submit" value=" " />
 		</div>
 	</div>
+	<!-- About Section -->
+	<div class="w3-container Custom" style="padding: 70px 0px" id="about">
+		<h3 class="w3-left h3" ng-model="detail_songName"></h3>
+		<div class="row test">
+			<ul>
 
-	<!-- Team Section -->
-	<div class="col-md-6" id="team">
-		<h3 class="w3-left h3">Karaoke Vol Mới</h3>
+				<li data-ng-repeat="x in list_SixNumberSong">
+					<div class="song">
+						<div class="row test">
 
-		<div class="w3-row-padding w3-grayscale">
-			<div class="">
-				<div id="songs-container ">
-					<ul>
+							<p class="songId">
+								{{x.maso}}
+							</p>
+							<h1 class="songName">
+								<a
+									href="${pageContext.request.contextPath }/demo/detailSong/{{x.id}}.html">{{x.ten}}</a>
+							</h1>
+							<h4 class="SongLyric">{{x.loi}}</h4>
+							<h3 class="author">{{x.thongtin}}</h3>
 
-						<li data-ng-repeat="x in list_NewestSong">
-							<div class="song">
-								<div class="row test">
+						</div>
+					</div>
 
-									<p class="songId">
-										{{x.maso}}<span
-											style="font-size: 14px !important; text-transform: uppercase !important;">{{x.volume.volName}}</span>
-									</p>
-									<h1 class="songName">
-										<a
-											href="${pageContext.request.contextPath }/demo/detailSong/{{x.id}}.html">{{x.ten}}</a>
-									</h1>
-									<h4 class="SongLyric">{{x.loi}}</h4>
-									<h3 class="author">{{x.thongtin}}</h3>
+				</li>
 
-								</div>
-							</div>
+			</ul>
 
-						</li>
-
-					</ul>
-				</div>
-			</div>
 		</div>
 
 
 	</div>
-	<div class="col-md-6" id="team">
-		<h3 class="w3-left h3">Bài hát yêu thích</h3>
 
-		<div class="w3-row-padding w3-grayscale">
-			<div class="">
-				<div id="songs-container ">
-					<ul>
-
-						<li data-ng-repeat="x in list_favoriteSong">
-							<div class="song">
-								<div class="row">
-
-									<p class="songId">
-										{{x.maso}}<span
-											style="font-size: 14px !important; text-transform: uppercase !important;">{{x.volume.volName}}</span>
-									</p>
-									<h1 class="songName">{{x.ten}}</h1>
-									<h4 class="SongLyric">{{x.loi}}</h4>
-									<h3 class="author">{{x.thongtin}}</h3>
-
-								</div>
-							</div>
-
-						</li>
-
-					</ul>
-				</div>
-			</div>
-		</div>
-
-
-	</div>
-	<!-- Footer -->
 	<footer class="w3-right w3-padding-64"> <a href="#home"
 		class="w3-button w3-light-grey"><i
 		class="fa fa-arrow-up w3-margin-right"></i>To the top</a>
@@ -221,7 +181,8 @@ body, html {
 
 </body>
 <!-- jQuery -->
-
+<script
+	src="${pageContext.request.contextPath }/assets/js/jquery.min.js"></script>
 
 <!-- Bootstrap -->
 <script
@@ -261,7 +222,7 @@ body, html {
 	src="${pageContext.request.contextPath }/assets/scripts/myApp.js"></script>
 
 <script type="text/javascript"
-	src="${pageContext.request.contextPath }/assets/scripts/indexCtrl.js"></script>
+	src="${pageContext.request.contextPath }/assets/scripts/detailCtrl.js"></script>
 <script src="${pageContext.request.contextPath }/assets/js/ui-grid.js"></script>
 
 </html>

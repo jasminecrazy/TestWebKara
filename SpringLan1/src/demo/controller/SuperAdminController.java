@@ -9,27 +9,22 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import demo.entity.User;
-import demo.service.AccountService;
-import demo.service.SongService;
+
 
 @Controller
 @RequestMapping("/superadmin**")
 public class SuperAdminController {
-	@Autowired
-	private AccountService accountService;
-	@Autowired
-	private SongService songService;
+	
 
 	@RequestMapping(method = RequestMethod.GET)
-	public String index(ModelMap modelMap) {
-		modelMap.put("accounts", accountService.findAll());
+	public String index() {
+		
 		return "superadmin/index";
 	}
 
 	@RequestMapping(value = "song", method = RequestMethod.GET)
-	public String song(ModelMap modelMap) {
-		modelMap.put("song", songService.findAll());
+	public String song() {
+		
 		return "superadmin/song";
 	}
 

@@ -3,36 +3,67 @@ package demo.dao;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import demo.entity.User;
+import demo.entity.Album;
 import demo.entity.Vn;
 
-@Repository("songDao")
-public class SongDaoImpl implements SongDao{
+@Repository("SongDao")
+
+public class SongDaoImpl implements SongDao {
 	@Autowired
 	private SessionFactory sessionFactory;
+
+	@Override
+	public List<String> search(String songName) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Vn> findAll() {
+	public List<Vn> getSongVol(int id) {
 		
-		List<Vn> song =new ArrayList<Vn>();
+		List<Vn> song = new ArrayList<Vn>();
 		Session session = sessionFactory.openSession();
 		Transaction transaction = null;
 		try {
 			transaction = session.beginTransaction();
-			song = session.createQuery("from Vn")
-					.list();
+			song = session.createQuery("select c from Vn c where c.volume.id = :id ").setInteger("id",id).list();
 			transaction.commit();
 		} catch (Exception e) {
 			song = null;
-			if(transaction != null) {
+			if (transaction != null) {
 				transaction.rollback();
 			}
+			System.out.println(e.getMessage());
+		} finally {
+			session.close();
+		}
+		return song;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Vn> getAlbumSong(int id) {
+		List<Vn> song = new ArrayList<Vn>();
+		Session session = sessionFactory.openSession();
+		Transaction transaction = null;
+		try {
+			transaction = session.beginTransaction();
+			song = session.createQuery("select c from Vn c where c.album.id = :id ").setInteger("id",id).list();
+			transaction.commit();
+		} catch (Exception e) {
+			song = null;
+			if (transaction != null) {
+				transaction.rollback();
+			}
+			System.out.println(e.getMessage());
 		} finally {
 			session.close();
 		}
@@ -40,101 +71,17 @@ public class SongDaoImpl implements SongDao{
 	}
 
 	@Override
-	public Vn find(String songname) {
-	Vn song = null;
-	Session session  =sessionFactory.openSession();
-	Transaction transaction =null;
-	try {
-		transaction = session.beginTransaction();
-		song = (Vn) session
-				.createQuery("select a "
-						+ "from Vn a "
-						+ "where a.ten = :ten")
-				.setString("ten", songname)
-				.uniqueResult();
-		transaction.commit();
-	} catch (Exception e) {
-		song = null;
-		if(transaction != null) {
-			transaction.rollback();
-		}
-	} finally {
-		session.close();
-	}		
-	return song;
-	}
-
-	@Override
-	public void create(Vn song) {
+	public Vn getSong(int id) {
+		Vn song = null;
 		Session session = sessionFactory.openSession();
 		Transaction transaction = null;
 		try {
 			transaction = session.beginTransaction();
-			session.save(song);
-			transaction.commit();
-		} catch (Exception e) {
-			if(transaction != null) {
-				transaction.rollback();
-			}
-		} finally {
-			session.close();
-		}	
-		
-	}
-
-	@Override
-	public void delete(Vn song) {
-		Session session = sessionFactory.openSession();
-		Transaction transaction = null;
-		try {
-			transaction = session.beginTransaction();
-			session.delete(song);
-			transaction.commit();
-		} catch (Exception e) {
-			if(transaction != null) {
-				transaction.rollback();
-			}
-		} finally {
-			session.close();
-		}	
-		
-	}
-
-	@Override
-	public void update(Vn song) {
-		Session session = sessionFactory.openSession();
-		Transaction transaction = null;
-		try {
-			transaction = session.beginTransaction();
-			session.update(song);
-			transaction.commit();
-		} catch (Exception e) {
-			if(transaction != null) {
-				transaction.rollback();
-			}
-		} finally {
-			session.close();
-		}	
-		
-	}
-
-	@SuppressWarnings("unchecked")
-	@Override
-	public List<Vn> search(String keyword) {
-		List<Vn> song= new ArrayList<Vn>();
-		Session session = sessionFactory.openSession();
-		Transaction transaction = null;
-		try {
-			transaction = session.beginTransaction();
-			song = session.createQuery("select a "
-					+ "from Vn a "
-					+ "where a.ten like :keyword")
-					.setString("keyword", "%" + keyword + "%")
-					.list();
+			song = (Vn) session.createQuery("select c from Vn c where c.id =:id").setInteger("id", id).uniqueResult();
 			transaction.commit();
 		} catch (Exception e) {
 			song = null;
-			if(transaction != null) {
+			if (transaction != null) {
 				transaction.rollback();
 			}
 		} finally {

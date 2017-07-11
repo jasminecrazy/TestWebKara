@@ -1,11 +1,14 @@
 package demo.entity;
-// Generated Jul 5, 2017 11:54:41 AM by Hibernate Tools 5.2.3.Final
+// Generated Jul 11, 2017 6:17:00 PM by Hibernate Tools 5.2.3.Final
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -16,34 +19,43 @@ import javax.persistence.Table;
 public class Vn implements java.io.Serializable {
 
 	private Integer id;
+	private Album album;
+	private Volume volume;
 	private String ten;
 	private int maso;
 	private String loi;
 	private String thongtin;
-	private String ten_1;
-	private String loi_1;
 	private String linkyoutube;
+	private Integer masauso;
+	private Boolean baihatyeuthich;
+	private Boolean baihatnoibat;
+	private String loidaydu;
 
 	public Vn() {
 	}
 
-	public Vn(String ten, int maso, String loi, String thongtin, String ten_1, String loi_1) {
+	public Vn(Album album, Volume volume, String ten, int maso, String loi, String thongtin) {
+		this.album = album;
+		this.volume = volume;
 		this.ten = ten;
 		this.maso = maso;
 		this.loi = loi;
 		this.thongtin = thongtin;
-		this.ten_1 = ten_1;
-		this.loi_1 = loi_1;
 	}
 
-	public Vn(String ten, int maso, String loi, String thongtin, String ten_1, String loi_1, String linkyoutube) {
+	public Vn(Album album, Volume volume, String ten, int maso, String loi, String thongtin, String linkyoutube,
+			Integer masauso, Boolean baihatyeuthich, Boolean baihatnoibat, String loidaydu) {
+		this.album = album;
+		this.volume = volume;
 		this.ten = ten;
 		this.maso = maso;
 		this.loi = loi;
 		this.thongtin = thongtin;
-		this.ten_1 = ten_1;
-		this.loi_1 = loi_1;
 		this.linkyoutube = linkyoutube;
+		this.masauso = masauso;
+		this.baihatyeuthich = baihatyeuthich;
+		this.baihatnoibat = baihatnoibat;
+		this.loidaydu = loidaydu;
 	}
 
 	@Id
@@ -56,6 +68,26 @@ public class Vn implements java.io.Serializable {
 
 	public void setId(Integer id) {
 		this.id = id;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "idalbum", nullable = false)
+	public Album getAlbum() {
+		return this.album;
+	}
+
+	public void setAlbum(Album album) {
+		this.album = album;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "vol_id", nullable = false)
+	public Volume getVolume() {
+		return this.volume;
+	}
+
+	public void setVolume(Volume volume) {
+		this.volume = volume;
 	}
 
 	@Column(name = "ten", nullable = false, length = 100)
@@ -94,24 +126,6 @@ public class Vn implements java.io.Serializable {
 		this.thongtin = thongtin;
 	}
 
-	@Column(name = "ten_", nullable = false, length = 100)
-	public String getTen_1() {
-		return this.ten_1;
-	}
-
-	public void setTen_1(String ten_1) {
-		this.ten_1 = ten_1;
-	}
-
-	@Column(name = "loi_", nullable = false, length = 100)
-	public String getLoi_1() {
-		return this.loi_1;
-	}
-
-	public void setLoi_1(String loi_1) {
-		this.loi_1 = loi_1;
-	}
-
 	@Column(name = "linkyoutube", length = 65535)
 	public String getLinkyoutube() {
 		return this.linkyoutube;
@@ -119,6 +133,42 @@ public class Vn implements java.io.Serializable {
 
 	public void setLinkyoutube(String linkyoutube) {
 		this.linkyoutube = linkyoutube;
+	}
+
+	@Column(name = "masauso")
+	public Integer getMasauso() {
+		return this.masauso;
+	}
+
+	public void setMasauso(Integer masauso) {
+		this.masauso = masauso;
+	}
+
+	@Column(name = "baihatyeuthich")
+	public Boolean getBaihatyeuthich() {
+		return this.baihatyeuthich;
+	}
+
+	public void setBaihatyeuthich(Boolean baihatyeuthich) {
+		this.baihatyeuthich = baihatyeuthich;
+	}
+
+	@Column(name = "baihatnoibat")
+	public Boolean getBaihatnoibat() {
+		return this.baihatnoibat;
+	}
+
+	public void setBaihatnoibat(Boolean baihatnoibat) {
+		this.baihatnoibat = baihatnoibat;
+	}
+
+	@Column(name = "loidaydu", length = 65535)
+	public String getLoidaydu() {
+		return this.loidaydu;
+	}
+
+	public void setLoidaydu(String loidaydu) {
+		this.loidaydu = loidaydu;
 	}
 
 }

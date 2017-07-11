@@ -1,15 +1,14 @@
 package demo.entity;
-// Generated Jul 5, 2017 11:54:41 AM by Hibernate Tools 5.2.3.Final
+// Generated Jul 11, 2017 6:17:00 PM by Hibernate Tools 5.2.3.Final
 
-import java.util.HashSet;
-import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -20,27 +19,28 @@ import javax.persistence.Table;
 public class User implements java.io.Serializable {
 
 	private Integer id;
+	private Role role;
 	private String username;
-	private String fullname;
 	private String password;
-	private int enabled;
-	private Set<UserRole> userRoles = new HashSet<UserRole>(0);
+	private boolean enabled;
+	private String fullname;
 
 	public User() {
 	}
 
-	public User(String username, String password, int enabled) {
+	public User(Role role, String username, String password, boolean enabled) {
+		this.role = role;
 		this.username = username;
 		this.password = password;
 		this.enabled = enabled;
 	}
 
-	public User(String username, String fullname, String password, int enabled, Set<UserRole> userRoles) {
+	public User(Role role, String username, String password, boolean enabled, String fullname) {
+		this.role = role;
 		this.username = username;
-		this.fullname = fullname;
 		this.password = password;
 		this.enabled = enabled;
-		this.userRoles = userRoles;
+		this.fullname = fullname;
 	}
 
 	@Id
@@ -55,6 +55,16 @@ public class User implements java.io.Serializable {
 		this.id = id;
 	}
 
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "roleid", nullable = false)
+	public Role getRole() {
+		return this.role;
+	}
+
+	public void setRole(Role role) {
+		this.role = role;
+	}
+
 	@Column(name = "username", nullable = false, length = 100)
 	public String getUsername() {
 		return this.username;
@@ -62,15 +72,6 @@ public class User implements java.io.Serializable {
 
 	public void setUsername(String username) {
 		this.username = username;
-	}
-
-	@Column(name = "fullname", length = 100)
-	public String getFullname() {
-		return this.fullname;
-	}
-
-	public void setFullname(String fullname) {
-		this.fullname = fullname;
 	}
 
 	@Column(name = "password", nullable = false, length = 100)
@@ -83,21 +84,21 @@ public class User implements java.io.Serializable {
 	}
 
 	@Column(name = "enabled", nullable = false)
-	public int getEnabled() {
+	public boolean isEnabled() {
 		return this.enabled;
 	}
 
-	public void setEnabled(int enabled) {
+	public void setEnabled(boolean enabled) {
 		this.enabled = enabled;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
-	public Set<UserRole> getUserRoles() {
-		return this.userRoles;
+	@Column(name = "fullname", length = 100)
+	public String getFullname() {
+		return this.fullname;
 	}
 
-	public void setUserRoles(Set<UserRole> userRoles) {
-		this.userRoles = userRoles;
+	public void setFullname(String fullname) {
+		this.fullname = fullname;
 	}
 
 }

@@ -57,12 +57,12 @@
 					<div class="profile clearfix">
 						<div class="profile_pic">
 							<img
-								src="${pageContext.request.contextPath }/assets/images/img.jpg"
+								src="${pageContext.request.contextPath }/assets/images/preview.png"
 								alt="..." class="img-circle profile_img" />
 						</div>
 						<div class="profile_info">
-							<span>Welcome,</span>
-							<h2>${pageContext.request.userPrincipal.name }</h2>
+							<h4>Administrator</h4>
+							
 						</div>
 					</div>
 					<!-- sidebar menu -->
@@ -93,8 +93,12 @@
 												Management</a></li>
 
 									</ul></li>
-
 							</ul>
+
+
+
+
+
 						</div>
 
 
@@ -118,13 +122,10 @@
 						<ul class="nav navbar-nav navbar-right">
 							<li class=""><a href="javascript:;"
 								class="user-profile dropdown-toggle" data-toggle="dropdown"
-								aria-expanded="false"> <img src="${pageContext.request.contextPath }/assets/images/img.jpg" alt="" />Admin
-									<span class=" fa fa-angle-down"></span>
+								aria-expanded="false"> Admin <span class=" fa fa-angle-down"></span>
 							</a>
 								<ul class="dropdown-menu dropdown-usermenu pull-right">
-									<li><a
-										href="${pageContext.request.contextPath }/superadmin/profile.html">
-											Profile</a></li>
+									
 
 
 									<li><a href="<c:url value='/j_spring_security_logout'/>"><i
@@ -150,7 +151,7 @@
 									href="${pageContext.request.contextPath }/admin/welcome">Home</a>
 								</li>
 								<li class="active"><a
-									href="${pageContext.request.contextPath }/superadmin/song.html">Song
+									href="${pageContext.request.contextPath }/admin.html">Song
 										Management</a></li>
 
 							</ul>
@@ -199,7 +200,8 @@
 										<h4 class="modal-title" id="myModalLabel">Add new song</h4>
 									</div>
 									<div class="modal-body row">
-										<form class="form-horizontal" name="frmFormAdd">
+										<form class="form-horizontal" name="frmFormAdd"
+											 id="fileUploadForm">
 											<div class="col-md-6">
 												<div class="form-group">
 													<label class=" control-label" for="">Song ID</label>
@@ -207,8 +209,14 @@
 														<input id="songId" name="songId"
 															ng-keyup="hideDuplicateAlert()"
 															class="form-control input-md"
-															ng-keydown="autoAdd($event)" type="number"
-															ng-model="add_songId" ng-required="false" />
+															ng-keydown="autoAdd($event)" type="number" min="0"
+															ng-model="add_songId" ng-required="true" />
+														<div ng-messages="frmFormAdd.songId.$error">
+															<div ng-message="required"
+																ng-show="frmFormAdd.songId.$touched">
+																<p style="color: red">This field is required</p>
+															</div>
+														</div>
 													</div>
 												</div>
 												<p ng-show="duplicateAlert != ''" ng-bind="duplicateAlert"
@@ -219,7 +227,13 @@
 													<div class="">
 														<input id="songName" name="songName"
 															class="form-control input-md" type="text"
-															ng-model="add_songName" ng-required="false" />
+															ng-model="add_songName" ng-required="true" />
+														<div ng-messages="frmFormAdd.songName.$error">
+															<div ng-message="required"
+																ng-show="frmFormAdd.songName.$touched">
+																<p style="color: red">This field is required</p>
+															</div>
+														</div>
 													</div>
 												</div>
 												<div class="form-group">
@@ -227,7 +241,13 @@
 													<div class="">
 														<input id="lyric" name="lyric" placeholder=""
 															ng-model="add_lyric" class="form-control input-md"
-															type="text" />
+															type="text" ng-required="true" />
+														<div ng-messages="frmFormAdd.lyric.$error">
+															<div ng-message="required"
+																ng-show="frmFormAdd.lyric.$touched">
+																<p style="color: red">This field is required</p>
+															</div>
+														</div>
 
 													</div>
 												</div>
@@ -237,7 +257,13 @@
 													<div class="">
 														<input id="author" name="author" placeholder=""
 															ng-model="add_author" class="form-control input-md"
-															type="text" />
+															type="text" ng-required="true" />
+														<div ng-messages="frmFormAdd.lyric.$error">
+															<div ng-message="required"
+																ng-show="frmFormAdd.lyric.$touched">
+																<p style="color: red">This field is required</p>
+															</div>
+														</div>
 
 													</div>
 
@@ -249,7 +275,57 @@
 													<div class="">
 														<textarea id="youtube" name="youtube" rows="5"
 															class="form-control input-md" type="text"
-															ng-model="add_youtubelink"></textarea>
+															ng-model="add_youtubelink" ng-required="true"></textarea>
+														<div ng-messages="frmFormAdd.youtube.$error">
+															<div ng-message="required"
+																ng-show="frmFormAdd.youtube.$touched">
+																<p style="color: red">This field is required</p>
+															</div>
+														</div>
+
+													</div>
+												</div>
+												
+
+											</div>
+											<div class="col-md-6">
+												<div class="form-group">
+													<label class="control-label" for="selectbasic">Vol</label>
+													<div class="">
+														<select ng-selected="vol.volName" ng-model="add_volName"
+															class="form-control"
+															ng-options="x.volName for x in list_volume"
+															name="volName" id="volName" ng-required="true">
+														</select>
+													</div>
+												</div>
+												<div class="form-group">
+													<label class="control-label" for="selectbasic">ID
+														Karaoke California</label>
+													<div class="">
+														<input type="number" min="0" name="genre"
+															ng-model="add_genre" id="genre" ng-disabled="true"
+															class="col-md-11" /> <input type="checkbox" id="check"
+															class="col-md-1" ng-model="chk" />
+													</div>
+												</div>
+												<div class="form-group">
+													<label class="control-label" for="selectbasic">Album</label>
+													<div class="">
+														<select ng-selected="album.albumName"
+															ng-model="add_albumName" class="form-control"
+															ng-options="x.albumName for x in list_album"
+															name="albumName" id="albumName" ng-required="true">
+														</select>
+													</div>
+												</div>
+												<div class="form-group">
+													<label class=" control-label">Full Lyric</label>
+													<div class="">
+														<textarea id="fullLyric" name="fullLyric" rows="9"
+															class="form-control input-md" type="text"
+															ng-model="add_fullLyric" ng-required="false"></textarea>
+														
 
 													</div>
 												</div>
@@ -264,9 +340,12 @@
 									</div>
 									<div class="modal-footer">
 										<button id="btnSave" name="btnSave" class="btn btn-primary"
+											ng-disabled="frmFormAdd.songId.$error.required || frmFormAdd.songName.$error.required||frmFormAdd.lyric.$error.required||frmFormAdd.lyric.$error.required||frmFormAdd.youtube.$error.required "
 											ng-click="add(false)">Add</button>
 										<button id="btnSave" name="btnSave" class="btn btn-default"
-											ng-click="add(true)">Add and close</button>
+											ng-click="add(true)"
+											ng-disabled="frmFormAdd.songId.$error.required || frmFormAdd.songName.$error.required||frmFormAdd.lyric.$error.required||frmFormAdd.lyric.$error.required||frmFormAdd.youtube.$error.required ">Add
+											and close</button>
 										<button type="button" class="btn btn-default"
 											data-dismiss="modal">Close</button>
 
@@ -298,7 +377,13 @@
 														<input id="songId" name="songId"
 															ng-keyup="hideDuplicateAlert()"
 															class="form-control input-md" type="number"
-															ng-model="edit_songId" ng-required="false" />
+															ng-model="edit_songId" ng-required="true" />
+														<div ng-messages="editForm.songId.$error">
+															<div ng-message="required"
+																ng-show="editForm.songId.$touched">
+																<p style="color: red">This field is required</p>
+															</div>
+														</div>
 													</div>
 												</div>
 												<p ng-show="duplicateAlert != ''" ng-bind="duplicateAlert"
@@ -309,7 +394,13 @@
 													<div class="">
 														<input id="songName" name="songName"
 															class="form-control input-md" type="text"
-															ng-model="edit_songName" ng-required="false" />
+															ng-model="edit_songName" ng-required="true" />
+														<div ng-messages="editForm.songName.$error">
+															<div ng-message="required"
+																ng-show="editForm.songName.$touched">
+																<p style="color: red">This field is required</p>
+															</div>
+														</div>
 													</div>
 												</div>
 												<div class="form-group">
@@ -317,8 +408,14 @@
 													<div class="">
 														<input id="lyric" name="lyric" placeholder=""
 															ng-model="edit_lyric" class="form-control input-md"
-															type="text" />
+															type="text" ng-required="true" />
+														<div ng-messages="editForm.lyric.$error">
+															<div ng-message="required"
+																ng-show="editForm.lyric.$touched">
+																<p style="color: red">This field is required</p>
+															</div>
 
+														</div>
 													</div>
 												</div>
 
@@ -327,11 +424,17 @@
 													<div class="">
 														<input id="author" name="author" placeholder=""
 															ng-model="edit_author" class="form-control input-md"
-															type="text" />
+															type="text" ng-required="true" />
+														<div ng-messages="editForm.author.$error">
+															<div ng-message="required"
+																ng-show="editForm.author.$touched">
+																<p style="color: red">This field is required</p>
+															</div>
+
+														</div>
+
 
 													</div>
-
-
 												</div>
 
 												<div class="form-group">
@@ -339,18 +442,64 @@
 													<div class="">
 														<textarea id="youtube" name="youtube" rows="5"
 															class="form-control input-md" type="text"
-															ng-model="edit_youtubelink"></textarea>
+															ng-model="edit_youtubelink" ng-required="true"></textarea>
+														<div ng-messages="editForm.youtube.$error">
+															<div ng-message="required"
+																ng-show="editForm.youtube.$touched">
+																<p style="color: red">This field is required</p>
+															</div>
+														</div>
+													</div>
+
+												</div>
+											</div>
+											<div class="col-md-6">
+												<div class="form-group">
+													<label class="control-label" for="selectbasic">Vol</label>
+													<div class="">
+														<select ng-selected="vol.volName" ng-model="edit_volName"
+															class="form-control"
+															ng-options="x.volName for x in list_volume"
+															name="volName" id="volName" ng-required="true">
+														</select>
+													</div>
+												</div>
+												<div class="form-group">
+													<label class="control-label" for="selectbasic">ID
+														Karaoke California</label>
+													<div class="">
+														<input type="number" min="0" name="genre"
+															ng-model="edit_genre" id="genre" class="col-md-11" />
+													</div>
+												</div>
+												<div class="form-group">
+													<label class="control-label" for="selectbasic">Album</label>
+													<div class="">
+														<select ng-selected="album.albumName"
+															ng-model="edit_albumName" class="form-control"
+															ng-options="x.albumName for x in list_album"
+															name="albumName" id="albumName" ng-required="true">
+														</select>
+													</div>
+												</div>
+												<div class="form-group">
+													<label class=" control-label">Full Lyric</label>
+													<div class="">
+														<textarea id="fullLyric" name="fullLyric" rows="9"
+															class="form-control input-md" type="text"
+															ng-model="edit_fullLyric" ng-required="false"></textarea>
+														
 
 													</div>
 												</div>
 
 											</div>
-
 										</form>
 									</div>
 									<div class="modal-footer">
 
 										<button id="btnSave" name="btnSave" class="btn btn-primary"
+										ng-disabled="editForm.songId.$error.required || editForm.songName.$error.required||editForm.lyric.$error.required||editForm.lyric.$error.required||editForm.youtube.$error.required "
 											ng-click="update()" data-dismiss="modal">Save</button>
 										<button type="button" class="btn btn-default"
 											data-dismiss="modal">Close</button>

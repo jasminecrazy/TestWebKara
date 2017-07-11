@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import demo.entity.Album;
+import demo.entity.Vn;
 import demo.service.AlbumService;
 
 @RestController
@@ -69,5 +70,8 @@ public class AlbumController {
 		}
 		return new ResponseEntity<>(HttpStatus.ACCEPTED);
 	}
-
+	@RequestMapping(value = "album/getSong/{id}", method = RequestMethod.GET)
+	public ResponseEntity<List<Vn>> getAlbumSong(@PathVariable int id) {
+		return new ResponseEntity<List<Vn>>(albumService.getSongAlbum(id), HttpStatus.OK);
+	}
 }

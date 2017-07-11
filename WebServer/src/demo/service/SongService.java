@@ -26,4 +26,8 @@ public interface SongService {
 	public List<Vn> getFavoriteSong();
 
 	public List<Vn> getNewestSong();
+
+	public List<Vn> getVolSong(int id);
+
+	public List<Vn> getSongSixNumber();
 }

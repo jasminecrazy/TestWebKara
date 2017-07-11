@@ -5,15 +5,11 @@ import java.util.List;
 import demo.entity.Vn;
 
 public interface SongService {
-	public List<Vn> findAll();
+	public List<String> search(String songName);
 
-	public Vn find(String songname);
+	public List<Vn> getSongVol(int id);
 
-	public void create(Vn song);
+	public List<Vn> getAlbumSong(int id);
 
-	public void delete(Vn song);
-
-	public void update(Vn song);
-
-	public List<Vn> search(String keyword);
+	public Vn getSong(int id);
 }

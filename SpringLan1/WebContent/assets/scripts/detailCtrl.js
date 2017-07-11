@@ -1,8 +1,14 @@
 app
 		.controller(
-				'indexCtrl',
-				function($scope,$rootScope, $http, $filter, $resource, uiGridConstants) {
+				'detailCtrl',
+				function($scope,$http, $filter, $resource, uiGridConstants) {
 
+					
+					
+					
+					
+
+				
 					// get Album  List
 					function GetListAlbum() {
 						$scope.list_album = [];
@@ -16,13 +22,6 @@ app
 
 					}
 					GetListAlbum();
-					
-					$scope.GetVolSongId= function(id)
-					{
-						
-						$rootScope.volid = id;
-					}
-					
 					//get New List Vol 
 					function GetListVol() {
 						$scope.list_newVol = [];
@@ -82,15 +81,25 @@ app
 						newSong.query().$promise.then(function(listNewestSong) {
 
 							$scope.list_NewestSong = listNewestSong;
-						
+							console.log(listNewestSong);
 						
 
 						});
 
 					}
 					GetNewestSong();
-					
-					
 
-					
+					function GetSongHasSixNumber() {
+						$scope.list_SixNumberSong = [];
+						var newSong = $resource('http://localhost:8080/WebServer/api/song/sixNumber');
+						newSong.query().$promise.then(function(listSixNumberSong) {
+
+							$scope.list_SixNumberSong = listSixNumberSong;
+							console.log(listSixNumberSong);
+						
+
+						});
+
+					}
+					GetSongHasSixNumber();
 				});

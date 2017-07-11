@@ -119,47 +119,13 @@ app
 					$scope.hideDuplicateAlert = function() {
 						$scope.duplicateAlert = " ";
 					}
-					// Get Image
-					$scope.prev_img='';
-					$scope.getImage = function(element) {
-			    		photofile = element.files[0];
-			            var reader = new FileReader();
-			            reader.onload = function(e) {
-			                $scope.$apply(function() {
-			                    $scope.prev_img = e.target.result;
-			                });
-			            };
-			            reader.readAsDataURL(photofile);
-			          
-			    	};
-			    	
-			    	function uploadFile() {
-			            $.ajax({
-			              url: "http://localhost:8080/WebServer/api/song/uploadFile",
-			              type: "POST",
-			              data: new FormData($("#fileUploadForm")[0]),
-			              enctype: 'multipart/form-data',
-			              processData: false,
-			              contentType: false,
-			              cache: false,
-			              success: function () {
-			                // Handle upload success
-			                $("#upload-file-message").text("File succesfully uploaded");
-			              },
-			              error: function () {
-			                // Handle upload error
-			                $("#upload-file-message").text(
-			                    "File not uploaded (Perhaps this picture is too big)");
-			              }
-			            });
-			          }
-			    	$scope.image="";
+					
 					// Add new Song
 					$scope.add = function(close) {
 						if($scope.chk)
 							{
 							if (id_duplicate_Add(document.getElementById("songId").value)) {
-								uploadFile();
+								
 								$http(
 										{
 											method : "POST",
@@ -173,7 +139,8 @@ app
 												picture:$scope.image,
 												volume:$scope.add_volName,
 												album:$scope.add_albumName,
-												masauso:$scope.add_genre
+												masauso:$scope.add_genre,
+												loidaydu:$scope.add_fullLyric
 											},
 
 											dataType : "json",
@@ -202,7 +169,7 @@ app
 						else
 							{
 							if (id_duplicate_Add(document.getElementById("songId").value)) {
-								uploadFile();
+								
 								$http(
 										{
 											method : "POST",
@@ -216,7 +183,9 @@ app
 												picture:$scope.image,
 												volume:$scope.add_volName,
 												album:$scope.add_albumName,
-												masauso:null
+												masauso:null,
+												loidaydu : $scope.add_fullLyric
+												
 											},
 
 											dataType : "json",
@@ -267,7 +236,7 @@ app
 											$scope.editForm.lyric.$setUntouched();
 											$scope.editForm.author.$setUntouched();
 											$scope.editForm.youtube.$setUntouched();
-											
+											$scope.edit_fullLyric = response.data.loidaydu;
 											for (var i = 0; i < $scope.list_volume.length; i++) {
 								                if (response.data.volume.volId == $scope.list_volume[i].volId) {
 								                    $scope.edit_volName = $scope.list_volume[i];
@@ -367,6 +336,15 @@ app
 							title : "",
 							text : "Edit successfully.",
 							type : "success",
+							timer : alertDuration,
+							showConfirmButton : false
+						});
+					}
+					function alertFailMessage(message) {
+						swal({
+							title : "",
+							text : message,
+							type : "error",
 							timer : alertDuration,
 							showConfirmButton : false
 						});

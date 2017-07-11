@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import demo.dao.AlbumDao;
 import demo.entity.Album;
+import demo.entity.Vn;
 
 @Service("AlbumService")
 @Transactional
@@ -43,6 +44,12 @@ public class AlbumServiceImpl implements AlbumService {
 	public void updateAlbum(Album album) {
 		albumDao.updateAlbum(album);
 
+	}
+
+	@Override
+	public List<Vn> getSongAlbum(int id) {
+		
+		return albumDao.getSongAlbum(id);
 	}
 
 }

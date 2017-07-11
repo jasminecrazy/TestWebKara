@@ -3,11 +3,11 @@
                                          "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
  <session-factory name="">
- <property name="hibernate.enable_lazy_load_no_trans">true</property>
-  <mapping class="demo.entity.User"/>
-  <mapping class="demo.entity.UserRole"/>
-  <mapping class="demo.entity.UserRoleId"/>
-  <mapping class="demo.entity.Vn"/>
+  <property name="hibernate.enable_lazy_load_no_trans">true</property>
+  <mapping class="demo.entity.Album"/>
   <mapping class="demo.entity.Role"/>
+  <mapping class="demo.entity.User"/>
+  <mapping class="demo.entity.Vn"/>
+  <mapping class="demo.entity.Volume"/>
  </session-factory>
 </hibernate-configuration>

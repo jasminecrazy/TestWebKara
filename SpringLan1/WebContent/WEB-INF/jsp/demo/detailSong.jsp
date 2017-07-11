@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -10,11 +11,16 @@
 	href="https://fonts.googleapis.com/css?family=Raleway">
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css"
+	href="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.0/css/jquery.dataTables.css">
+<link rel="stylesheet" type="text/css"
+	href="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.0/css/jquery.dataTables_themeroller.css">
 
 
-
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script type="text/javascript" charset="utf8"
+	src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.1.min.js"></script>
+<script type="text/javascript" charset="utf8"
+	src="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.0/jquery.dataTables.min.js"></script>
 
 <!-- Bootstrap -->
 <link
@@ -40,13 +46,6 @@
 <link
 	href="${pageContext.request.contextPath }/assets/css/sweetalert.css"
 	rel="stylesheet" />
-<script type="text/javascript">
-	$(document).ready(function() {
-		$('#songName').autocomplete({
-			source : '${pageContext.request.contextPath }/demo/search.html'
-		});
-	});
-</script>
 </head>
 <style>
 body, h1, h2, h3, h4, h5, h6 {
@@ -69,23 +68,19 @@ body, html {
 	font-size: 19px;
 }
 </style>
-
-<body ng-controller="indexCtrl" ng-app="myApp">
+<body ng-controller="detailCtrl" ng-app="myApp">
 	<!-- Navbar (sit on top) -->
 	<div class="w3-top">
 		<div class="w3-bar w3-white w3-card-2" id="myNavbar">
-			<a href="#home" class="w3-bar-item w3-button w3-wide">Tìm kiếm mã
+			<a href="${pageContext.request.contextPath }/demo.html" class="w3-bar-item w3-button w3-wide">Tìm kiếm mã
 				số karaoke</a>
 			<!-- Right-sided navbar links -->
-			<div class="w3-right w3-hide-small">
-				<a href="${pageContext.request.contextPath }/demo/karaoke.html"
-					class="w3-bar-item w3-button ">Karaoke 6 số</a> <a
-					href="${pageContext.request.contextPath }/demo/detail/{{x.id}}.html"
-					ng-model="volid" class="w3-bar-item w3-button"
-					data-ng-repeat="x in list_newVol" ng-click="GetVolSongId(x.id)">{{x.volName}}</a>
-				<a
-					href="${pageContext.request.contextPath }/demo/detail/{{x.id}}.html"
-					class="w3-bar-item w3-button" data-ng-repeat="x in list_album">{{x.albumName}}</a>
+			<div class="w3-right w3-hide-small" >
+
+				<a href="${pageContext.request.contextPath }/demo/detail/{{x.id}}.html" ng-model="volid" class="w3-bar-item w3-button" data-ng-repeat="x in list_newVol"
+					 ng-click="GetVolSongId(x.id)">{{x.volName}}</a> <a
+					href="${pageContext.request.contextPath }/demo/detail/{{x.id}}.html" class="w3-bar-item w3-button"
+					data-ng-repeat="x in list_album">{{x.albumName}}</a> 
 
 			</div>
 			<!-- Hide right-floated links on small screens and replace them with a menu icon -->
@@ -111,14 +106,38 @@ body, html {
 
 		<h3>Tìm kiếm mã số bài hát...</h3>
 		<div class="wrapper">
-			<input class="search" type="text" id="songName"
+			<input class="search" type="text" id="search"
 				placeholder="Nhập từ khóa cần tìm" /> <input class="submit"
 				type="submit" value=" " />
 		</div>
 	</div>
+	<!-- About Section -->
+	<div class="w3-container Custom" style="padding: 70px 0px" id="about">
+		<h3 class="w3-left h3" ng-model="detail_songName"></h3>
+		<div class="row col-md-8 w3-center " style="padding-left:70px">
 
-	<!-- Team Section -->
-	<div class="col-md-6" id="team">
+<h5 class="songId">${detailSong.maso}</h5>
+<h1 class="songName">${detailSong.ten}</h1>
+
+<p class="fullLyric">${detailSong.loidaydu }</p>
+<h3 class="author">Sáng tác :${detailSong.thongtin}</h3>			
+		</div>
+		<aside>
+		 <div class="col-md-3 w3-right menu-right">
+			<ul>
+				<li><a class="fa fa-music"  href="${pageContext.request.contextPath }/demo/detail/{{x.id}}.html" data-ng-repeat="x in list_album"> Danh sách {{x.albumName}}</a></li>
+				
+				<li><a class="fa fa-music"href="${pageContext.request.contextPath }/demo/detail/{{x.id}}.html" data-ng-repeat="x in list_newVol"> Danh sách bài hát {{x.volName}}</a></li>
+				
+			</ul>
+		</div> 
+		</aside>
+
+
+	</div>
+	<!-- 
+	 Team Section
+	 <div class="col-md-6" id="team">
 		<h3 class="w3-left h3">Karaoke Vol Mới</h3>
 
 		<div class="w3-row-padding w3-grayscale">
@@ -126,26 +145,65 @@ body, html {
 				<div id="songs-container ">
 					<ul>
 
-						<li data-ng-repeat="x in list_NewestSong">
+						<li>
 							<div class="song">
-								<div class="row test">
+								<div class="row">
 
 									<p class="songId">
-										{{x.maso}}<span
-											style="font-size: 14px !important; text-transform: uppercase !important;">{{x.volume.volName}}</span>
+										61471 <span
+											style="font-size: 14px !important; text-transform: uppercase !important;">vol62</span>
 									</p>
-									<h1 class="songName">
-										<a
-											href="${pageContext.request.contextPath }/demo/detailSong/{{x.id}}.html">{{x.ten}}</a>
-									</h1>
-									<h4 class="SongLyric">{{x.loi}}</h4>
-									<h3 class="author">{{x.thongtin}}</h3>
+									<h1 class="songName">phía sau một cô gái</h1>
+									<h4 class="SongLyric">
+										Nhiều khi anh mong được một lần nói ra hết tất cả thay vì ngồi
+										lặng im nghe..<span style="padding: 0px 4px;" class="lmore"
+											id="61471" style="display:block;">+</span>
+									</h4>
+									<h3 class="author">Tiên Cookie</h3>
 
 								</div>
 							</div>
 
 						</li>
+						<li>
+							<div class="song">
+								<div class="row">
 
+									<p class="songId">
+										61471 <span
+											style="font-size: 14px !important; text-transform: uppercase !important;">vol62</span>
+									</p>
+									<h1 class="songName">phía sau một cô gái</h1>
+									<h4 class="SongLyric">
+										Nhiều khi anh mong được một lần nói ra hết tất cả thay vì ngồi
+										lặng im nghe..<span style="padding: 0px 4px;" class="lmore"
+											id="61471" style="display:block;">+</span>
+									</h4>
+									<h3 class="author">Tiên Cookie</h3>
+
+								</div>
+							</div>
+
+						</li>
+						<li>
+							<div class="song">
+								<div class="row">
+
+									<p class="songId">
+										61471 <span
+											style="font-size: 14px !important; text-transform: uppercase !important;">vol62</span>
+									</p>
+									<h1 class="songName">phía sau một cô gái</h1>
+									<h4 class="SongLyric">
+										Nhiều khi anh mong được một lần nói ra hết tất cả thay vì ngồi
+										lặng im nghe..
+									</h4>
+									<h3 class="author">Tiên Cookie</h3>
+
+								</div>
+							</div>
+
+						</li>
 					</ul>
 				</div>
 			</div>
@@ -170,21 +228,23 @@ body, html {
 											style="font-size: 14px !important; text-transform: uppercase !important;">{{x.volume.volName}}</span>
 									</p>
 									<h1 class="songName">{{x.ten}}</h1>
-									<h4 class="SongLyric">{{x.loi}}</h4>
+									<h4 class="SongLyric">
+										{{x.loi}}
+									</h4>
 									<h3 class="author">{{x.thongtin}}</h3>
 
 								</div>
 							</div>
 
 						</li>
-
+						
 					</ul>
 				</div>
 			</div>
 		</div>
 
 
-	</div>
+	</div>  -->
 	<!-- Footer -->
 	<footer class="w3-right w3-padding-64"> <a href="#home"
 		class="w3-button w3-light-grey"><i
@@ -221,7 +281,8 @@ body, html {
 
 </body>
 <!-- jQuery -->
-
+<script
+	src="${pageContext.request.contextPath }/assets/js/jquery.min.js"></script>
 
 <!-- Bootstrap -->
 <script
@@ -261,7 +322,7 @@ body, html {
 	src="${pageContext.request.contextPath }/assets/scripts/myApp.js"></script>
 
 <script type="text/javascript"
-	src="${pageContext.request.contextPath }/assets/scripts/indexCtrl.js"></script>
+	src="${pageContext.request.contextPath }/assets/scripts/detailCtrl.js"></script>
 <script src="${pageContext.request.contextPath }/assets/js/ui-grid.js"></script>
 
 </html>

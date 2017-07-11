@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -67,19 +68,19 @@ body, html {
 	font-size: 19px;
 }
 </style>
-<body ng-controller="indexCtrl" ng-app="myApp">
+<body ng-controller="detailCtrl" ng-app="myApp">
 	<!-- Navbar (sit on top) -->
 	<div class="w3-top">
 		<div class="w3-bar w3-white w3-card-2" id="myNavbar">
-			<a href="#home" class="w3-bar-item w3-button w3-wide">Tìm kiếm mã
+			<a href="${pageContext.request.contextPath }/demo.html" class="w3-bar-item w3-button w3-wide">Tìm kiếm mã
 				số karaoke</a>
 			<!-- Right-sided navbar links -->
-			<div class="w3-right w3-hide-small">
+			<div class="w3-right w3-hide-small" >
 
-				<a href="${pageContext.request.contextPath }/demo/detail/{{k.id}}" class="w3-bar-item w3-button"
-					data-ng-repeat="x in list_newVol">{{x.volName}}</a> <a
-					href="#pricing" class="w3-bar-item w3-button"
-					data-ng-repeat="x in list_album">{{x.albumName}}</a>
+				<a href="${pageContext.request.contextPath }/demo/detail/{{x.id}}.html" ng-model="volid" class="w3-bar-item w3-button" data-ng-repeat="x in list_newVol"
+					 ng-click="GetVolSongId(x.id)">{{x.volName}}</a> <a
+					href="${pageContext.request.contextPath }/demo/detail/{{x.id}}.html" class="w3-bar-item w3-button"
+					data-ng-repeat="x in list_album">{{x.albumName}}</a> 
 
 			</div>
 			<!-- Hide right-floated links on small screens and replace them with a menu icon -->
@@ -113,14 +114,26 @@ body, html {
 	<!-- About Section -->
 	<div class="w3-container Custom" style="padding: 70px 0px" id="about">
 		<h3 class="w3-left h3" ng-model="detail_songName"></h3>
-		<div class="row">
-		
+		<div class="row test">
+
+
+			<c:forEach var="detail" items="${songDetail}">
+				<div class="row " style="padding-left:50px">
+					<h3  class="songId">${detail.maso}</h3>
+					
+					<h2 class="songName"><a href="${pageContext.request.contextPath }/demo/detailSong/${detail.id}.html">${detail.ten }</a></h2>
+					<h5 class="SongLyric">${detail.loi }</h5>
+					<hr>
+				</div>
+
+			</c:forEach>
 		</div>
 
-		
+
 	</div>
-	<!-- Team Section -->
-	<div class="col-md-6" id="team">
+	<!-- 
+	 Team Section
+	 <div class="col-md-6" id="team">
 		<h3 class="w3-left h3">Karaoke Vol Mới</h3>
 
 		<div class="w3-row-padding w3-grayscale">
@@ -227,7 +240,7 @@ body, html {
 		</div>
 
 
-	</div>
+	</div>  -->
 	<!-- Footer -->
 	<footer class="w3-right w3-padding-64"> <a href="#home"
 		class="w3-button w3-light-grey"><i
@@ -305,7 +318,7 @@ body, html {
 	src="${pageContext.request.contextPath }/assets/scripts/myApp.js"></script>
 
 <script type="text/javascript"
-	src="${pageContext.request.contextPath }/assets/scripts/indexCtrl.js"></script>
+	src="${pageContext.request.contextPath }/assets/scripts/detailCtrl.js"></script>
 <script src="${pageContext.request.contextPath }/assets/js/ui-grid.js"></script>
 
 </html>

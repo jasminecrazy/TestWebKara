@@ -1,5 +1,5 @@
 package demo.entity;
-// Generated Jul 10, 2017 10:46:46 AM by Hibernate Tools 5.2.3.Final
+// Generated Jul 11, 2017 6:16:49 PM by Hibernate Tools 5.2.3.Final
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -26,10 +26,10 @@ public class Vn implements java.io.Serializable {
 	private String loi;
 	private String thongtin;
 	private String linkyoutube;
-	private String picture;
 	private Integer masauso;
 	private Boolean baihatyeuthich;
 	private Boolean baihatnoibat;
+	private String loidaydu;
 
 	public Vn() {
 	}
@@ -44,7 +44,7 @@ public class Vn implements java.io.Serializable {
 	}
 
 	public Vn(Album album, Volume volume, String ten, int maso, String loi, String thongtin, String linkyoutube,
-			String picture, Integer masauso, Boolean baihatyeuthich, Boolean baihatnoibat) {
+			Integer masauso, Boolean baihatyeuthich, Boolean baihatnoibat, String loidaydu) {
 		this.album = album;
 		this.volume = volume;
 		this.ten = ten;
@@ -52,10 +52,10 @@ public class Vn implements java.io.Serializable {
 		this.loi = loi;
 		this.thongtin = thongtin;
 		this.linkyoutube = linkyoutube;
-		this.picture = picture;
 		this.masauso = masauso;
 		this.baihatyeuthich = baihatyeuthich;
 		this.baihatnoibat = baihatnoibat;
+		this.loidaydu = loidaydu;
 	}
 
 	@Id
@@ -135,15 +135,6 @@ public class Vn implements java.io.Serializable {
 		this.linkyoutube = linkyoutube;
 	}
 
-	@Column(name = "picture", length = 65535)
-	public String getPicture() {
-		return this.picture;
-	}
-
-	public void setPicture(String picture) {
-		this.picture = picture;
-	}
-
 	@Column(name = "masauso")
 	public Integer getMasauso() {
 		return this.masauso;
@@ -169,6 +160,15 @@ public class Vn implements java.io.Serializable {
 
 	public void setBaihatnoibat(Boolean baihatnoibat) {
 		this.baihatnoibat = baihatnoibat;
+	}
+
+	@Column(name = "loidaydu", length = 65535)
+	public String getLoidaydu() {
+		return this.loidaydu;
+	}
+
+	public void setLoidaydu(String loidaydu) {
+		this.loidaydu = loidaydu;
 	}
 
 }
