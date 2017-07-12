@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jul 11, 2017 at 11:27 AM
+-- Generation Time: Jul 12, 2017 at 10:58 AM
 -- Server version: 5.6.12-log
 -- PHP Version: 5.4.16
 
@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 --
 -- Database: `db_kara`
 --
-CREATE DATABASE IF NOT EXISTS `db_kara` DEFAULT CHARACTER SET utf32 COLLATE utf32_vietnamese_ci;
+CREATE DATABASE IF NOT EXISTS `db_kara` DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
 USE `db_kara`;
 
 -- --------------------------------------------------------
@@ -110,43 +110,43 @@ CREATE TABLE IF NOT EXISTS `vn` (
   PRIMARY KEY (`id`),
   KEY `fk_album_song` (`idalbum`),
   KEY `fk_song_vol` (`vol_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=8241 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=8246 ;
 
 --
 -- Dumping data for table `vn`
 --
 
 INSERT INTO `vn` (`id`, `ten`, `maso`, `loi`, `thongtin`, `linkyoutube`, `idalbum`, `vol_id`, `masauso`, `baihatyeuthich`, `baihatnoibat`, `loidaydu`) VALUES
-(1, '1 2 3 CHIA TAY', 55205, 'Một là yêu em, hai là bên em, ba là anh chỉ có em…', 'Nhat Trung', '', 1, 11, NULL, 1, 1, '1 là yêu em\r\n2 là bên em\r\n3 là anh chỉ có em\r\nlàm em hạnh phúc\r\nlàm em ngây ngất\r\nthế gian em chỉ cần anh\r\n1 là chia tay\r\n2 là anh đi\r\n3 là em đã mất anh\r\nchỉ vừa mới đó mà giờ thay đổi trái tim sao quá vội vàng chẳng một lý do vì sao ta thế này chẳng cần biết tại vì sao em mỉm cười người chỉ biết con đường anh đi giờ em đã trở nên phiền mau mau làm sao xa rời em đợi anh đi xa em giờ mới khóc khóc cho vơi đi nỗi đau buồn làm chi nữa 1 người đi mãi\r\n1 2 3 em mất anh rồi'),
+(1, '1 2 3 CHIA TAY', 55205, 'Một là yêu em, hai là bên em, ba là anh chỉ có em…', 'Nhat Trung', 'https://www.youtube.com/watch?v=7EuDw6QNeTs', 1, 11, NULL, 1, 1, '1 là yêu em\r\n2 là bên em\r\n3 là anh chỉ có em\r\nlàm em hạnh phúc\r\nlàm em ngây ngất\r\nthế gian em chỉ cần anh\r\n1 là chia tay\r\n2 là anh đi\r\n3 là em đã mất anh\r\nchỉ vừa mới đó mà giờ thay đổi trái tim sao quá vội vàng chẳng một lý do vì sao ta thế này chẳng cần biết tại vì sao em mỉm cười người chỉ biết con đường anh đi giờ em đã trở nên phiền mau mau làm sao xa rời em đợi anh đi xa em giờ mới khóc khóc cho vơi đi nỗi đau buồn làm chi nữa 1 người đi mãi\r\n1 2 3 em mất anh rồi'),
 (2, '1 2 3 Chia đôi lối về', 54630, 'Nuốt nước mắt khi ôm em trong lòng', 'Bảo Chinh', '', 1, 11, NULL, 1, 0, NULL),
-(3, '1 2 3 DZÔ', 53097, 'Uống cho say cùng vui em ơi, uống cho say cùng vui anh ơi...', 'Anh Khanh Minh Anh', '', 1, 1, NULL, NULL, NULL, NULL),
-(4, '1, 2, 3 KHÓC', 55667, 'Màn đêm xuống dần cô đơn, mình anh với anh mong em về đây…', 'Khánh Đơn', '', 1, 1, NULL, NULL, NULL, NULL),
-(5, '1,2,3 NGÔI SAO', 52591, 'Một ngày anh nhớ, nhớ bóng hình em, trái tim…', 'Sỹ Luân', '', 1, 1, NULL, NULL, NULL, NULL),
-(6, '100% YÊU EM', 54378, 'Mãi mãi bên nhau nồng say, khi ta có nhau tay nắm tay…', 'Bảo Thạch', '', 1, 1, NULL, NULL, 1, NULL),
-(7, '1000 LÝ DO ANH ĐẶT RA', 53098, 'Thôi nhắn tin làm chi nữa giờ em đã hiểu trái tim anh...', 'Vũ Quốc Bình Vũ Hồng Khanh', '', 1, 1, NULL, NULL, NULL, NULL),
-(8, '1000 ĐIỀU ƯỚC', 57255, 'Ngồi đây với trăng, trăng kia đang khuyết dần...', 'Khánh Đơn', '', 1, 1, NULL, NULL, 1, NULL),
-(9, '12 GI? (REMIX)', 57200, 'M??i hai gi? rung h?i chu?ng vang réo r?t…', 'Nguy?n Duy Hùng', 'https://www.youtube.com/watch?v=YgQs2uCRDoM', 1, 1, NULL, NULL, NULL, NULL),
-(10, '12 GiỜ', 54379, 'Mười hai giờ rung hồi chuông vang réo rắt…', 'Nguyễn Duy Hùng', '', 1, 1, NULL, NULL, NULL, NULL),
-(11, '2 + 1 = 0', 52858, 'Biết làm gì khi có hai người yêu mình, nỡ sao đành…', 'Nguyễn Hoài Anh', '', 1, 1, NULL, 1, NULL, NULL),
-(12, '24 GIỜ 7 NGÀY', 55206, 'Tiếng nói ấm áp đâu đây còn vang khắp phòng…', 'Huy Tuấn', '', 1, 1, NULL, NULL, NULL, NULL),
-(13, '8 VẠN 6 NGÀN 400 LẦN NHỚ EM', 53366, 'Ngày tháng trôi qua anh phải sống một mình anh…', 'Nhất Trung', '', 1, 1, NULL, 1, 1, NULL),
-(14, '9 CON SỐ 1 LINH HỒN', 51279, 'Em còn nhớ không em…', 'Quốc Dũng', '', 1, 1, NULL, NULL, NULL, NULL),
-(15, '999 ĐÓA HỒNG', 50931, 'Nhắc chi chuyện xưa…', 'Nhạc Hoa', '', 1, 1, NULL, NULL, NULL, NULL),
-(16, 'AI BIẾT', 50650, 'Chàng thề rằng chàng yêu tôi…', 'Nhạc Hoa', '', 1, 1, NULL, NULL, NULL, NULL),
-(17, 'AI BẢO EM DỄ THƯƠNG', 56917, 'Ai bảo em dễ thương, nhưng thương thương khơng dễ…', 'Nhạc: Sơng Trà. Thơ: Trần Văn Phúc', '', 1, 1, NULL, NULL, NULL, NULL),
-(18, 'AI CHO EM TÌNH YÊU', 50070, 'Chiều một mình buồn qua đây...', 'Ngọc Lễ', '', 1, 1, NULL, NULL, NULL, NULL),
+(3, '1 2 3 DZÔ', 53097, 'Uống cho say cùng vui em ơi, uống cho say cùng vui anh ơi...', 'Anh Khanh Minh Anh', '', 1, 12, NULL, NULL, NULL, NULL),
+(4, '1, 2, 3 KHÓC', 55667, 'Màn đêm xuống dần cô đơn, mình anh với anh mong em về đây…', 'Khánh Đơn', '', 1, 12, NULL, NULL, NULL, NULL),
+(5, '1,2,3 NGÔI SAO', 52591, 'Một ngày anh nhớ, nhớ bóng hình em, trái tim…', 'Sỹ Luân', '', 1, 12, NULL, NULL, NULL, NULL),
+(6, '100% YÊU EM', 54378, 'Mãi mãi bên nhau nồng say, khi ta có nhau tay nắm tay…', 'Bảo Thạch', '', 1, 12, NULL, NULL, 1, NULL),
+(7, '1000 LÝ DO ANH ĐẶT RA', 53098, 'Thôi nhắn tin làm chi nữa giờ em đã hiểu trái tim anh...', 'Vũ Quốc Bình Vũ Hồng Khanh', '', 1, 12, NULL, NULL, NULL, NULL),
+(8, '1000 ĐIỀU ƯỚC', 57255, 'Ngồi đây với trăng, trăng kia đang khuyết dần...', 'Khánh Đơn', '', 1, 13, NULL, 1, 1, NULL),
+(9, '12 Giờ(REMIX)', 57200, '12 chuông đồng hồ reo réo rắt', 'Nguyễn Duy Hùng', 'https://www.youtube.com/watch?v=YgQs2uCRDoM', 1, 14, 623910, 0, 0, NULL),
+(10, '12 GiỜ', 54379, 'Mười hai giờ rung hồi chuông vang réo rắt…', 'Nguyễn Duy Hùng', 'https://www.youtube.com/watch?v=2wlIlxRNc0w', 1, 14, NULL, NULL, NULL, '12 giờ chuông đồng hồ vang reo rắt, 12 giờ '),
+(11, '2 + 1 = 0', 52858, 'Biết làm gì khi có hai người yêu mình, nỡ sao đành…', 'Nguyễn Hoài Anh', '', 1, 14, NULL, 1, NULL, NULL),
+(12, '24 GIỜ 7 NGÀY', 55206, 'Tiếng nói ấm áp đâu đây còn vang khắp phòng…', 'Huy Tuấn', '', 1, 14, NULL, NULL, NULL, NULL),
+(13, '8 VẠN 6 NGÀN 400 LẦN NHỚ EM', 53366, 'Ngày tháng trôi qua anh phải sống một mình anh…', 'Nhất Trung', '', 1, 14, NULL, 1, 1, NULL),
+(14, '9 CON SỐ 1 LINH HỒN', 51279, 'Em còn nhớ không em…', 'Quốc Dũng', '', 1, 14, NULL, NULL, NULL, NULL),
+(15, '999 ĐÓA HỒNG', 50931, 'Nhắc chi chuyện xưa…', 'Nhạc Hoa', '', 1, 12, NULL, NULL, NULL, NULL),
+(16, 'AI BIẾT', 50650, 'Chàng thề rằng chàng yêu tôi…', 'Nhạc Hoa', '', 1, 12, NULL, NULL, NULL, NULL),
+(17, 'AI BẢO EM DỄ THƯƠNG', 56917, 'Ai bảo em dễ thương, nhưng thương thương khơng dễ…', 'Nhạc: Sơng Trà. Thơ: Trần Văn Phúc', '', 1, 13, NULL, 1, NULL, NULL),
+(18, 'AI CHO EM TÌNH YÊU', 50070, 'Chiều một mình buồn qua đây...', 'Ngọc Lễ', '', 1, 13, NULL, NULL, NULL, NULL),
 (19, 'AI CHO TÔI TÌNH YÊU', 50012, 'Ai cho tôi tình yêu...', 'Trúc Phương', '', 1, 1, NULL, NULL, NULL, NULL),
-(20, 'AI CHO TÔI TÌNH YÊU', 53825, 'Ai cho tôi tình yêu của ngày thơ ngày mộng, tôi xin dâng ...', 'Cổ nhạc: Viễn Châu Tân nhạc: Trúc Phương', '', 1, 1, NULL, NULL, NULL, NULL),
-(21, 'AI CŨNG CÓ THỂ', 56257, 'Nào ta cùng hát những khúc hát, ai cũng cĩ thể hy vọng…', 'Võ Thiện Thanh', '', 1, 1, NULL, NULL, NULL, NULL),
-(22, 'AI HAY CHỮ NGỜ', 56918, 'Tình này anh trao em đong đầy, gọi ngàn giấc mơ quay về đây…', 'Nguyên Chấn Phong', '', 1, 1, NULL, NULL, NULL, NULL),
-(23, 'AI KHỔ VÌ AI', 55668, 'Anh biết chăng anh em khổ vì ai, em khóc vì ai...', 'Thương Linh', '', 1, 1, NULL, NULL, NULL, NULL),
+(20, 'AI CHO TÔI TÌNH YÊU', 53825, 'Ai cho tôi tình yêu của ngày thơ ngày mộng, tôi xin dâng ...', 'Cổ nhạc: Viễn Châu Tân nhạc: Trúc Phương', '', 1, 13, NULL, NULL, NULL, NULL),
+(21, 'AI CŨNG CÓ THỂ', 56257, 'Nào ta cùng hát những khúc hát, ai cũng cĩ thể hy vọng…', 'Võ Thiện Thanh', '', 1, 11, NULL, 1, NULL, NULL),
+(22, 'AI HAY CHỮ NGỜ', 56918, 'Tình này anh trao em đong đầy, gọi ngàn giấc mơ quay về đây…', 'Nguyên Chấn Phong', '', 1, 13, NULL, 1, NULL, NULL),
+(23, 'AI KHỔ VÌ AI', 55668, 'Anh biết chăng anh em khổ vì ai, em khóc vì ai...', 'Thương Linh', '', 1, 13, NULL, NULL, NULL, NULL),
 (24, 'AI LÊN XỨ HOA ĐÀO', 50210, 'Ai lên xứ hoa đào...', 'Hoàng Nguyên', '', 1, 1, NULL, NULL, NULL, NULL),
-(25, 'AI NHANH HƠN', 56258, 'Pí po xình xịch… Chúng em đi ơ tơ, chúng em đi xe lửa…', 'Trần Thanh Tùng', '', 1, 1, NULL, NULL, NULL, NULL),
-(26, 'AI RA XỨ HUẾ', 52860, 'Ai ra xứ Huế thì ra, ai về là về núi Ngự, ai về là về sông Hương…', 'Duy Khánh', '', 1, 1, NULL, NULL, NULL, NULL),
-(27, 'AI SẼ YÊU THẬT LÒNG', 57691, 'Ngồi ngắm những áng mây bay về cuối trời…', 'Lâm Chấn Khang', '', 1, 1, NULL, NULL, NULL, NULL),
-(28, 'AI THƯƠNG CON NHIỀU', 50810, 'Ba với mẹ đều thương con, nhưng không biết…', 'Vũ Hoàng', '', 1, 1, NULL, NULL, NULL, NULL),
-(29, 'AI THƯƠNG YÊU EM', 52147, 'Ai thương yêu em, ai vỗ về em, ai thường hay…', 'Dzoãn Bình', '', 1, 1, NULL, NULL, NULL, NULL),
-(30, 'AI VÌ AI', 56919, 'Chờ ai, trơng ai, ngĩng ai, nhớ ai, mà đợi mãi đợi hồi…', 'Tơ Tài Năng', '', 1, 1, NULL, NULL, NULL, NULL),
+(25, 'AI NHANH HƠN', 56258, 'Pí po xình xịch… Chúng em đi ơ tơ, chúng em đi xe lửa…', 'Trần Thanh Tùng', '', 1, 13, NULL, NULL, NULL, NULL),
+(26, 'AI RA XỨ HUẾ', 52860, 'Ai ra xứ Huế thì ra, ai về là về núi Ngự, ai về là về sông Hương…', 'Duy Khánh', '', 1, 12, NULL, NULL, NULL, NULL),
+(27, 'AI SẼ YÊU THẬT LÒNG', 57691, 'Ngồi ngắm những áng mây bay về cuối trời…', 'Lâm Chấn Khang', '', 1, 12, NULL, NULL, NULL, NULL),
+(28, 'AI THƯƠNG CON NHIỀU', 50810, 'Ba với mẹ đều thương con, nhưng không biết…', 'Vũ Hoàng', '', 1, 14, NULL, NULL, NULL, NULL),
+(29, 'AI THƯƠNG YÊU EM', 52147, 'Ai thương yêu em, ai vỗ về em, ai thường hay…', 'Dzoãn Bình', '', 1, 14, NULL, 0, NULL, NULL),
+(30, 'AI VÌ AI', 56919, 'Chờ ai, trơng ai, ngĩng ai, nhớ ai, mà đợi mãi đợi hồi…', 'Tơ Tài Năng', '', 1, 13, NULL, NULL, NULL, NULL),
 (31, 'AI VÔ XỨ NGHỆ', 57439, 'Ai đi vô nơi đây xin dừng chân xứ Nghệ, ai đi ra nơi đây...', 'Nhạc: Phạm Tuyên Thơ: Huy Cận', '', 1, 1, NULL, NULL, NULL, NULL),
 (32, 'AI VỀ SÔNG TƯƠNG', 50050, 'Ai có về trên bến sông Tương…', 'Thông Đạt', '', 1, 1, NULL, NULL, NULL, NULL),
 (33, 'AI YÊU BÁC HỒ CHÍ MINH HƠN THIẾU NIÊN NHI ĐỒNG', 54153, 'Ai yêu Bác Hồ Chí Minh hơn thiếu niên nhi đồng, ai yêu...', 'Phong Nhã', '', 1, 1, NULL, NULL, NULL, NULL),
@@ -316,7 +316,7 @@ INSERT INTO `vn` (`id`, `ten`, `maso`, `loi`, `thongtin`, `linkyoutube`, `idalbu
 (197, 'BAY', 55969, 'Cho bao nhiêu bước chân đêm nay rung lên nhẹ nhàng...', 'Nguyễn Hải Phong', '', 1, 1, NULL, NULL, NULL, NULL),
 (198, 'BAY CAO TIẾNG HÁT ƯỚC MƠ', 51974, 'Đỏ thắm khăn quàng trên màu cờ…', 'Nguyễn Nam', '', 1, 1, NULL, NULL, NULL, NULL),
 (199, 'BAY CÙNG TÌNH YÊU', 54886, 'Ngày xưa anh vẫn thường mơ về một điều lạ vu vơ...', 'Lương Bằng Quang', '', 1, 1, NULL, NULL, NULL, NULL),
-(200, 'BAY GIỮA NGÂN HÀ', 54164, 'Vòng đu quay cứ mỗi phút giây lại càng bay lên cao...', 'Nguyễn Văn Chung', '', 1, 1, NULL, NULL, NULL, NULL),
+(200, 'BAY GIỮA NGÂN HÀ', 54164, 'Vòng đu quay cứ mỗi phút giây lại càng bay lên cao...', 'Nguyễn Văn Chung', 'https://www.youtube.com/watch?v=MXYfi_rGSUY', 1, 1, 661275, NULL, NULL, NULL),
 (201, 'BAY LÊN NHỮNG GIẤC MƠ', 55970, 'Đôi khi lòng ta bỗng thấy buồn phiền, đôi khi thời gian khiến ta mỏi mệt...', 'Nguyễn Hồng Thuận', '', 1, 1, NULL, NULL, NULL, NULL),
 (202, 'BAY LÊN NÒI GIỐNG TIÊN RỒNG', 54165, 'Kìa rộn ràng mùa xuân đang tới, khắp non sông tưng bừng...', 'Thanh Tùng', '', 1, 1, NULL, NULL, NULL, NULL),
 (203, 'BAY LÊN ƯỚC MƠ', 55226, 'Ngày vui đang đến đây rồi gió khẽ hát trên đường đông vui này...', 'Tăng Nhật Tuệ', '', 1, 1, NULL, NULL, NULL, NULL),
@@ -436,9 +436,9 @@ INSERT INTO `vn` (`id`, `ten`, `maso`, `loi`, `thongtin`, `linkyoutube`, `idalbu
 (317, 'BÀI CA KHÔNG QUÊN', 50107, 'Có một bài ca...', 'Phạm Minh Tuấn', '', 1, 1, NULL, NULL, NULL, NULL),
 (318, 'BÀI CA LỤC QUÂN 2', 52865, 'Hơ hơ… Ta mang trong tim hình bóng chiến sĩ…', 'An Thuyên', '', 1, 1, NULL, NULL, NULL, NULL),
 (319, 'BÀI CA MAY ÁO', 50668, 'Chiến sĩ ta dầm mưa dãi nắng…', 'Xuân Hồng', '', 1, 1, NULL, NULL, NULL, NULL),
-(320, 'BÀI CA MÙA THU', 50166, 'Này em ơi em có nghe chiều nay…', 'Chu Minh Ký', '', 1, 1, NULL, NULL, NULL, NULL),
-(321, 'BÀI CA MÙA XUÂN', 53988, 'Mùa thu qua mau đem mùa đông đến...', 'Phạm Hoàng Long', '', 1, 1, NULL, NULL, NULL, NULL);
+(320, 'BÀI CA MÙA THU', 50166, 'Này em ơi em có nghe chiều nay…', 'Chu Minh Ký', '', 1, 1, NULL, NULL, NULL, NULL);
 INSERT INTO `vn` (`id`, `ten`, `maso`, `loi`, `thongtin`, `linkyoutube`, `idalbum`, `vol_id`, `masauso`, `baihatyeuthich`, `baihatnoibat`, `loidaydu`) VALUES
+(321, 'BÀI CA MÙA XUÂN', 53988, 'Mùa thu qua mau đem mùa đông đến...', 'Phạm Hoàng Long', '', 1, 1, NULL, NULL, NULL, NULL),
 (322, 'BÀI CA MÙA XUÂN', 50665, 'Nghe thấy không em…', 'Lương Vĩnh', '', 1, 1, NULL, NULL, NULL, NULL),
 (323, 'BÀI CA NGƯỜI LAO ĐỘNG', 52657, 'Từ nhà máy hay công trường, từ rừng núi cho đến biển khơi...', 'Phạm Trọng Cầu', '', 1, 1, NULL, NULL, NULL, NULL),
 (324, 'BÀI CA NGƯỜI LÍNH', 51975, 'Đường dài hành quân xa đi khắp non sông nhà...', 'Diệp Minh Tuyền', '', 1, 1, NULL, NULL, NULL, NULL),
@@ -617,7 +617,7 @@ INSERT INTO `vn` (`id`, `ten`, `maso`, `loi`, `thongtin`, `linkyoutube`, `idalbu
 (497, 'BÔNG VẠN THỌ', 57465, 'Sáng hăm ba ra đầu ngõ, tôi gặp cây bông, cây bông vạn thọ...', 'Võ Thiện Thanh', '', 1, 1, NULL, NULL, NULL, NULL),
 (498, 'BÔNG Ô MÔI', 55234, 'Bông ô môi rơi đầy trước ngõ, bao kỷ niệm về...', 'Sơn Hạ', '', 1, 1, NULL, NULL, NULL, NULL),
 (499, 'BÔNG Ô MÔI', 52853, 'Bông ô môi, gió cuốn rụng đầy trên sông, nhìn mây trời…', 'Viễn Châu', '', 1, 1, NULL, NULL, NULL, NULL),
-(500, 'BÔNG ĐIÊN ĐIỂN', 51083, 'Hò ơ má ơi đừng gả con xa…', 'Hà Phương', '', 1, 1, NULL, NULL, NULL, NULL),
+(500, 'BÔNG ĐIÊN ĐIỂN', 51083, 'Hò ơ má ơi đừng gả con xa…', 'Hà Phương', 'https://www.youtube.com/watch?v=4Cx6u7LI-ok', 1, 1, 669917, NULL, NULL, NULL),
 (501, 'BÚP BÊ BẰNG BÔNG', 53679, 'Búp bê bằng bông biết bay bay bay, búp bê biết bò…', 'Lê Quốc Thắng', '', 1, 1, NULL, NULL, NULL, NULL),
 (502, 'BÚP BÊ BẰNG SỨ', 50615, 'Thôi đừng nên làm cô bé…', 'Nhạc Pháp', '', 1, 1, NULL, NULL, NULL, NULL),
 (503, 'BÚP BÊ KHÔNG TÌNH YÊU', 50611, 'Tôi như con búp bê bằng nhựa…', 'Nhạc Pháp', '', 1, 1, NULL, NULL, NULL, NULL),
@@ -8375,9 +8375,12 @@ INSERT INTO `vn` (`id`, `ten`, `maso`, `loi`, `thongtin`, `linkyoutube`, `idalbu
 (8230, 'vì đời vẫn thế (remix)', 58369, 'Đêm chìm trong những khúc nhạc buồn', 'minh quân', '', 1, 1, NULL, NULL, NULL, NULL),
 (8231, 'với lấy tình yêu (remix)', 58370, 'Anh vì em nên biết đêm còn dài, anh vì em', 'nguyễn văn chung', '', 1, 1, NULL, NULL, NULL, NULL),
 (8232, 'xin lỗi (remix)', 58371, 'Chuyện tình đôi ta, xem như từ đây chấm hết', 'mỹ tâm', '', 1, 1, NULL, NULL, NULL, NULL),
-(8233, 'xóa hết dĩ vãng (remix)', 58372, 'Khi màn đêm buông xuống dần, tình yêu kia tàn phai', 'trung quân', '', 1, 1, NULL, NULL, NULL, NULL),
+(8233, 'xóa hết dĩ vãng (remix)', 58372, 'Khi màn đêm buông xuống dần, tình yêu kia tàn phai', 'trung quân', '', 1, 1, 669977, NULL, NULL, NULL),
 (8238, 'Just the way you are', 4022, ' And I see your name that nothing that I would change', 'Bruno Mars', 'https://www.youtube.com/watch?v=KtyB1UTaoaE', 1, 11, NULL, NULL, NULL, NULL),
-(8240, 'Just the way you are', 7377, ' And I see your name that nothing that I would change', 'Bruno Mars', 'https://www.youtube.com/watch?v=KtyB1UTaoaE', 4, 11, 662216, NULL, NULL, 'sdefdafdfdfdfdsfdsfdsfdsf');
+(8240, 'Just the way you are', 33917, ' And I see your name that nothing that I would change', 'Bruno Mars', 'https://www.youtube.com/watch?v=KtyB1UTaoaE', 4, 11, 662216, 0, 0, NULL),
+(8241, 'Hello', 52597, 'Hello It''s me , I''ve been waiting for all this year who used to be', 'Adele', 'https://www.youtube.com/watch?v=q2UVTPlKZtQ', 4, 9, NULL, 0, 0, NULL),
+(8242, 'You belong with me', 33918, 'I''m in the room it typical Tuesday night. Listen to the kind of music she doesn''t like', 'Taylor Swift', 'https://www.youtube.com/watch?v=5B_dHpwfBXE', 4, 8, NULL, 0, 0, NULL),
+(8245, 'Just the way you are', 8712, 'Một là yêu em, hai là bên em, ba là anh chỉ có em…', 'Bruno Mars', 'https://www.youtube.com/watch?v=KtyB1UTaoaE', 1, 1, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -8390,7 +8393,7 @@ CREATE TABLE IF NOT EXISTS `volume` (
   `volId` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `vol_name` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=12 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=16 ;
 
 --
 -- Dumping data for table `volume`
@@ -8406,7 +8409,10 @@ INSERT INTO `volume` (`id`, `volId`, `vol_name`) VALUES
 (8, 'V7', 'Vol 49'),
 (9, 'V8', 'Vol 50'),
 (10, 'V9', 'Vol 51'),
-(11, 'V10', 'Vol 52');
+(11, 'V10', 'Vol 52'),
+(12, 'V11', 'Vol 53'),
+(13, 'V12', 'Vol 54'),
+(14, 'V13', 'Vol 55');
 
 --
 -- Constraints for dumped tables
