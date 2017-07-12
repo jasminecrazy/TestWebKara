@@ -57,12 +57,12 @@
 					<div class="profile clearfix">
 						<div class="profile_pic">
 							<img
-								src="${pageContext.request.contextPath }/assets/images/img.jpg"
+								src="${pageContext.request.contextPath }/assets/images/preview.png"
 								alt="..." class="img-circle profile_img" />
 						</div>
 						<div class="profile_info">
-							<span>Welcome,</span>
-							<h2>${pageContext.request.userPrincipal.name }</h2>
+							<h4>Administrator</h4>
+							
 						</div>
 					</div>
 					<!-- sidebar menu -->
@@ -124,9 +124,7 @@
 						<ul class="nav navbar-nav navbar-right">
 							<li class=""><a href="javascript:;"
 								class="user-profile dropdown-toggle" data-toggle="dropdown"
-								aria-expanded="false"> <img
-									src="${pageContext.request.contextPath }/assets/images/img.jpg"
-									alt="" />Admin <span class=" fa fa-angle-down"></span>
+								aria-expanded="false">Admin <span class=" fa fa-angle-down"></span>
 							</a>
 								<ul class="dropdown-menu dropdown-usermenu pull-right">
 									<li><a

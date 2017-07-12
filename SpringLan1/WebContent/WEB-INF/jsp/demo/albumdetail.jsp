@@ -80,8 +80,7 @@ body, html {
 					class="w3-bar-item w3-button ">Karaoke 6 số</a> <a
 					href="${pageContext.request.contextPath }/demo/detail/{{x.id}}.html"
 					ng-model="volid" class="w3-bar-item w3-button"
-					data-ng-repeat="x in list_newVol" ng-click="GetVolSongId(x.id)">{{x.volName}}</a>
-				<a
+					data-ng-repeat="x in list_newVol" ng-click="GetVolSongId(x.id)">{{x.volName}}</a><a
 					href="${pageContext.request.contextPath }/demo/albumdetail/{{x.id}}.html"
 					class="w3-bar-item w3-button" data-ng-repeat="x in list_album">{{x.albumName}}</a>
 
@@ -117,34 +116,23 @@ body, html {
 	<!-- About Section -->
 	<div class="w3-container Custom" style="padding: 70px 0px" id="about">
 		<h3 class="w3-left h3" ng-model="detail_songName"></h3>
-		<div class="row col-md-8 w3-center " style="padding-left: 70px">
+		<div class="row test">
 
-			<h5 class="songId">${detailSong.maso}</h5>
-			<h1 class="songName">${detailSong.ten}</h1>
-			<a href="${detailSong.linkyoutube}" class="w3-right">Mở trên
-				youtube</a>
-			<p class="fullLyric">${detailSong.loidaydu }</p>
-			<h3 class="author">Sáng tác :${detailSong.thongtin}</h3>
 
-			<video src="${detailSong.linkyoutube}" width="500" height="300"
-				controls> Your browser does not support the <video>
-			element. </video>
+			<c:forEach var="detail" items="${albumDetail}">
+				<div class="row " style="padding-left: 50px">
+					<h3 class="songId">${detail.maso}</h3>
+
+					<h2 class="songName">
+						<a
+							href="${pageContext.request.contextPath }/demo/detailSong/${detail.id}.html">${detail.ten }</a>
+					</h2>
+					<h5 class="SongLyric">${detail.loi }</h5>
+					<hr>
+				</div>
+
+			</c:forEach>
 		</div>
-		<aside>
-		<div class="col-md-3 w3-right menu-right">
-			<ul>
-				<li><a class="fa fa-music"
-					href="${pageContext.request.contextPath }/demo/detail/{{x.id}}.html"
-					data-ng-repeat="x in list_album"> Danh sách {{x.albumName}}</a></li>
-
-				<li><a class="fa fa-music"
-					href="${pageContext.request.contextPath }/demo/detail/{{x.id}}.html"
-					data-ng-repeat="x in list_newVol"> Danh sách bài hát
-						{{x.volName}}</a></li>
-
-			</ul>
-		</div>
-		</aside>
 
 
 	</div>

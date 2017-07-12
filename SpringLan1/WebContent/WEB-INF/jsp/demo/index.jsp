@@ -84,7 +84,7 @@ body, html {
 					ng-model="volid" class="w3-bar-item w3-button"
 					data-ng-repeat="x in list_newVol" ng-click="GetVolSongId(x.id)">{{x.volName}}</a>
 				<a
-					href="${pageContext.request.contextPath }/demo/detail/{{x.id}}.html"
+					href="${pageContext.request.contextPath }/demo/albumdetail/{{x.id}}.html"
 					class="w3-bar-item w3-button" data-ng-repeat="x in list_album">{{x.albumName}}</a>
 
 			</div>
@@ -163,13 +163,16 @@ body, html {
 
 						<li data-ng-repeat="x in list_favoriteSong">
 							<div class="song">
-								<div class="row">
+								<div class="row test">
 
 									<p class="songId">
 										{{x.maso}}<span
 											style="font-size: 14px !important; text-transform: uppercase !important;">{{x.volume.volName}}</span>
 									</p>
-									<h1 class="songName">{{x.ten}}</h1>
+									<h1 class="songName">
+										<a
+											href="${pageContext.request.contextPath }/demo/detailSong/{{x.id}}.html">{{x.ten}}</a>
+									</h1>
 									<h4 class="SongLyric">{{x.loi}}</h4>
 									<h3 class="author">{{x.thongtin}}</h3>
 

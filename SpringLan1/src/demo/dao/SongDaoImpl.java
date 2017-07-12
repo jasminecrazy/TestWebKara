@@ -2,15 +2,11 @@ package demo.dao;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-
-import demo.entity.Album;
 import demo.entity.Vn;
 
 @Repository("SongDao")
@@ -34,7 +30,7 @@ public class SongDaoImpl implements SongDao {
 		Transaction transaction = null;
 		try {
 			transaction = session.beginTransaction();
-			song = session.createQuery("select c from Vn c where c.volume.id = :id ").setInteger("id",id).list();
+			song = session.createQuery("select c from Vn c where c.volume.id = :id ").setMaxResults(20).setInteger("id",id).list();
 			transaction.commit();
 		} catch (Exception e) {
 			song = null;
@@ -56,7 +52,7 @@ public class SongDaoImpl implements SongDao {
 		Transaction transaction = null;
 		try {
 			transaction = session.beginTransaction();
-			song = session.createQuery("select c from Vn c where c.album.id = :id ").setInteger("id",id).list();
+			song = session.createQuery("select c from Vn c where c.album.id = :id ").setMaxResults(20).setInteger("id",id).list();
 			transaction.commit();
 		} catch (Exception e) {
 			song = null;

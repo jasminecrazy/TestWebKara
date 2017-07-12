@@ -57,6 +57,14 @@ public String index()
 	{
 		return "demo/karaoke";
 	}
+	@RequestMapping(value = "albumdetail/{id}", 
+			method = RequestMethod.GET)
+	public String Songdetail(
+		@PathVariable("id") int id, 
+		ModelMap modelMap) {
+		modelMap.put("albumDetail",songService.getAlbumSong(id));
+		return "demo/albumdetail";
+	}
 	
 	
 }

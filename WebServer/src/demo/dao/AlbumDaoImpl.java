@@ -121,7 +121,7 @@ public class AlbumDaoImpl implements AlbumDao {
 		Transaction transaction = null;
 		try {
 			transaction = session.beginTransaction();
-			song = session.createQuery("select c from Vn c where c.album.id = :id ").setInteger("id",id).list();
+			song = session.createQuery("select c from Vn c where c.album.id = :id ").setMaxResults(20).setInteger("id",id).list();
 			transaction.commit();
 		} catch (Exception e) {
 			song = null;

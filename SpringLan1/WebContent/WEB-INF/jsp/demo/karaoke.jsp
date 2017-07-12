@@ -82,7 +82,7 @@ body, html {
 					ng-model="volid" class="w3-bar-item w3-button"
 					data-ng-repeat="x in list_newVol" ng-click="GetVolSongId(x.id)">{{x.volName}}</a>
 				<a
-					href="${pageContext.request.contextPath }/demo/detail/{{x.id}}.html"
+					href="${pageContext.request.contextPath }/demo/albumdetail/{{x.id}}.html"
 					class="w3-bar-item w3-button" data-ng-repeat="x in list_album">{{x.albumName}}</a>
 
 			</div>
@@ -125,7 +125,7 @@ body, html {
 						<div class="row test">
 
 							<p class="songId">
-								{{x.maso}}
+								{{x.masauso}}
 							</p>
 							<h1 class="songName">
 								<a

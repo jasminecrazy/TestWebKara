@@ -72,16 +72,18 @@ body, html {
 	<!-- Navbar (sit on top) -->
 	<div class="w3-top">
 		<div class="w3-bar w3-white w3-card-2" id="myNavbar">
-			<a href="${pageContext.request.contextPath }/demo.html" class="w3-bar-item w3-button w3-wide">Tìm kiếm mã
-				số karaoke</a>
+			<a href="${pageContext.request.contextPath }/demo.html"
+				class="w3-bar-item w3-button w3-wide">Tìm kiếm mã số karaoke</a>
 			<!-- Right-sided navbar links -->
-			<div class="w3-right w3-hide-small" >
-
-				<a href="${pageContext.request.contextPath }/demo/detail/{{x.id}}.html" ng-model="volid" class="w3-bar-item w3-button" data-ng-repeat="x in list_newVol"
-					 ng-click="GetVolSongId(x.id)">{{x.volName}}</a> <a
-					href="${pageContext.request.contextPath }/demo/detail/{{x.id}}.html" class="w3-bar-item w3-button"
-					data-ng-repeat="x in list_album">{{x.albumName}}</a> 
-
+			<div class="w3-right w3-hide-small">
+				<a href="${pageContext.request.contextPath }/demo/karaoke.html"
+					class="w3-bar-item w3-button ">Karaoke 6 số</a> <a
+					href="${pageContext.request.contextPath }/demo/detail/{{x.id}}.html"
+					ng-model="volid" class="w3-bar-item w3-button"
+					data-ng-repeat="x in list_newVol" ng-click="GetVolSongId(x.id)">{{x.volName}}</a>
+				<a
+					href="${pageContext.request.contextPath }/demo/albumdetail/{{x.id}}.html"
+					class="w3-bar-item w3-button" data-ng-repeat="x in list_album">{{x.albumName}}</a>
 			</div>
 			<!-- Hide right-floated links on small screens and replace them with a menu icon -->
 
@@ -118,10 +120,14 @@ body, html {
 
 
 			<c:forEach var="detail" items="${songDetail}">
-				<div class="row " style="padding-left:50px">
-					<h3  class="songId">${detail.maso}</h3>
+				<div class="row test" style="padding-left: 50px">
+					<h3 class="songId">${detail.maso} <span
+						style="font-size: 14px !important; text-transform: uppercase !important;">${detail.volume.volName}</span></h3>
 					
-					<h2 class="songName"><a href="${pageContext.request.contextPath }/demo/detailSong/${detail.id}.html">${detail.ten }</a></h2>
+					<h2 class="songName">
+						<a
+							href="${pageContext.request.contextPath }/demo/detailSong/${detail.id}.html">${detail.ten }</a>
+					</h2>
 					<h5 class="SongLyric">${detail.loi }</h5>
 					<hr>
 				</div>
