@@ -62,7 +62,7 @@
 						</div>
 						<div class="profile_info">
 							<h4>Administrator</h4>
-							
+
 						</div>
 					</div>
 					<!-- sidebar menu -->
@@ -78,7 +78,7 @@
 										<li><a
 											href="${pageContext.request.contextPath }/admin.html">Song
 												management</a></li>
-										
+
 
 									</ul></li>
 								<li><a> <i class="fa fa-list-ul"></i>Category
@@ -125,7 +125,7 @@
 								aria-expanded="false"> Admin <span class=" fa fa-angle-down"></span>
 							</a>
 								<ul class="dropdown-menu dropdown-usermenu pull-right">
-									
+
 
 
 									<li><a href="<c:url value='/j_spring_security_logout'/>"><i
@@ -201,7 +201,7 @@
 									</div>
 									<div class="modal-body row">
 										<form class="form-horizontal" name="frmFormAdd"
-											 id="fileUploadForm">
+											id="fileUploadForm">
 											<div class="col-md-6">
 												<div class="form-group">
 													<label class=" control-label" for="">Song ID</label>
@@ -285,7 +285,7 @@
 
 													</div>
 												</div>
-												
+
 
 											</div>
 											<div class="col-md-6">
@@ -297,6 +297,12 @@
 															ng-options="x.volName for x in list_volume"
 															name="volName" id="volName" ng-required="true">
 														</select>
+														<div ng-messages="frmFormAdd.volName.$error">
+															<div ng-message="required"
+																ng-show="frmFormAdd.volName.$touched">
+																<p style="color: red">This field is required</p>
+															</div>
+														</div>
 													</div>
 												</div>
 												<div class="form-group">
@@ -317,6 +323,12 @@
 															ng-options="x.albumName for x in list_album"
 															name="albumName" id="albumName" ng-required="true">
 														</select>
+														<div ng-messages="frmFormAdd.albumName.$error">
+															<div ng-message="required"
+																ng-show="frmFormAdd.albumName.$touched">
+																<p style="color: red">This field is required</p>
+															</div>
+														</div>
 													</div>
 												</div>
 												<div class="form-group">
@@ -325,7 +337,7 @@
 														<textarea id="fullLyric" name="fullLyric" rows="9"
 															class="form-control input-md" type="text"
 															ng-model="add_fullLyric" ng-required="false"></textarea>
-														
+
 
 													</div>
 												</div>
@@ -488,7 +500,7 @@
 														<textarea id="fullLyric" name="fullLyric" rows="9"
 															class="form-control input-md" type="text"
 															ng-model="edit_fullLyric" ng-required="false"></textarea>
-														
+
 
 													</div>
 												</div>
@@ -499,7 +511,7 @@
 									<div class="modal-footer">
 
 										<button id="btnSave" name="btnSave" class="btn btn-primary"
-										ng-disabled="editForm.songId.$error.required || editForm.songName.$error.required||editForm.lyric.$error.required||editForm.lyric.$error.required||editForm.youtube.$error.required "
+											ng-disabled="editForm.songId.$error.required || editForm.songName.$error.required||editForm.lyric.$error.required||editForm.lyric.$error.required||editForm.youtube.$error.required "
 											ng-click="update()" data-dismiss="modal">Save</button>
 										<button type="button" class="btn btn-default"
 											data-dismiss="modal">Close</button>

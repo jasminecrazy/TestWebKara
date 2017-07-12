@@ -369,11 +369,14 @@ app
 						$scope.add_lyric = "";
 						$scope.add_author="";
 						$scope.add_youtubelink="";
+						$scope.add_volName = "";
 						$scope.frmFormAdd.songId.$setUntouched();
 						$scope.frmFormAdd.songName.$setUntouched();
 						$scope.frmFormAdd.lyric.$setUntouched();
 						$scope.frmFormAdd.author.$setUntouched();
 						$scope.frmFormAdd.youtube.$setUntouched();
+						$scope.frmFormAdd.volName.$setUntouched();
+						$scope.frmFormAdd.albumName.$setUntouched();
 					}
 					function getRandomInt(min, max) {
 						return Math.floor(Math.random() * (max - min + 1))
@@ -382,7 +385,7 @@ app
 					// Auto fill in add form
 					$scope.autoAdd = function(keyEvent) {
 						if (keyEvent.keyCode == 81 && keyEvent.altKey) {
-							var random = getRandomInt(1000, 10000);
+							var random = getRandomInt(10000, 59999);
 							$scope.add_songId = random;
 							$scope.add_songName = "Just the way you are";
 							$scope.add_lyric = " And I see your name that nothing that I would change";

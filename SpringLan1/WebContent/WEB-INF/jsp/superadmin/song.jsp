@@ -262,9 +262,9 @@
 														<input id="author" name="author" placeholder=""
 															ng-model="add_author" class="form-control input-md"
 															type="text" ng-required="true" />
-														<div ng-messages="frmFormAdd.lyric.$error">
+														<div ng-messages="frmFormAdd.author.$error">
 															<div ng-message="required"
-																ng-show="frmFormAdd.lyric.$touched">
+																ng-show="frmFormAdd.author.$touched">
 																<p style="color: red">This field is required</p>
 															</div>
 														</div>
@@ -301,6 +301,12 @@
 															ng-options="x.volName for x in list_volume"
 															name="volName" id="volName" ng-required="true">
 														</select>
+														<div ng-messages="frmFormAdd.volName.$error">
+															<div ng-message="required"
+																ng-show="frmFormAdd.volName.$touched">
+																<p style="color: red">This field is required</p>
+															</div>
+														</div>
 													</div>
 												</div>
 												<div class="form-group">
@@ -321,6 +327,12 @@
 															ng-options="x.albumName for x in list_album"
 															name="albumName" id="albumName" ng-required="true">
 														</select>
+														<div ng-messages="frmFormAdd.albumName.$error">
+															<div ng-message="required"
+																ng-show="frmFormAdd.albumName.$touched">
+																<p style="color: red">This field is required</p>
+															</div>
+														</div>
 													</div>
 												</div>
 												<div class="form-group">
@@ -344,11 +356,11 @@
 									</div>
 									<div class="modal-footer">
 										<button id="btnSave" name="btnSave" class="btn btn-primary"
-											ng-disabled="frmFormAdd.songId.$error.required || frmFormAdd.songName.$error.required||frmFormAdd.lyric.$error.required||frmFormAdd.lyric.$error.required||frmFormAdd.youtube.$error.required "
+											ng-disabled="frmFormAdd.songId.$error.required || frmFormAdd.songName.$error.required||frmFormAdd.lyric.$error.required||frmFormAdd.lyric.$error.required||frmFormAdd.youtube.$error.required||frmFormAdd.albumName.$error.required||frmFormAdd.volName.$error.required "
 											ng-click="add(false)">Add</button>
 										<button id="btnSave" name="btnSave" class="btn btn-default"
 											ng-click="add(true)"
-											ng-disabled="frmFormAdd.songId.$error.required || frmFormAdd.songName.$error.required||frmFormAdd.lyric.$error.required||frmFormAdd.lyric.$error.required||frmFormAdd.youtube.$error.required ">Add
+											ng-disabled="frmFormAdd.songId.$error.required || frmFormAdd.songName.$error.required||frmFormAdd.lyric.$error.required||frmFormAdd.lyric.$error.required||frmFormAdd.youtube.$error.required ||frmFormAdd.albumName.$error.required||frmFormAdd.volName.$error.required">Add
 											and close</button>
 										<button type="button" class="btn btn-default"
 											data-dismiss="modal">Close</button>
