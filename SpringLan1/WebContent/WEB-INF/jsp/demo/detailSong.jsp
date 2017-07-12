@@ -108,6 +108,11 @@ body, html {
 	<div class="row w3-center t" style="padding-top: 100px">
 
 		<h3>Tìm kiếm mã số bài hát...</h3>
+		<div class="">
+			<label>Tên bài hát</label> <input type="checkbox"
+				ng-model="chk_songName" checked="checked" /> <label>Lời bài
+				hát</label> <input type="checkbox" ng-model="chk_lyric" />
+		</div>
 		<div class="wrapper">
 			<input class="search" type="text" id="songName" ng-model="keyword"
 				placeholder="Nhập từ khóa cần tìm" name="keyword" /> <input
@@ -147,7 +152,8 @@ body, html {
 		</div>
 	</div>
 	<!-- About Section -->
-	<div class="w3-container Custom" style="padding: 70px 0px" id="about" ng-hide="showme">
+	<div class="w3-container Custom" style="padding: 70px 0px" id="about"
+		ng-hide="showme">
 		<h3 class="w3-left h3" ng-model="detail_songName"></h3>
 		<div class="row col-md-8 w3-center " style="padding-left: 70px">
 
@@ -291,9 +297,10 @@ body, html {
 
 	</div>  -->
 	<!-- Footer -->
-	<footer class="w3-right w3-padding-64"> <a href="" onclick="topFunction()" style="background:#f39c12!important"
+	<footer class="w3-right w3-padding-64"> <a href=""
+		onclick="topFunction()" style="background: #f39c12 !important"
 		class="w3-button w3-light-grey"><i
-		class="fa fa-arrow-up w3-margin-right" ></i>To the top</a>
+		class="fa fa-arrow-up w3-margin-right"></i>To the top</a>
 	<div class="w3-xlarge w3-section"></div>
 
 	</footer>
@@ -370,10 +377,9 @@ body, html {
 	src="${pageContext.request.contextPath }/assets/scripts/detailCtrl.js"></script>
 <script src="${pageContext.request.contextPath }/assets/js/ui-grid.js"></script>
 <script>
-function topFunction() {
-    document.body.scrollTop = 0; // For Chrome, Safari and Opera 
-    document.documentElement.scrollTop = 0; // For IE and Firefox
-}
-
+	function topFunction() {
+		document.body.scrollTop = 0; // For Chrome, Safari and Opera 
+		document.documentElement.scrollTop = 0; // For IE and Firefox
+	}
 </script>
 </html>

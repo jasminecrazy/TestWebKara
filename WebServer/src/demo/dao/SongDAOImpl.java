@@ -265,6 +265,7 @@ public class SongDAOImpl implements SongDAO {
 		return song;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Vn> searchSong(String keyword) {
 		List<Vn> song = new ArrayList<Vn>();
@@ -285,4 +286,29 @@ public class SongDAOImpl implements SongDAO {
 		}
 		return song;
 	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Vn> searchLyricSong(String lyric) {
+		List<Vn> song = new ArrayList<Vn>();
+		Session session = sessionFactory.openSession();
+		Transaction transaction = null;
+		try {
+			transaction = session.beginTransaction();
+			song = session.createQuery("select c from Vn c where c.loi like :lyric").setString("lyric","%"+lyric+"%").list();
+			transaction.commit();
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			song = null;
+			if (transaction != null) {
+				transaction.rollback();
+			}
+			System.out.println(e.getMessage());
+		} finally {
+			session.close();
+		}
+		return song;
+	}
+
+	
 }

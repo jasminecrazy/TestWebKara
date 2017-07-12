@@ -85,17 +85,35 @@ app
 
 					}
 					GetNewestSong();
+					if(!$scope.chk_lyric)
+						{
+						$scope.chk_songName = true;
+						}
 					
-					$scope.Search = function()
-					{
-						$http.get(
-								"http://localhost:8080/WebServer/api/song/search/"
-										+ $scope.keyword).then(function(response) {
-											$scope.list_searchSong = response.data;
-											$scope.result = true;
-											$scope.showme = true;
+					$scope.Search = function() {
+						if ($scope.chk_songName) {
+							$http.get(
+									"http://localhost:8080/WebServer/api/song/search/"
+											+ $scope.keyword).then(
+									function(response) {
+										$scope.list_searchSong = response.data;
+										$scope.result = true;
+										$scope.showme = true;
 
-						});
+									});
+						} else if ($scope.chk_lyric) {
+							$http.get(
+									"http://localhost:8080/WebServer/api/song/searchLyric/"
+											+ $scope.keyword).then(
+									function(response) {
+										$scope.list_searchSong = response.data;
+										$scope.result = true;
+										$scope.showme = true;
+										
+
+									});
+						}
+						
 					}
-					
+
 				});

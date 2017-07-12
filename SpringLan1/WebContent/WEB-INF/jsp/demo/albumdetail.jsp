@@ -107,6 +107,10 @@ body, html {
 	<div class="row w3-center t" style="padding-top: 100px">
 
 		<h3>Tìm kiếm mã số bài hát...</h3>
+		<div class="">
+			<label>Tên bài hát</label> <input type="checkbox" ng-model="chk_songName"  checked="checked"/>
+				 <label>Lời bài hát</label> <input type="checkbox" ng-model="chk_lyric" />
+		</div>
 		<div class="wrapper">
 			<input class="search" type="text" id="songName" ng-model="keyword"
 				placeholder="Nhập từ khóa cần tìm" name="keyword" /> <input
