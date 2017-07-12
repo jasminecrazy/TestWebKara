@@ -171,9 +171,12 @@ body, html {
 		<aside>
 		<div class="col-md-3 w3-right menu-right">
 			<ul>
-				<li><a class="fa fa-music"
-					href="${pageContext.request.contextPath }/demo/detail/{{x.id}}.html"
-					data-ng-repeat="x in list_album"> Danh sách {{x.albumName}}</a></li>
+				<li>
+				<a
+					href="${pageContext.request.contextPath }/demo/albumdetail/{{x.id}}.html"
+					data-ng-repeat="x in list_album">{{x.albumName}}</a>
+					
+				</li>
 
 				<li><a class="fa fa-music"
 					href="${pageContext.request.contextPath }/demo/detail/{{x.id}}.html"
