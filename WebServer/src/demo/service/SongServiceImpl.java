@@ -90,4 +90,10 @@ public class SongServiceImpl implements SongService {
 		return songDao.getSongSixNumber();
 	}
 
+	@Override
+	public List<Vn> searchSong(String keyword) {
+		
+		return songDao.searchSong(keyword);
+	}
+
 }

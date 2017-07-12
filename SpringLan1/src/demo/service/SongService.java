@@ -12,4 +12,6 @@ public interface SongService {
 	public List<Vn> getAlbumSong(int id);
 
 	public Vn getSong(int id);
+
+	public List<Vn> searchSong(String keyword);
 }

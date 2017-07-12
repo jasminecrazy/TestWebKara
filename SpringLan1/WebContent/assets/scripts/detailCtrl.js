@@ -102,4 +102,18 @@ app
 
 					}
 					GetSongHasSixNumber();
+
+					$scope.Search = function()
+					{
+						$http.get(
+								"http://localhost:8080/WebServer/api/song/search/"
+										+ $scope.keyword).then(function(response) {
+											$scope.list_searchSong = response.data;
+											$scope.result = true;
+											$scope.showme = true;
+
+						});
+					}
+					
+					
 				});

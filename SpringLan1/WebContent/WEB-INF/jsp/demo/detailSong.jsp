@@ -109,13 +109,45 @@ body, html {
 
 		<h3>Tìm kiếm mã số bài hát...</h3>
 		<div class="wrapper">
-			<input class="search" type="text" id="search"
-				placeholder="Nhập từ khóa cần tìm" /> <input class="submit"
-				type="submit" value=" " />
+			<input class="search" type="text" id="songName" ng-model="keyword"
+				placeholder="Nhập từ khóa cần tìm" name="keyword" /> <input
+				class="submit" type="submit" value=" " ng-click=Search() />
+
+
+		</div>
+	</div>
+	<div class="" ng-show="result">
+		<h3>Kết quả tìm kiếm</h3>
+		<div class="">
+			<div id="songs-container ">
+				<ul>
+
+					<li data-ng-repeat="x in list_searchSong">
+						<div class="song">
+							<div class="row test">
+
+								<p class="songId">
+									{{x.maso}}<span
+										style="font-size: 14px !important; text-transform: uppercase !important;">{{x.volume.volName}}</span>
+								</p>
+								<h1 class="songName">
+									<a
+										href="${pageContext.request.contextPath }/demo/detailSong/{{x.id}}.html">{{x.ten}}</a>
+								</h1>
+								<h4 class="SongLyric">{{x.loi}}</h4>
+								<h3 class="author">{{x.thongtin}}</h3>
+
+							</div>
+						</div>
+
+					</li>
+
+				</ul>
+			</div>
 		</div>
 	</div>
 	<!-- About Section -->
-	<div class="w3-container Custom" style="padding: 70px 0px" id="about">
+	<div class="w3-container Custom" style="padding: 70px 0px" id="about" ng-hide="showme">
 		<h3 class="w3-left h3" ng-model="detail_songName"></h3>
 		<div class="row col-md-8 w3-center " style="padding-left: 70px">
 
@@ -259,9 +291,9 @@ body, html {
 
 	</div>  -->
 	<!-- Footer -->
-	<footer class="w3-right w3-padding-64"> <a href="#home"
+	<footer class="w3-right w3-padding-64"> <a href="" onclick="topFunction()" style="background:#f39c12!important"
 		class="w3-button w3-light-grey"><i
-		class="fa fa-arrow-up w3-margin-right"></i>To the top</a>
+		class="fa fa-arrow-up w3-margin-right" ></i>To the top</a>
 	<div class="w3-xlarge w3-section"></div>
 
 	</footer>
@@ -337,5 +369,11 @@ body, html {
 <script type="text/javascript"
 	src="${pageContext.request.contextPath }/assets/scripts/detailCtrl.js"></script>
 <script src="${pageContext.request.contextPath }/assets/js/ui-grid.js"></script>
+<script>
+function topFunction() {
+    document.body.scrollTop = 0; // For Chrome, Safari and Opera 
+    document.documentElement.scrollTop = 0; // For IE and Firefox
+}
 
+</script>
 </html>

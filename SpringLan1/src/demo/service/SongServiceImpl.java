@@ -33,5 +33,10 @@ private SongDao songDao;
 		
 		return songDao.getSong(id);
 	}
+	@Override
+	public List<Vn> searchSong(String keyword) {
+	
+		return songDao.searchSong(keyword);
+	}
 
 }

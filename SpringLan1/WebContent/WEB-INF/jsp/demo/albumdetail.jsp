@@ -108,13 +108,45 @@ body, html {
 
 		<h3>Tìm kiếm mã số bài hát...</h3>
 		<div class="wrapper">
-			<input class="search" type="text" id="search"
-				placeholder="Nhập từ khóa cần tìm" /> <input class="submit"
-				type="submit" value=" " />
+			<input class="search" type="text" id="songName" ng-model="keyword"
+				placeholder="Nhập từ khóa cần tìm" name="keyword" /> <input
+				class="submit" type="submit" value=" " ng-click=Search() />
+
+
+		</div>
+	</div>
+	<div class="" ng-show="result">
+		<h3>Kết quả tìm kiếm</h3>
+		<div class="">
+			<div id="songs-container ">
+				<ul>
+
+					<li data-ng-repeat="x in list_searchSong">
+						<div class="song">
+							<div class="row test">
+
+								<p class="songId">
+									{{x.maso}}<span
+										style="font-size: 14px !important; text-transform: uppercase !important;">{{x.volume.volName}}</span>
+								</p>
+								<h1 class="songName">
+									<a
+										href="${pageContext.request.contextPath }/demo/detailSong/{{x.id}}.html">{{x.ten}}</a>
+								</h1>
+								<h4 class="SongLyric">{{x.loi}}</h4>
+								<h3 class="author">{{x.thongtin}}</h3>
+
+							</div>
+						</div>
+
+					</li>
+
+				</ul>
+			</div>
 		</div>
 	</div>
 	<!-- About Section -->
-	<div class="w3-container Custom" style="padding: 70px 0px" id="about">
+	<div class="w3-container Custom" style="padding: 70px 0px" id="about" ng-hide="showme">
 		<h3 class="w3-left h3" ng-model="detail_songName"></h3>
 		<div class="row test">
 
@@ -136,120 +168,11 @@ body, html {
 
 
 	</div>
-	<!-- 
-	 Team Section
-	 <div class="col-md-6" id="team">
-		<h3 class="w3-left h3">Karaoke Vol Mới</h3>
-
-		<div class="w3-row-padding w3-grayscale">
-			<div class="">
-				<div id="songs-container ">
-					<ul>
-
-						<li>
-							<div class="song">
-								<div class="row">
-
-									<p class="songId">
-										61471 <span
-											style="font-size: 14px !important; text-transform: uppercase !important;">vol62</span>
-									</p>
-									<h1 class="songName">phía sau một cô gái</h1>
-									<h4 class="SongLyric">
-										Nhiều khi anh mong được một lần nói ra hết tất cả thay vì ngồi
-										lặng im nghe..<span style="padding: 0px 4px;" class="lmore"
-											id="61471" style="display:block;">+</span>
-									</h4>
-									<h3 class="author">Tiên Cookie</h3>
-
-								</div>
-							</div>
-
-						</li>
-						<li>
-							<div class="song">
-								<div class="row">
-
-									<p class="songId">
-										61471 <span
-											style="font-size: 14px !important; text-transform: uppercase !important;">vol62</span>
-									</p>
-									<h1 class="songName">phía sau một cô gái</h1>
-									<h4 class="SongLyric">
-										Nhiều khi anh mong được một lần nói ra hết tất cả thay vì ngồi
-										lặng im nghe..<span style="padding: 0px 4px;" class="lmore"
-											id="61471" style="display:block;">+</span>
-									</h4>
-									<h3 class="author">Tiên Cookie</h3>
-
-								</div>
-							</div>
-
-						</li>
-						<li>
-							<div class="song">
-								<div class="row">
-
-									<p class="songId">
-										61471 <span
-											style="font-size: 14px !important; text-transform: uppercase !important;">vol62</span>
-									</p>
-									<h1 class="songName">phía sau một cô gái</h1>
-									<h4 class="SongLyric">
-										Nhiều khi anh mong được một lần nói ra hết tất cả thay vì ngồi
-										lặng im nghe..
-									</h4>
-									<h3 class="author">Tiên Cookie</h3>
-
-								</div>
-							</div>
-
-						</li>
-					</ul>
-				</div>
-			</div>
-		</div>
-
-
-	</div>
-	<div class="col-md-6" id="team">
-		<h3 class="w3-left h3">Bài hát yêu thích</h3>
-
-		<div class="w3-row-padding w3-grayscale">
-			<div class="">
-				<div id="songs-container ">
-					<ul>
-
-						<li data-ng-repeat="x in list_favoriteSong">
-							<div class="song">
-								<div class="row">
-
-									<p class="songId">
-										{{x.maso}}<span
-											style="font-size: 14px !important; text-transform: uppercase !important;">{{x.volume.volName}}</span>
-									</p>
-									<h1 class="songName">{{x.ten}}</h1>
-									<h4 class="SongLyric">
-										{{x.loi}}
-									</h4>
-									<h3 class="author">{{x.thongtin}}</h3>
-
-								</div>
-							</div>
-
-						</li>
-						
-					</ul>
-				</div>
-			</div>
-		</div>
-
-
-	</div>  -->
+	
 	<!-- Footer -->
-	<footer class="w3-right w3-padding-64"> <a href="#home"
+	<footer class="w3-right w3-padding-64"> <a href="" onclick="topFunction()" style="background:#f39c12!important"
 		class="w3-button w3-light-grey"><i
-		class="fa fa-arrow-up w3-margin-right"></i>To the top</a>
+		class="fa fa-arrow-up w3-margin-right" ></i>To the top</a>
 	<div class="w3-xlarge w3-section"></div>
 
 	</footer>
@@ -325,5 +248,11 @@ body, html {
 <script type="text/javascript"
 	src="${pageContext.request.contextPath }/assets/scripts/detailCtrl.js"></script>
 <script src="${pageContext.request.contextPath }/assets/js/ui-grid.js"></script>
+<script>
+function topFunction() {
+    document.body.scrollTop = 0; // For Chrome, Safari and Opera 
+    document.documentElement.scrollTop = 0; // For IE and Firefox
+}
 
+</script>
 </html>
