@@ -111,11 +111,22 @@ body, html {
 			<label>Tên bài hát</label> <input type="checkbox" ng-model="chk_songName"  checked="checked"/>
 				 <label>Lời bài hát</label> <input type="checkbox" ng-model="chk_lyric" />
 		</div>
-		<div class="wrapper">
-			<input class="search" type="text" id="songName" ng-model="keyword"
-				placeholder="Nhập từ khóa cần tìm" name="keyword" /> <input
-				class="submit" type="submit" value=" " ng-click=Search() />
+		<div class="list-wrapper">
 
+			<div>
+				<input type="text" placeholder="Search for items"
+					class="form-control" ng-keydown="checkKeyDown($event)"
+					ng-keyup="checkKeyUp($event)" ng-model="searchText"
+					ng-change="search()" />
+			</div>
+
+			<ul class="suggestions-list">
+				<li ng-repeat="suggestion in suggestions track by $index"
+					ng-class="{active : selectedIndex === $index}"
+					ng-click="AssignValueAndHide($index)">{{suggestion}}</li>
+			</ul>
+			<input class="submit w3-right" type="submit" value=" "
+				ng-click=Search() />
 
 		</div>
 	</div>
@@ -127,6 +138,7 @@ body, html {
 
 					<li data-ng-repeat="x in list_searchSong">
 						<div class="song">
+						
 							<div class="row test">
 
 								<p class="songId">
@@ -152,6 +164,8 @@ body, html {
 	<!-- About Section -->
 	<div class="w3-container Custom" style="padding: 70px 0px" id="about" ng-hide="showme">
 		<h3 class="w3-left h3" ng-model="detail_songName"></h3>
+		
+		<hr>
 		<div class="row test">
 
 

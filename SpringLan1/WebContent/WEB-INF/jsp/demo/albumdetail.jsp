@@ -112,11 +112,22 @@ body, html {
 				ng-model="chk_songName" checked="checked" /> <label>Lời bài
 				hát</label> <input type="checkbox" ng-model="chk_lyric" />
 		</div>
-		<div class="wrapper">
-			<input class="search" type="text" id="songName" ng-model="keyword"
-				placeholder="Nhập từ khóa cần tìm" name="keyword" /> <input
-				class="submit" type="submit" value=" " ng-click=Search() />
+		<div class="list-wrapper">
 
+			<div>
+				<input type="text" placeholder="Search for items"
+					class="form-control" ng-keydown="checkKeyDown($event)"
+					ng-keyup="checkKeyUp($event)" ng-model="searchText"
+					ng-change="search()" />
+			</div>
+
+			<ul class="suggestions-list">
+				<li ng-repeat="suggestion in suggestions track by $index"
+					ng-class="{active : selectedIndex === $index}"
+					ng-click="AssignValueAndHide($index)">{{suggestion}}</li>
+			</ul>
+			<input class="submit w3-right" type="submit" value=" "
+				ng-click=Search() />
 
 		</div>
 	</div>
@@ -159,6 +170,7 @@ body, html {
 
 			<c:forEach var="detail" items="${albumDetail}">
 				<div class="row " style="padding-left: 50px">
+				
 					<h3 class="songId">${detail.maso}</h3>
 
 					<h2 class="songName">
@@ -170,14 +182,6 @@ body, html {
 				</div>
 
 			</c:forEach>
-		</div>
-		<div class='pull-right'>
-			<uib-pagination data-total-items="list_SixNumberSong.length"
-				data-ng-model="currentPage" data-ng-change="updatePageIndexes()"
-				data-max-size="maxPaginationSize" data-items-per-page="itemsPerPage"
-				data-boundary-links="true" data-previous-text="&lsaquo;"
-				data-next-text="&rsaquo;" data-first-text="&laquo;"
-				data-last-text="&raquo;"> </uib-pagination>
 		</div>
 
 	</div>

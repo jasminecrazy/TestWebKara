@@ -112,16 +112,27 @@ body, html {
 				ng-model="chk_songName" checked="checked" /> <label>Lời bài
 				hát</label> <input type="checkbox" ng-model="chk_lyric" />
 		</div>
-		<div class="wrapper">
-			<input class="search" type="text" id="songName" ng-model="keyword"
-				placeholder="Nhập từ khóa cần tìm" name="keyword" /> <input
-				class="submit" type="submit" value=" " ng-click=Search() />
+		<div class="list-wrapper">
 
+			<div>
+				<input type="text" placeholder="Search for items"
+					class="form-control" ng-keydown="checkKeyDown($event)"
+					ng-keyup="checkKeyUp($event)" ng-model="searchText"
+					ng-change="search()" />
+			</div>
+
+			<ul class="suggestions-list">
+				<li ng-repeat="suggestion in suggestions track by $index"
+					ng-class="{active : selectedIndex === $index}"
+					ng-click="AssignValueAndHide($index)">{{suggestion}}</li>
+			</ul>
+			<input class="submit w3-right" type="submit" value=" "
+				ng-click=Search() />
 
 		</div>
 	</div>
 	<div class="" ng-show="result">
-		<h3>Kết quả tìm kiếm</h3>
+		<h3 style="margin-left:20px">Kết quả tìm kiếm</h3><hr>
 		<div class="">
 			<div id="songs-container ">
 				<ul>
@@ -154,22 +165,22 @@ body, html {
 	<div class="w3-container Custom" style="padding: 70px 0px" id="about"
 		ng-hide="showme">
 		<h3 class="w3-left h3" ng-model="detail_songName"></h3>
-		<div class="row col-md-8 w3-center " style="padding-left: 70px">
+		<div class="row w3-center " style="padding-left: 70px">
 
 			<h5 class="songId">${detailSong.maso}</h5>
-			<h1 class="songName">${detailSong.ten}</h1>
+			<h1 class="songName" style="font-size:30px">${detailSong.ten}</h1>
 			<h3 class="author">Thông tin :${detailSong.thongtin}</h3>
 			<div class="row">
 				<iframe width="750" height="330"
 					src="${detailSong.linkyoutube}?autoplay=1"> </iframe>
 			</div>
 			<h3>Lời bài hát</h3>
-			<p class="fullLyric" style="margin-top: 10px">${detailSong.loidaydu }</p>
+			<p class="fullLyric col-md-8" style="margin-top: 10px;margin-left:200px">${detailSong.loidaydu }</p>
 			
 
 
 		</div>
-		<aside>
+		<%-- <aside>
 		<div class="col-md-3 w3-right menu-right">
 			<ul>
 				<li><a class="fa fa-music"
@@ -183,7 +194,7 @@ body, html {
 
 			</ul>
 		</div>
-		</aside>
+		</aside> --%>
 
 
 	</div>

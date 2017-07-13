@@ -1,8 +1,96 @@
 app
 		.controller(
 				'detailCtrl',
-				function($scope, $http, $filter, $resource, uiGridConstants) {
-
+				function($scope,$rootScope, $http, $filter, $resource, uiGridConstants) {
+					$scope.list_Song = [];
+					$rootScope.listName = [];
+					      function getAllSong() {
+					            $http({
+					              url : 'http://localhost:8080/WebServer/api/song',
+					              method : "GET"
+					            }).then(function(response) {
+					              $scope.list_Song = response.data;
+					               $rootScope.listName = [];
+					              for(var i = 0; i<response.data.length;i++)
+					              {
+					                $scope.listName.push($scope.list_Song[i].ten)
+					                //$scope.songName = response.data[i].ten;
+					            
+					              }
+					              console.log($scope.listName);
+					            }, function(error) {
+					              console.log(error);
+					            });
+					          }
+					          getAllSong();
+						
+						
+						//Sort Array
+						$rootScope.listName.sort();
+						//Define Suggestions List
+						$rootScope.suggestions = [];
+						//Define Selected Suggestion Item
+						$rootScope.selectedIndex = -1;
+						
+						//Function To Call On ng-change
+						$rootScope.search = function(){
+							$rootScope.suggestions = [];
+							var myMaxSuggestionListLength = 0;
+							for(var i=0; i<$rootScope.listName.length; i++){
+								var searchItemsSmallLetters = angular.lowercase($rootScope.listName[i]);
+								var searchTextSmallLetters = angular.lowercase($scope.searchText);
+								if( searchItemsSmallLetters.indexOf(searchTextSmallLetters) !== -1){
+									$rootScope.suggestions.push(searchItemsSmallLetters);
+									myMaxSuggestionListLength += 1;
+									if(myMaxSuggestionListLength == 5){
+										break;
+									}
+								}
+							}
+						}
+						
+						//Keep Track Of Search Text Value During The Selection From The Suggestions List  
+						$rootScope.$watch('selectedIndex',function(val){
+							if(val !== -1) {
+								$scope.searchText = $rootScope.suggestions[$rootScope.selectedIndex];
+							}
+						});
+						
+						
+						//Text Field Events
+						//Function To Call on ng-keydown
+						$rootScope.checkKeyDown = function(event){
+							if(event.keyCode === 40){//down key, increment selectedIndex
+								event.preventDefault();
+								if($rootScope.selectedIndex+1 !== $rootScope.suggestions.length){
+									$rootScope.selectedIndex++;
+								}
+							}else if(event.keyCode === 38){ //up key, decrement selectedIndex
+								event.preventDefault();
+								if($rootScope.selectedIndex-1 !== -1){
+									$rootScope.selectedIndex--;
+								}
+							}else if(event.keyCode === 13){ //enter key, empty suggestions array
+								event.preventDefault();
+								$rootScope.suggestions = [];
+							}
+						}
+						//Function To Call on ng-keyup
+						$rootScope.checkKeyUp = function(event){ 
+							if(event.keyCode !== 8 || event.keyCode !== 46){//delete or backspace
+								if($scope.searchText == ""){
+									$rootScope.suggestions = [];
+								}
+							}
+						}
+						//======================================
+						
+						//List Item Events
+						//Function To Call on ng-click
+						$rootScope.AssignValueAndHide = function(index){
+							 $scope.searchText = $rootScope.suggestions[index];
+							 $rootScope.suggestions=[];
+						}
 					// get Album List
 					function GetListAlbum() {
 						$scope.list_album = [];
@@ -102,7 +190,7 @@ app
 						if ($scope.chk_songName) {
 							$http.get(
 									"http://localhost:8080/WebServer/api/song/search/"
-											+ $scope.keyword).then(
+											+ $scope.searchText).then(
 									function(response) {
 										$scope.list_searchSong = response.data;
 										$scope.result = true;
@@ -112,7 +200,7 @@ app
 						} else if ($scope.chk_lyric) {
 							$http.get(
 									"http://localhost:8080/WebServer/api/song/searchLyric/"
-											+ $scope.keyword).then(
+											+ $scope.searchText).then(
 									function(response) {
 										$scope.list_searchSong = response.data;
 										$scope.result = true;
@@ -122,5 +210,36 @@ app
 						}
 
 					}
-
+					// Phân trang
+			    	$scope.currentPage = 1;
+			    	// max size of the pagination bar
+			    	$scope.maxPaginationSize = 10;
+			    	  $scope.itemsPerPage = 15;
+			    	$scope.updatePageIndexes = function () {
+			    		var totalPages = Math.ceil($scope.list_SixNumberSong.length / $scope.maxPaginationSize);
+			    		if (totalPages <= 10) {
+			                // less than 10 total pages so show all
+			    			$scope.firstIndex = 1;
+			    			$scope.lastIndex = totalPages;
+			            } else {
+			                // more than 10 total pages so calculate start and end pages
+			                if ($scope.currentPage <= 6) {
+			                	$scope.firstIndex = 1;
+			                	$scope.lastIndex = 10;
+			                } else if ($scope.currentPage + 4 >= totalPages) {
+			                	$scope.firstIndex = totalPages - 9;
+			                	$scope.lastIndex = totalPages;
+			                } else {
+			                	$scope.firstIndex = $scope.currentPage - 5;
+			                	$scope.lastIndex = $scope.currentPage + 4;
+			                }
+			            }
+			    		$scope.firstIndex = ($scope.currentPage - 1) * $scope.itemsPerPage;
+			    		$scope.lastIndex = $scope.currentPage * $scope.itemsPerPage;
+			    	};
+			    	$scope.updatePageIndexes();
+			    	
+			    	$scope.showList=function(school,index){
+			    		return ((index >= $scope.firstIndex) && (index < $scope.lastIndex));
+			    	}
 				});

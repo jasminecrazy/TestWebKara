@@ -26,7 +26,7 @@ public class SongDAOImpl implements SongDAO {
 		Transaction transaction = null;
 		try {
 			transaction = session.beginTransaction();
-			song = session.createQuery("from Vn").list();
+			song = session.createQuery("select c from Vn c").list();
 			transaction.commit();
 		} catch (Exception e) {
 			song = null;

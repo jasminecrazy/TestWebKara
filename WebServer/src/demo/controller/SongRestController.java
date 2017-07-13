@@ -25,7 +25,16 @@ public class SongRestController {
 
 	@RequestMapping(value = "song", method = RequestMethod.GET)
 	public ResponseEntity<List<Vn>> getAllSong() {
-		return new ResponseEntity<List<Vn>>(songService.findAllSong(), HttpStatus.OK);
+		
+		HttpHeaders headers = new HttpHeaders();
+		headers.add("Access-Control-Allow-Origin", "*");
+		headers.add("Access-Control-Allow-Credentials", "true");
+		headers.add("Access-Control-Allow-Methods", "POST, GET, PUT, OPTIONS, DELETE");
+		headers.add("Access-Control-Max-Age", "3600");
+		headers.add("Content-Type", "application/json;charset=UTF-8");
+		headers.add("Access-Control-Allow-Headers",
+				"X-Requested-With, Content-Type, authorization, Origin, Accept, Access-Control-Request-Method, Access-Control-Request-Headers");
+		return new ResponseEntity<List<Vn>>(songService.findAllSong(),headers, HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "song/{id}", method = RequestMethod.GET)

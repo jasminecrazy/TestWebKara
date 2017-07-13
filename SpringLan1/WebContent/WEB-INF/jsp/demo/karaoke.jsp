@@ -105,20 +105,33 @@ body, html {
 		data-ng-repeat="x in list_newVol">{{x.volName}}</a> <a href="#pricing"
 		onclick="w3_close()" data-ng-repeat="x in list_album"
 		class="w3-bar-item w3-button">{{x.albumName}}</a> </nav>
-	<div class="row w3-center t" style="padding-top: 100px">
+	<div class="row w3-center t" style="padding-top: 200px">
 
 		<h3>Tìm kiếm mã số bài hát...</h3>
 		<div class="">
-			<label>Tên bài hát</label> <input type="checkbox" ng-model="chk_songName"  checked="checked"/>
-				 <label>Lời bài hát</label> <input type="checkbox" ng-model="chk_lyric" />
+			<label>Tên bài hát</label> <input type="checkbox"
+				ng-model="chk_songName" checked="checked" /> <label>Lời bài
+				hát</label> <input type="checkbox" ng-model="chk_lyric" />
 		</div>
-		<div class="wrapper">
-			<input class="search" type="text" id="songName" ng-model="keyword"
-				placeholder="Nhập từ khóa cần tìm" name="keyword" /> <input
-				class="submit" type="submit" value=" " ng-click=Search() />
+		<div class="list-wrapper">
 
+			<div>
+				<input type="text" placeholder="Search for items"
+					class="form-control" ng-keydown="checkKeyDown($event)"
+					ng-keyup="checkKeyUp($event)" ng-model="searchText"
+					ng-change="search()" />
+			</div>
+
+			<ul class="suggestions-list">
+				<li ng-repeat="suggestion in suggestions track by $index"
+					ng-class="{active : selectedIndex === $index}"
+					ng-click="AssignValueAndHide($index)">{{suggestion}}</li>
+			</ul>
+			<input class="submit w3-right" type="submit" value=" "
+				ng-click=Search() />
 
 		</div>
+
 	</div>
 	<div class="" ng-show="result">
 		<h3>Kết quả tìm kiếm</h3>
@@ -151,18 +164,23 @@ body, html {
 		</div>
 	</div>
 	<!-- About Section -->
-	<div class="w3-container Custom" style="padding: 70px 0px" id="about" ng-hide="showme">
+	<div class="w3-container Custom" style="padding: 70px 0px" id="about"
+		ng-hide="showme">
 		<h3 class="w3-left h3" ng-model="detail_songName"></h3>
+		<div class="row" style="margin-left: 30px; font-size: 20px">Danh
+			sách bài hát karaoke 6 số</div>
+
+		<hr>
 		<div class="row test">
 			<ul>
 
-				<li data-ng-repeat="x in list_SixNumberSong">
+				<li data-ng-repeat="x in list_SixNumberSong" data-ng-show="showList(x,$index)">
+
 					<div class="song">
+
 						<div class="row test">
 
-							<p class="songId">
-								{{x.masauso}}
-							</p>
+							<p class="songId">{{x.masauso}}</p>
 							<h1 class="songName">
 								<a
 									href="${pageContext.request.contextPath }/demo/detailSong/{{x.id}}.html">{{x.ten}}</a>
@@ -178,18 +196,26 @@ body, html {
 			</ul>
 
 		</div>
-
+		<div class='w3-center'>
+			<uib-pagination data-total-items="list_SixNumberSong.length"
+				data-ng-model="currentPage" data-ng-change="updatePageIndexes()"
+				data-max-size="maxPaginationSize" data-items-per-page="itemsPerPage"
+				data-boundary-links="true" data-previous-text="&lsaquo;"
+				data-next-text="&rsaquo;" data-first-text="&laquo;"
+				data-last-text="&raquo;"> </uib-pagination>
+		</div>
 
 	</div>
 
-	<footer class="w3-right w3-padding-64"> <a href="" onclick="topFunction()" style="background:#f39c12!important"
+	<footer class="w3-right w3-padding-64"> <a href=""
+		onclick="topFunction()" style="background: #f39c12 !important"
 		class="w3-button w3-light-grey"><i
-		class="fa fa-arrow-up w3-margin-right" ></i>To the top</a>
+		class="fa fa-arrow-up w3-margin-right"></i>To the top</a>
 	<div class="w3-xlarge w3-section"></div>
 
 	</footer>
 	<!-- Add Google Maps -->
-	
+
 
 </body>
 <!-- jQuery -->
@@ -237,10 +263,9 @@ body, html {
 	src="${pageContext.request.contextPath }/assets/scripts/detailCtrl.js"></script>
 <script src="${pageContext.request.contextPath }/assets/js/ui-grid.js"></script>
 <script>
-function topFunction() {
-    document.body.scrollTop = 0; // For Chrome, Safari and Opera 
-    document.documentElement.scrollTop = 0; // For IE and Firefox
-}
-
+	function topFunction() {
+		document.body.scrollTop = 0; // For Chrome, Safari and Opera 
+		document.documentElement.scrollTop = 0; // For IE and Firefox
+	}
 </script>
 </html>

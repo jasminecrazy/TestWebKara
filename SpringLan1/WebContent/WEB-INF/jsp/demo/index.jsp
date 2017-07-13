@@ -66,7 +66,7 @@ body, html {
 }
 </style>
 
-<body ng-controller="indexCtrl" ng-app="myApp">
+<body ng-controller="autoCompleteCTRL" ng-app="myApp">
 	<!-- Navbar (sit on top) -->
 	<div class="w3-top">
 		<div class="w3-bar w3-white w3-card-2" id="myNavbar">
@@ -103,23 +103,28 @@ body, html {
 		data-ng-repeat="x in list_newVol">{{x.volName}}</a> <a href="#pricing"
 		onclick="w3_close()" data-ng-repeat="x in list_album"
 		class="w3-bar-item w3-button">{{x.albumName}}</a> </nav>
-	<div class="row w3-center t" style="padding-top: 100px">
+	<div class="row w3-center t" style="padding-top: 200px">
 
 		<h3>Tìm kiếm mã số bài hát...</h3>
 		<div class="">
-			<label>Tên bài hát</label> <input type="checkbox" ng-model="chk_songName"  checked="checked"/>
-				 <label>Lời bài hát</label> <input type="checkbox" ng-model="chk_lyric" />
+			<label>Tên bài hát</label> <input type="checkbox"
+				ng-model="chk_songName" checked="checked" /> <label>Lời bài
+				hát</label> <input type="checkbox" ng-model="chk_lyric" />
 		</div>
-		<div class="wrapper">
-			<input class="search" type="text" id="songName" ng-model="keyword"
-				placeholder="Nhập từ khóa cần tìm" name="keyword" /> <input
-				class="submit" type="submit" value=" " ng-click=Search() />
-
-
-		</div>
+		<div class="list-wrapper">
+            
+            <div><input type="text" placeholder="Search for items" class="form-control" ng-keydown="checkKeyDown($event)" ng-keyup="checkKeyUp($event)"  ng-model="searchText" ng-change="search()" /></div>
+            
+            <ul class="suggestions-list">
+                <li ng-repeat="suggestion in suggestions track by $index" ng-class="{active : selectedIndex === $index}" ng-click="AssignValueAndHide($index)">{{suggestion}}</li>
+            </ul>
+            <input
+				class="submit w3-right" type="submit" value=" " ng-click=Search() /> 
+            
+        </div>
 
 	</div>
-	<div class="" ng-show="result">
+	<div class="" ng-show="result" style="margin-left:22px;">
 		<h3>Kết quả tìm kiếm</h3>
 		<div class="">
 			<div id="songs-container ">
@@ -150,6 +155,7 @@ body, html {
 		</div>
 	</div>
 	<!-- Team Section -->
+	<div class="row" style="margin-top:300px;margin-left:50px">
 	<div class="col-md-6" id="team" ng-hide="showme">
 		<h3 class="w3-left h3">Karaoke Vol Mới</h3>
 
@@ -220,6 +226,7 @@ body, html {
 
 
 	</div>
+	</div>
 	<!-- Footer -->
 
 	<footer class="w3-right w3-padding-64"> <a href=""
@@ -273,7 +280,7 @@ body, html {
 	src="${pageContext.request.contextPath }/assets/scripts/myApp.js"></script>
 
 <script type="text/javascript"
-	src="${pageContext.request.contextPath }/assets/scripts/indexCtrl.js"></script>
+	src="${pageContext.request.contextPath }/assets/scripts/autoCompleteCTRL.js"></script>
 <script src="${pageContext.request.contextPath }/assets/js/ui-grid.js"></script>
 <script>
 	function topFunction() {
