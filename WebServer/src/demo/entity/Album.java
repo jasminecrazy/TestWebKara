@@ -71,7 +71,8 @@ public class Album implements java.io.Serializable {
 	public void setAlbumName(String albumName) {
 		this.albumName = albumName;
 	}
-@JsonIgnore
+
+	@JsonIgnore
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "album")
 	public Set<Vn> getVns() {
 		return this.vns;

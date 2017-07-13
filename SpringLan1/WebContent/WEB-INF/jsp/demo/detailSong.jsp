@@ -7,8 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Karaoke Song</title>
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<link rel="stylesheet"
-	href="https://fonts.googleapis.com/css?family=Raleway">
+
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" type="text/css"
@@ -159,24 +158,23 @@ body, html {
 
 			<h5 class="songId">${detailSong.maso}</h5>
 			<h1 class="songName">${detailSong.ten}</h1>
-			<a href="${detailSong.linkyoutube}" class="w3-right">Mở trên
-				youtube</a>
-			<p class="fullLyric">${detailSong.loidaydu }</p>
-			<h3 class="author">Sáng tác :${detailSong.thongtin}</h3>
+			<h3 class="author">Thông tin :${detailSong.thongtin}</h3>
+			<div class="row">
+				<iframe width="750" height="330"
+					src="${detailSong.linkyoutube}?autoplay=1"> </iframe>
+			</div>
+			<h3>Lời bài hát</h3>
+			<p class="fullLyric" style="margin-top: 10px">${detailSong.loidaydu }</p>
+			
 
-			<video src="${detailSong.linkyoutube}" width="500" height="300"
-				controls> Your browser does not support the <video>
-			element. </video>
+
 		</div>
 		<aside>
 		<div class="col-md-3 w3-right menu-right">
 			<ul>
-				<li>
-				<a
+				<li><a class="fa fa-music"
 					href="${pageContext.request.contextPath }/demo/albumdetail/{{x.id}}.html"
-					data-ng-repeat="x in list_album">{{x.albumName}}</a>
-					
-				</li>
+					data-ng-repeat="x in list_album">Danh sách {{x.albumName}}</a></li>
 
 				<li><a class="fa fa-music"
 					href="${pageContext.request.contextPath }/demo/detail/{{x.id}}.html"
@@ -189,116 +187,7 @@ body, html {
 
 
 	</div>
-	<!-- 
-	 Team Section
-	 <div class="col-md-6" id="team">
-		<h3 class="w3-left h3">Karaoke Vol Mới</h3>
-
-		<div class="w3-row-padding w3-grayscale">
-			<div class="">
-				<div id="songs-container ">
-					<ul>
-
-						<li>
-							<div class="song">
-								<div class="row">
-
-									<p class="songId">
-										61471 <span
-											style="font-size: 14px !important; text-transform: uppercase !important;">vol62</span>
-									</p>
-									<h1 class="songName">phía sau một cô gái</h1>
-									<h4 class="SongLyric">
-										Nhiều khi anh mong được một lần nói ra hết tất cả thay vì ngồi
-										lặng im nghe..<span style="padding: 0px 4px;" class="lmore"
-											id="61471" style="display:block;">+</span>
-									</h4>
-									<h3 class="author">Tiên Cookie</h3>
-
-								</div>
-							</div>
-
-						</li>
-						<li>
-							<div class="song">
-								<div class="row">
-
-									<p class="songId">
-										61471 <span
-											style="font-size: 14px !important; text-transform: uppercase !important;">vol62</span>
-									</p>
-									<h1 class="songName">phía sau một cô gái</h1>
-									<h4 class="SongLyric">
-										Nhiều khi anh mong được một lần nói ra hết tất cả thay vì ngồi
-										lặng im nghe..<span style="padding: 0px 4px;" class="lmore"
-											id="61471" style="display:block;">+</span>
-									</h4>
-									<h3 class="author">Tiên Cookie</h3>
-
-								</div>
-							</div>
-
-						</li>
-						<li>
-							<div class="song">
-								<div class="row">
-
-									<p class="songId">
-										61471 <span
-											style="font-size: 14px !important; text-transform: uppercase !important;">vol62</span>
-									</p>
-									<h1 class="songName">phía sau một cô gái</h1>
-									<h4 class="SongLyric">
-										Nhiều khi anh mong được một lần nói ra hết tất cả thay vì ngồi
-										lặng im nghe..
-									</h4>
-									<h3 class="author">Tiên Cookie</h3>
-
-								</div>
-							</div>
-
-						</li>
-					</ul>
-				</div>
-			</div>
-		</div>
-
-
-	</div>
-	<div class="col-md-6" id="team">
-		<h3 class="w3-left h3">Bài hát yêu thích</h3>
-
-		<div class="w3-row-padding w3-grayscale">
-			<div class="">
-				<div id="songs-container ">
-					<ul>
-
-						<li data-ng-repeat="x in list_favoriteSong">
-							<div class="song">
-								<div class="row">
-
-									<p class="songId">
-										{{x.maso}}<span
-											style="font-size: 14px !important; text-transform: uppercase !important;">{{x.volume.volName}}</span>
-									</p>
-									<h1 class="songName">{{x.ten}}</h1>
-									<h4 class="SongLyric">
-										{{x.loi}}
-									</h4>
-									<h3 class="author">{{x.thongtin}}</h3>
-
-								</div>
-							</div>
-
-						</li>
-						
-					</ul>
-				</div>
-			</div>
-		</div>
-
-
-	</div>  -->
+	
 	<!-- Footer -->
 	<footer class="w3-right w3-padding-64"> <a href=""
 		onclick="topFunction()" style="background: #f39c12 !important"
@@ -307,32 +196,7 @@ body, html {
 	<div class="w3-xlarge w3-section"></div>
 
 	</footer>
-	<!-- Add Google Maps -->
-	<script>
-		// Modal Image Gallery
-		function onClick(element) {
-			document.getElementById("img01").src = element.src;
-			document.getElementById("modal01").style.display = "block";
-			var captionText = document.getElementById("caption");
-			captionText.innerHTML = element.alt;
-		}
-
-		// Toggle between showing and hiding the sidebar when clicking the menu icon
-		var mySidebar = document.getElementById("mySidebar");
-
-		function w3_open() {
-			if (mySidebar.style.display === 'block') {
-				mySidebar.style.display = 'none';
-			} else {
-				mySidebar.style.display = 'block';
-			}
-		}
-
-		// Close the sidebar with the close button
-		function w3_close() {
-			mySidebar.style.display = "none";
-		}
-	</script>
+	
 
 </body>
 <!-- jQuery -->

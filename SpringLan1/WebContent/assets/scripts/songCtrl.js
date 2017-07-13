@@ -231,12 +231,13 @@ app
 											$scope.edit_genre = response.data.masauso;
 											$scope.favoriteSong = response.data.baihatyeuthich;
 											$scope.highLight = response.data.baihatnoibat;
+											$scope.edit_fullLyric = response.data.loidaydu;
 											$scope.editForm.songId.$setUntouched();
 											$scope.editForm.songName.$setUntouched();
 											$scope.editForm.lyric.$setUntouched();
 											$scope.editForm.author.$setUntouched();
 											$scope.editForm.youtube.$setUntouched();
-											$scope.edit_fullLyric = response.data.loidaydu;
+											
 											for (var i = 0; i < $scope.list_volume.length; i++) {
 								                if (response.data.volume.volId == $scope.list_volume[i].volId) {
 								                    $scope.edit_volName = $scope.list_volume[i];
@@ -256,16 +257,21 @@ app
 					// Update song information
 					$scope.update = function () {
 						
-			   	var songData={id:songID,ten:$scope.edit_songName,maso:$scope.edit_songId,loi:$scope.edit_lyric,
-			   			thongtin:$scope.edit_author,linkyoutube:$scope.edit_youtubelink,volume:$scope.edit_volName,album:$scope.edit_albumName,masauso:$scope.edit_genre,
-			   			baihatyeuthich:($scope.favoriteSong == null ? false
-								: ($scope.favoriteSong == false ? false
-										: true)),
-										baihatnoibat:($scope.highLight == null ? false
-												: ($scope.highLight == false ? false
-														: true))
+			   	var songData={
+			   			id:songID,
+			   			ten:$scope.edit_songName,
+			   			maso:$scope.edit_songId,
+			   			loi:$scope.edit_lyric,
 			   			
-			   	};
+			   			thongtin:$scope.edit_author,
+			   			linkyoutube:$scope.edit_youtubelink,
+			   			volume:$scope.edit_volName,
+			   			album:$scope.edit_albumName,
+			   			masauso:$scope.edit_genre,
+			   			baihatyeuthich:($scope.favoriteSong == null ? false: ($scope.favoriteSong == false ? false: true)),
+						baihatnoibat:($scope.highLight == null ? false: ($scope.highLight == false ? false: true)),
+						loidaydu:$scope.edit_fullLyric
+			   				};
 			   	
 			       $http({
 			          method: "PUT",

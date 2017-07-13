@@ -40,11 +40,12 @@ public String index()
 		modelMap.put("songDetail",songService.getSongVol(id));
 		return "demo/detail";
 	}
-	@RequestMapping(value="/search",method = RequestMethod.GET)
+	@RequestMapping(value="process",method = RequestMethod.GET)
 	@ResponseBody
-	public List<String> search(HttpServletRequest request)
+	public List<Vn> search(HttpServletRequest request)
 	{
-		return songService.search(request.getParameter("term"));
+		String keyword= request.getParameter("term");
+		return songService.searchSong(keyword);
 	}
 	@RequestMapping(value="detailSong/{id}",method= RequestMethod.GET)
 	public String detailSong(@PathVariable("id") int id,ModelMap modelMap)
@@ -65,6 +66,8 @@ public String index()
 		modelMap.put("albumDetail",songService.getAlbumSong(id));
 		return "demo/albumdetail";
 	}
+	
+	
 	
 	
 }
