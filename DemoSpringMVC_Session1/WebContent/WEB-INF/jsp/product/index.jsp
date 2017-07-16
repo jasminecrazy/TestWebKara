@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -40,7 +41,29 @@
 	</tr>
 </table>
 
-
+<h3>Product List</h3>
+<table border="1">
+	<tr>
+		<th>Id</th>
+		<th>Name</th>
+		<th>Photo</th>
+		<th>Price</th>
+		<th>Quantity</th>
+		<th>Sub Total</th>
+	</tr>
+	<c:forEach var="p" items="${products }">
+		<tr>	
+			<td>${p.id }</td>
+			<td>${p.name }</td>
+			<td>
+				<img src="${pageContext.request.contextPath }/assets/images/${p.photo }" width="120" height="100">
+			</td>
+			<td>${p.price }</td>
+			<td>${p.quantity }</td>
+			<td>${p.price * p.quantity }</td>
+		</tr>
+	</c:forEach>
+</table>
 
 
 	

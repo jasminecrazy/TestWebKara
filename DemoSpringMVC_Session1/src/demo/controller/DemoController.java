@@ -20,6 +20,15 @@ public class DemoController {
 		return "demo/demo2";
 	}
 	
+	// localhost:8080/DemoSpringMVC_Session1/demo/hi/kevin.html
+	@RequestMapping(value = "hi/{fullName}", method = RequestMethod.GET)
+	public String hi(
+			@PathVariable("fullName") String fullName, 
+			ModelMap modelMap) {
+		modelMap.put("result", "Hi " + fullName);
+		return "demo/hi";
+	}
+	
 	
 	
 }
