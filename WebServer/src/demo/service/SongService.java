@@ -34,4 +34,6 @@ public interface SongService {
 	public List<Vn> searchSong(String keyword);
 
 	public List<Vn> searchLyricSong(String lyric);
+
+	public List<Vn> searchSongSixNumber(String songName);
 }

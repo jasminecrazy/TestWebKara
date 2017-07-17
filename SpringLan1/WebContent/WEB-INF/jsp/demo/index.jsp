@@ -78,10 +78,11 @@ body, html {
 					class="w3-bar-item w3-button ">Karaoke 6 số</a> <a
 					href="${pageContext.request.contextPath }/demo/detail/{{x.id}}.html"
 					ng-model="volid" class="w3-bar-item w3-button"
-					data-ng-repeat="x in list_newVol" ng-click="GetVolSongId(x.id)">{{x.volName}}</a>
+					data-ng-repeat="x in list_newVol" ng-click="GetVolSongId(x.id)" ng-bind="x.volName"></a>
 				<a
 					href="${pageContext.request.contextPath }/demo/albumdetail/{{x.id}}.html"
-					class="w3-bar-item w3-button" data-ng-repeat="x in list_album">{{x.albumName}}</a>
+					class="w3-bar-item w3-button" data-ng-repeat="x in list_album" ng-bind="x.albumName"></a>
+					
 
 			</div>
 			<!-- Hide right-floated links on small screens and replace them with a menu icon -->
@@ -109,22 +110,30 @@ body, html {
 		<div class="">
 			<label>Tên bài hát</label> <input type="checkbox"
 				ng-model="chk_songName" checked="checked" /> <label>Lời bài
-				hát</label> <input type="checkbox" ng-model="chk_lyric" />
+				hát</label> <input type="checkbox" ng-model="chk_lyric" /> <label>Tên
+				bài hát có mã sáu số</label> <input type="checkbox" ng-model="chk_song" />
 		</div>
 		<div class="list-wrapper">
-            
-            <div><input type="text" placeholder="Search for items" class="form-control" ng-keydown="checkKeyDown($event)" ng-keyup="checkKeyUp($event)"  ng-model="searchText" ng-change="search()" /></div>
-            
-            <ul class="suggestions-list">
-                <li ng-repeat="suggestion in suggestions track by $index" ng-class="{active : selectedIndex === $index}" ng-click="AssignValueAndHide($index)">{{suggestion}}</li>
-            </ul>
-            <input
-				class="submit w3-right" type="submit" value=" " ng-click=Search() /> 
-            
-        </div>
+
+			<div>
+				<input type="text" placeholder="Tìm kiếm"
+					class="form-control" ng-keydown="checkKeyDown($event)"
+					ng-keyup="checkKeyUp($event)" ng-model="searchText"
+					ng-change="search()" />
+			</div>
+
+			<ul class="suggestions-list">
+				<li ng-repeat="suggestion in suggestions track by $index"
+					ng-class="{active : selectedIndex === $index}"
+					ng-click="AssignValueAndHide($index)" ng-bind="suggestion"></li>
+			</ul>
+			<input class="submit w3-right" type="submit" value=" "
+				ng-click=Search() />
+
+		</div>
 
 	</div>
-	<div class="" ng-show="result" style="margin-left:22px;">
+	<div class="" ng-show="result" style="margin-left: 22px;">
 		<h3>Kết quả tìm kiếm</h3>
 		<div class="">
 			<div id="songs-container ">
@@ -133,18 +142,32 @@ body, html {
 					<li data-ng-repeat="x in list_searchSong">
 						<div class="song">
 							<div class="row test">
+								<div class="song" ng-show="songHasSixNumber" >
+									
+									<p class="songId" ng-bind="x.masauso">
+									<span
+											style="font-size: 14px !important; text-transform: uppercase !important;" ng-bind="x.volume.volName"></span>
+									</p>
+									<h1 class="songName">
+										<a
+											href="${pageContext.request.contextPath }/demo/detailSong/{{x.id}}.html" ng-bind="x.ten"></a>
+									</h1>
+									<h4 class="SongLyric" ng-bind="x.loi"></h4>
+									<h3 class="author" ng-bind="x.thongtin"></h3>
+								</div>
+								<div class="row" ng-hide="songHasFiveNumber">
+									<p class="songId" ng-bind="x.maso">
+									<span
+											style="font-size: 14px !important; text-transform: uppercase !important;" ng-bind="x.volume.volName"></span>
+									</p>
+									<h1 class="songName">
+										<a
+											href="${pageContext.request.contextPath }/demo/detailSong/{{x.id}}.html" ng-bind="x.ten"></a>
+									</h1>
+									<h4 class="SongLyric" ng-bind="x.loi"></h4>
+									<h3 class="author" ng-bind="x.thongtin"></h3>
 
-								<p class="songId">
-									{{x.maso}}<span
-										style="font-size: 14px !important; text-transform: uppercase !important;">{{x.volume.volName}}</span>
-								</p>
-								<h1 class="songName">
-									<a
-										href="${pageContext.request.contextPath }/demo/detailSong/{{x.id}}.html">{{x.ten}}</a>
-								</h1>
-								<h4 class="SongLyric">{{x.loi}}</h4>
-								<h3 class="author">{{x.thongtin}}</h3>
-
+								</div>
 							</div>
 						</div>
 
@@ -155,77 +178,77 @@ body, html {
 		</div>
 	</div>
 	<!-- Team Section -->
-	<div class="row" style="margin-top:300px;margin-left:50px">
-	<div class="col-md-6" id="team" ng-hide="showme">
-		<h3 class="w3-left h3">Karaoke Vol Mới</h3>
+	<div class="row" style="margin-top: 200px; margin-left: 50px">
+		<div class="col-md-6" id="team" ng-hide="showme">
+			<h3 class="w3-left h3">Karaoke Vol Mới</h3>
 
-		<div class="w3-row-padding w3-grayscale">
-			<div class="">
-				<div id="songs-container ">
-					<ul>
+			<div class="w3-row-padding w3-grayscale">
+				<div class="">
+					<div id="songs-container ">
+						<ul>
 
-						<li data-ng-repeat="x in list_NewestSong">
-							<div class="song">
-								<div class="row test">
+							<li data-ng-repeat="x in list_NewestSong">
+								<div class="song">
+									<div class="row test">
 
-									<p class="songId">
-										{{x.maso}}<span
-											style="font-size: 14px !important; text-transform: uppercase !important;">{{x.volume.volName}}</span>
-									</p>
-									<h1 class="songName">
-										<a
-											href="${pageContext.request.contextPath }/demo/detailSong/{{x.id}}.html">{{x.ten}}</a>
-									</h1>
-									<h4 class="SongLyric">{{x.loi}}</h4>
-									<h3 class="author">{{x.thongtin}}</h3>
+										<p class="songId" ng-bind="x.maso">
+											<span
+												style="font-size: 14px !important; text-transform: uppercase !important;" ng-bind="x.volume.volName"></span>
+										</p>
+										<h1 class="songName">
+											<a
+												href="${pageContext.request.contextPath }/demo/detailSong/{{x.id}}.html" ng-bind="x.ten"></a>
+										</h1>
+										<h4 class="SongLyric" ng-bind="x.loi"></h4>
+										<h3 class="author" ng-bind="x.thongtin"></h3>
 
+									</div>
 								</div>
-							</div>
 
-						</li>
+							</li>
 
-					</ul>
+						</ul>
+					</div>
 				</div>
 			</div>
+
+
 		</div>
+		<div class="col-md-6" id="team" ng-hide="showme">
+			<h3 class="w3-left h3">Bài hát yêu thích</h3>
 
+			<div class="w3-row-padding w3-grayscale">
+				<div class="">
+					<div id="songs-container ">
+						<ul>
 
-	</div>
-	<div class="col-md-6" id="team" ng-hide="showme">
-		<h3 class="w3-left h3">Bài hát yêu thích</h3>
+							<li data-ng-repeat="x in list_favoriteSong">
+								<div class="song">
+									<div class="row test">
 
-		<div class="w3-row-padding w3-grayscale">
-			<div class="">
-				<div id="songs-container ">
-					<ul>
+										<p class="songId" ng-bind="x.maso">
+											<span
+												style="font-size: 14px !important; text-transform: uppercase !important;" ng-bind="x.volume.volName"></span>
+										</p>
+										<h1 class="songName" >
+											<a
+												href="${pageContext.request.contextPath }/demo/detailSong/{{x.id}}.html" ng-bind="x.ten"></a>
+										</h1>
+										<h4 class="SongLyric" ng-bind="x.loi"></h4>
+										<h3 class="author" ng-bind="x.thongtin"></h3>
 
-						<li data-ng-repeat="x in list_favoriteSong">
-							<div class="song">
-								<div class="row test">
-
-									<p class="songId">
-										{{x.maso}}<span
-											style="font-size: 14px !important; text-transform: uppercase !important;">{{x.volume.volName}}</span>
-									</p>
-									<h1 class="songName">
-										<a
-											href="${pageContext.request.contextPath }/demo/detailSong/{{x.id}}.html">{{x.ten}}</a>
-									</h1>
-									<h4 class="SongLyric">{{x.loi}}</h4>
-									<h3 class="author">{{x.thongtin}}</h3>
-
+									</div>
 								</div>
-							</div>
 
-						</li>
+							</li>
 
-					</ul>
+						</ul>
+					</div>
 				</div>
 			</div>
+
+
 		</div>
-
-
-	</div>
 	</div>
 	<!-- Footer -->
 
@@ -238,7 +261,31 @@ body, html {
 	</footer>
 	<!-- Add Google Maps -->
 
+	<script>
+		// Modal Image Gallery
+		function onClick(element) {
+			document.getElementById("img01").src = element.src;
+			document.getElementById("modal01").style.display = "block";
+			var captionText = document.getElementById("caption");
+			captionText.innerHTML = element.alt;
+		}
 
+		// Toggle between showing and hiding the sidebar when clicking the menu icon
+		var mySidebar = document.getElementById("mySidebar");
+
+		function w3_open() {
+			if (mySidebar.style.display === 'block') {
+				mySidebar.style.display = 'none';
+			} else {
+				mySidebar.style.display = 'block';
+			}
+		}
+
+		// Close the sidebar with the close button
+		function w3_close() {
+			mySidebar.style.display = "none";
+		}
+	</script>
 </body>
 <!-- jQuery -->
 

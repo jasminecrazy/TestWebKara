@@ -131,5 +131,9 @@ public class SongRestController {
 	public ResponseEntity<List<Vn>> searchLyric(@PathVariable String lyric) {
 		return new ResponseEntity<List<Vn>>(songService.searchLyricSong(lyric), HttpStatus.OK);
 	}
+	@RequestMapping(value= "song/searchSong/{songName}",method = RequestMethod.GET)
+	public ResponseEntity<List<Vn>> searchSongSixNumber(@PathVariable String songName) {
+		return new ResponseEntity<List<Vn>>(songService.searchSongSixNumber(songName), HttpStatus.OK);
+	}
 	
 }

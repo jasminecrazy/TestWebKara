@@ -35,5 +35,6 @@ public interface SongDAO {
 
 	public List<Vn> searchLyricSong(String lyric);
 
-	
+	public List<Vn> searchSongSixNumber(String songName);
+
 }

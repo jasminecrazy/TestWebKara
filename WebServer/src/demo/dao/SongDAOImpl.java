@@ -310,5 +310,27 @@ public class SongDAOImpl implements SongDAO {
 		return song;
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Vn> searchSongSixNumber(String songName) {
+		List<Vn> song = new ArrayList<Vn>();
+		Session session = sessionFactory.openSession();
+		Transaction transaction = null;
+		try {
+			transaction = session.beginTransaction();
+			song = session.createQuery("select c from Vn c where c.masauso is not null and c.ten like :songName").setString("songName","%"+songName+"%").list();
+			transaction.commit();
+		} catch (Exception e) {
+			song = null;
+			if (transaction != null) {
+				transaction.rollback();
+			}
+			System.out.println(e.getMessage());
+		} finally {
+			session.close();
+		}
+		return song;
+	}
+
 	
 }

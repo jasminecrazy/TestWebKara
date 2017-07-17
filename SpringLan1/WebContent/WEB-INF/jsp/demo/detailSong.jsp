@@ -79,10 +79,10 @@ body, html {
 					class="w3-bar-item w3-button ">Karaoke 6 số</a> <a
 					href="${pageContext.request.contextPath }/demo/detail/{{x.id}}.html"
 					ng-model="volid" class="w3-bar-item w3-button"
-					data-ng-repeat="x in list_newVol" ng-click="GetVolSongId(x.id)">{{x.volName}}</a>
+					data-ng-repeat="x in list_newVol" ng-click="GetVolSongId(x.id)" ng-bind="x.volName"></a>
 				<a
 					href="${pageContext.request.contextPath }/demo/albumdetail/{{x.id}}.html"
-					class="w3-bar-item w3-button" data-ng-repeat="x in list_album">{{x.albumName}}</a>
+					class="w3-bar-item w3-button" data-ng-repeat="x in list_album" ng-bind="x.albumName"></a>
 
 			</div>
 			<!-- Hide right-floated links on small screens and replace them with a menu icon -->
@@ -141,16 +141,16 @@ body, html {
 						<div class="song">
 							<div class="row test">
 
-								<p class="songId">
-									{{x.maso}}<span
+								<p class="songId" ng-bind="x.maso">
+									<span
 										style="font-size: 14px !important; text-transform: uppercase !important;">{{x.volume.volName}}</span>
 								</p>
 								<h1 class="songName">
 									<a
 										href="${pageContext.request.contextPath }/demo/detailSong/{{x.id}}.html">{{x.ten}}</a>
 								</h1>
-								<h4 class="SongLyric">{{x.loi}}</h4>
-								<h3 class="author">{{x.thongtin}}</h3>
+								<h4 class="SongLyric" ng-bind="x.loi"></h4>
+								<h3 class="author" ng-bind="x.thongtin"></h3>
 
 							</div>
 						</div>
@@ -180,21 +180,7 @@ body, html {
 
 
 		</div>
-		<%-- <aside>
-		<div class="col-md-3 w3-right menu-right">
-			<ul>
-				<li><a class="fa fa-music"
-					href="${pageContext.request.contextPath }/demo/albumdetail/{{x.id}}.html"
-					data-ng-repeat="x in list_album">Danh sách {{x.albumName}}</a></li>
-
-				<li><a class="fa fa-music"
-					href="${pageContext.request.contextPath }/demo/detail/{{x.id}}.html"
-					data-ng-repeat="x in list_newVol"> Danh sách bài hát
-						{{x.volName}}</a></li>
-
-			</ul>
-		</div>
-		</aside> --%>
+	
 
 
 	</div>

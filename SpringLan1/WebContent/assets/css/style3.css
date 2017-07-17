@@ -149,7 +149,7 @@ list-style-type: none;
 margin: 0 0 0 23px;
 padding: 0;
 overflow: auto;
-left: 314px;
+left: 267px;
 
 }
 
@@ -159,7 +159,7 @@ padding: 6px 12px;
 cursor: pointer;
 background: #f9f9f9;
 border-bottom: 1px solid #eeeeee;
-width: 664px;
+width: 625px;
 text-align: left;
 padding: 6px 12px;
 
@@ -172,7 +172,7 @@ padding: 6px 12px;
 .suggestions-list li:active, .suggestions-list li.active {
 	color: #FFFFFF;
 	background: #0099FF;
-	width: 234px;
+	width: 625px;
 }
 
 .suggestions-list:focus {

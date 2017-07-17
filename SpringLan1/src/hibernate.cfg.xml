@@ -4,10 +4,12 @@
 <hibernate-configuration>
  <session-factory name="">
   <property name="hibernate.enable_lazy_load_no_trans">true</property>
-  <mapping class="demo.entity.Album"/>
+  <mapping class="demo.entity.Borrow"/>
+  <mapping class="demo.entity.Category"/>
+  <mapping class="demo.entity.BorrowId"/>
+  <mapping class="demo.entity.Employee"/>
+  <mapping class="demo.entity.Equipment"/>
   <mapping class="demo.entity.Role"/>
   <mapping class="demo.entity.User"/>
-  <mapping class="demo.entity.Vn"/>
-  <mapping class="demo.entity.Volume"/>
  </session-factory>
 </hibernate-configuration>

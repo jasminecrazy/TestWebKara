@@ -80,9 +80,9 @@ body, html {
 					class="w3-bar-item w3-button ">Karaoke 6 số</a> <a
 					href="${pageContext.request.contextPath }/demo/detail/{{x.id}}.html"
 					ng-model="volid" class="w3-bar-item w3-button"
-					data-ng-repeat="x in list_newVol" ng-click="GetVolSongId(x.id)">{{x.volName}}</a><a
+					data-ng-repeat="x in list_newVol" ng-click="GetVolSongId(x.id)" ng-bind="x.volName"></a><a
 					href="${pageContext.request.contextPath }/demo/albumdetail/{{x.id}}.html"
-					class="w3-bar-item w3-button" data-ng-repeat="x in list_album">{{x.albumName}}</a>
+					class="w3-bar-item w3-button" data-ng-repeat="x in list_album" ng-bind="x.albumName"></a>
 
 			</div>
 			<!-- Hide right-floated links on small screens and replace them with a menu icon -->
@@ -101,9 +101,9 @@ body, html {
 		href="javascript:void(0)" onclick="w3_close()"
 		class="w3-bar-item w3-button w3-large w3-padding-16">Close ×</a> <a
 		href="#about" onclick="w3_close()" class="w3-bar-item w3-button"
-		data-ng-repeat="x in list_newVol">{{x.volName}}</a> <a href="#pricing"
+		data-ng-repeat="x in list_newVol" ng-bind="x.volName"></a> <a href="#pricing"
 		onclick="w3_close()" data-ng-repeat="x in list_album"
-		class="w3-bar-item w3-button">{{x.albumName}}</a> </nav>
+		class="w3-bar-item w3-button" ng-bind="x.albumName"></a> </nav>
 	<div class="row w3-center t" style="padding-top: 100px">
 
 		<h3>Tìm kiếm mã số bài hát...</h3>
@@ -141,16 +141,16 @@ body, html {
 						<div class="song">
 							<div class="row test">
 
-								<p class="songId">
-									{{x.maso}}<span
+								<p class="songId" ng-bind="x.maso">
+									<span
 										style="font-size: 14px !important; text-transform: uppercase !important;">{{x.volume.volName}}</span>
 								</p>
 								<h1 class="songName">
 									<a
 										href="${pageContext.request.contextPath }/demo/detailSong/{{x.id}}.html">{{x.ten}}</a>
 								</h1>
-								<h4 class="SongLyric">{{x.loi}}</h4>
-								<h3 class="author">{{x.thongtin}}</h3>
+								<h4 class="SongLyric" ng-bind="x.loi"></h4>
+								<h3 class="author" ng-bind="x.thongtin"></h3>
 
 							</div>
 						</div>

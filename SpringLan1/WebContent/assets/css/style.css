@@ -227,7 +227,7 @@ label.lbl-3 {
 	}
 	
 	body {
-	  min-height: 811px;
+	
 	}
 }
 @media (max-width:1366px){
@@ -238,7 +238,7 @@ label.lbl-3 {
 	  margin-top: 3em;
 	}
 	body {
-	  min-height: 768px;
+	 /*  min-height: 768px; */
 	}
 }
 @media (max-width:1280px){
@@ -246,7 +246,7 @@ label.lbl-3 {
 	   background: url(../images/pass.png) no-repeat 336px 18px;
 	}
 	body {
-	  min-height: 711px;
+	 /*  min-height: 711px; */
 	}
 	.copy-rights {
 	  margin-top: 0.5em;
