@@ -13,6 +13,7 @@ public class ProductController {
 	public String index(ModelMap modelMap) {
 		ProductModel productModel = new ProductModel();
 		modelMap.put("product", productModel.find());
+		modelMap.put("products", productModel.findAll());
 		return "product/index";
 	}
 	
