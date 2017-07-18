@@ -11,29 +11,34 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import demo.dto.BorrowDTO;
 import demo.entity.Borrow;
+import demo.entity.Category;
 import demo.entity.Equipment;
 import demo.service.BorrowService;
+
 @RestController
 public class BorrowRestController {
 	@Autowired
 	private BorrowService borrowService;
+
 	@RequestMapping(value = "borrowEquipment/{id}", method = RequestMethod.GET)
-	public ResponseEntity<Borrow> getEquipment(@PathVariable int id) {
+	public ResponseEntity<List<Borrow>> getEquipment(@PathVariable int id) {
 		try {
-		borrowService.getEquipment(id);
+			borrowService.getEquipment(id);
 		} catch (Exception ex) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
-		return new ResponseEntity<Borrow>(borrowService.getEquipment(id),HttpStatus.ACCEPTED);
+		return new ResponseEntity<List<Borrow>>(borrowService.getEquipment(id), HttpStatus.ACCEPTED);
 	}
+
 	@RequestMapping(value = "borrow", method = RequestMethod.GET)
 	public ResponseEntity<List<Borrow>> getAllCategory() {
 
 		return new ResponseEntity<List<Borrow>>(borrowService.getAll(), HttpStatus.OK);
 	}
 	@RequestMapping(value = "borrow", method = RequestMethod.POST)
-	public ResponseEntity<Void> addEquipment(@RequestBody Borrow borrow) {
+	public ResponseEntity<Void> addEquipment(@RequestBody BorrowDTO borrow) {
 		try {
 			borrowService.addListBorrow(borrow);
 		} catch (Exception e) {
@@ -52,5 +57,36 @@ public class BorrowRestController {
 			return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
 		}
 		return new ResponseEntity<>(HttpStatus.ACCEPTED);
+	}
+
+	@RequestMapping(value = "borrowlist/{id}", method = RequestMethod.GET)
+	public ResponseEntity<Borrow> getBorrowList(@PathVariable int id) {
+		Borrow borrow;
+		try {
+			borrow = borrowService.getListBorrow(id);
+
+		} catch (Exception e) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<>(borrow, HttpStatus.OK);
+	}
+
+	@RequestMapping(value = "borrow/{id}", method = RequestMethod.DELETE)
+	public ResponseEntity<Void> deleteBorrowList(@PathVariable int id) {
+		try {
+			borrowService.deleteBorow(id);
+		} catch (Exception ex) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<>(HttpStatus.ACCEPTED);
+	}
+	@RequestMapping(value = "borrowUser/{username}", method = RequestMethod.GET)
+	public ResponseEntity<List<Borrow>> getUserBorrow(@PathVariable String username) {
+		try {
+			borrowService.getUserBorrow(username);
+		} catch (Exception ex) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<List<Borrow>>(borrowService.getUserBorrow(username), HttpStatus.ACCEPTED);
 	}
 }

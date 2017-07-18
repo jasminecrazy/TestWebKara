@@ -2,8 +2,8 @@ app
 		.controller(
 				'listCtrl',
 				function($scope, $http, $filter, $resource, uiGridConstants) {
-					
-					// get List 
+					const alertDuration = 2000;
+					// get List
 					function GetListEquipment() {
 						$scope.list = [];
 						var Song = $resource('http://localhost:8080/EquipmentServer/api/borrow');
@@ -15,22 +15,21 @@ app
 						});
 
 					}
-					
+
 					GetListEquipment();
-					// get List 
+					// get List
 					function GetListCategory() {
 						$scope.list_category = [];
 						var Vol = $resource('http://localhost:8080/EquipmentServer/api/category');
 						Vol.query().$promise.then(function(listVol) {
 
 							$scope.list_category = listVol;
-							
 
 						});
 
 					}
 					GetListCategory();
-					
+
 					$scope.gridOptions = {
 						noUnselect : true,
 						multiSelect : false,
@@ -49,16 +48,12 @@ app
 									displayName : 'No.'
 								},
 								{
-									name : 'employee.employeeName',
+									name : 'user.employeeName',
 									displayName : 'Employee Name'
 								},
 								{
-									name : 'employee.email',
+									name : 'user.email',
 									displayName : 'Email'
-								},
-								{
-									name : 'employee.phone',
-									displayName : 'Phone'
 								},
 								{
 									name : 'equipment.equipmentName',
@@ -74,149 +69,107 @@ app
 								},
 								{
 									name : 'status',
-									displayName : 'Status'
+									displayName : 'Status',
+									visible : true,
+									cellTemplate : '<div class="ui-grid-cell-contents">{{row.entity.status == 0 ? "pending" : "approved"}}</div>',
+									filter : {
+										type : uiGridConstants.filter.SELECT,
+										selectOptions : [ {
+											value : 'true',
+											label : 'approved'
+										}, {
+											value : 'false',
+											label : 'pending'
+										} ]
+									}
 								},
 								{
 									name : 'Action',
 									enableSorting : false,
 									enableFiltering : false,
 									cellTemplate : '<button class="btn btn-primary btn-sm" ng-click="grid.appScope.GetEquipment(row.entity)" data-tooltip ="tooltip" title="Edit"	data-toggle="modal" data-target="#myModal_Edit"><span class="glyphicon glyphicon-edit"></span></button>'
-										
+
 											+ '<button ng-click="grid.appScope.deleteEquipment(row.entity)" data-toggle="modal" class="btn btn-danger btn-sm" data-tooltip ="tooltip" title="Delete" data-target="#myModal_delete"><span class="glyphicon glyphicon-remove"></span></button>'
-											
+
 								} ]
 					};
-					
-					
-					/*var alertDuration = 1800;
-					// Check SongId
-					function id_duplicate_Add(id) {
-						var flag = true;
-						$scope.list
-								.forEach(function(item, index) {
-									if (item.equipmentId ===id) {
-										$scope.duplicateAlert = "There already exists an equipment with this ID";
-
-										flag = false;
-									}
-								});
-						return flag;
-					}
-					// Hide alert when using same EquipmentID
-					$scope.hideDuplicateAlert = function() {
-						$scope.duplicateAlert = " ";
-					}
-					
-					// Add new Equipment
-					$scope.add = function(close) {
-						if (id_duplicate_Add(document.getElementById("EquipmentId").value)) {
-							
-							$http(
-									{
-										method : "POST",
-										url : "http://localhost:8080/EquipmentServer/api/equipment",
-										data : {
-											equipmentId : $scope.add_EquipmentId,
-											equipmentName : $scope.add_EquipmentName,
-											status : $scope.add_note,
-											quantity:$scope.add_quantity,
-											unit : $scope.add_unit,
-											category:$scope.add_categoryName
-											
-										},
-
-										dataType : "json",
-										headers: { 'Content-Type': 'application/json; charset=UTF-8'}
-									})
-									.then(
-											function(result) {
-												if (result.status == 201) {
-
-													GetListEquipment();
-													alertAddSucess();
-													if (close == true) {
-														$("#myModal_Add")
-																.modal("hide");
-													}
-												}
-
-											},
-											function(response) {
-												alertFailMessage("Oops! Something went wrong, please check your input again.");
-												console.log('Fail');
-											});
-						}
-					}
-					// Load song data to edit form
-
 					$scope.GetEquipment = function(data) {
 						$http
 								.get(
-										"http://localhost:8080/EquipmentServer/api/equipment/"
+										"http://localhost:8080/EquipmentServer/api/borrowlist/"
 												+ data.id)
 								.then(
 										function(response) {
-										EquipmentID= data.id
-											$scope.edit_equipmentId = response.data.equipmentId;
-											$scope.edit_equipmentName = response.data.equipmentName;
-											$scope.edit_unit= response.data.unit;
+											borrowID = data.id
+											$scope.edit_idequipment = response.data.equipment.id;
+											$scope.edit_EquipmentId = response.data.equipment.equipmentId;
+											$scope.edit_EquipmentName = response.data.equipment.equipmentName;
+											$scope.edit_employeeId = response.data.user.employeeName;
 											$scope.edit_quantity = response.data.quantity;
-											$scope.edit_note = response.data.status;
-											for (var i = 0; i < $scope.list_category.length; i++) {
-								                if (response.data.category.categoryId == $scope.list_category[i].categoryId) {
-								                    $scope.edit_categoryName = $scope.list_category[i];
-								                    break;
-}}
-										
+											$scope.edit_unit = response.data.equipment.unit;
+											$scope.status = response.data.status;
+											$scope.edit_date_borrow = new Date(
+													response.data.dateBorrow);
+											$scope.edit_date_return = new Date(
+													response.data.dateReturnback);
+											$scope.edit_employee = response.data.user.id;
+
 										});
 
 					}
-					// Update song information
-					$scope.update = function () {
-						
-			   	var EquipmentData={
-			   			id:EquipmentID,
-			   			equipmentId:$scope.edit_equipmentId,
-			   			equipmentName:$scope.edit_equipmentName,
-			   			status : $scope.edit_note,
-			   	quantity:$scope.edit_quantity,
-			   	unit :$scope.edit_unit,
-			   	category : $scope.edit_categoryName
-			   			
-			   				};
-			   	
-			       $http({
-			          method: "PUT",
-			          url: "http://localhost:8080/EquipmentServer/api/equipment",
-			          data: EquipmentData,
-			          dataType: "json",
-			          headers: { 'Content-Type': 'application/json; charset=UTF-8'}
-			       })
-			          .then(function (result) {
-			           	  $("#myModal_Edit").modal("hide");
-			           	GetListEquipment();
-			           	alertEditSucess();
-			        }, function(response) {
-							alertFailMessage("Oops! Something went wrong, please check your input again.");
 
-			        });
-			  }  
-				
-					// get data for delete
-					var deleteCatogies ="";
-					// get data for delete
-					$scope.deleteEquipment = function(data)
-					{
-						deleteCatogies = data;
+					// Update song information
+					$scope.update = function() {
+
+						var EquipmentData = {
+							id : borrowID,
+							status : ($scope.status == null ? false
+									: ($scope.status == false ? false : true)),
+							quantity : $scope.edit_quantity,
+							equipment : {
+								'id' : $scope.edit_idequipment
+							},
+							employee : {
+								'id' : $scope.edit_employee
+							},
+							dateBorrow : $scope.edit_date_borrow,
+							dateReturnback : $scope.edit_date_return
+
+						};
+
+						$http(
+								{
+									method : "PUT",
+									url : "http://localhost:8080/EquipmentServer/api/borrow",
+									data : EquipmentData,
+									dataType : "json",
+									headers : {
+										'Content-Type' : 'application/json; charset=UTF-8'
+									}
+								})
+								.then(
+										function(result) {
+											$("#myModal_Edit").modal("hide");
+											GetListEquipment();
+											alertEditSucess();
+										},
+										function(response) {
+											alertFailMessage("Oops! Something went wrong, please check your input again.");
+
+										});
 					}
-					// Delete Song
-					$scope.delete = function()
-					{
+					var deleteBorrowList = "";
+					// get data for delete
+					$scope.deleteEquipment = function(data) {
+						deleteBorrowList = data;
+					}
+					// Delete user
+					$scope.delete = function() {
 						$http(
 								{
 									method : "DELETE",
-									url : "http://localhost:8080/EquipmentServer/api/equipment/"
-											+ deleteCatogies.id
+									url : "http://localhost:8080/EquipmentServer/api/borrow/"
+											+ deleteBorrowList.id
 								}).then(function(result) {
 							if (result.status == 202) {
 								$('#myModal_delete').modal('hide');
@@ -226,15 +179,22 @@ app
 							}
 						});
 					}
-					
-					
-					// Alert when adding successfully
-					function alertAddSucess() {
+					function alertFailMessage(message) {
 						swal({
 							title : "",
-							text : "Add successfully.",
+							text : message,
+							type : "error",
+							timer : alertDuration,
+							showConfirmButton : false
+						});
+					}
+
+					function alertEditSucess() {
+						swal({
+							title : "",
+							text : "Edit successfully.",
 							type : "success",
-							timer : 2000,
+							timer : alertDuration,
 							showConfirmButton : false
 						});
 					}
@@ -248,59 +208,4 @@ app
 							showConfirmButton : false
 						});
 					}
-					// alert when edit successfully
-					function alertEditSucess() {
-						swal({
-							title : "",
-							text : "Edit successfully.",
-							type : "success",
-							timer : alertDuration,
-							showConfirmButton : false
-						});
-					}
-					function alertFailMessage(message) {
-						swal({
-							title : "",
-							text : message,
-							type : "error",
-							timer : alertDuration,
-							showConfirmButton : false
-						});
-					}
-					// alert when have some input not right format
-					function alertFail() {
-						swal({
-							title : "",
-							text : "Opps! Something went wrong, please check your input again.",
-							type : "error",
-							timer : alertDuration,
-							showConfirmButton : false
-						})
-						setTimeout(function() {
-							location.reload();
-						}, alertDuration);
-					}
-					// Reset form add
-					$scope.ResetForm = function() {
-						$scope.add_EquipmentId = "";
-						$scope.add_EquipmentName = "";	
-						$scope.frmFormAdd.EquipmentName.$setUntouched();
-						$scope.frmFormAdd.EquipmentId.$setUntouched();
-					}
-					function getRandomInt(min, max) {
-						return Math.floor(Math.random() * (max - min + 1))
-								+ min;
-					}
-					// Auto fill in add form
-					$scope.autoAdd = function(keyEvent) {
-						if (keyEvent.keyCode == 81 && keyEvent.altKey) {
-							var random = getRandomInt(10000, 59999);
-							$scope.add_EquipmentId ="C"+ random;
-							$scope.add_EquipmentName = "Ban Phim";
-							$scope.add_unit = "cai";
-							$scope.add_quantity = 1;
-							$scope.add_note = "white machine";
-						
-						}
-					}*/
 				});

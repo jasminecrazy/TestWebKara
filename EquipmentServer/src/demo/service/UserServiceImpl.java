@@ -17,15 +17,14 @@ import demo.entity.User;
 public class UserServiceImpl implements UserService {
 	@Autowired
 	private UserDAO userDao;
-
 	@Override
-	public List<Employee> findAllUser() {
+	public List<User> findAllUser() {
 
 		return userDao.findAllUser();
 	}
 
 	@Override
-	public Employee getUser(int id) {
+	public User getUser(int id) {
 		
 		return userDao.getUser(id);
 	}
@@ -37,17 +36,23 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public void addUser(Employee user) {
-	
+	public void addUser(User user) {
+		user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
 	userDao.addUser(user);
 
 	}
 
 	@Override
-	public void updateUser(Employee user) {
+	public void updateUser(User user) {
 		userDao.updateUser(user);
 
 	}
 
+	@Override
+	public void resetPass(User user) {
+		user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
+		userDao.resetPass(user);
+		
+	}
 	
 }

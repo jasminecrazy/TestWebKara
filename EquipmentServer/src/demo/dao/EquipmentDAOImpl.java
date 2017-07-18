@@ -25,9 +25,10 @@ public class EquipmentDAOImpl implements EquipmentDAO {
 		Transaction transaction = null;
 		try {
 			transaction = session.beginTransaction();
-			equipment = session.createQuery("from Equipment").list();
+			equipment = session.createQuery("select e from Equipment e where e.quantity > 0").list();
 			transaction.commit();
 		} catch (Exception e) {
+			System.out.println(e.getMessage());
 			equipment = null;
 			if (transaction != null) {
 				transaction.rollback();

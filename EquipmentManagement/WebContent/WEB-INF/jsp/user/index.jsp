@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -74,12 +75,10 @@ body, html {
 				class="w3-bar-item w3-button w3-wide">Equipment</a>
 			<!-- Right-sided navbar links -->
 			<div class="w3-right w3-hide-small">
-				<a href="#" class="w3-bar-item w3-button ">Danh sach</a> <a href="#"
-					class="w3-bar-item w3-button">Test</a> <a
-					href="${pageContext.request.contextPath }/demo/albumdetail/{{x.id}}.html"
-					class="w3-bar-item w3-button" data-ng-repeat="x in list_album"
-					ng-bind="x.albumName"></a>
-
+			<sec:authentication var="user" property="principal"/>
+				<a href="${pageContext.request.contextPath }/user/detail/${user.username}.html" class="w3-bar-item w3-button ">Xem Danh sách thiết bị đã mượn</a><%--  <a href="<c:url value='/j_spring_security_logout'/>"
+					class="w3-bar-item w3-button">Logout</a>
+ --%>
 
 			</div>
 			<!-- Hide right-floated links on small screens and replace them with a menu icon -->
@@ -102,124 +101,135 @@ body, html {
 		onclick="w3_close()" data-ng-repeat="x in list_album"
 		class="w3-bar-item w3-button">{{x.albumName}}</a> </nav>
 	<div class="row" style="padding-top: 200px">
-	<div class="row t "style="margin-left: 100px" >
-	 <h1 >Danh sach thiet bi</h1>
-	 	<div data-ng-repeat="x in list_equipment">
-	 		<h4 data-ng-bind="x.equipmentName"></h4>
-	 		<button ng-click="borrow(x)" class="btn btn-primary"
+		<div class="row t " style="margin-left: 100px">
+			<h1>Danh sách thiết bị</h1>
+			<hr>
+			<div data-ng-repeat="x in list_equipment">
+				Tên thiết bị<h3 data-ng-bind="x.equipmentName"></h3>
+				Mô tả :
+				<p data-ng-bind="x.status"></p>
+				Số lượng
+				<p data-ng-bind="x.quantity"></p>
+				<button ng-click="borrow(x)" class="btn btn-primary"
 					data-toggle="modal" data-target="#myModal_Add">Mượn</button>
-	 		<hr>
-	 	</div>
+				<hr>
+			</div>
+		</div>
 	</div>
-	</div>
-<div class="modal fade" id="myModal_Add" tabindex="-1" role="dialog">
-				<div class="modal-dialog" role="document">
-					<div class="modal-content">
-						<div class="modal-header">
-							<button type="button" class="close" data-dismiss="modal"
-								aria-label="Close">
-								<span aria-hidden="true">&times;</span>
-							</button>
-							<h4 class="modal-title" id="myModalLabel">Đăng kí mượn thiết
-								bị</h4>
-						</div>
-						<div class="modal-body row " style="padding-left:30px">
-							<form class="form-horizontal" name="frmFormAdd"
-								id="fileUploadForm">
-								<div class="col-md-6">
-									<div class="form-group">
-										<label class=" control-label" for="">Mã thiết bị</label>
-										<div class="">
-											<input id="EquipmentId" name="EquipmentId"
-												class="form-control input-md" type="text"
-												readonly="readonly" ng-model="add_EquipmentId" />
+	<div class="modal fade" id="myModal_Add" tabindex="-1" role="dialog">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" id="myModalLabel">Đăng kí mượn thiết
+						bị</h4>
+				</div>
+				<div class="modal-body row " style="padding-left: 30px">
+					<form class="form-horizontal" name="frmFormAdd" id="fileUploadForm">
+						<div class="col-md-6">
+							<div class="form-group">
+								<label class=" control-label" for="">Mã thiết bị</label>
+								<div class="">
+									<input id="EquipmentId" name="EquipmentId"
+										class="form-control input-md" type="text" readonly="readonly"
+										ng-model="add_EquipmentId" />
 
-										</div>
-									</div>
+								</div>
+							</div>
 
 
-									<div class="form-group">
-										<label class=" control-label" for="">Tên thiết bị</label>
-										<div class="">
-											<input id="EquipmentName" name="EquipmentName"
-												class="form-control input-md" type="text" readonly= "readonly"
-												ng-model="add_EquipmentName"/>
-											
-										</div>
-									</div>
-									<div class="form-group">
-										<label class=" control-label" for="">Họ tên</label>
-										<div class="">
-											<input id="employeeName" name="employeeName"
-												class="form-control input-md" type="text"
-												ng-model="add_employeeId"/>
-											
-										</div>
-									</div>
-									
-									<div class="form-group">
-										<label class=" control-label" for="">Quantity</label>
-										<div class="">
-											<input id="quantity" name="quantity"
-												class="form-control input-md" type="number" min="0"
-												ng-model="add_quantity" ng-required="true" />
-											<div ng-messages="frmFormAdd.quantity.$error">
-												<div ng-message="required"
-													ng-show="frmFormAdd.quantity.$touched">
-													<p style="color: red">This field is required</p>
-												</div>
-											</div>
-										</div>
-									</div>
-									<div class="form-group">
-										<label class=" control-label" for="">Unit</label>
-										<div class="">
-											<input id="unit" name="unit" class="form-control input-md"
-												type="text" ng-model="add_unit" readonly="readonly" />
-											
-										</div>
-									</div>
-									<div class="form-group">
-										<label class=" control-label" for="">Note</label>
-										<div class="">
-											<input id="note" name="note" class="form-control input-md"
-												type="text" ng-model="add_note" />
-											
-										</div>
-									</div>
-									<div class="form-group">
-										<label class=" control-label" for="">Ngày trả</label>
-										<div class="">
-											<input id="date_return" name="date_return" class="form-control input-md"
-												type="date" ng-model="add_date_return" />
-											
-										</div>
-									</div>
-									
+							<div class="form-group">
+								<label class=" control-label" for="">Tên thiết bị</label>
+								<div class="">
+									<input id="EquipmentName" name="EquipmentName"
+										class="form-control input-md" type="text" readonly="readonly"
+										ng-model="add_EquipmentName" />
 
+								</div>
+							</div>
+							<div class="form-group">
+								<label class=" control-label" for="">Unit</label>
+								<div class="">
+									<input id="unit" name="unit" class="form-control input-md"
+										type="text" ng-model="add_unit" readonly="readonly" />
 
 								</div>
 
+							</div>
+							<div class="form-group">
+								<label class=" control-label" for="">Mã nhân viên</label>
+								<div class="">
+									<input id="employeeName" name="employeeName"
+										class="form-control input-md" type="text"
+										ng-model="add_employeeId" ng-required="true" />
+
+								</div>
+								<div ng-messages="frmFormAdd.employeeName.$error">
+									<div ng-message="required"
+										ng-show="frmFormAdd.employeeName.$touched">
+										<p style="color: red">This field is required</p>
+									</div>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label class=" control-label" for="">Quantity</label>
+								<div class="">
+									<input id="quantity" name="quantity"
+										class="form-control input-md" type="number" min="0"
+										ng-model="add_quantity" ng-required="true" />
+									<div ng-messages="frmFormAdd.quantity.$error">
+										<div ng-message="required"
+											ng-show="frmFormAdd.quantity.$touched">
+											<p style="color: red">This field is required</p>
+										</div>
+									</div>
+								</div>
+							</div>
+
+
+							<div class="form-group">
+								<label class=" control-label" for="">Ngày trả</label>
+								<div class="">
+									<input id="date_return" name="date_return"
+										class="form-control input-md" type="date"
+										ng-model="add_date_return" />
+
+								</div>
+								<div ng-messages="frmFormAdd.date_return.$error">
+									<div ng-message="required"
+										ng-show="frmFormAdd.date_return.$touched">
+										<p style="color: red">This field is required</p>
+									</div>
+								</div>
+							</div>
 
 
 
-
-
-							</form>
 						</div>
-						<div class="modal-footer">
-							<button id="btnSave" name="btnSave" class="btn btn-primary"
-								ng-disabled="frmFormAdd.CategoryId.$error.required || frmFormAdd.CategoryName.$error.required||frmFormAdd.lyric.$error.required||frmFormAdd.lyric.$error.required||frmFormAdd.youtube.$error.required "
-								ng-click="add()">Add</button>
-							
-							<button type="button" class="btn btn-default"
-								data-dismiss="modal">Close</button>
 
-						</div>
 
-					</div>
+
+
+
+
+					</form>
 				</div>
+				<div class="modal-footer">
+					<button id="btnSave" name="btnSave" class="btn btn-primary"
+						ng-disabled="frmFormAdd.date_return.$error.required ||frmFormAdd.quantity.$error.required||frmFormAdd.employeeName.$error.required"
+						ng-click="add()">Mượn</button>
+
+					<button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+
+				</div>
+
 			</div>
+		</div>
+	</div>
 
 	<footer class="w3-right w3-padding-64"> <a href=""
 		onclick="topFunction()" style="background: #f0f0f0 !important"

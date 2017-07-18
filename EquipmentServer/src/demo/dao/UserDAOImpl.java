@@ -9,9 +9,7 @@ import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import demo.entity.Employee;
 import demo.entity.User;
-
 @Repository("UserDAO")
 public class UserDAOImpl implements UserDAO{
 	@Autowired
@@ -19,8 +17,8 @@ public class UserDAOImpl implements UserDAO{
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Employee> findAllUser() {
-		List<Employee> user = new ArrayList<Employee>();
+	public List<User> findAllUser() {
+		List<User> user = new ArrayList<User>();
 		Session session = sessionFactory.openSession();
 		Transaction transaction = null;
 		try {
@@ -39,13 +37,13 @@ public class UserDAOImpl implements UserDAO{
 	}
 
 	@Override
-	public Employee getUser(int id) {
-		Employee user = null;
+	public User getUser(int id) {
+		User user = null;
 		Session session = sessionFactory.openSession();
 		Transaction transaction = null;
 		try {
 			transaction = session.beginTransaction();
-			user = (Employee) session.createQuery("select c from Employee c where c.id =:id").setInteger("id", id).uniqueResult();
+			user = (User) session.createQuery("select c from User c where c.id =:id").setInteger("id", id).uniqueResult();
 			transaction.commit();
 		} catch (Exception e) {
 			user = null;
@@ -78,7 +76,7 @@ public class UserDAOImpl implements UserDAO{
 	}
 
 	@Override
-	public void addUser(Employee user) {
+	public void addUser(User user) {
 		Session session = sessionFactory.openSession();
 		Transaction transaction = null;
 		try {
@@ -97,7 +95,7 @@ public class UserDAOImpl implements UserDAO{
 	}
 
 	@Override
-	public void updateUser(Employee user) {
+	public void updateUser(User user) {
 		Session session = sessionFactory.openSession();
 		Transaction transaction = null;
 		try {
@@ -114,6 +112,22 @@ public class UserDAOImpl implements UserDAO{
 		
 	}
 
-	
+	@Override
+	public void resetPass(User user) {
+		Session session = sessionFactory.openSession();
+		Transaction transaction = null;
+		try {
+			transaction = session.beginTransaction();
+			session.update(user);
+			transaction.commit();
+		} catch (Exception e) {
+			if (transaction != null) {
+				transaction.rollback();
+			}
+		} finally {
+			session.close();
+		}
+		
+	}
 
 }

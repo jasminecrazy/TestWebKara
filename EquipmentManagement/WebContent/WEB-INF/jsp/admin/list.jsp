@@ -78,24 +78,22 @@
 										<li><a
 											href="${pageContext.request.contextPath }/admin/equipment.html">Equipment
 												management</a></li>
-												<li><a
+										<li><a
 											href="${pageContext.request.contextPath }/admin/user.html">User
 												management</a></li>
-												<li><a
+										<li><a
 											href="${pageContext.request.contextPath }/admin.html">Equipment
 												management</a></li>
 
 
 									</ul></li>
-								<li><a> <i class="fa fa-list-ul"></i>List<span class="fa fa-chevron-down"></span></a>
+								<li><a> <i class="fa fa-list-ul"></i>List<span
+										class="fa fa-chevron-down"></span></a>
 									<ul class="nav child_menu">
-									<li>
-									<a
-											href="${pageContext.request.contextPath }/admin/list.html">List borrowed
-												equipment</a>
-									</li>
-									</ul>
-									</li>
+										<li><a
+											href="${pageContext.request.contextPath }/admin/list.html">List
+												borrowed equipment</a></li>
+									</ul></li>
 							</ul>
 
 
@@ -131,8 +129,8 @@
 
 
 
-									<li><a href="<c:url value='/j_spring_security_logout'/>"><i
-											class="fa fa-sign-out pull-right"></i> Log Out</a></li>
+						<%-- 			<li><a href="<c:url value='/j_spring_security_logout'/>"><i
+											class="fa fa-sign-out pull-right"></i> Log Out</a></li> --%>
 								</ul></li>
 
 
@@ -154,7 +152,8 @@
 									href="${pageContext.request.contextPath }/admin/welcome">Home</a>
 								</li>
 								<li class="active"><a
-									href="${pageContext.request.contextPath }/admin/equipment.html">List borrowed equipment</a></li>
+									href="${pageContext.request.contextPath }/admin/equipment.html">List
+										borrowed equipment</a></li>
 
 							</ul>
 						</div>
@@ -162,9 +161,9 @@
 					</div>
 					<div class="title_right">
 						<div class="form-group pull-right top_search">
-							<button data-toggle="modal" data-target="#myModal_Add"
+							<!-- <button data-toggle="modal" data-target="#myModal_Add"
 								type="button" class="btn btn-primary btn-lg"
-								ng-click="ResetForm()">Add</button>
+								ng-click="ResetForm()">Add</button> -->
 						</div>
 					</div>
 					<div class="clearfix"></div>
@@ -173,7 +172,7 @@
 							<div class="x_panel">
 								<div class="x_title">
 									<div class="clearfix"></div>
-									<h3>List Equipment Information</h3>
+									<h3>List Borrowed Equipment</h3>
 								</div>
 
 
@@ -199,7 +198,8 @@
 											aria-label="Close">
 											<span aria-hidden="true">&times;</span>
 										</button>
-										<h4 class="modal-title" id="myModalLabel">Add new Equipment</h4>
+										<h4 class="modal-title" id="myModalLabel">Add new
+											Equipment</h4>
 									</div>
 									<div class="modal-body row">
 										<form class="form-horizontal" name="frmFormAdd"
@@ -255,9 +255,8 @@
 												<div class="form-group">
 													<label class=" control-label" for="">Unit</label>
 													<div class="">
-														<input id="unit" name="unit"
-															class="form-control input-md" type="text" 
-															ng-model="add_unit" ng-required="true" />
+														<input id="unit" name="unit" class="form-control input-md"
+															type="text" ng-model="add_unit" ng-required="true" />
 														<div ng-messages="frmFormAdd.unit.$error">
 															<div ng-message="required"
 																ng-show="frmFormAdd.unit.$touched">
@@ -269,9 +268,8 @@
 												<div class="form-group">
 													<label class=" control-label" for="">Note</label>
 													<div class="">
-														<input id="note" name="note"
-															class="form-control input-md" type="text"
-															ng-model="add_note" ng-required="true" />
+														<input id="note" name="note" class="form-control input-md"
+															type="text" ng-model="add_note" ng-required="true" />
 														<div ng-messages="frmFormAdd.note.$error">
 															<div ng-message="required"
 																ng-show="frmFormAdd.note.$touched">
@@ -280,7 +278,7 @@
 														</div>
 													</div>
 												</div>
-			
+
 												<div class="form-group">
 													<label class=" control-label" for="">Category</label>
 													<div class="">
@@ -297,7 +295,7 @@
 														</div>
 													</div>
 												</div>
-												
+
 
 											</div>
 
@@ -334,53 +332,53 @@
 											aria-label="Close">
 											<span aria-hidden="true">&times;</span>
 										</button>
-										<h4 class="modal-title" id="myModalLabel">Edit Equipment
-											information</h4>
+										<h4 class="modal-title" id="myModalLabel">Edit</h4>
 									</div>
-									<div class="modal-body row">
-										<form class="form-horizontal" name="editForm">
+									<div class="modal-body row " style="padding-left: 30px">
+										<form class="form-horizontal" name="frmFormAdd"
+											id="fileUploadForm">
 											<div class="col-md-6">
 												<div class="form-group">
-													<label class=" control-label" for="">Equipment ID</label>
+												<input type="hidden" ng-model="edit_idequipment"/>
+													<label class=" control-label" for="">EquipmentId</label>
 													<div class="">
 														<input id="EquipmentId" name="EquipmentId"
-															ng-keyup="hideDuplicateAlert()"
 															class="form-control input-md" type="text"
-															ng-model="edit_equipmentId" ng-required="true" />
-														<div ng-messages="editForm.equipmentId.$error">
-															<div ng-message="required"
-																ng-show="editForm.equipmentId.$touched">
-																<p style="color: red">This field is required</p>
-															</div>
-														</div>
+															readonly="readonly" ng-model="edit_EquipmentId" />
+
 													</div>
 												</div>
-												<p ng-show="duplicateAlert != ''" ng-bind="duplicateAlert"
-													style="color: red"></p>
+
 
 												<div class="form-group">
 													<label class=" control-label" for="">Equipment Name</label>
 													<div class="">
 														<input id="EquipmentName" name="EquipmentName"
 															class="form-control input-md" type="text"
-															ng-model="edit_equipmentName" ng-required="true" />
-														<div ng-messages="editForm.equipmentName.$error">
-															<div ng-message="required"
-																ng-show="editForm.equipmentName.$touched">
-																<p style="color: red">This field is required</p>
-															</div>
-														</div>
+															readonly="readonly" ng-model="edit_EquipmentName" />
+
 													</div>
 												</div>
+												<div class="form-group">
+												<input type="hidden" ng-model="edit_employee"/>
+													<label class=" control-label" for="">Employee Name</label>
+													<div class="">
+														<input id="employeeName" name="employeeName"
+															class="form-control input-md" type="text"
+															ng-model="edit_employeeId" readonly = "readonly"/>
+
+													</div>
+												</div>
+
 												<div class="form-group">
 													<label class=" control-label" for="">Quantity</label>
 													<div class="">
 														<input id="quantity" name="quantity"
 															class="form-control input-md" type="number" min="0"
 															ng-model="edit_quantity" ng-required="true" />
-														<div ng-messages="editForm.quantity.$error">
+														<div ng-messages="frmFormAdd.quantity.$error">
 															<div ng-message="required"
-																ng-show="editForm.quantity.$touched">
+																ng-show="frmFormAdd.quantity.$touched">
 																<p style="color: red">This field is required</p>
 															</div>
 														</div>
@@ -389,61 +387,59 @@
 												<div class="form-group">
 													<label class=" control-label" for="">Unit</label>
 													<div class="">
-														<input id="unit" name="unit"
-															class="form-control input-md" type="text" 
-															ng-model="edit_unit" ng-required="true" />
-														<div ng-messages="editForm.unit.$error">
-															<div ng-message="required"
-																ng-show="editForm.unit.$touched">
-																<p style="color: red">This field is required</p>
-															</div>
-														</div>
+														<input id="unit" name="unit" class="form-control input-md"
+															type="text" ng-model="edit_unit" />
+
 													</div>
 												</div>
 												<div class="form-group">
-													<label class=" control-label" for="">Note</label>
-													<div class="">
-														<input id="note" name="note"
-															class="form-control input-md" type="text"
-															ng-model="edit_note" ng-required="true" />
-														<div ng-messages="editForm.note.$error">
-															<div ng-message="required"
-																ng-show="editForm.note.$touched">
-																<p style="color: red">This field is required</p>
-															</div>
-														</div>
-													</div>
+													<label class="control-label">Status</label> <input
+														type="radio" ng-model="status" ng-value="true"
+														ng-checked="true" /> Approved <input type="radio"
+														ng-model="status" ng-value="false" />Pending
+
+
 												</div>
-			
 												<div class="form-group">
-													<label class=" control-label" for="">Category</label>
+													<label class=" control-label" for="">Date borrow</label>
 													<div class="">
-														<select ng-selected="category.CategoryName"
-															ng-model="edit_categoryName" class="form-control"
-															ng-options="x.categoryName for x in list_category"
-															name="categoryName" id="categoryName" ng-required="true">
-														</select>
-														<div ng-messages="editForm.categoryName.$error">
-															<div ng-message="required"
-																ng-show="editForm.categoryName.$touched">
-																<p style="color: red">This field is required</p>
-															</div>
-														</div>
+														<input id="date_return" name="date_return"
+															class="form-control input-md" type="date"
+															ng-model="edit_date_borrow" />
+
 													</div>
 												</div>
-												
+												<div class="form-group">
+													<label class=" control-label" for="">Ngày trả</label>
+													<div class="">
+														<input id="date_return" name="date_return"
+															class="form-control input-md" type="date"
+															ng-model="edit_date_return" />
+
+													</div>
+												</div>
+
+
 
 											</div>
+
+
+
+
+
+
 										</form>
 									</div>
 									<div class="modal-footer">
-
 										<button id="btnSave" name="btnSave" class="btn btn-primary"
-											ng-disabled="editForm.EquipmentId.$error.required || editForm.EquipmentName.$error.required||editForm.lyric.$error.required||editForm.lyric.$error.required||editForm.youtube.$error.required "
-											ng-click="update()" data-dismiss="modal">Save</button>
+											ng-disabled="frmFormAdd.CategoryId.$error.required || frmFormAdd.CategoryName.$error.required||frmFormAdd.lyric.$error.required||frmFormAdd.lyric.$error.required||frmFormAdd.youtube.$error.required "
+											ng-click="update()">Save</button>
+
 										<button type="button" class="btn btn-default"
 											data-dismiss="modal">Close</button>
+
 									</div>
+
 								</div>
 							</div>
 						</div>

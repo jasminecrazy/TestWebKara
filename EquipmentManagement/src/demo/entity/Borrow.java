@@ -1,5 +1,5 @@
 package demo.entity;
-// Generated Jul 17, 2017 3:46:42 PM by Hibernate Tools 5.2.3.Final
+// Generated Jul 18, 2017 11:37:46 AM by Hibernate Tools 5.2.3.Final
 
 import java.util.Date;
 import javax.persistence.Column;
@@ -22,8 +22,8 @@ import javax.persistence.TemporalType;
 public class Borrow implements java.io.Serializable {
 
 	private Integer id;
-	private Employee employee;
 	private Equipment equipment;
+	private User user;
 	private Date dateBorrow;
 	private Date dateReturnback;
 	private int quantity;
@@ -32,10 +32,9 @@ public class Borrow implements java.io.Serializable {
 	public Borrow() {
 	}
 
-	public Borrow(Employee employee, Equipment equipment, Date dateBorrow, Date dateReturnback, int quantity,
-			boolean status) {
-		this.employee = employee;
+	public Borrow(Equipment equipment, User user, Date dateBorrow, Date dateReturnback, int quantity, boolean status) {
 		this.equipment = equipment;
+		this.user = user;
 		this.dateBorrow = dateBorrow;
 		this.dateReturnback = dateReturnback;
 		this.quantity = quantity;
@@ -55,16 +54,6 @@ public class Borrow implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "employee_id", nullable = false)
-	public Employee getEmployee() {
-		return this.employee;
-	}
-
-	public void setEmployee(Employee employee) {
-		this.employee = employee;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "equipment_id", nullable = false)
 	public Equipment getEquipment() {
 		return this.equipment;
@@ -72,6 +61,16 @@ public class Borrow implements java.io.Serializable {
 
 	public void setEquipment(Equipment equipment) {
 		this.equipment = equipment;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "employee_id", nullable = false)
+	public User getUser() {
+		return this.user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	@Temporal(TemporalType.DATE)

@@ -1,15 +1,11 @@
 package demo.entity;
-// Generated Jul 17, 2017 3:46:42 PM by Hibernate Tools 5.2.3.Final
+// Generated Jul 18, 2017 11:37:46 AM by Hibernate Tools 5.2.3.Final
 
-import java.util.HashSet;
-import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -24,7 +20,6 @@ public class Employee implements java.io.Serializable {
 	private String employeeName;
 	private String email;
 	private String phone;
-	private Set<Borrow> borrows = new HashSet<Borrow>(0);
 
 	public Employee() {
 	}
@@ -34,14 +29,6 @@ public class Employee implements java.io.Serializable {
 		this.employeeName = employeeName;
 		this.email = email;
 		this.phone = phone;
-	}
-
-	public Employee(String employeeId, String employeeName, String email, String phone, Set<Borrow> borrows) {
-		this.employeeId = employeeId;
-		this.employeeName = employeeName;
-		this.email = email;
-		this.phone = phone;
-		this.borrows = borrows;
 	}
 
 	@Id
@@ -90,15 +77,6 @@ public class Employee implements java.io.Serializable {
 
 	public void setPhone(String phone) {
 		this.phone = phone;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "employee")
-	public Set<Borrow> getBorrows() {
-		return this.borrows;
-	}
-
-	public void setBorrows(Set<Borrow> borrows) {
-		this.borrows = borrows;
 	}
 
 }

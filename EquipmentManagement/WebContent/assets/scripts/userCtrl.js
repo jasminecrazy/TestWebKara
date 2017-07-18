@@ -7,7 +7,7 @@ app
 					// get User List
 					function GetListUser() {
 						$scope.list = [];
-						var User = $resource('http://localhost:8080/WebServer/api/user');
+						var User = $resource('http://localhost:8080/EquipmentServer/api/user');
 						User.query().$promise.then(function(listUser) {
 
 							$scope.list = listUser;
@@ -31,7 +31,11 @@ app
 						paginationPageSize : 15,
 						columnDefs : [
 								{
-									name : 'fullname',
+									name : 'employeeId',
+									displayName : 'Employee ID'
+								},
+								{
+									name : 'employeeName',
 									displayName : 'Fullname'
 								},
 								{
@@ -81,6 +85,18 @@ app
 								});
 						return flag;
 					}
+					function id_duplicate_add(id) {
+						var flag = true;
+						$scope.list
+								.forEach(function(item, index) {
+									if (item.employeeId === id) {
+										$scope.duplicateAlert = "There've already exists a user with this ID"
+										flag = false;
+									}
+
+								});
+						return flag;
+					}
 					// Hide alert when using same username
 					$scope.hideDuplicateAlert = function() {
 						$scope.duplicateAlert = " ";
@@ -88,19 +104,23 @@ app
 					// Add new user
 					$scope.save = function(close) {
 						if (id_duplicate_Add(document
-								.getElementById("username").value)) {
+								.getElementById("username").value)
+								&& id_duplicate_add(document
+										.getElementById("employeeId").value)) {
 							$http(
 									{
 										method : "POST",
-										url : "http://localhost:8080/WebServer/api/user",
+										url : "http://localhost:8080/EquipmentServer/api/user",
 										data : {
 											username : $scope.add_username,
-											fullname : $scope.add_fullname,
+											employeeId : $scope.add_employeeId,
+											employeeName : $scope.add_fullname,
 											password : $scope.add_password,
 											role : {
 												'id' : $scope.role
 											},
-											enabled : $scope.status
+											enabled : $scope.status,
+											email : $scope.add_email
 										},
 
 										dataType : "json"
@@ -130,10 +150,13 @@ app
 						$scope.add_username = "";
 						$scope.add_fullname = "";
 						$scope.add_password = "";
-					
+						$scope.add_email = "";
+						$scope.add_employeeId = "";
 						$scope.frmUserAdd.fullname.$setUntouched();
 						$scope.frmUserAdd.username.$setUntouched();
 						$scope.frmUserAdd.password.$setUntouched();
+						$scope.frmUserAdd.employeeId.$setUntouched();
+
 					}
 					function getRandomInt(min, max) {
 						return Math.floor(Math.random() * (max - min + 1))
@@ -145,25 +168,29 @@ app
 							var random = getRandomInt(1, 10000);
 							$scope.add_username = "Jackson" + random;
 							$scope.add_fullname = "Jackson Samatha";
-							$scope.add_password = "123456"
+							$scope.add_password = "123456";
+							$scope.add_email = "suongpham@gmail.com";
+							$scope.add_employeeId = "NV" + random;
 
 						}
 					}
 					// Load data to edit form
 					$scope.GetUser = function(data) {
 						$http.get(
-								"http://localhost:8080/WebServer/api/user/"
+								"http://localhost:8080/EquipmentServer/api/user/"
 										+ data.id).then(function(response) {
 							userID = data.id;
 							$scope.edit_username = response.data.username;
-							$scope.edit_fullname = response.data.fullname
+							$scope.edit_fullname = response.data.employeeName;
 							$scope.edit_status = response.data.enabled;
 							$scope.edit_id = data.id;
 							$scope.edit_role = response.data.role.id;
 							$scope.edit_password = response.data.password;
+							$scope.edit_email = response.data.email;
 							$scope.editForm.fullname.$setUntouched();
 							$scope.editForm.username.$setUntouched();
 							$scope.editForm.password.$setUntouched();
+							$scope.edit_employeeId = response.data.employeeId;
 
 						});
 
@@ -173,21 +200,25 @@ app
 
 						var userData = {
 							id : userID,
+							employeeId:$scope.edit_employeeId,
 							username : $scope.edit_username,
-							fullname : $scope.edit_fullname,
+							employeeName : $scope.edit_fullname,
 							enabled : ($scope.edit_status == null ? false
 									: ($scope.edit_status == false ? false
 											: true)),
 							password : $scope.edit_password,
 							role : {
 								'id' : $scope.edit_role
-							}
+							},
+							email : $scope.edit_email
+							
+						
 						};
 
 						$http(
 								{
 									method : "PUT",
-									url : "http://localhost:8080/WebServer/api/user",
+									url : "http://localhost:8080/EquipmentServer/api/user",
 									data : userData,
 									dataType : "json",
 									headers : {
@@ -215,7 +246,7 @@ app
 						$http(
 								{
 									method : "DELETE",
-									url : "http://localhost:8080/WebServer/api/user/"
+									url : "http://localhost:8080/EquipmentServer/api/user/"
 											+ deleteUser.id
 								}).then(function(result) {
 							if (result.status == 202) {
@@ -230,15 +261,19 @@ app
 					$scope.ResetPass = function() {
 						$http
 								.get(
-										"http://localhost:8080/WebServer/api/user/"
+										"http://localhost:8080/EquipmentServer/api/user/"
 												+ $scope.edit_id)
 								.then(
 										function(response) {
 											userID = $scope.edit_id;
 											$scope.reset_username = response.data.username;
 											$scope.reset_id_role = response.data.role.id;
-											$scope.reset_fullname =response.data.fullname;
-											$scope.reset_status = response.data.enabled
+											$scope.reset_fullname = response.data.employeeName;
+											$scope.reset_status = response.data.enabled;
+											$scope.reset_employeeId= response.data.employeeId;
+											
+											$scope.reset_email = response.data.email;
+											console.log($scope.reset_fullname);
 
 										});
 					}
@@ -252,14 +287,16 @@ app
 							role : {
 								'id' : $scope.reset_id_role
 							},
-							username:$scope.reset_username,
-							fullname:$scope.reset_fullname,
-							enabled :$scope.reset_role
+							username : $scope.reset_username,
+							employeeName : $scope.reset_fullname,
+							enabled : $scope.reset_role,
+							employeeId :$scope.reset_employeeId,
+							email:$scope.reset_email
 						};
 						$http(
 								{
 									method : "PUT",
-									url : "http://localhost:8080/WebServer/api/user/resetpass",
+									url : "http://localhost:8080/EquipmentServer/api/user/resetpass",
 									data : dataUser,
 									dataType : "json"
 								}).then(function(result) {

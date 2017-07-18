@@ -1,16 +1,25 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <!-- Meta, title, CSS, favicons, etc. -->
-
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-<title>Equipment management</title>
+<title>Welcome</title>
+<link rel="stylesheet" type="text/css"
+	href="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.0/css/jquery.dataTables.css">
+<link rel="stylesheet" type="text/css"
+	href="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.0/css/jquery.dataTables_themeroller.css">
+
+
+<script type="text/javascript" charset="utf8"
+	src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.1.min.js"></script>
+<script type="text/javascript" charset="utf8"
+	src="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.0/jquery.dataTables.min.js"></script>
 
 <!-- Bootstrap -->
 <link
@@ -38,16 +47,16 @@
 <!-- External Libraries-->
 <link href="${pageContext.request.contextPath }/assets/css/style1.css"
 	rel="stylesheet" />
+<link href="${pageContext.request.contextPath }/assets/css/ui-grid.css"
+	rel="stylesheet" />
 <link
 	href="${pageContext.request.contextPath }/assets/css/sweetalert.css"
 	rel="stylesheet" />
-<link href="${pageContext.request.contextPath }/assets/css/ui-grid.css"
-	rel="stylesheet" />
+
 
 </head>
 
-<body data-ng-app="myApp" class="nav-md"
-	data-ng-controller="equipmentCtrl">
+<body data-ng-app="myApp" class="nav-md" data-ng-controller="userCtrl">
 	<div class="container body">
 		<div class="main_container">
 			<div class="col-md-3 left_col">
@@ -96,7 +105,6 @@
 												borrowed equipment</a></li>
 									</ul></li>
 							</ul>
-
 
 
 
@@ -153,7 +161,7 @@
 									href="${pageContext.request.contextPath }/admin/welcome">Home</a>
 								</li>
 								<li class="active"><a
-									href="${pageContext.request.contextPath }/admin/equipment.html">Equipment
+									href="${pageContext.request.contextPath }/superadmin.html">User
 										Management</a></li>
 
 							</ul>
@@ -162,9 +170,11 @@
 					</div>
 					<div class="title_right">
 						<div class="form-group pull-right top_search">
-							<button data-toggle="modal" data-target="#myModal_Add"
+							<%-- <a href="${pageContext.request.contextPath }/superadmin/add.html"
+								class="btn btn-primary btn-lg">Add</a> --%>
+							<button data-toggle="modal" data-target="#myModal_add"
 								type="button" class="btn btn-primary btn-lg"
-								ng-click="ResetForm()">Add</button>
+								ng-click="resetFormAdd()">Add</button>
 						</div>
 					</div>
 					<div class="clearfix"></div>
@@ -172,25 +182,26 @@
 						<div class="col-md-12 col-sm-12 col-xs-12">
 							<div class="x_panel">
 								<div class="x_title">
+									<h3>User Management</h3>
 									<div class="clearfix"></div>
-									<h3>List Equipment Information</h3>
 								</div>
 
 
 								<div class="x_content">
 
-
 									<div class="table-responsive">
+
 										<div id="grid" ui-grid="gridOptions"
 											ui-grid-selection="ui-grid-selection"
 											ui-grid-resize-columns="ui-grid-resize-columns"
 											ui-grid-pagination="ui-grid-pagination" class="myGrid"></div>
+
 									</div>
 								</div>
 							</div>
 						</div>
-						<!-- Modal add new Equipment -->
-						<div class="modal fade" id="myModal_Add" tabindex="-1"
+						<!-- Modal add -->
+						<div class="modal fade" id="myModal_add" tabindex="-1"
 							role="dialog">
 							<div class="modal-dialog" role="document">
 								<div class="modal-content">
@@ -199,104 +210,118 @@
 											aria-label="Close">
 											<span aria-hidden="true">&times;</span>
 										</button>
-										<h4 class="modal-title" id="myModalLabel">Add new
-											Equipment</h4>
+										<h4 class="modal-title" id="myModalLabel">Add new User</h4>
 									</div>
 									<div class="modal-body row">
-										<form class="form-horizontal" name="frmFormAdd"
-											id="fileUploadForm">
+										<form class="form-horizontal" name="frmUserAdd"
+											enctype="multipart/form-data" id="fileUploadForm">
 											<div class="col-md-6">
 												<div class="form-group">
-													<label class=" control-label" for="">Equipment ID</label>
+													<label class=" control-label">Employee ID</label>
 													<div class="">
-														<input id="EquipmentId" name="EquipmentId"
-															ng-keyup="hideDuplicateAlert()"
-															class="form-control input-md"
-															ng-keydown="autoAdd($event)" type="text"
-															ng-model="add_EquipmentId" ng-required="true" />
-														<div ng-messages="frmFormAdd.EquipmentId.$error">
+														<input id="employeeId" name="employeeId"
+															ng-keydown="autoAdd($event)" ng-model="add_employeeId"
+															class="form-control input-md" type="text"
+															ng-required="true" />
+														<div ng-messages="frmUserAdd.employeeId.$error">
 															<div ng-message="required"
-																ng-show="frmFormAdd.EquipmentId.$touched">
+																ng-show="frmUserAdd.employeeId.$touched">
 																<p style="color: red">This field is required</p>
 															</div>
 														</div>
+														<p ng-show="duplicateAlert != ''" ng-bind="duplicateAlert"
+															style="color: red"></p>
+													</div>
+												</div>
+												<div class="form-group">
+													<label class=" control-label">Fullname</label>
+													<div class="">
+														<input id="fullname" name="fullname"
+															ng-model="add_fullname" class="form-control input-md"
+															type="text" ng-required="true" />
+														<div ng-messages="frmUserAdd.fullname.$error">
+															<div ng-message="required"
+																ng-show="frmUserAdd.fullname.$touched">
+																<p style="color: red">This field is required</p>
+															</div>
+														</div>
+														<p ng-show="duplicateAlert != ''" ng-bind="duplicateAlert"
+															style="color: red"></p>
+													</div>
+												</div>
+												<div class="form-group">
+													<label class=" control-label" for="">Username</label>
+													<div class="">
+														<input id="username" name="username"
+															ng-keyup="hideDuplicateAlert()"
+															class="form-control input-md" type="text"
+															ng-model="add_username" ng-required="true" />
+														<div ng-messages="frmUserAdd.username.$error">
+															<div ng-message="required"
+																ng-show="frmUserAdd.username.$touched">
+																<p style="color: red">This field is required</p>
+															</div>
+														</div>
+														<p ng-show="duplicateAlert != ''" ng-bind="duplicateAlert"
+															style="color: red"></p>
 													</div>
 												</div>
 												<p ng-show="duplicateAlert != ''" ng-bind="duplicateAlert"
 													style="color: red"></p>
 
+
+
 												<div class="form-group">
-													<label class=" control-label" for="">Equipment Name</label>
+													<label class=" control-label" for="">Password</label>
 													<div class="">
-														<input id="EquipmentName" name="EquipmentName"
-															class="form-control input-md" type="text"
-															ng-model="add_EquipmentName" ng-required="true" />
-														<div ng-messages="frmFormAdd.EquipmentName.$error">
+														<input id="password" name="password"
+															class="form-control input-md" type="password"
+															ng-model="add_password" ng-required="true" />
+														<div ng-messages="frmUserAdd.password.$error">
 															<div ng-message="required"
-																ng-show="frmFormAdd.EquipmentName.$touched">
+																ng-show="frmUserAdd.password.$touched">
 																<p style="color: red">This field is required</p>
 															</div>
 														</div>
-													</div>
-												</div>
-												<div class="form-group">
-													<label class=" control-label" for="">Quantity</label>
-													<div class="">
-														<input id="quantity" name="quantity"
-															class="form-control input-md" type="number" min="0"
-															ng-model="add_quantity" ng-required="true" />
-														<div ng-messages="frmFormAdd.quantity.$error">
-															<div ng-message="required"
-																ng-show="frmFormAdd.quantity.$touched">
-																<p style="color: red">This field is required</p>
-															</div>
-														</div>
-													</div>
-												</div>
-												<div class="form-group">
-													<label class=" control-label" for="">Unit</label>
-													<div class="">
-														<input id="unit" name="unit" class="form-control input-md"
-															type="text" ng-model="add_unit" ng-required="true" />
-														<div ng-messages="frmFormAdd.unit.$error">
-															<div ng-message="required"
-																ng-show="frmFormAdd.unit.$touched">
-																<p style="color: red">This field is required</p>
-															</div>
-														</div>
-													</div>
-												</div>
-												<div class="form-group">
-													<label class=" control-label" for="">Note</label>
-													<div class="">
-														<input id="note" name="note" class="form-control input-md"
-															type="text" ng-model="add_note" ng-required="true" />
-														<div ng-messages="frmFormAdd.note.$error">
-															<div ng-message="required"
-																ng-show="frmFormAdd.note.$touched">
-																<p style="color: red">This field is required</p>
-															</div>
-														</div>
+														<p ng-show="duplicateAlert != ''" ng-bind="duplicateAlert"
+															style="color: red"></p>
 													</div>
 												</div>
 
 												<div class="form-group">
-													<label class=" control-label" for="">Category</label>
+													<label class=" control-label" for="">Email</label>
 													<div class="">
-														<select ng-selected="category.CategoryName"
-															ng-model="add_categoryName" class="form-control"
-															ng-options="x.categoryName for x in list_category"
-															name="albumName" id="albumName" ng-required="true">
-														</select>
-														<div ng-messages="frmFormAdd.categoryName.$error">
+														<input id="email" name="email"
+															class="form-control input-md" type="email"
+															ng-model="add_email" ng-required="true" />
+														<div ng-messages="frmUserAdd.email.$error">
 															<div ng-message="required"
-																ng-show="frmFormAdd.categoryName.$touched">
+																ng-show="frmUserAdd.email.$touched">
 																<p style="color: red">This field is required</p>
 															</div>
 														</div>
+														<p ng-show="duplicateAlert != ''" ng-bind="duplicateAlert"
+															style="color: red"></p>
 													</div>
 												</div>
 
+												<div class="form-group">
+													<label class="control-label">Status</label> <input
+														type="radio" ng-model="status" ng-value="true"
+														ng-checked="true" /> Active <input type="radio"
+														ng-model="status" ng-value="false" /> Inactive
+
+
+												</div>
+
+												<div class="form-group">
+													<label class="control-label">Role</label> <input
+														type="radio" ng-model="role" ng-value="1"
+														ng-checked="true" /> Admin <input type="radio"
+														ng-model="role" ng-value="2" /> User
+
+
+												</div>
 
 											</div>
 
@@ -308,12 +333,11 @@
 									</div>
 									<div class="modal-footer">
 										<button id="btnSave" name="btnSave" class="btn btn-primary"
-											ng-disabled="frmFormAdd.EquipmentId.$error.required || frmFormAdd.EquipmentName.$error.required||frmFormAdd.lyric.$error.required||frmFormAdd.lyric.$error.required||frmFormAdd.youtube.$error.required "
-											ng-click="add(false)">Add</button>
+											ng-disabled="frmUserAdd.fullname.$error.required || frmUserAdd.username.$error.required ||frmUserAdd.password.$error.required"
+											ng-click="save(false)">Add</button>
 										<button id="btnSave" name="btnSave" class="btn btn-default"
-											ng-click="add(true)"
-											ng-disabled="frmFormAdd.EquipmentId.$error.required || frmFormAdd.EquipmentName.$error.required||frmFormAdd.lyric.$error.required||frmFormAdd.lyric.$error.required||frmFormAdd.youtube.$error.required ">Add
-											and close</button>
+											ng-disabled="frmUserAdd.fullname.$error.required || frmUserAdd.username.$error.required ||frmUserAdd.password.$error.required"
+											ng-click="save(true)">Add and close</button>
 										<button type="button" class="btn btn-default"
 											data-dismiss="modal">Close</button>
 
@@ -322,9 +346,9 @@
 								</div>
 							</div>
 						</div>
-
-						<!-- Modal edit Equipment information -->
-						<div class="modal fade" id="myModal_Edit" tabindex="-1"
+						<!-- Modal-->
+						<!-- Modal edit -->
+						<div class="modal fade" id="myModal_edit" tabindex="-1"
 							role="dialog">
 							<div class="modal-dialog" role="document">
 								<div class="modal-content">
@@ -333,22 +357,54 @@
 											aria-label="Close">
 											<span aria-hidden="true">&times;</span>
 										</button>
-										<h4 class="modal-title" id="myModalLabel">Edit Equipment
-											information</h4>
+										<h4 class="modal-title" id="myModalLabel">Edit User
+											Information</h4>
 									</div>
 									<div class="modal-body row">
 										<form class="form-horizontal" name="editForm">
 											<div class="col-md-6">
+												<input type="hidden" name="id" ng-model="edit_id" />
 												<div class="form-group">
-													<label class=" control-label" for="">Equipment ID</label>
+													<label class=" control-label">EmployeeID</label>
 													<div class="">
-														<input id="EquipmentId" name="EquipmentId"
-															ng-keyup="hideDuplicateAlert()"
-															class="form-control input-md" type="text"
-															ng-model="edit_equipmentId" ng-required="true" />
-														<div ng-messages="editForm.equipmentId.$error">
+														<input id="employeeId" name="employeeId" placeholder=""
+															ng-required="true" ng-model="edit_employeeId"
+															class="form-control input-md" type="text" readonly="readonly" />
+														<div ng-messages="editForm.employeeId.$error">
 															<div ng-message="required"
-																ng-show="editForm.equipmentId.$touched">
+																ng-show="editForm.employeeId.$touched">
+																<p style="color: red">This field is required</p>
+															</div>
+														</div>
+
+													</div>
+												</div>
+												<div class="form-group">
+													<label class=" control-label">Fullname</label>
+													<div class="">
+														<input id="fullname" name="fullname" placeholder=""
+															ng-required="true" ng-model="edit_fullname"
+															class="form-control input-md" type="text" />
+														<div ng-messages="editForm.fullname.$error">
+															<div ng-message="required"
+																ng-show="editForm.fullname.$touched">
+																<p style="color: red">This field is required</p>
+															</div>
+														</div>
+
+													</div>
+												</div>
+												<div class="form-group">
+													<label class=" control-label" for="">Username</label>
+													<div class="">
+														<input id="username" name="username"
+															ng-keyup="hideDuplicateAlert()"
+															class="form-control input-md"
+															ng-keydown="autoAdd($event)" type="text"
+															ng-model="edit_username" ng-required="true" />
+														<div ng-messages="editForm.username.$error">
+															<div ng-message="required"
+																ng-show="editForm.username.$touched">
 																<p style="color: red">This field is required</p>
 															</div>
 														</div>
@@ -356,87 +412,59 @@
 												</div>
 												<p ng-show="duplicateAlert != ''" ng-bind="duplicateAlert"
 													style="color: red"></p>
-
+												<input type="hidden" id="password" name="password"
+													ng-model="edit_password" />
 												<div class="form-group">
-													<label class=" control-label" for="">Equipment Name</label>
-													<div class="">
-														<input id="EquipmentName" name="EquipmentName"
-															class="form-control input-md" type="text"
-															ng-model="edit_equipmentName" ng-required="true" />
-														<div ng-messages="editForm.equipmentName.$error">
-															<div ng-message="required"
-																ng-show="editForm.equipmentName.$touched">
-																<p style="color: red">This field is required</p>
-															</div>
-														</div>
+													<label class="control-label">Status</label>
+													<div class="checkbox">
+														<label> <input type="radio" ng-model="edit_status"
+															value="false" name="status" ng-value="false" /> Disable
+														</label> <label> <input type="radio"
+															ng-model="edit_status" value="true" name="status"
+															ng-value="true" /> Enable
+														</label>
 													</div>
-												</div>
-												<div class="form-group">
-													<label class=" control-label" for="">Quantity</label>
-													<div class="">
-														<input id="quantity" name="quantity"
-															class="form-control input-md" type="number" min="0"
-															ng-model="edit_quantity" ng-required="true" />
-														<div ng-messages="editForm.quantity.$error">
-															<div ng-message="required"
-																ng-show="editForm.quantity.$touched">
-																<p style="color: red">This field is required</p>
-															</div>
-														</div>
-													</div>
-												</div>
-												<div class="form-group">
-													<label class=" control-label" for="">Unit</label>
-													<div class="">
-														<input id="unit" name="unit" class="form-control input-md"
-															type="text" ng-model="edit_unit" ng-required="true" />
-														<div ng-messages="editForm.unit.$error">
-															<div ng-message="required"
-																ng-show="editForm.unit.$touched">
-																<p style="color: red">This field is required</p>
-															</div>
-														</div>
-													</div>
-												</div>
-												<div class="form-group">
-													<label class=" control-label" for="">Note</label>
-													<div class="">
-														<input id="note" name="note" class="form-control input-md"
-															type="text" ng-model="edit_note" ng-required="true" />
-														<div ng-messages="editForm.note.$error">
-															<div ng-message="required"
-																ng-show="editForm.note.$touched">
-																<p style="color: red">This field is required</p>
-															</div>
-														</div>
-													</div>
-												</div>
-
-												<div class="form-group">
-													<label class=" control-label" for="">Category</label>
-													<div class="">
-														<select ng-selected="category.CategoryName"
-															ng-model="edit_categoryName" class="form-control"
-															ng-options="x.categoryName for x in list_category"
-															name="categoryName" id="categoryName" ng-required="true">
-														</select>
-														<div ng-messages="editForm.categoryName.$error">
-															<div ng-message="required"
-																ng-show="editForm.categoryName.$touched">
-																<p style="color: red">This field is required</p>
-															</div>
-														</div>
-													</div>
-												</div>
 
 
+												</div>
+												<div class="form-group">
+													<label class="control-label">Role</label>
+													<div class="checkbox">
+														<label> <input type="radio" ng-model="edit_role"
+															value="1" name="role" ng-value="1" />Admin
+														</label> <label> <input type="radio" ng-model="edit_role"
+															value="2" name="role" ng-value="2" />User
+														</label>
+													</div>
+
+
+												</div>
+												<div class="form-group">
+													<label class=" control-label" for="">Email</label>
+													<div class="">
+														<input id="email" name="email"
+															ng-keyup="hideDuplicateAlert()"
+															class="form-control input-md"
+															ng-keydown="autoAdd($event)" type="text"
+															ng-model="edit_email" ng-required="true" />
+														<div ng-messages="editForm.email.$error">
+															<div ng-message="required"
+																ng-show="editForm.email.$touched">
+																<p style="color: red">This field is required</p>
+															</div>
+														</div>
+													</div>
+
+												</div>
 											</div>
 										</form>
 									</div>
 									<div class="modal-footer">
-
+										<button type="button" class="pull-left btn btn-danger"
+											data-toggle="modal" data-target="#myModal_confirmReset"
+											ng-click="ResetPass(x)">Reset password</button>
 										<button id="btnSave" name="btnSave" class="btn btn-primary"
-											ng-disabled="editForm.EquipmentId.$error.required || editForm.EquipmentName.$error.required||editForm.lyric.$error.required||editForm.lyric.$error.required||editForm.youtube.$error.required "
+											ng-disabled="editForm.username.$error.required ||editForm.fullname.$error.required"
 											ng-click="update()" data-dismiss="modal">Save</button>
 										<button type="button" class="btn btn-default"
 											data-dismiss="modal">Close</button>
@@ -444,6 +472,82 @@
 								</div>
 							</div>
 						</div>
+						<!-- Modal confirmReset -->
+						<div class="modal fade" id="myModal_confirmReset" tabindex="-1"
+							role="dialog" aria-labelledby="myModalLabel">
+							<div class="modal-dialog" role="document">
+								<div class="modal-content">
+
+									<div class="modal-header">
+										<button type="button" class="close" data-dismiss="modal"
+											aria-hidden="true">&times;</button>
+										<h4 class="modal-title" id="myModalLabel">Confirm reset
+											password</h4>
+									</div>
+
+									<div class="modal-body row">
+										<form class="form-horizontal" name="frmReset">
+											<div class="form-group">
+												<label class=" control-label" for="birthday">New
+													password</label>
+												<div class="">
+													<input type="password" id="newPassword" name="newPassword"
+														ng-model="newPassword" class="form-control "
+														required="required" />
+													<div ng-messages="frmReset.newPassword.$error">
+														<div ng-message="required"
+															ng-show="frmReset.newPassword.$touched">
+															<p style="color: red">This field is required</p>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div class="form-group">
+												<label class=" control-label" for="birthday">Retype
+													password</label>
+												<div class="">
+													<input type="password" id="reNewPassword"
+														name="reNewPassword" ng-model="reNewPassword"
+														class="form-control" required="required"
+														match-password="newPassword" />
+													<div ng-messages="frmReset.reNewPassword.$error">
+														<div ng-message="required"
+															ng-show="frmReset.reNewPassword.$touched">
+															<p style="color: red">This field is required</p>
+														</div>
+														<div ng-message="matchPassword">
+															<p style="color: red">Must match the previous field</p>
+														</div>
+													</div>
+
+												</div>
+
+											</div>
+											<input type="hidden" ng-model="reset_id_role" /> <input
+												type="hidden" ng-model="reset_username" /> <input
+												type="hidden" ng-model="reset_fullname" /> <input
+												type="hidden" ng-model="reset_status" />
+												<input type="hidden" ng-model="reset_email"/>
+												<input type="hidden" ng-model ="reset_employeeId"/>
+												
+
+										</form>
+									</div>
+
+									<div class="modal-footer">
+										<a class="btn btn-danger btn-ok" data-target="#myModal_reset"
+											data-toggle="modal"
+											ng-click="frmReset.$invalid || ResetPassword()"
+											ng-disabled="frmReset.$invalid">Yes</a>
+
+										<button type="button" class="btn btn-default"
+											data-dismiss="modal">No</button>
+
+									</div>
+								</div>
+							</div>
+						</div>
+
 						<!-- Modal delete -->
 						<div class="modal fade" id="myModal_delete" tabindex="-1"
 							role="dialog" aria-labelledby="myModalLabel">
@@ -464,7 +568,7 @@
 									</div>
 
 									<div class="modal-footer">
-										<a class="btn btn-danger btn-ok" ng-click="delete()">Yes</a>
+										<a class="btn btn-danger btn-ok" ng-click="deleteUsers()">Yes</a>
 										<button type="button" class="btn btn-default"
 											data-dismiss="modal">No</button>
 
@@ -483,6 +587,7 @@
 			</div>
 		</div>
 	</div>
+
 
 	<!-- jQuery -->
 	<script
@@ -528,9 +633,10 @@
 		src="${pageContext.request.contextPath }/assets/scripts/myApp.js"></script>
 
 	<script type="text/javascript"
-		src="${pageContext.request.contextPath }/assets/scripts/equipmentCtrl.js"></script>
-
+		src="${pageContext.request.contextPath }/assets/scripts/userCtrl.js"></script>
 	<script src="${pageContext.request.contextPath }/assets/js/ui-grid.js"></script>
+
+
 </body>
 
 </html>

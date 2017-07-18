@@ -21,14 +21,14 @@ public class UserRestController {
 	@Autowired
 	private UserService userService;
 	@RequestMapping(value = "user", method = RequestMethod.GET)
-	public ResponseEntity<List<Employee>> getAllUser() {
+	public ResponseEntity<List<User>> getAllUser() {
 
-		return new ResponseEntity<List<Employee>>(userService.findAllUser(), HttpStatus.OK);
+		return new ResponseEntity<List<User>>(userService.findAllUser(), HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "user/{id}", method = RequestMethod.GET)
-	public ResponseEntity<Employee> getUser(@PathVariable int id) {
-		Employee user;
+	public ResponseEntity<User> getUser(@PathVariable int id) {
+		User user;
 		try {
 			user = userService.getUser(id);
 
@@ -39,7 +39,7 @@ public class UserRestController {
 	}
 
 	@RequestMapping(value = "user", method = RequestMethod.POST)
-	public ResponseEntity<Void> addUser(@RequestBody Employee user) {
+	public ResponseEntity<Void> addUser(@RequestBody User user) {
 		try {
 			userService.addUser(user);
 		} catch (Exception e) {
@@ -50,7 +50,7 @@ public class UserRestController {
 	}
 
 	@RequestMapping(value = "user", method = RequestMethod.PUT)
-	public ResponseEntity<Void> updateUser(@RequestBody Employee user) {
+	public ResponseEntity<Void> updateUser(@RequestBody User user) {
 		try {
 			userService.updateUser(user);
 		} catch (Exception e) {
@@ -66,6 +66,15 @@ public class UserRestController {
 			userService.deleteUser(id);
 		} catch (Exception ex) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<>(HttpStatus.ACCEPTED);
+	}
+@RequestMapping(value="user/resetpass",method= RequestMethod.PUT)
+	public ResponseEntity<Void> resetPassword(@RequestBody User user) {
+		try {
+			userService.resetPass(user);
+		} catch (Exception e) {
+			return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
 		}
 		return new ResponseEntity<>(HttpStatus.ACCEPTED);
 	}

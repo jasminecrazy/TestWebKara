@@ -46,7 +46,8 @@
 
 </head>
 
-<body data-ng-app="myApp" class="nav-md" data-ng-controller="categoryCtrl">
+<body data-ng-app="myApp" class="nav-md"
+	data-ng-controller="categoryCtrl">
 	<div class="container body">
 		<div class="main_container">
 			<div class="col-md-3 left_col">
@@ -78,17 +79,24 @@
 										<li><a
 											href="${pageContext.request.contextPath }/admin/equipment.html">Equipment
 												management</a></li>
-												<li><a
+										<li>
+											 <a
 											href="${pageContext.request.contextPath }/admin/user.html">User
-												management</a></li>
-												<li><a
+												management</a></li> 
+										<li><a
 											href="${pageContext.request.contextPath }/admin.html">Category
 												management</a></li>
 
 
 									</ul></li>
-								<li><a> <i class="fa fa-list-ul"></i>List<span class="fa fa-chevron-down"></span></a>
-									</li>
+								<li><a> <i class="fa fa-list-ul"></i>List<span
+										class="fa fa-chevron-down"></span></a>
+									<ul class="nav child_menu">
+										<li><a
+											href="${pageContext.request.contextPath }/admin/list.html">List
+												borrowed equipment</a></li>
+									</ul>
+								</li>
 							</ul>
 
 
@@ -193,7 +201,8 @@
 											aria-label="Close">
 											<span aria-hidden="true">&times;</span>
 										</button>
-										<h4 class="modal-title" id="myModalLabel">Add new Category</h4>
+										<h4 class="modal-title" id="myModalLabel">Add new
+											Category</h4>
 									</div>
 									<div class="modal-body row">
 										<form class="form-horizontal" name="frmFormAdd"
@@ -232,7 +241,7 @@
 														</div>
 													</div>
 												</div>
-												
+
 
 											</div>
 
@@ -307,7 +316,7 @@
 														</div>
 													</div>
 												</div>
-												
+
 
 											</div>
 										</form>

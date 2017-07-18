@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -70,15 +71,29 @@ body, html {
 	<!-- Navbar (sit on top) -->
 	<div class="w3-top">
 		<div class="w3-bar w3-white w3-card-2" id="myNavbar">
-			<a href="${pageContext.request.contextPath }/demo.html"
+			<a href="${pageContext.request.contextPath }/user.html"
 				class="w3-bar-item w3-button w3-wide">Equipment</a>
 			<!-- Right-sided navbar links -->
 			<div class="w3-right w3-hide-small">
-				<a href="#" class="w3-bar-item w3-button ">Danh sach</a> <a href="#"
-					class="w3-bar-item w3-button">Test</a> <a
-					href="${pageContext.request.contextPath }/demo/albumdetail/{{x.id}}.html"
-					class="w3-bar-item w3-button" data-ng-repeat="x in list_album"
-					ng-bind="x.albumName"></a>
+				<a href="${pageContext.request.contextPath }/user/detail.html"
+					class="w3-bar-item w3-button ">Danh sách các thiết bị đã mượn</a>
+				<%-- <a href="<c:url value='/j_spring_security_logout'/>"
+					class="w3-bar-item w3-button">Logout</a> --%>
+				<%-- <ul class="nav navbar-nav navbar-right">
+					<li class=""><a href="javascript:;"
+						class="user-profile dropdown-toggle" data-toggle="dropdown"
+						aria-expanded="false"> Admin <span class=" fa fa-angle-down"></span>
+					</a>
+						<ul class="dropdown-menu dropdown-usermenu pull-right">
+
+
+
+							<li><a href="<c:url value='/j_spring_security_logout'/>"><i
+									class="fa fa-sign-out pull-right"></i> Log Out</a></li>
+						</ul></li>
+
+
+				</ul> --%>
 
 
 			</div>
@@ -106,17 +121,23 @@ body, html {
 			ng-hide="showme">
 			<h3 class="w3-left h3" ng-model="detail_categoryName"></h3>
 			<div class="row " style="padding-left: 70px">
+				<h2>Danh sách các thiết bị đã mượn</h2>
+				<hr>
+				<c:forEach var="details" items="${detail}">
+					<%-- <h1 style="font-size: 30px">Tên thiết bị:
+						${detail.equipment.equipmentName}</h1>
+					<h5>Mã : ${detail.equipmentId}</h5>
+					<h3>Mô tả :${detail.status}</h3>
+
+					<h3>Trạng thái</h3> --%>
+					${details.id}
+
+					
+				</c:forEach>
 
 
-				<h1 style="font-size: 30px">Tên thiết bị:
-					${detail.equipmentName}</h1>
-				<h5>Mã : ${detail.equipmentId}</h5>
-				<h3>Mô tả :${detail.status}</h3>
-
-				<h3>Trạng thái</h3>
-
-				<button ng-click="borrow()" class="btn btn-primary"
-					data-toggle="modal" data-target="#myModal_Add">Mượn</button>
+		
+				
 
 
 			</div>
@@ -131,7 +152,7 @@ body, html {
 							<h4 class="modal-title" id="myModalLabel">Đăng kí mượn thiết
 								bị</h4>
 						</div>
-						<div class="modal-body row " style="padding-left:30px">
+						<div class="modal-body row " style="padding-left: 30px">
 							<form class="form-horizontal" name="frmFormAdd"
 								id="fileUploadForm">
 								<div class="col-md-6">
@@ -150,9 +171,9 @@ body, html {
 										<label class=" control-label" for="">Tên thiết bị</label>
 										<div class="">
 											<input id="EquipmentName" name="EquipmentName"
-												class="form-control input-md" type="text" readonly= "readonly"
-												ng-model="add_EquipmentName"/>
-											
+												class="form-control input-md" type="text"
+												readonly="readonly" ng-model="add_EquipmentName" />
+
 										</div>
 									</div>
 									<div class="form-group">
@@ -174,7 +195,7 @@ body, html {
 										<div class="">
 											<input id="unit" name="unit" class="form-control input-md"
 												type="text" ng-model="add_unit" readonly="readonly" />
-											
+
 										</div>
 									</div>
 									<div class="form-group">
@@ -182,18 +203,19 @@ body, html {
 										<div class="">
 											<input id="note" name="note" class="form-control input-md"
 												type="text" ng-model="add_note" />
-											
+
 										</div>
 									</div>
 									<div class="form-group">
 										<label class=" control-label" for="">Ngày trả</label>
 										<div class="">
-											<input id="date_return" name="date_return" class="form-control input-md"
-												type="date" ng-model="add_date_return" />
-											
+											<input id="date_return" name="date_return"
+												class="form-control input-md" type="date"
+												ng-model="add_date_return" />
+
 										</div>
 									</div>
-									
+
 
 
 								</div>
@@ -209,7 +231,7 @@ body, html {
 							<button id="btnSave" name="btnSave" class="btn btn-primary"
 								ng-disabled="frmFormAdd.CategoryId.$error.required || frmFormAdd.CategoryName.$error.required||frmFormAdd.lyric.$error.required||frmFormAdd.lyric.$error.required||frmFormAdd.youtube.$error.required "
 								ng-click="add">Add</button>
-							
+
 							<button type="button" class="btn btn-default"
 								data-dismiss="modal">Close</button>
 

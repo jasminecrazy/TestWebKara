@@ -6,15 +6,17 @@ import demo.entity.Employee;
 import demo.entity.User;
 
 public interface UserService {
-	public List<Employee> findAllUser();
+	public List<User> findAllUser();
 
-	public Employee getUser(int id);
+	public User getUser(int id);
 
 	public void deleteUser(int id);
 
-	public void addUser(Employee user);
+	public void addUser(User user);
 
-	public void updateUser(Employee user);
+	public void updateUser(User user);
+
+	public void resetPass(User user);
 
 
 }
