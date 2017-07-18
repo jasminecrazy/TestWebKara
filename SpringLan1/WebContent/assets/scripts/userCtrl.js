@@ -239,6 +239,7 @@ app
 											$scope.reset_id_role = response.data.role.id;
 											$scope.reset_fullname =response.data.fullname;
 											$scope.reset_status = response.data.enabled
+										
 
 										});
 					}
