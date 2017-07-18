@@ -7,6 +7,8 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Repository;
 
 import demo.entity.Borrow;
@@ -22,8 +24,9 @@ private SessionFactory sessionFactory;
 		Session session = sessionFactory.openSession();
 		Transaction transaction = null;
 		try {
+			
 			transaction = session.beginTransaction();
-			borrow =  session.createQuery("select c from Borrow c where c.user.username =:username").setString("user", username).list();
+			borrow =  session.createQuery("select c from Borrow c where c.user.username =: username").setString("username",username).list();
 			transaction.commit();
 		} catch (Exception e) {
 			System.out.println(e.getMessage());

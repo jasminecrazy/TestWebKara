@@ -22,11 +22,9 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "detail/{username}", method = RequestMethod.GET)
-	public String detail(@PathVariable ("username") String username, ModelMap mm ) {
+	public String detail(@PathVariable("username") String username, ModelMap mm ) {
 		
-		/*User user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-	      String name = user.getUsername(); //get logged in username
-*/		mm.put("detail",borrowService.getUserBorow(username));
+				mm.put("detail",borrowService.getUserBorow(username));
 		return "user/detail";
 	}
 }

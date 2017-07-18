@@ -34,7 +34,12 @@ var equipmentID = "";
 												$scope.add_EquipmentId = response.data[i].equipmentId;
 												$scope.add_EquipmentName = response.data[i].equipmentName;
 												$scope.add_unit = response.data[i].unit;
-												
+												$scope.add_date_return ="";
+												$scope.add_employeeId = "";
+												$scope.add_quantity ="";
+												$scope.frmFormAdd.employeeName.$setUntouched();
+												$scope.frmFormAdd.quantity.$setUntouched();
+												$scope.frmFormAdd.date_return.$setUntouched();
 												}
 										
 											
@@ -53,15 +58,6 @@ var equipmentID = "";
 						dateReturnback : $scope.add_date_return,
 						quantity : $scope.add_quantity,
 						status : false
-						
-								/*employeeId: 'J1',
-								equipment :{
-									'id':1
-								},
-						 "dateBorrow": "2017-07-17",
-					        "dateReturnback": "2017-07-19",
-					        "quantity": 1,
-					        "status": true*/
 							};
 						var currentDate = new Date();
 						$http.post("http://localhost:8080/EquipmentServer/api/borrow", borrowDto)
@@ -70,6 +66,7 @@ var equipmentID = "";
 											if (result.status == 201) {
 
 												$("#myModal_Add").modal("hide");
+												GetListEquipment();
 												alertAddSucess();
 
 											}

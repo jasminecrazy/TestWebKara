@@ -1,11 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="sec"
+	uri="http://www.springframework.org/security/tags"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Karaoke Song</title>
+<title>Danh sách trang thiết bị</title>
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -60,7 +62,7 @@ body, html {
 }
 
 .w3-white, .w3-hover-white:hover {
-	color: #ffff !important;
+	color: #00000 !important;
 	background-color: #f0f0f0 !important;
 	font-weight: bold;
 	font-size: 19px;
@@ -72,13 +74,15 @@ body, html {
 	<div class="w3-top">
 		<div class="w3-bar w3-white w3-card-2" id="myNavbar">
 			<a href="${pageContext.request.contextPath }/demo.html"
-				class="w3-bar-item w3-button w3-wide">Equipment</a>
+				class="w3-bar-item w3-button w3-wide">Logo</a>
 			<!-- Right-sided navbar links -->
 			<div class="w3-right w3-hide-small">
-			<sec:authentication var="user" property="principal"/>
-				<a href="${pageContext.request.contextPath }/user/detail/${user.username}.html" class="w3-bar-item w3-button ">Xem Danh sách thiết bị đã mượn</a><%--  <a href="<c:url value='/j_spring_security_logout'/>"
+
+				<a
+					href="${pageContext.request.contextPath }/user/detail/${pageContext.request.userPrincipal.name }.html"
+					class="w3-bar-item w3-button ">Xem Danh sách thiết bị đã mượn</a> <a
+					href="<c:url value='/j_spring_security_logout'/>"
 					class="w3-bar-item w3-button">Logout</a>
- --%>
 
 			</div>
 			<!-- Hide right-floated links on small screens and replace them with a menu icon -->
@@ -100,12 +104,15 @@ body, html {
 		data-ng-repeat="x in list_newVol">{{x.volName}}</a> <a href="#pricing"
 		onclick="w3_close()" data-ng-repeat="x in list_album"
 		class="w3-bar-item w3-button">{{x.albumName}}</a> </nav>
-	<div class="row" style="padding-top: 200px">
+	<!-- <div class="row" style="padding-top: 200px">
 		<div class="row t " style="margin-left: 100px">
 			<h1>Danh sách thiết bị</h1>
 			<hr>
 			<div data-ng-repeat="x in list_equipment">
-				Tên thiết bị<h3 data-ng-bind="x.equipmentName"></h3>
+				<div class="row">
+					<label>Tên thiết bị: </label>
+					<h3 data-ng-bind="x.equipmentName"></h3>
+				</div>
 				Mô tả :
 				<p data-ng-bind="x.status"></p>
 				Số lượng
@@ -115,6 +122,24 @@ body, html {
 				<hr>
 			</div>
 		</div>
+	</div> -->
+<div class="w3-row-padding w3-center" style="margin-top:200px" >
+		<div class="w3-third" data-ng-repeat="x in list_equipment">
+			<div class="w3-card-2" style="min-height: 460px">
+				<h3 style="color:blue; padding-top:10px">{{x.equipmentName}}</h3>
+				<br> <i class="fa fa-desktop w3-margin-bottom w3-text-theme"
+					style="font-size: 120px"></i>
+				<p style="font-weight:bold">Mô tả: {{x.status}}</p>
+				<p>Tình trạng: {{x.quantity > 0 ? 'Còn':'Hết'}}</p>
+				<button ng-click="borrow(x)" class="btn btn-primary"
+					data-toggle="modal" data-target="#myModal_Add">Mượn</button>
+				
+			</div>
+		</div>
+
+		
+	</div> 
+	
 	</div>
 	<div class="modal fade" id="myModal_Add" tabindex="-1" role="dialog">
 		<div class="modal-dialog" role="document">

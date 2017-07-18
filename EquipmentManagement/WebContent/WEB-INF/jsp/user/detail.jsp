@@ -60,7 +60,7 @@ body, html {
 }
 
 .w3-white, .w3-hover-white:hover {
-	color: #ffff !important;
+	color: #00000 !important;
 	background-color: #f0f0f0 !important;
 	font-weight: bold;
 	font-size: 19px;
@@ -77,8 +77,8 @@ body, html {
 			<div class="w3-right w3-hide-small">
 				<a href="${pageContext.request.contextPath }/user/detail.html"
 					class="w3-bar-item w3-button ">Danh sách các thiết bị đã mượn</a>
-				<%-- <a href="<c:url value='/j_spring_security_logout'/>"
-					class="w3-bar-item w3-button">Logout</a> --%>
+			 <a href="<c:url value='/j_spring_security_logout'/>"
+					class="w3-bar-item w3-button">Logout</a>
 				<%-- <ul class="nav navbar-nav navbar-right">
 					<li class=""><a href="javascript:;"
 						class="user-profile dropdown-toggle" data-toggle="dropdown"
