@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -72,11 +73,12 @@ body, html {
 	<div class="w3-top">
 		<div class="w3-bar w3-white w3-card-2" id="myNavbar">
 			<a href="${pageContext.request.contextPath }/user.html"
-				class="w3-bar-item w3-button w3-wide">Equipment</a>
+				class="w3-bar-item w3-button w3-wide">Logo</a>
 			<!-- Right-sided navbar links -->
 			<div class="w3-right w3-hide-small">
-				<a href="${pageContext.request.contextPath }/user/detail.html"
-					class="w3-bar-item w3-button ">Danh sách các thiết bị đã mượn</a>
+				<a
+					href="${pageContext.request.contextPath }/user/detail/${pageContext.request.userPrincipal.name }.html"
+					class="w3-bar-item w3-button ">Xem Danh sách thiết bị đã mượn</a>
 			 <a href="<c:url value='/j_spring_security_logout'/>"
 					class="w3-bar-item w3-button">Logout</a>
 				<%-- <ul class="nav navbar-nav navbar-right">
@@ -130,7 +132,18 @@ body, html {
 					<h3>Mô tả :${detail.status}</h3>
 
 					<h3>Trạng thái</h3> --%>
-					${details.id}
+					<div class="row">
+						<div class="equipmentName">${details.equipment.equipmentName}</div>
+						<p>Số lượng mượn :${details.quantity }</p>
+						<p>Ngày mượn:<fmt:formatDate value="${details.dateBorrow}" pattern="dd-MM-yyyy" /></p>
+						<p>Ngày trả :<fmt:formatDate value="${details.dateReturnback}" pattern="dd-MM-yyyy" /></p>
+						<p>Trạng thái: ${details.status?'đã được duyệt':'đang đợi duyệt' }</p>
+						<button class="btn btn-primary" ng-model="btnLendBack"> Trả</button>
+					</div>
+					<hr>
+					
+					
+					
 
 					
 				</c:forEach>
@@ -141,105 +154,7 @@ body, html {
 
 
 			</div>
-			<div class="modal fade" id="myModal_Add" tabindex="-1" role="dialog">
-				<div class="modal-dialog" role="document">
-					<div class="modal-content">
-						<div class="modal-header">
-							<button type="button" class="close" data-dismiss="modal"
-								aria-label="Close">
-								<span aria-hidden="true">&times;</span>
-							</button>
-							<h4 class="modal-title" id="myModalLabel">Đăng kí mượn thiết
-								bị</h4>
-						</div>
-						<div class="modal-body row " style="padding-left: 30px">
-							<form class="form-horizontal" name="frmFormAdd"
-								id="fileUploadForm">
-								<div class="col-md-6">
-									<div class="form-group">
-										<label class=" control-label" for="">Mã thiết bị</label>
-										<div class="">
-											<input id="EquipmentId" name="EquipmentId"
-												class="form-control input-md" type="text"
-												readonly="readonly" ng-model="add_EquipmentId" />
-
-										</div>
-									</div>
-
-
-									<div class="form-group">
-										<label class=" control-label" for="">Tên thiết bị</label>
-										<div class="">
-											<input id="EquipmentName" name="EquipmentName"
-												class="form-control input-md" type="text"
-												readonly="readonly" ng-model="add_EquipmentName" />
-
-										</div>
-									</div>
-									<div class="form-group">
-										<label class=" control-label" for="">Quantity</label>
-										<div class="">
-											<input id="quantity" name="quantity"
-												class="form-control input-md" type="number" min="0"
-												ng-model="add_quantity" ng-required="true" />
-											<div ng-messages="frmFormAdd.quantity.$error">
-												<div ng-message="required"
-													ng-show="frmFormAdd.quantity.$touched">
-													<p style="color: red">This field is required</p>
-												</div>
-											</div>
-										</div>
-									</div>
-									<div class="form-group">
-										<label class=" control-label" for="">Unit</label>
-										<div class="">
-											<input id="unit" name="unit" class="form-control input-md"
-												type="text" ng-model="add_unit" readonly="readonly" />
-
-										</div>
-									</div>
-									<div class="form-group">
-										<label class=" control-label" for="">Note</label>
-										<div class="">
-											<input id="note" name="note" class="form-control input-md"
-												type="text" ng-model="add_note" />
-
-										</div>
-									</div>
-									<div class="form-group">
-										<label class=" control-label" for="">Ngày trả</label>
-										<div class="">
-											<input id="date_return" name="date_return"
-												class="form-control input-md" type="date"
-												ng-model="add_date_return" />
-
-										</div>
-									</div>
-
-
-
-								</div>
-
-
-
-
-
-
-							</form>
-						</div>
-						<div class="modal-footer">
-							<button id="btnSave" name="btnSave" class="btn btn-primary"
-								ng-disabled="frmFormAdd.CategoryId.$error.required || frmFormAdd.CategoryName.$error.required||frmFormAdd.lyric.$error.required||frmFormAdd.lyric.$error.required||frmFormAdd.youtube.$error.required "
-								ng-click="add">Add</button>
-
-							<button type="button" class="btn btn-default"
-								data-dismiss="modal">Close</button>
-
-						</div>
-
-					</div>
-				</div>
-			</div>
+			
 
 
 		</div>

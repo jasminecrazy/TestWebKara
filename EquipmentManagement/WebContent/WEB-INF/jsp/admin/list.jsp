@@ -57,7 +57,7 @@
 					<div class="profile clearfix">
 						<div class="profile_pic">
 							<img
-								src="${pageContext.request.contextPath }/assets/images/preview.png"
+								src="${pageContext.request.contextPath }/assets/images/avtar.png"
 								alt="..." class="img-circle profile_img" />
 						</div>
 						<div class="profile_info">

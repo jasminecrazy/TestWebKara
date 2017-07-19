@@ -67,7 +67,7 @@
 					<div class="profile clearfix">
 						<div class="profile_pic">
 							<img
-								src="${pageContext.request.contextPath }/assets/images/preview.png"
+								src="${pageContext.request.contextPath }/assets/images/avtar.png"
 								alt="..." class="img-circle profile_img" />
 						</div>
 						<div class="profile_info">
@@ -305,11 +305,16 @@
 													</div>
 												</div>
 
-												<div class="form-group">
-													<label class="control-label">Status</label> <input
-														type="radio" ng-model="status" ng-value="true"
-														ng-checked="true" /> Active <input type="radio"
-														ng-model="status" ng-value="false" /> Inactive
+													<div class="form-group">
+													<label class="control-label">Status</label>
+													<div class="checkbox">
+														<label> <input type="radio" ng-model="add_status"
+															value="false" name="status" ng-value="false" /> Disable
+														</label> <label> <input type="radio"
+															ng-model="add_status" value="true" name="status"
+															ng-value="true" ng-checked="true"/> Enable
+														</label>
+													</div>
 
 
 												</div>

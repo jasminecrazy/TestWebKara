@@ -26,7 +26,7 @@ private SessionFactory sessionFactory;
 		try {
 			
 			transaction = session.beginTransaction();
-			borrow =  session.createQuery("select c from Borrow c where c.user.username =: 'admin'").setString("username",username).list();
+			borrow =  session.createQuery("select c from Borrow c where c.user.username =:username").setString("username", username).list();
 			transaction.commit();
 		} catch (Exception e) {
 			System.out.println(e.getMessage());

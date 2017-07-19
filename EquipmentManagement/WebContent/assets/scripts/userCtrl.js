@@ -116,11 +116,12 @@ app
 											employeeId : $scope.add_employeeId,
 											employeeName : $scope.add_fullname,
 											password : $scope.add_password,
+											enabled : $scope.add_status,
+
+											email : $scope.add_email,
 											role : {
 												'id' : $scope.role
-											},
-											enabled : $scope.status,
-											email : $scope.add_email
+											}
 										},
 
 										dataType : "json"
@@ -200,7 +201,7 @@ app
 
 						var userData = {
 							id : userID,
-							employeeId:$scope.edit_employeeId,
+							employeeId : $scope.edit_employeeId,
 							username : $scope.edit_username,
 							employeeName : $scope.edit_fullname,
 							enabled : ($scope.edit_status == null ? false
@@ -211,8 +212,7 @@ app
 								'id' : $scope.edit_role
 							},
 							email : $scope.edit_email
-							
-						
+
 						};
 
 						$http(
@@ -270,8 +270,8 @@ app
 											$scope.reset_id_role = response.data.role.id;
 											$scope.reset_fullname = response.data.employeeName;
 											$scope.reset_status = response.data.enabled;
-											$scope.reset_employeeId= response.data.employeeId;
-											
+											$scope.reset_employeeId = response.data.employeeId;
+
 											$scope.reset_email = response.data.email;
 											console.log($scope.reset_fullname);
 
@@ -290,8 +290,8 @@ app
 							username : $scope.reset_username,
 							employeeName : $scope.reset_fullname,
 							enabled : $scope.reset_role,
-							employeeId :$scope.reset_employeeId,
-							email:$scope.reset_email
+							employeeId : $scope.reset_employeeId,
+							email : $scope.reset_email
 						};
 						$http(
 								{

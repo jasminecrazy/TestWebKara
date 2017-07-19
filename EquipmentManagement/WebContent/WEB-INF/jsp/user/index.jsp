@@ -73,7 +73,7 @@ body, html {
 	<!-- Navbar (sit on top) -->
 	<div class="w3-top">
 		<div class="w3-bar w3-white w3-card-2" id="myNavbar">
-			<a href="${pageContext.request.contextPath }/demo.html"
+			<a href="${pageContext.request.contextPath }/user.html"
 				class="w3-bar-item w3-button w3-wide">Logo</a>
 			<!-- Right-sided navbar links -->
 			<div class="w3-right w3-hide-small">
@@ -123,31 +123,32 @@ body, html {
 			</div>
 		</div>
 	</div> -->
-<div class="w3-row-padding w3-center" style="margin-top:200px" >
-		<div class="w3-third" data-ng-repeat="x in list_equipment" data-ng-show="showList(x,$index)">
+	<div class="w3-row-padding w3-center" style="margin-top: 200px">
+		<div class="w3-third" data-ng-repeat="x in list_equipment"
+			data-ng-show="showList(x,$index)">
 			<div class="w3-card-2" style="min-height: 460px">
-				<h3 style="color:blue; padding-top:10px">{{x.equipmentName}}</h3>
+				<h3 style="color: blue; padding-top: 10px">{{x.equipmentName}}</h3>
 				<br> <i class="fa fa-desktop w3-margin-bottom w3-text-theme"
 					style="font-size: 120px"></i>
-				<p style="font-weight:bold">Mô tả: {{x.status}}</p>
+				<p style="font-weight: bold">Mô tả: {{x.status}}</p>
 				<p>Tình trạng: {{x.quantity > 0 ? 'Còn':'Hết'}}</p>
 				<button ng-click="borrow(x)" class="btn btn-primary"
 					data-toggle="modal" data-target="#myModal_Add">Mượn</button>
-				
+
 			</div>
 		</div>
 
-		
-	</div> 
+
+	</div>
 	<div class='w3-center'>
-			<uib-pagination data-total-items="list_equipment.length"
-				data-ng-model="currentPage" data-ng-change="updatePageIndexes()"
-				data-max-size="maxPaginationSize" data-items-per-page="itemsPerPage"
-				data-boundary-links="true" data-previous-text="&lsaquo;"
-				data-next-text="&rsaquo;" data-first-text="&laquo;"
-				data-last-text="&raquo;"> </uib-pagination>
-		</div>
-	
+		<uib-pagination data-total-items="list_equipment.length"
+			data-ng-model="currentPage" data-ng-change="updatePageIndexes()"
+			data-max-size="maxPaginationSize" data-items-per-page="itemsPerPage"
+			data-boundary-links="true" data-previous-text="&lsaquo;"
+			data-next-text="&rsaquo;" data-first-text="&laquo;"
+			data-last-text="&raquo;"> </uib-pagination>
+	</div>
+
 	<div class="modal fade" id="myModal_Add" tabindex="-1" role="dialog">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
@@ -228,7 +229,7 @@ body, html {
 								<div class="">
 									<input id="date_return" name="date_return"
 										class="form-control input-md" type="date"
-										ng-model="add_date_return" />
+										ng-model="add_date_return" min="{{today}}"/>
 
 								</div>
 								<div ng-messages="frmFormAdd.date_return.$error">
@@ -236,8 +237,11 @@ body, html {
 										ng-show="frmFormAdd.date_return.$touched">
 										<p style="color: red">This field is required</p>
 									</div>
+									
 								</div>
+								<span ng-show="frmFormAdd.date_return.$error.min" style="color:red">Ngày trả không được nhỏ hơn ngày mượn</span>
 							</div>
+							
 
 
 

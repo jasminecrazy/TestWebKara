@@ -1,6 +1,7 @@
 package demo.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
@@ -23,8 +24,16 @@ public class UserController {
 
 	@RequestMapping(value = "detail/{username}", method = RequestMethod.GET)
 	public String detail(@PathVariable("username") String username, ModelMap mm ) {
-		
-				mm.put("detail",borrowService.getUserBorow(username));
+		/*
+		 *  Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+      String name = auth.getName(); //get logged in username
+
+      model.addAttribute("username", name);
+		 * */
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		 username = auth.getName();
+		mm.addAttribute("detail",borrowService.getUserBorow(username));
+				//mm.put("detail",borrowService.getUserBorow("user"));
 		return "user/detail";
 	}
 }
