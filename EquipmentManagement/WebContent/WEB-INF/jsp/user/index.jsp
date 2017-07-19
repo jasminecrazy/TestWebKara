@@ -124,7 +124,7 @@ body, html {
 		</div>
 	</div> -->
 <div class="w3-row-padding w3-center" style="margin-top:200px" >
-		<div class="w3-third" data-ng-repeat="x in list_equipment">
+		<div class="w3-third" data-ng-repeat="x in list_equipment" data-ng-show="showList(x,$index)">
 			<div class="w3-card-2" style="min-height: 460px">
 				<h3 style="color:blue; padding-top:10px">{{x.equipmentName}}</h3>
 				<br> <i class="fa fa-desktop w3-margin-bottom w3-text-theme"
@@ -139,8 +139,15 @@ body, html {
 
 		
 	</div> 
+	<div class='w3-center'>
+			<uib-pagination data-total-items="list_equipment.length"
+				data-ng-model="currentPage" data-ng-change="updatePageIndexes()"
+				data-max-size="maxPaginationSize" data-items-per-page="itemsPerPage"
+				data-boundary-links="true" data-previous-text="&lsaquo;"
+				data-next-text="&rsaquo;" data-first-text="&laquo;"
+				data-last-text="&raquo;"> </uib-pagination>
+		</div>
 	
-	</div>
 	<div class="modal fade" id="myModal_Add" tabindex="-1" role="dialog">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
