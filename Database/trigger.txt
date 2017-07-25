@@ -1,0 +1,8 @@
+DELIMITER $$
+CREATE TRIGGER update_count 
+AFTER INSERT ON borrow FOR EACH ROW
+BEGIN 
+UPDATE equipment SET quantity= quantity - NEW.quantity where id= NEW.equipment_id ;
+END
+$$
+DELIMITER;

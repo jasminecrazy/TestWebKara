@@ -6,6 +6,7 @@ import demo.entity.Employee;
 import demo.entity.Equipment;
 
 public class BorrowDTO {
+
 	private Integer id;
 	private String username;
 	private String password;

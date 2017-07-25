@@ -13,5 +13,7 @@
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
+	<classpathentry kind="lib" path="D:/Libraries Java/Spring MVC/lib/hibernate-validator-4.2.0.Final.jar"/>
+	<classpathentry kind="lib" path="D:/Libraries Java/Spring MVC/lib/hibernate-validator-annotation-processor-4.2.0.Final.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
