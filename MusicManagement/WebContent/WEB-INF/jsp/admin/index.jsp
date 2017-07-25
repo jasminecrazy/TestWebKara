@@ -169,9 +169,7 @@
 					</div>
 					<div class="title_right">
 						<div class="form-group pull-right top_search">
-							<!-- <button data-toggle="modal" data-target="#myModal_Add"
-								type="button" class="btn btn-primary btn-lg"
-								></button> -->
+							
 								<a href="${pageContext.request.contextPath }/admin/add.html" class="btn btn-primary">Add</a>
 						</div>
 					</div>

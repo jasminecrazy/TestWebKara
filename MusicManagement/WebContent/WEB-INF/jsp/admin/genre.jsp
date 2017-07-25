@@ -10,7 +10,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-<title>Song management</title>
+<title>Genre management</title>
 
 <!-- Bootstrap -->
 <link
@@ -46,7 +46,7 @@
 
 </head>
 
-<body  class="nav-md">
+<body class="nav-md">
 	<div class="container body">
 		<div class="main_container">
 			<div class="col-md-3 left_col">
@@ -169,9 +169,8 @@
 					</div>
 					<div class="title_right">
 						<div class="form-group pull-right top_search">
-							<button data-toggle="modal" data-target="#myModal_Add"
-								type="button" class="btn btn-primary btn-lg"
-								ng-click="ResetForm()">Add</button>
+							
+								<a href="${pageContext.request.contextPath }/admin/add_genre.html" class="btn btn-primary">Add</a>
 						</div>
 					</div>
 					<div class="clearfix"></div>
@@ -180,14 +179,35 @@
 							<div class="x_panel">
 								<div class="x_title">
 									<div class="clearfix"></div>
-									<h3>List Genre</h3>
+									<h3>List genre Information</h3>
 								</div>
 
 
 								<div class="x_content">
+									<table class="table">
+										<tr>
+											<th>Genre ID</th>
+											<th>Genre Name</th>
 
-									<h2>List genre here</h2>
+											<th>Action</th>
+										</tr>
+										<c:forEach var="genre" items="${genre}">
 
+
+											<tr>
+												<td>${genre.genreId}</td>
+												<td>${genre.genreName }</td>
+
+												<td><a class="fa fa-pencil-square-o fa-2x"
+													href="${pageContext.request.contextPath}/admin/edit_genre/${genre.id}.html"
+													style="color: green; margin-right: 5px"></a> | <a
+													class="fa fa-trash-o fa-2x" style="color: red"
+													href="${pageContext.request.contextPath}/admin/delete_genre/${genre.id}.html"
+													onclick="return confirm('Are you sure you want to delete this?')"></a></td>
+											</tr>
+
+										</c:forEach>
+									</table>
 								</div>
 							</div>
 						</div>
@@ -246,7 +266,7 @@
 		src="${pageContext.request.contextPath }/assets/js/angular-messages.min.js"></script>
 	<script type="text/javascript"
 		src="${pageContext.request.contextPath }/assets/js/ui-bootstrap-tpls.min.js"></script>
-	
+
 	<script src="${pageContext.request.contextPath }/assets/js/ui-grid.js"></script>
 </body>
 

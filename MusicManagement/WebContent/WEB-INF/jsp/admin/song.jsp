@@ -169,9 +169,8 @@
 					</div>
 					<div class="title_right">
 						<div class="form-group pull-right top_search">
-							<button data-toggle="modal" data-target="#myModal_Add"
-								type="button" class="btn btn-primary btn-lg"
-								ng-click="ResetForm()">Add</button>
+							
+								<a href="${pageContext.request.contextPath }/admin/add_song.html" class="btn btn-primary">Add</a>
 						</div>
 					</div>
 					<div class="clearfix"></div>
@@ -185,9 +184,35 @@
 
 
 								<div class="x_content">
+									<table class="table">
+									<tr>
+												<th>Song ID</th>
+												<th>Song Name</th>
+												<th>Author</th>
+												<th>Singer</th>
+												<th>Album</th>
+												<th>Genre</th>
+												<th>Lyric</th>
+												<th>Status</th>
+												<th>Action</th>
+											</tr>
+										<c:forEach var="song" items="${song}">
 
-									<h2>List song here</h2>
+											
+											<tr>
+												<td>${song.songId }</td>
+												<td>${song.songName }</td>
+												<td>${song.author.authorname }</td> 
+												<td>${song.singer.singerName}</td>
+												<td>${song.album.albumName}</td>
+												<td>${song.genre.genreName}</td>
+												<td>${song.lyric}</td>
+												<td>${song.status==true ?'like':'dislike'}</td>
+												<td><a class="fa fa-pencil-square-o fa-2x" href="${pageContext.request.contextPath}/admin/edit_song/${song.id}.html" style="color:green;margin-right:5px"></a> | <a class="fa fa-trash-o fa-2x" style="color:red" href="${pageContext.request.contextPath}/admin/delete_song/${song.id}.html" onclick="return confirm('Are you sure you want to delete this?')"></a></td>
+											</tr>
 
+										</c:forEach>
+									</table>
 								</div>
 							</div>
 						</div>

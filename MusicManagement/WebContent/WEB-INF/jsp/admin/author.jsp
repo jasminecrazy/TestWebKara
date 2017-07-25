@@ -169,9 +169,10 @@
 					</div>
 					<div class="title_right">
 						<div class="form-group pull-right top_search">
-							<button data-toggle="modal" data-target="#myModal_Add"
+							<!-- <button data-toggle="modal" data-target="#myModal_Add"
 								type="button" class="btn btn-primary btn-lg"
-								ng-click="ResetForm()">Add</button>
+								></button> -->
+								<a href="${pageContext.request.contextPath }/admin/add_author.html" class="btn btn-primary">Add</a>
 						</div>
 					</div>
 					<div class="clearfix"></div>
@@ -185,9 +186,30 @@
 
 
 								<div class="x_content">
+									<table class="table">
+										<tr>
+											<th>Author ID</th>
+											<th>Author Name</th>
 
-									<h2>List author here</h2>
+											<th>Action</th>
+										</tr>
+										<c:forEach var="author" items="${author}">
 
+
+											<tr>
+												<td>${author.authorId}</td>
+												<td>${author.authorname }</td>
+
+												<td><a class="fa fa-pencil-square-o fa-2x"
+													href="${pageContext.request.contextPath}/admin/edit_author/${author.id}.html"
+													style="color: green; margin-right: 5px"></a> | <a
+													class="fa fa-trash-o fa-2x" style="color: red"
+													href="${pageContext.request.contextPath}/admin/delete_author/${author.id}.html"
+													onclick="return confirm('Are you sure you want to delete this?')"></a></td>
+											</tr>
+
+										</c:forEach>
+									</table>
 								</div>
 							</div>
 						</div>

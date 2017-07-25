@@ -194,7 +194,7 @@
 											<div class="form-group">
 												<label class="col-md-4 control-label" for="username">Album ID</label>
 												<div class="col-md-8">
-
+<s:hidden path="id"/>
 													<s:input path="albumId" class="form-control input-md"
 														 />
 

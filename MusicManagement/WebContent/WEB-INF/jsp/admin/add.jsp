@@ -238,13 +238,13 @@
 												<div class="form-check">
 													<label class="custom-control custom-radio"> 
 													<s:radiobutton
-															class="custom-control-input" value="${role[1]}"
+															class="custom-control-input" value="1"
 															path="role.id" checked="true" />
 													 <span
 														class="custom-control-indicator"></span> Admin
 													</label> <label class="custom-control custom-radio"> 
 													<s:radiobutton
-															class="custom-control-input" value="${role[2]}"
+															class="custom-control-input" value="2"
 															path="role.id" /> <span
 														class="custom-control-indicator"></span> User
 													</label>
@@ -256,13 +256,13 @@
 												<div class="form-check">
 													<label class="custom-control custom-radio"> 
 													<s:radiobutton
-															class="custom-control-input" value="${enabled[0]}"
+															class="custom-control-input" value="false"
 															path="enabled" checked="true" />
 													 <span
 														class="custom-control-indicator"></span> Disable
 													</label> <label class="custom-control custom-radio"> 
 													<s:radiobutton
-															class="custom-control-input" value="${enabled[1]}"
+															class="custom-control-input" value="true"
 															path="enabled" /> <span
 														class="custom-control-indicator"></span> Enable
 													</label>

@@ -194,7 +194,7 @@
 											<div class="form-group">
 												<label class="col-md-4 control-label" for="username">Username</label>
 												<div class="col-md-8">
-
+													<s:hidden path="id" />
 													<s:input path="username" class="form-control input-md"
 														disabled="true" />
 
@@ -230,13 +230,12 @@
 												<label class="col-md-4 control-label">Role</label>
 												<div class="form-check">
 													<label class="custom-control custom-radio"> <s:radiobutton
-															class="custom-control-input" value="${role[1]}"
-															path="role.id" checked="true" /> <span
-														class="custom-control-indicator"></span> Admin
+															class="custom-control-input" value="1" path="role.id"
+															checked="true" /> <span class="custom-control-indicator"></span>
+														Admin
 													</label> <label class="custom-control custom-radio"> <s:radiobutton
-															class="custom-control-input" value="${role[2]}"
-															path="role.id" /> <span class="custom-control-indicator"></span>
-														User
+															class="custom-control-input" value="2" path="role.id" />
+														<span class="custom-control-indicator"></span> User
 													</label>
 												</div>
 											</div>
@@ -245,13 +244,12 @@
 												<label class="col-md-4 control-label">Status</label>
 												<div class="form-check">
 													<label class="custom-control custom-radio"> <s:radiobutton
-															class="custom-control-input" value="${enabled[false]}"
-															path="enabled" checked="true" /> <span
-														class="custom-control-indicator"></span> Disable
+															class="custom-control-input" value="false" path="enabled"
+															checked="true" /> <span class="custom-control-indicator"></span>
+														Disable
 													</label> <label class="custom-control custom-radio"> <s:radiobutton
-															class="custom-control-input" value="${enabled[true]}"
-															path="enabled" /> <span class="custom-control-indicator"></span>
-														Enable
+															class="custom-control-input" value="true" path="enabled" />
+														<span class="custom-control-indicator"></span> Enable
 													</label>
 												</div>
 											</div>

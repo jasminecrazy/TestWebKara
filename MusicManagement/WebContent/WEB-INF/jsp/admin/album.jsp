@@ -204,7 +204,7 @@
 													href="${pageContext.request.contextPath}/admin/edit_album/${album.id}.html"
 													style="color: green; margin-right: 5px"></a> | <a
 													class="fa fa-trash-o fa-2x" style="color: red"
-													href="${pageContext.request.contextPath}/admin/delete/${album.id}.html"
+													href="${pageContext.request.contextPath}/admin/delete_album/${album.id}.html"
 													onclick="return confirm('Are you sure you want to delete this?')"></a></td>
 											</tr>
 
