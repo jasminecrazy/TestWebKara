@@ -50,7 +50,7 @@
 </style>
 </head>
 
-<body data-ng-app="myApp" class="nav-md" data-ng-controller="songCtrl">
+<body  class="nav-md" >
 	<div class="container body">
 		<div class="main_container">
 			<div class="col-md-3 left_col">
@@ -266,9 +266,11 @@
 												</div>
 											</div>
 											<div class="col-md-12 text-center">
-												<input type="submit" value="Save"
-													class="btn btn-primary btn-md"
-													style="height: 45px; width: 91px;" />
+												<button type="submit" value="Save"
+													class="btn btn-primary btn-lg"
+													>Add</button> <a
+													href="${pageContext.request.contextPath }/admin.html"
+													class="btn btn-default btn-lg">Cancel</a>
 											</div>
 
 										</fieldset>
@@ -332,11 +334,7 @@
 	<script type="text/javascript"
 		src="${pageContext.request.contextPath }/assets/js/ui-bootstrap-tpls.min.js"></script>
 	<!-- App & Controller -->
-	<script type="text/javascript"
-		src="${pageContext.request.contextPath }/assets/scripts/myApp.js"></script>
-
-	<script type="text/javascript"
-		src="${pageContext.request.contextPath }/assets/scripts/songCtrl.js"></script>
+	
 
 	<script src="${pageContext.request.contextPath }/assets/js/ui-grid.js"></script>
 </body>

@@ -188,9 +188,9 @@
 									<tr>
 												<th>Username</th>
 												<th>Fullname</th>
-												<th>Email</th>
+												<th style="width:20%">Email</th>
 												<th>Phone</th>
-												<th>Status</th>
+												<th style="width:10%">Status</th>
 												<th>Action</th>
 											</tr>
 										<c:forEach var="account" items="${accounts}">

@@ -17,7 +17,7 @@
 			error-page="/main/403.html" />
 		
 		<form-login login-page="/main.html" 
-			default-target-url="/main/welcome.html"
+			default-target-url="/user.html"
 			authentication-failure-url="/main/login.html?error"
 			username-parameter="username" 
 			password-parameter="password" />

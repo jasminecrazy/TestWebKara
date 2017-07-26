@@ -105,13 +105,13 @@ body, html {
 
 		<!-- Menu Section -->
 		<div class="w3-row w3-padding-64" >
-			<div class=" l6 w3-padding-large">
+			<div class="">
 				<h1 class="w3-center">List Song</h1>
 				<br>
 				<c:forEach var="song" items="${song}">
 					<h4><a href="${pageContext.request.contextPath}/demo/detail/${song.id}.html">${song.songName}</a></h4>
 					<h6>${song.singer.singerName}</h6>
-					<p class="w3-text-grey">${song.lyric}</p>
+					
 					<hr>
 				</c:forEach>
 

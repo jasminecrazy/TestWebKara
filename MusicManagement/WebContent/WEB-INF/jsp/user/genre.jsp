@@ -68,32 +68,47 @@ body, html {
 </style>
 
 <body>
-	<!-- Navbar (sit on top) -->
-	<div class="w3-top">
-		<div class="w3-bar w3-white w3-card-2" id="myNavbar">
-			<a href="${pageContext.request.contextPath }/demo.html"
-				class="w3-bar-item w3-button w3-wide">Logo</a>
-			<!-- Right-sided navbar links -->
-			<div class="w3-right w3-hide-small">
-				<a href="${pageContext.request.contextPath }/demo/album.html"
-					class="w3-bar-item w3-button ">Album</a> <a
-					href="${pageContext.request.contextPath }/demo/singer.html"
-					ng-model="volid" class="w3-bar-item w3-button">Singer</a> <a
-					href="${pageContext.request.contextPath }/demo/genre.html"
-					class="w3-bar-item w3-button">Genre</a>
-
-
-			</div>
-			<!-- Hide right-floated links on small screens and replace them with a menu icon -->
-
-			<a href="javascript:void(0)"
-				class="w3-bar-item w3-button w3-right w3-hide-large w3-hide-medium"
-				onclick="w3_open()"> <i class="fa fa-bars"></i>
-			</a>
+	<nav class="navbar navbar-default" style="background:#718fc6">
+	<div class="container-fluid">
+		<!-- Brand and toggle get grouped for better mobile display -->
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed"
+				data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
+				aria-expanded="false">
+				<span class="sr-only">Toggle navigation</span> <span
+					class="icon-bar"></span> <span class="icon-bar"></span> <span
+					class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" style="color: white;font-weight:bold;font-size:24px" href="${pageContext.request.contextPath }/user.html">Logo</a>
 		</div>
+
+		<!-- Collect the nav links, forms, and other content for toggling -->
+		<div class="collapse navbar-collapse"
+			id="bs-example-navbar-collapse-1" >
+			<ul class="nav navbar-nav" >
+				<li ><a href="${pageContext.request.contextPath }/user/album.html" style="color:white">Album</a></li>
+				<li><a href="${pageContext.request.contextPath }/user/singer.html" style="color:white">Singer</a></li>
+				<li><a href="${pageContext.request.contextPath }/user/genre.html" style="color:white">Genre</a></li>
+
+			</ul>
+			<ul class="nav navbar-nav navbar-right">
+
+				<li class="dropdown"><a href="#" class="dropdown-toggle"
+					style="color: white" data-toggle="dropdown" role="button"
+					aria-haspopup="true" aria-expanded="false">Cá nhân<span
+						class="caret"></span></a>
+					<ul class="dropdown-menu">
+
+						<li><a href="<c:url value='/j_spring_security_logout'/>">Đăng
+								xuất</a></li>
+
+					</ul></li>
+			</ul>
+		</div>
+		<!-- /.navbar-collapse -->
 	</div>
-	<!-- Page content -->
-	<div class="w3-content" style="max-width: 1100px">
+	<!-- /.container-fluid --> </nav>
+<div class="w3-content" style="max-width: 1100px">
 
 
 		<!-- Menu Section -->
@@ -102,7 +117,7 @@ body, html {
 				<h1 class="w3-center">List Genre</h1>
 				<br>
 				<c:forEach var="genre" items="${genre}">
-					<h4><a href="${pageContext.request.contextPath}/demo/detail_genre/${genre.id}.html">${genre.genreName}</a></h4>
+					<h4><a href="${pageContext.request.contextPath}/user/detail_genre/${genre.id}.html">${genre.genreName}</a></h4>
 					
 					<hr>
 				</c:forEach>
@@ -114,7 +129,6 @@ body, html {
 
 		<hr>
 	</div>
-
 	<!-- Sidebar on small screens when clicking the menu icon -->
 	<nav
 		class="w3-sidebar w3-bar-block w3-black w3-card-2 w3-animate-left w3-hide-medium w3-hide-large"

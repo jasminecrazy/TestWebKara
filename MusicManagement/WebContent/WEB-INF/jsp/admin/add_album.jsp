@@ -51,7 +51,7 @@
 </style>
 </head>
 
-<body data-ng-app="myApp" class="nav-md" data-ng-controller="songCtrl">
+<body  class="nav-md">
 	<div class="container body">
 		<div class="main_container">
 			<div class="col-md-3 left_col">
@@ -275,11 +275,7 @@
 	<script type="text/javascript"
 		src="${pageContext.request.contextPath }/assets/js/ui-bootstrap-tpls.min.js"></script>
 	<!-- App & Controller -->
-	<script type="text/javascript"
-		src="${pageContext.request.contextPath }/assets/scripts/myApp.js"></script>
-
-	<script type="text/javascript"
-		src="${pageContext.request.contextPath }/assets/scripts/songCtrl.js"></script>
+	
 
 	<script src="${pageContext.request.contextPath }/assets/js/ui-grid.js"></script>
 </body>

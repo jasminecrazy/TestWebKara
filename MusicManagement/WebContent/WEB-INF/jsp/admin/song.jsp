@@ -192,7 +192,7 @@
 												<th>Singer</th>
 												<th>Album</th>
 												<th>Genre</th>
-												<th>Lyric</th>
+												
 												<th>Status</th>
 												<th>Action</th>
 											</tr>
@@ -206,7 +206,7 @@
 												<td>${song.singer.singerName}</td>
 												<td>${song.album.albumName}</td>
 												<td>${song.genre.genreName}</td>
-												<td>${song.lyric}</td>
+												
 												<td>${song.status==true ?'like':'dislike'}</td>
 												<td><a class="fa fa-pencil-square-o fa-2x" href="${pageContext.request.contextPath}/admin/edit_song/${song.id}.html" style="color:green;margin-right:5px"></a> | <a class="fa fa-trash-o fa-2x" style="color:red" href="${pageContext.request.contextPath}/admin/delete_song/${song.id}.html" onclick="return confirm('Are you sure you want to delete this?')"></a></td>
 											</tr>
