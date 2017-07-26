@@ -20,13 +20,18 @@ public class UserValidator implements Validator {
 
 	@Override
 	public void validate(Object object, Errors errors) {
-		/*User user = (User) object;
-
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "username", "NotEmpty");
+		User user = (User) object;
+String password= user.getPassword();
+String retypePass = user.getRetypePassword();
+if(!password.equals(retypePass)){
+    errors.rejectValue("retypePassword","notmatch.password");
+}
+//ValidationUtils.rejectIfEmptyOrWhitespace(errors, "username", "NotEmpty");
 		
-		if (userService.findByUsername(user.getUsername()) != null) {
-			errors.rejectValue("username", "account.username.exists");
+	/*if (userService.findByUsername(user.getUsername()) != null) {
+			//errors.rejectValue("username", "account.username.exists");
 		}*/
+
 	}
 	
 

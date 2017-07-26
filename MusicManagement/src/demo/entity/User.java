@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.Size;
 
@@ -31,6 +32,7 @@ public class User implements java.io.Serializable {
 	private Role role;
 	@NotEmpty
 	@Length(min = 3, max = 10)
+	
 	private String username;
 	@NotEmpty
 	private String password;
@@ -43,6 +45,16 @@ public class User implements java.io.Serializable {
 	@NotEmpty
 	@Email
 	private String email;
+	@Transient
+	private String retypePassword;
+
+	public String getRetypePassword() {
+		return retypePassword;
+	}
+
+	public void setRetypePassword(String retypePassword) {
+		this.retypePassword = retypePassword;
+	}
 
 	public User() {
 	}

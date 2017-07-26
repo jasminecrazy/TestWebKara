@@ -80,14 +80,15 @@
 										<label class="sr-only" for="form-last-name">Password</label>
 										<s:password name="form-last-name" placeholder="Enter password"
 											path="password" class="form-password form-control"
-											id="form-last-name" />
+											id="form-last-name"/>
 										<s:errors path="password" cssClass="error"></s:errors>
 									</div>
 									<div class="form-group">
 										<label class="sr-only" for="form-last-name">Re
-											Password</label> <input type="password" name="form-last-name"
+											Password</label> <s:password path="retypePassword" name="form-last-name"
 											placeholder="Re enter password"
-											class="form-password form-control" id="form-last-name">
+											class="form-password form-control" id="form-last-name"/>
+											<s:errors path="retypePassword" cssClass="error"></s:errors>
 									</div>
 									<div class="form-group">
 										<label class="sr-only" for="form-email">Email</label>
