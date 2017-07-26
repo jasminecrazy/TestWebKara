@@ -212,8 +212,9 @@
 											
 											<div class="col-md-12 text-center">
 												<input type="submit" value="Save"
-													class="btn btn-primary btn-md"
-													style="height: 45px; width: 91px;" />
+													class="btn btn-primary btn-lg"
+													 />
+													 <a href="${pageContext.request.contextPath }/admin/album.html" class="btn btn-default btn-lg">Cancel</a>
 											</div>
 
 										</fieldset>

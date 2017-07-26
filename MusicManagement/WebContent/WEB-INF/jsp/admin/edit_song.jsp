@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="s" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -46,7 +47,7 @@
 
 </head>
 
-<body data-ng-app="myApp" class="nav-md" data-ng-controller="songCtrl">
+<body class="nav-md">
 	<div class="container body">
 		<div class="main_container">
 			<div class="col-md-3 left_col">
@@ -160,7 +161,7 @@
 									href="${pageContext.request.contextPath }/admin.html">Home</a>
 								</li>
 								<li class="active"><a
-									href="${pageContext.request.contextPath }/admin/album.html">Album
+									href="${pageContext.request.contextPath }/admin/song.html">Song
 										Management</a></li>
 
 							</ul>
@@ -181,40 +182,85 @@
 								<div class="x_content">
 
 									<s:form
-										action="${pageContext.request.contextPath }/admin/add_album.html"
-										method="POST" commandName="album">
+										action="${pageContext.request.contextPath }/admin/add_song.html"
+										method="POST" commandName="song">
 										<fieldset>
 
 											<!-- Form Name -->
 											<legend class="text-center"
-												style="color: black; font-weight: bold">Add new
-												album</legend>
+												style="color: black; font-weight: bold">Edit song
+												information</legend>
+											<s:hidden path="id" />
 
-											<!-- Text input-->
-											<div class="form-group">
-												<label class="col-md-4 control-label" for="albumId">Album ID</label>
+											<div class="form-group col-md-12">
+												<label class="col-md-4 control-label">Song Name</label>
 												<div class="col-md-8">
 
-													<s:input path="albumId" class="form-control input-md" />
+													<s:input path="songName" class="form-control input-md" />
 
 												</div>
 											</div>
-											<div class="form-group">
-												<label class="col-md-4 control-label" for="albumName">Album Name</label>
+											<div class="form-group col-md-12">
+												<label class="col-md-4 control-label">Lyric</label>
 												<div class="col-md-8">
 
-													<s:input path="albumName" class="form-control input-md" />
+													<s:textarea path="lyric" class="form-control input-md" />
 
 												</div>
 											</div>
+											<div class="form-group col-md-12">
+												<label class="col-md-4 control-label">Author</label>
+												<div class="col-md-8">
 
+													<s:select path="author.id">
+														<c:forEach var="author" items="${author}">
+															<s:option value="${author.id}">${author.authorname}</s:option>
+														</c:forEach>
+													</s:select>
+
+												</div>
+											</div>
+										
+											<div class="form-group col-md-12 ">
+												<label class="col-md-4 control-label">Singer</label>
+												<div class="col-md-8">
+													<s:select path="singer.id">
+														<c:forEach var="singer" items="${singer}">
+															<s:option value="${singer.id}">${singer.singerName}</s:option>
+														</c:forEach>
+													</s:select>
+												</div>
+											</div>
+											<div class="form-group col-md-12 ">
+												<label class="col-md-4 control-label">Album</label>
+												<div class="col-md-8">
+													<s:select path="album.id">
+														<c:forEach var="album" items="${album}">
+															<s:option value="${album.id}">${album.albumName}</s:option>
+														</c:forEach>
+													</s:select>
+												</div>
+											</div>
+											<div class="form-group col-md-12 ">
+												<label class="col-md-4 control-label">Genre Name</label>
+												<div class="col-md-8">
+													<s:select path="genre.id">
+														
+														<c:forEach var="genre" items="${genre}">
+															<s:option value="${genre.id}">${genre.genreName}</s:option>
+														</c:forEach>
+													</s:select>
+												</div>
+											</div> 
 											
+
 											<div class="col-md-12 text-center">
 												<input type="submit" value="Save"
 													class="btn btn-primary btn-lg"
 													 />
-													<a href="${pageContext.request.contextPath }/admin/album.html" class="btn btn-default btn-lg">Cancel</a>
+													<a href="${pageContext.request.contextPath }/admin/song.html" class="btn btn-default btn-lg">Cancel</a>
 											</div>
+
 
 										</fieldset>
 									</s:form>
@@ -277,11 +323,7 @@
 	<script type="text/javascript"
 		src="${pageContext.request.contextPath }/assets/js/ui-bootstrap-tpls.min.js"></script>
 	<!-- App & Controller -->
-	<script type="text/javascript"
-		src="${pageContext.request.contextPath }/assets/scripts/myApp.js"></script>
 
-	<script type="text/javascript"
-		src="${pageContext.request.contextPath }/assets/scripts/songCtrl.js"></script>
 
 	<script src="${pageContext.request.contextPath }/assets/js/ui-grid.js"></script>
 </body>

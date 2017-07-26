@@ -4,7 +4,6 @@ import java.util.List;
 
 import demo.entity.Author;
 
-
 public interface AuthorDAO {
 	public List<Author> findAllAuthor();
 
@@ -15,4 +14,6 @@ public interface AuthorDAO {
 	public void addAuthor(Author author);
 
 	public void updateAuthor(Author author);
+
+	
 }

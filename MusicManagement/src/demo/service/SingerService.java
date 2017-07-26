@@ -16,4 +16,6 @@ public interface SingerService {
 	public void addSinger(Singer singer);
 
 	public void updateSinger(Singer singer);
+
+	
 }

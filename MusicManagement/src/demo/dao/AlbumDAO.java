@@ -4,7 +4,6 @@ import java.util.List;
 
 import demo.entity.Album;
 
-
 public interface AlbumDAO {
 	public List<Album> findAllAlbum();
 
@@ -15,4 +14,6 @@ public interface AlbumDAO {
 	public void addAlbum(Album album);
 
 	public void updateAlbum(Album album);
+
+
 }

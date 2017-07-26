@@ -15,4 +15,6 @@ public interface AlbumService {
 	public void addAlbum(Album album);
 
 	public void updateAlbum(Album album);
+
+	
 }

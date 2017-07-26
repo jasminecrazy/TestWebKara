@@ -4,7 +4,6 @@ import java.util.List;
 
 import demo.entity.Genre;
 
-
 public interface GenreDAO {
 	public List<Genre> findAllGenre();
 
@@ -15,4 +14,6 @@ public interface GenreDAO {
 	public void addGenre(Genre genre);
 
 	public void updateGenre(Genre genre);
+
+	
 }

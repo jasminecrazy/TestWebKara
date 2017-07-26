@@ -1,5 +1,6 @@
 package demo.controller;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -18,6 +19,7 @@ import demo.service.UserService;
 public class AdminController {
 	@Autowired
 	private UserService userService;
+	
 
 	@Autowired
 	private BCryptPasswordEncoder passwordEncoder;
@@ -69,5 +71,5 @@ public class AdminController {
 		userService.updateUser(currentAccount);
 		return "redirect:../admin.html";
 	}
-
+	
 }

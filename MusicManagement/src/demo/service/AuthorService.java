@@ -14,4 +14,6 @@ public interface AuthorService {
 	public void addAuthor(Author author);
 
 	public void updateAuthor(Author author);
+
+
 }
