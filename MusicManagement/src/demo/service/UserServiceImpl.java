@@ -11,37 +11,43 @@ import demo.entity.User;
 
 @Service("UserService")
 @Transactional
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService {
 	@Autowired
-private UserDAO userDao;
+	private UserDAO userDao;
+
 	@Override
 	public List<User> findAllUser() {
-		
+
 		return userDao.findAllUser();
 	}
 
 	@Override
 	public User getUser(int id) {
-		
+
 		return userDao.getUser(id);
 	}
 
 	@Override
 	public void deleteUser(int id) {
 		userDao.deleteUser(id);
-		
+
 	}
 
 	@Override
 	public void addUser(User user) {
 		userDao.addUser(user);
-		
+
 	}
 
 	@Override
 	public void updateUser(User user) {
 		userDao.updateUser(user);
-		
+
+	}
+
+	@Override
+	public User findByUsername(String username) {
+		return userDao.findByUsername(username);
 	}
 
 }

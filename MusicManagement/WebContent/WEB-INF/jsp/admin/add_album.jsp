@@ -44,6 +44,11 @@
 <link href="${pageContext.request.contextPath }/assets/css/ui-grid.css"
 	rel="stylesheet" />
 
+<style type="text/css">
+.error {
+	color: red;
+}
+</style>
 </head>
 
 <body data-ng-app="myApp" class="nav-md" data-ng-controller="songCtrl">
@@ -190,30 +195,23 @@
 												style="color: black; font-weight: bold">Add new
 												album</legend>
 
-											<!-- Text input-->
-											<div class="form-group">
-												<label class="col-md-4 control-label" for="albumId">Album ID</label>
-												<div class="col-md-8">
 
-													<s:input path="albumId" class="form-control input-md" />
-
-												</div>
-											</div>
 											<div class="form-group">
-												<label class="col-md-4 control-label" for="albumName">Album Name</label>
+												<label class="col-md-4 control-label" for="albumName">Album
+													Name</label>
 												<div class="col-md-8">
 
 													<s:input path="albumName" class="form-control input-md" />
-
+													<s:errors path="albumName" cssClass="error"></s:errors>
 												</div>
 											</div>
 
-											
+
 											<div class="col-md-12 text-center">
 												<input type="submit" value="Save"
-													class="btn btn-primary btn-lg"
-													 />
-													<a href="${pageContext.request.contextPath }/admin/album.html" class="btn btn-default btn-lg">Cancel</a>
+													class="btn btn-primary btn-lg" /> <a
+													href="${pageContext.request.contextPath }/admin/album.html"
+													class="btn btn-default btn-lg">Cancel</a>
 											</div>
 
 										</fieldset>

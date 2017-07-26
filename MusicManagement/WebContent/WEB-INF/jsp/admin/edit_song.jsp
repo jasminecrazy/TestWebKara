@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="s" uri="http://www.springframework.org/tags/form"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -44,7 +44,11 @@
 	rel="stylesheet" />
 <link href="${pageContext.request.contextPath }/assets/css/ui-grid.css"
 	rel="stylesheet" />
-
+<style type="text/css">
+.error {
+	color: red;
+}
+</style>
 </head>
 
 <body class="nav-md">
@@ -197,7 +201,7 @@
 												<div class="col-md-8">
 
 													<s:input path="songName" class="form-control input-md" />
-
+													<s:errors path="songName" cssClass="error"></s:errors>
 												</div>
 											</div>
 											<div class="form-group col-md-12">
@@ -205,7 +209,7 @@
 												<div class="col-md-8">
 
 													<s:textarea path="lyric" class="form-control input-md" />
-
+													<s:errors path="lyric" cssClass="error"></s:errors>
 												</div>
 											</div>
 											<div class="form-group col-md-12">
@@ -220,7 +224,7 @@
 
 												</div>
 											</div>
-										
+
 											<div class="form-group col-md-12 ">
 												<label class="col-md-4 control-label">Singer</label>
 												<div class="col-md-8">
@@ -245,20 +249,20 @@
 												<label class="col-md-4 control-label">Genre Name</label>
 												<div class="col-md-8">
 													<s:select path="genre.id">
-														
+
 														<c:forEach var="genre" items="${genre}">
 															<s:option value="${genre.id}">${genre.genreName}</s:option>
 														</c:forEach>
 													</s:select>
 												</div>
-											</div> 
-											
+											</div>
+
 
 											<div class="col-md-12 text-center">
 												<input type="submit" value="Save"
-													class="btn btn-primary btn-lg"
-													 />
-													<a href="${pageContext.request.contextPath }/admin/song.html" class="btn btn-default btn-lg">Cancel</a>
+													class="btn btn-primary btn-lg" /> <a
+													href="${pageContext.request.contextPath }/admin/song.html"
+													class="btn btn-default btn-lg">Cancel</a>
 											</div>
 
 

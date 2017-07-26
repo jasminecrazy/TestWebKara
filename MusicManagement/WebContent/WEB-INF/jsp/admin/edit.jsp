@@ -43,7 +43,11 @@
 	rel="stylesheet" />
 <link href="${pageContext.request.contextPath }/assets/css/ui-grid.css"
 	rel="stylesheet" />
-
+<style type="text/css">
+.error {
+	color: red;
+}
+</style>
 </head>
 
 <body data-ng-app="myApp" class="nav-md" data-ng-controller="songCtrl">
@@ -196,7 +200,8 @@
 												<div class="col-md-8">
 													<s:hidden path="id" />
 													<s:input path="username" class="form-control input-md"
-														disabled="true" />
+														readonly="true" />
+
 
 												</div>
 											</div>
@@ -207,6 +212,7 @@
 												<label class="col-md-4 control-label" for="fullname">Fullname</label>
 												<div class="col-md-8">
 													<s:input path="fullname" class="form-control input-md" />
+													<s:errors path="fullname" cssClass="error"></s:errors>
 												</div>
 											</div>
 
@@ -215,14 +221,14 @@
 												<label class="col-md-4 control-label" for="email">Email</label>
 												<div class="col-md-8">
 													<s:input path="email" class="form-control input-md" />
-
+													<s:errors path="email" cssClass="error"></s:errors>
 												</div>
 											</div>
 											<div class="form-group">
 												<label class="col-md-4 control-label" for="phone">Phone</label>
 												<div class="col-md-8">
 													<s:input path="phone" class="form-control input-md" />
-
+													<s:errors path="phone" cssClass="error"></s:errors>
 												</div>
 											</div>
 											<div class="form-group">

@@ -44,7 +44,11 @@
 	rel="stylesheet" />
 <link href="${pageContext.request.contextPath }/assets/css/ui-grid.css"
 	rel="stylesheet" />
-
+<style type="text/css">
+.error {
+	color: red;
+}
+</style>
 </head>
 
 <body data-ng-app="myApp" class="nav-md" data-ng-controller="songCtrl">
@@ -197,7 +201,7 @@
 												<div class="col-md-8">
 
 													<s:input path="songName" class="form-control input-md" />
-
+													<s:errors path="songName" cssClass="error"></s:errors>
 												</div>
 											</div>
 											<div class="form-group col-md-12">
@@ -205,7 +209,7 @@
 												<div class="col-md-8">
 
 													<s:textarea path="lyric" class="form-control input-md" />
-
+													<s:errors path="lyric" cssClass="error"></s:errors>
 												</div>
 											</div>
 											<div class="form-group col-md-12">
@@ -256,13 +260,13 @@
 
 											<div class="col-md-12 text-center">
 												<input type="submit" value="Save"
-													class="btn btn-primary btn-lg"
-													 />
-												<a href="${pageContext.request.contextPath }/admin/song.html" class="btn btn-default btn-lg">Cancel</a>
+													class="btn btn-primary btn-lg" /> <a
+													href="${pageContext.request.contextPath }/admin/song.html"
+													class="btn btn-default btn-lg">Cancel</a>
 											</div>
 
 
-<!-- style="height: 45px; width: 91px;" -->
+											<!-- style="height: 45px; width: 91px;" -->
 
 
 										</fieldset>

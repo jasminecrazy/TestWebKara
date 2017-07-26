@@ -115,4 +115,24 @@ public class UserDaoImpl implements UserDAO{
 		
 	}
 
+	@Override
+	public User findByUsername(String username) {
+		User user = null;
+		Session session = sessionFactory.openSession();
+		Transaction transaction = null;
+		try {
+			transaction = session.beginTransaction();
+			user = (User) session.createQuery("select c from User c where c.username =:username").setString("username", username).uniqueResult();
+			transaction.commit();
+		} catch (Exception e) {
+			user = null;
+			if (transaction != null) {
+				transaction.rollback();
+			}
+		} finally {
+			session.close();
+		}
+		return user;
+	}
+
 }

@@ -43,7 +43,11 @@
 	rel="stylesheet" />
 <link href="${pageContext.request.contextPath }/assets/css/ui-grid.css"
 	rel="stylesheet" />
-
+<style type="text/css">
+.error {
+	color: red;
+}
+</style>
 </head>
 
 <body data-ng-app="myApp" class="nav-md" data-ng-controller="songCtrl">
@@ -196,7 +200,7 @@
 												<div class="col-md-8">
 
 													<s:input path="username" class="form-control input-md" />
-
+													<s:errors path="username" cssClass="error"></s:errors>
 												</div>
 											</div>
 
@@ -205,7 +209,7 @@
 												<label class="col-md-4 control-label" for="password">Password</label>
 												<div class="col-md-8">
 													<s:password path="password" class="form-control input-md" />
-
+													<s:errors path="password" cssClass="error"></s:errors>
 												</div>
 											</div>
 
@@ -214,6 +218,7 @@
 												<label class="col-md-4 control-label" for="fullname">Fullname</label>
 												<div class="col-md-8">
 													<s:input path="fullname" class="form-control input-md" />
+													<s:errors path="fullname" cssClass="error"></s:errors>
 												</div>
 											</div>
 
@@ -222,49 +227,41 @@
 												<label class="col-md-4 control-label" for="email">Email</label>
 												<div class="col-md-8">
 													<s:input path="email" class="form-control input-md" />
-
+													<s:errors path="email" cssClass="error"></s:errors>
 												</div>
 											</div>
 											<div class="form-group">
 												<label class="col-md-4 control-label" for="phone">Phone</label>
 												<div class="col-md-8">
 													<s:input path="phone" class="form-control input-md" />
-
+													<s:errors path="phone" cssClass="error"></s:errors>
 												</div>
 											</div>
 											<div class="form-group">
-											
+
 												<label class="col-md-4 control-label">Role</label>
 												<div class="form-check">
-													<label class="custom-control custom-radio"> 
-													<s:radiobutton
-															class="custom-control-input" value="1"
-															path="role.id" checked="true" />
-													 <span
-														class="custom-control-indicator"></span> Admin
-													</label> <label class="custom-control custom-radio"> 
-													<s:radiobutton
-															class="custom-control-input" value="2"
-															path="role.id" /> <span
-														class="custom-control-indicator"></span> User
+													<label class="custom-control custom-radio"> <s:radiobutton
+															class="custom-control-input" value="1" path="role.id"
+															checked="true" /> <span class="custom-control-indicator"></span>
+														Admin
+													</label> <label class="custom-control custom-radio"> <s:radiobutton
+															class="custom-control-input" value="2" path="role.id" />
+														<span class="custom-control-indicator"></span> User
 													</label>
 												</div>
 											</div>
 											<div class="form-group">
-											
+
 												<label class="col-md-4 control-label">Status</label>
 												<div class="form-check">
-													<label class="custom-control custom-radio"> 
-													<s:radiobutton
-															class="custom-control-input" value="false"
-															path="enabled" checked="true" />
-													 <span
-														class="custom-control-indicator"></span> Disable
-													</label> <label class="custom-control custom-radio"> 
-													<s:radiobutton
-															class="custom-control-input" value="true"
-															path="enabled" /> <span
-														class="custom-control-indicator"></span> Enable
+													<label class="custom-control custom-radio"> <s:radiobutton
+															class="custom-control-input" value="false" path="enabled"
+															checked="true" /> <span class="custom-control-indicator"></span>
+														Disable
+													</label> <label class="custom-control custom-radio"> <s:radiobutton
+															class="custom-control-input" value="true" path="enabled" />
+														<span class="custom-control-indicator"></span> Enable
 													</label>
 												</div>
 											</div>
