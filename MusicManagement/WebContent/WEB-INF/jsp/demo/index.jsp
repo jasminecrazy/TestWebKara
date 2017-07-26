@@ -78,9 +78,16 @@ body, html {
 				<a href="${pageContext.request.contextPath }/demo/album.html"
 					class="w3-bar-item w3-button ">Album</a> <a
 					href="${pageContext.request.contextPath }/demo/singer.html"
-					ng-model="volid" class="w3-bar-item w3-button">Singer</a> <a
+					ng-model="volid" class="w3-bar-item w3-button">Singer</a> 
+					<a
 					href="${pageContext.request.contextPath }/demo/genre.html"
 					class="w3-bar-item w3-button">Genre</a>
+					<a
+					href="${pageContext.request.contextPath }/user.html"
+					class="w3-bar-item w3-button">Login</a>
+					<a
+					href="${pageContext.request.contextPath }/demo/register.html"
+					class="w3-bar-item w3-button">Register</a>
 
 
 			</div>

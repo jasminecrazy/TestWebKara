@@ -33,7 +33,6 @@ public class User implements java.io.Serializable {
 	@Length(min = 3, max = 10)
 	private String username;
 	@NotEmpty
-	@Size(min = 6, max = 15, message = "Your password must between 6 and 15 characters")
 	private String password;
 	private boolean enabled;
 	@NotEmpty

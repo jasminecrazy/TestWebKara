@@ -78,13 +78,9 @@ body, html {
 				<a href="${pageContext.request.contextPath }/demo/album.html"
 					class="w3-bar-item w3-button ">Album</a> <a
 					href="${pageContext.request.contextPath }/demo/singer.html"
-					ng-model="volid" class="w3-bar-item w3-button">Singer</a> 
-					<a
+					ng-model="volid" class="w3-bar-item w3-button">Singer</a> <a
 					href="${pageContext.request.contextPath }/demo/genre.html"
 					class="w3-bar-item w3-button">Genre</a>
-					<a class="w3-bar-item w3-button" style="border-left: 1px solid black">Hi! ${pageContext.request.userPrincipal.name }
-						
-					</a>
 
 
 			</div>
@@ -101,14 +97,13 @@ body, html {
 
 
 		<!-- Menu Section -->
-		<div class="w3-row w3-padding-64" >
+		<div class="w3-row w3-padding-64">
 			<div class=" l6 w3-padding-large">
-				<h1 class="w3-center">List Song</h1>
-				<br>
-				<c:forEach var="song" items="${song}">
-					<h4><a href="${pageContext.request.contextPath}/demo/detail/${song.id}.html">${song.songName}</a></h4>
-					<h6>${song.singer.singerName}</h6>
-					<p class="w3-text-grey">${song.lyric}</p>
+			
+				<c:forEach var="detail_singer" items="${detail_singer}">
+					<h4><a href="${pageContext.request.contextPath}/demo/detail/${detail_singer.id}.html">${detail_singer.songName}</a></h4>
+					<h6>${detail_singer.singer.singerName}</h6>
+					<p class="w3-text-grey">${detail_singer.lyric}</p>
 					<hr>
 				</c:forEach>
 
@@ -117,7 +112,7 @@ body, html {
 
 		</div>
 
-		<hr>
+		
 	</div>
 
 	<!-- Sidebar on small screens when clicking the menu icon -->
