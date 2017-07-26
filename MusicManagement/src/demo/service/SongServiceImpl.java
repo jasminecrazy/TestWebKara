@@ -42,4 +42,21 @@ private SongDAO songDao;
 		
 	}
 
+	@Override
+	public List<Songs> getAlbumSong(int id) {
+		return songDao.getAlbumSong(id);
+	}
+
+	@Override
+	public List<Songs> getSingerSong(int id) {
+		
+		return songDao.getSingerSong(id);
+	}
+
+	@Override
+	public List<Songs> getGenreSong(int id) {
+		
+		return songDao.getGenreSong(id);
+	}
+
 }

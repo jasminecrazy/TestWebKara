@@ -1,20 +1,27 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<!-- Meta, title, CSS, favicons, etc. -->
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Music</title>
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
 
-<title>Song management</title>
-
+<script src="https://code.jquery.com/jquery-2.2.4.min.js"
+	integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+	crossorigin="anonymous"></script>
+<script type="text/javascript"
+	src="${pageContext.request.contextPath }/assets/js/jquery-ui-1.8.2.custom.js"></script>
 <!-- Bootstrap -->
 <link
 	href="${pageContext.request.contextPath }/assets/css/bootstrap.min.css"
+	rel="stylesheet" />
+<link
+	href="${pageContext.request.contextPath }/assets/css/base/jquery.ui.all.css"
 	rel="stylesheet" />
 
 <!-- Font Awesome -->
@@ -27,249 +34,180 @@
 	href="${pageContext.request.contextPath }/assets/css/nprogress.css"
 	rel="stylesheet" />
 
-<!-- iCheck -->
-<link href="${pageContext.request.contextPath }/assets/css/green.css"
-	rel="stylesheet" />
-<!-- Custom Theme Style -->
-<link
-	href="${pageContext.request.contextPath }/assets/css/custom.min.css"
-	rel="stylesheet" />
 
 <!-- External Libraries-->
-<link href="${pageContext.request.contextPath }/assets/css/style1.css"
+<link href="${pageContext.request.contextPath }/assets/css/style3.css"
+	rel="stylesheet" />
+<link href="${pageContext.request.contextPath }/assets/css/ui-grid.css"
 	rel="stylesheet" />
 <link
 	href="${pageContext.request.contextPath }/assets/css/sweetalert.css"
 	rel="stylesheet" />
-<link href="${pageContext.request.contextPath }/assets/css/ui-grid.css"
-	rel="stylesheet" />
 
 </head>
+<style>
+body, h1, h2, h3, h4, h5, h6 {
+	font-family: "Raleway", sans-serif
+}
 
-<body class="nav-md">
-	<div class="container body">
-		<div class="main_container">
-			<div class="col-md-3 left_col">
-				<div class="left_col scroll-view">
+body, html {
+	height: 100%;
+	line-height: 1.8;
+}
 
+.w3-bar .w3-button {
+	padding: 16px;
+}
 
-					<div class="clearfix"></div>
-					<div class="profile clearfix">
-						<div class="profile_pic">
-							<img
-								src="${pageContext.request.contextPath }/assets/images/preview.png"
-								alt="..." class="img-circle profile_img" />
-						</div>
-						<div class="profile_info">
-							<h4>Administrator</h4>
+.w3-white, .w3-hover-white:hover {
+	color: white !important;
+	background-color: #718fc6 !important;
+	font-weight: bold;
+	font-size: 19px;
+}
+</style>
 
-						</div>
-					</div>
-					<!-- sidebar menu -->
-					<div id="sidebar-menu"
-						class="main_menu_side hidden-print main_menu">
-						<div class="menu_section">
-
-							<ul class="nav side-menu">
-
-								<li><a> <i class="fa fa-info-circle"></i>Information
-										Management<span class="fa fa-chevron-down"></span></a>
-									<ul class="nav child_menu">
-										<li><a
-											href="${pageContext.request.contextPath }/admin.html">User
-												management</a></li>
-										<li><a
-											href="${pageContext.request.contextPath }/admin/song.html">Song
-												management</a></li>
-
-
-									</ul></li>
-								<li><a> <i class="fa fa-list-ul"></i>Category
-										Management<span class="fa fa-chevron-down"></span></a>
-									<ul class="nav child_menu">
-
-										<li><a
-											href="${pageContext.request.contextPath }/admin/genre.html">Genre
-												Management</a></li>
-										<li><a
-											href="${pageContext.request.contextPath }/admin/album.html">Album
-												Management</a></li>
-										<li><a
-											href="${pageContext.request.contextPath }/admin/singer.html">Singer
-												Management</a></li>
-										<li><a
-											href="${pageContext.request.contextPath }/admin/author.html">Author
-												Management</a></li>
-
-									</ul></li>
-							</ul>
-
-
-
-
-
-						</div>
-
-
-					</div>
-					<!-- /sidebar menu -->
-
-					<!-- /menu footer buttons -->
-
-					<!-- /menu footer buttons -->
-				</div>
-			</div>
-
-			<!-- top navigation -->
-			<div class="top_nav">
-				<div class="nav_menu">
-					<nav>
-						<div class="nav toggle">
-							<a id="menu_toggle"><i class="fa fa-bars"></i></a>
-						</div>
-
-						<ul class="nav navbar-nav navbar-right">
-							<li class=""><a href="javascript:;"
-								class="user-profile dropdown-toggle" data-toggle="dropdown"
-								aria-expanded="false"> Admin <span class=" fa fa-angle-down"></span>
-							</a>
-								<ul class="dropdown-menu dropdown-usermenu pull-right">
-
-
-
-									<li><a href="<c:url value='/j_spring_security_logout'/>"><i
-											class="fa fa-sign-out pull-right"></i> Log Out</a></li>
-								</ul></li>
-
-
-						</ul>
-					</nav>
-				</div>
-			</div>
-			<!-- /top navigation -->
-
-			<!-- page content -->
-			<div class="right_col" role="main">
-
-				<div class="">
-					<div class="page-title">
-						<div class="title_left">
-
-							<ul class="breadcrumb">
-								<li><i class="ace-icon fa fa-home home-icon"></i> <a
-									href="${pageContext.request.contextPath }/admin.html">Home</a>
-								</li>
-								<li class="active"><a
-									href="${pageContext.request.contextPath }/admin/album.html">Album
-										Management</a></li>
-
-							</ul>
-						</div>
-
-					</div>
-					<div class="title_right">
-						<div class="form-group pull-right top_search">
-							<!-- <button data-toggle="modal" data-target="#myModal_Add"
-								type="button" class="btn btn-primary btn-lg"
-								></button> -->
-								<a href="${pageContext.request.contextPath }/admin/add_album.html" class="btn btn-primary">Add</a>
-						</div>
-					</div>
-					<div class="clearfix"></div>
-					<div class="row">
-						<div class="col-md-12 col-sm-12 col-xs-12">
-							<div class="x_panel">
-								<div class="x_title">
-									<div class="clearfix"></div>
-									<h3>List album Information</h3>
-								</div>
-
-
-								<div class="x_content">
-									<table class="table">
-										<tr>
-											<th>Album ID</th>
-											<th>Album Name</th>
-
-											<th>Action</th>
-										</tr>
-										<c:forEach var="album" items="${album}">
-
-
-											<tr>
-												<td>${album.albumId}</td>
-												<td>${album.albumName }</td>
-
-												<td><a class="fa fa-pencil-square-o fa-2x"
-													href="${pageContext.request.contextPath}/admin/edit_album/${album.id}.html"
-													style="color: green; margin-right: 5px"></a> | <a
-													class="fa fa-trash-o fa-2x" style="color: red"
-													href="${pageContext.request.contextPath}/admin/delete_album/${album.id}.html"
-													onclick="return confirm('Are you sure you want to delete this?')"></a></td>
-											</tr>
-
-										</c:forEach>
-									</table>
-								</div>
-							</div>
-						</div>
-
-
-
-					</div>
-				</div>
+<body>
+	<!-- Navbar (sit on top) -->
+	<div class="w3-top">
+		<div class="w3-bar w3-white w3-card-2" id="myNavbar">
+			<a href="${pageContext.request.contextPath }/demo.html"
+				class="w3-bar-item w3-button w3-wide">Logo</a>
+			<!-- Right-sided navbar links -->
+			<div class="w3-right w3-hide-small">
+				<a href="${pageContext.request.contextPath }/demo/album.html"
+					class="w3-bar-item w3-button ">Album</a> <a
+					href="${pageContext.request.contextPath }/demo/singer.html"
+					ng-model="volid" class="w3-bar-item w3-button">Singer</a> <a
+					href="${pageContext.request.contextPath }/demo/genre.html"
+					class="w3-bar-item w3-button">Genre</a>
 
 
 			</div>
+			<!-- Hide right-floated links on small screens and replace them with a menu icon -->
+
+			<a href="javascript:void(0)"
+				class="w3-bar-item w3-button w3-right w3-hide-large w3-hide-medium"
+				onclick="w3_open()"> <i class="fa fa-bars"></i>
+			</a>
 		</div>
-		<!-- /page content -->
+	</div>
+	<!-- Page content -->
+	<div class="w3-content" style="max-width: 1100px">
 
-		<!-- footer content -->
-		<footer> </footer>
-		<!-- /footer content -->
+
+		<!-- Menu Section -->
+		<div class="w3-row w3-padding-64" >
+			<div class=" l6 w3-padding-large">
+				<h1 class="w3-center">List Singer</h1>
+				<br>
+				<c:forEach var="album" items="${album}">
+					<h4><a href="${pageContext.request.contextPath}/demo/detail.html">${album.albumName}</a></h4>
+					
+					<hr>
+				</c:forEach>
+
+			</div>
+
+
+		</div>
+
+		<hr>
 	</div>
 
-	<!-- jQuery -->
-	<script
-		src="${pageContext.request.contextPath }/assets/js/jquery.min.js"></script>
+	<!-- Sidebar on small screens when clicking the menu icon -->
+	<nav
+		class="w3-sidebar w3-bar-block w3-black w3-card-2 w3-animate-left w3-hide-medium w3-hide-large"
+		style="display:none" id="mySidebar"> <a
+		href="javascript:void(0)" onclick="w3_close()"
+		class="w3-bar-item w3-button w3-large w3-padding-16">Close ×</a> <a
+		href="#about" onclick="w3_close()" class="w3-bar-item w3-button"
+		data-ng-repeat="x in list_newVol">{{x.volName}}</a> <a href="#pricing"
+		onclick="w3_close()" data-ng-repeat="x in list_album"
+		class="w3-bar-item w3-button">{{x.albumName}}</a> </nav>
 
-	<!-- Bootstrap -->
-	<script
-		src="${pageContext.request.contextPath }/assets/js/bootstrap.min.js"></script>
 
-	<!-- FastClick -->
-	<script
-		src="${pageContext.request.contextPath }/assets/js/fastclick.js"></script>
 
-	<!-- NProgress -->
-	<script
-		src="${pageContext.request.contextPath }/assets/js/nprogress.js"></script>
 
-	<!-- iCheck -->
-	<script
-		src="${pageContext.request.contextPath }/assets/js/icheck.min.js"></script>
+	<!-- Footer -->
 
-	<!-- Custom Theme Scripts -->
-	<script src="${pageContext.request.contextPath }/assets/js/custom.js"></script>
+	<footer class="w3-right w3-padding-64"> <a href=""
+		onclick="topFunction()"
+		style="background: #718fc6 !important; color: white !important"
+		class="w3-button w3-light-grey"><i
+		class="fa fa-arrow-up w3-margin-right"></i>To the top</a>
+	<div class="w3-xlarge w3-section"></div>
 
-	<!-- Angular JS -->
-	<script type="text/javascript"
-		src="${pageContext.request.contextPath }/assets/js/angular.min.js"></script>
+	</footer>
+	<!-- Add Google Maps -->
 
-	<script type="text/javascript"
-		src="${pageContext.request.contextPath }/assets/js/sweetalert-dev.js"></script>
-	<script type="text/javascript"
-		src="${pageContext.request.contextPath }/assets/js/angular-route.min.js"></script>
-	<script type="text/javascript"
-		src="${pageContext.request.contextPath }/assets/js/angular-ui.min.js"></script>
-	<script type="text/javascript"
-		src="${pageContext.request.contextPath }/assets/js/angular-resource.min.js"></script>
-	<script type="text/javascript"
-		src="${pageContext.request.contextPath }/assets/js/angular-messages.min.js"></script>
-	<script type="text/javascript"
-		src="${pageContext.request.contextPath }/assets/js/ui-bootstrap-tpls.min.js"></script>
+	<script>
+		// Modal Image Gallery
+		function onClick(element) {
+			document.getElementById("img01").src = element.src;
+			document.getElementById("modal01").style.display = "block";
+			var captionText = document.getElementById("caption");
+			captionText.innerHTML = element.alt;
+		}
 
-	<script src="${pageContext.request.contextPath }/assets/js/ui-grid.js"></script>
+		// Toggle between showing and hiding the sidebar when clicking the menu icon
+		var mySidebar = document.getElementById("mySidebar");
+
+		function w3_open() {
+			if (mySidebar.style.display === 'block') {
+				mySidebar.style.display = 'none';
+			} else {
+				mySidebar.style.display = 'block';
+			}
+		}
+
+		// Close the sidebar with the close button
+		function w3_close() {
+			mySidebar.style.display = "none";
+		}
+	</script>
 </body>
+<!-- jQuery -->
 
+<!-- Bootstrap -->
+<script
+	src="${pageContext.request.contextPath }/assets/js/bootstrap.min.js"></script>
+
+<!-- FastClick -->
+<script src="${pageContext.request.contextPath }/assets/js/fastclick.js"></script>
+
+<!-- NProgress -->
+<script src="${pageContext.request.contextPath }/assets/js/nprogress.js"></script>
+
+<!-- iCheck -->
+<script
+	src="${pageContext.request.contextPath }/assets/js/icheck.min.js"></script>
+
+<!-- Custom Theme Scripts -->
+<script src="${pageContext.request.contextPath }/assets/js/custom.js"></script>
+
+<!-- Angular JS -->
+<script type="text/javascript"
+	src="${pageContext.request.contextPath }/assets/js/angular.min.js"></script>
+
+<script type="text/javascript"
+	src="${pageContext.request.contextPath }/assets/js/sweetalert-dev.js"></script>
+<script type="text/javascript"
+	src="${pageContext.request.contextPath }/assets/js/angular-route.min.js"></script>
+<script type="text/javascript"
+	src="${pageContext.request.contextPath }/assets/js/angular-ui.min.js"></script>
+<script type="text/javascript"
+	src="${pageContext.request.contextPath }/assets/js/angular-resource.min.js"></script>
+<script type="text/javascript"
+	src="${pageContext.request.contextPath }/assets/js/angular-messages.min.js"></script>
+<script type="text/javascript"
+	src="${pageContext.request.contextPath }/assets/js/ui-bootstrap-tpls.min.js"></script>
+<!-- App & Controller -->
+<script src="${pageContext.request.contextPath }/assets/js/ui-grid.js"></script>
+<script>
+	function topFunction() {
+		document.body.scrollTop = 0; // For Chrome, Safari and Opera 
+		document.documentElement.scrollTop = 0; // For IE and Firefox
+	}
+</script>
 </html>

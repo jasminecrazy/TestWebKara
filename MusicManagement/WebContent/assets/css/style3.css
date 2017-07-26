@@ -96,6 +96,10 @@ li {
 a {
 	text-decoration: none;
 }
+a:hover
+{
+	text-decoration:none !important;
+}
 
 .w3-greyscale, .w3-grayscale {
 	filter: none !important;

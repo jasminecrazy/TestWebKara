@@ -14,4 +14,10 @@ public interface SongService {
 	public void addSongs(Songs song);
 
 	public void updateSongs(Songs song);
+
+	public List<Songs> getAlbumSong(int id);
+
+	public List<Songs> getSingerSong(int id);
+
+	public List<Songs> getGenreSong(int id);
 }

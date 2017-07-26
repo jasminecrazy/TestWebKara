@@ -115,4 +115,67 @@ public class SongDAOImpl implements SongDAO {
 
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Songs> getAlbumSong(int id) {
+		List<Songs> song = new ArrayList<Songs>();
+		Session session = sessionFactory.openSession();
+		Transaction transaction = null;
+		try {
+			transaction = session.beginTransaction();
+			song = session.createQuery("select c from Songs c where c.album.id =:id").setInteger("id", id).list();
+			transaction.commit();
+		} catch (Exception e) {
+			song = null;
+			if (transaction != null) {
+				transaction.rollback();
+			}
+		} finally {
+			session.close();
+		}
+		return song;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Songs> getSingerSong(int id) {
+		List<Songs> song = new ArrayList<Songs>();
+		Session session = sessionFactory.openSession();
+		Transaction transaction = null;
+		try {
+			transaction = session.beginTransaction();
+			song = session.createQuery("select c from Songs c where c.singer.id =:id").setInteger("id", id).list();
+			transaction.commit();
+		} catch (Exception e) {
+			song = null;
+			if (transaction != null) {
+				transaction.rollback();
+			}
+		} finally {
+			session.close();
+		}
+		return song;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Songs> getGenreSong(int id) {
+		List<Songs> song = new ArrayList<Songs>();
+		Session session = sessionFactory.openSession();
+		Transaction transaction = null;
+		try {
+			transaction = session.beginTransaction();
+			song = session.createQuery("select c from Songs c where c.genre.id =:id").setInteger("id", id).list();
+			transaction.commit();
+		} catch (Exception e) {
+			song = null;
+			if (transaction != null) {
+				transaction.rollback();
+			}
+		} finally {
+			session.close();
+		}
+		return song;
+	}
+
 }
